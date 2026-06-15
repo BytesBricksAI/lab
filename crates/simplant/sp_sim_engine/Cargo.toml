@@ -1,0 +1,20 @@
+[package]
+name = "sp_sim_engine"
+authors.workspace = true
+description = "SimPlant Lab native simulation engine (minimal): first-order dynamics implementing SimulatorPort."
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish = false
+readme = "README.md"
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+sp_simulation = { path = "../sp_simulation" }
+
+[dev-dependencies]

@@ -1,0 +1,21 @@
+[package]
+name = "sp_stress_testing"
+authors.workspace = true
+description = "SimPlant Lab stress testing core: load profiles bounded by design limits times a safety factor, with acceptance criteria."
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish = false
+readme = "README.md"
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+thiserror.workspace = true
+serde = { workspace = true, features = ["derive"] }
+
+[dev-dependencies]

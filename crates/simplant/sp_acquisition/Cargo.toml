@@ -1,0 +1,24 @@
+[package]
+name = "sp_acquisition"
+authors.workspace = true
+description = "SimPlant Lab acquisition capability: domain (AcquisitionSession) and ports (DataSourcePort, RecorderPort)."
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish = false
+readme = "README.md"
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+sp_kernel = { path = "../sp_kernel" }
+sp_asset_model = { path = "../sp_asset_model" }
+thiserror.workspace = true
+serde = { workspace = true, features = ["derive"] }
+toml = { workspace = true, features = ["parse", "display", "serde"] }
+
+[dev-dependencies]

@@ -1,0 +1,15 @@
+[package]
+name = "tanque_demo"
+version = "0.33.0-alpha.1+dev"
+edition = "2024"
+rust-version = "1.92"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[dependencies]
+sp_kernel = { path = "../../../crates/simplant/sp_kernel" }
+sp_asset_model = { path = "../../../crates/simplant/sp_asset_model" }
+sp_acquisition = { path = "../../../crates/simplant/sp_acquisition" }
+sp_acquisition_replay = { path = "../../../crates/simplant/sp_acquisition_replay" }
+sp_recording = { path = "../../../crates/simplant/sp_recording" }
+anyhow = "1.0"

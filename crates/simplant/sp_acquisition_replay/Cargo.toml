@@ -1,0 +1,24 @@
+[package]
+name = "sp_acquisition_replay"
+authors.workspace = true
+description = "SimPlant Lab replay adapter: implements DataSourcePort by replaying a historian CSV export."
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish = false
+readme = "README.md"
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+sp_kernel = { path = "../sp_kernel" }
+sp_acquisition = { path = "../sp_acquisition" }
+csv = "1.3"
+jiff = { workspace = true }
+thiserror.workspace = true
+
+[dev-dependencies]
