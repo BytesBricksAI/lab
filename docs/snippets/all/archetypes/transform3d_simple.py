@@ -2,8 +2,8 @@
 
 from math import pi
 
-import rerun as rr
-from rerun.datatypes import Angle, RotationAxisAngle
+import simplant_lab as rr
+from simplant_lab.datatypes import Angle, RotationAxisAngle
 
 rr.init("rerun_example_transform3d", spawn=True)
 

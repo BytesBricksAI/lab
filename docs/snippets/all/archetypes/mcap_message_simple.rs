@@ -1,8 +1,9 @@
 //! Log a simple MCAP message with binary data.
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new("rerun_example_mcap_message")
-        .spawn()?;
+    let rec =
+        simplant_lab::RecordingStreamBuilder::new("rerun_example_mcap_message")
+            .spawn()?;
 
     // Example binary message data (could be from a ROS message, protobuf, etc.)
     // This represents a simple sensor reading encoded as bytes
@@ -11,7 +12,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     rec.log(
         "mcap/messages/sensor_reading",
-        &rerun::McapMessage::new(sensor_data.as_bytes()),
+        &simplant_lab::McapMessage::new(sensor_data.as_bytes()),
     )?;
 
     Ok(())

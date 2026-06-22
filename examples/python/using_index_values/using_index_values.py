@@ -9,8 +9,8 @@ from pathlib import Path
 import numpy as np
 import pyarrow as pa
 
-import rerun as rr
-from rerun.server import Server
+import simplant_lab as rr
+from simplant_lab.server import Server
 
 DATASET_NAME = "dataset"
 

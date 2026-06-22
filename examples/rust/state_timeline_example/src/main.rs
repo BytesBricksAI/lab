@@ -2,11 +2,11 @@
 
 use std::sync::Arc;
 
-use rerun::external::{re_crash_handler, re_grpc_server, re_log, re_viewer, tokio};
+use simplant_lab::external::{re_crash_handler, re_grpc_server, re_log, re_viewer, tokio};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let main_thread_token = rerun::MainThreadToken::i_promise_i_am_on_the_main_thread();
+    let main_thread_token = simplant_lab::MainThreadToken::i_promise_i_am_on_the_main_thread();
 
     re_log::setup_logging();
     re_crash_handler::install_crash_handlers(re_viewer::build_info());
@@ -48,7 +48,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 fn log_state_data() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new("rerun_example_state_timeline")
+    let rec = simplant_lab::RecordingStreamBuilder::new("rerun_example_state_timeline")
         .default_enabled(true)
         .connect_grpc()
         .map_err(|err| format!("Failed to connect: {err}"))?;
@@ -56,12 +56,12 @@ fn log_state_data() -> Result<(), Box<dyn std::error::Error>> {
     // An example of a static annotation context. An edge case for the state timeline view.
     rec.log_static(
         "/",
-        &rerun::AnnotationContext::new([
-            (1, "person", rerun::Rgba32::from_rgb(220, 20, 60)),
-            (2, "bicycle", rerun::Rgba32::from_rgb(119, 11, 32)),
-            (3, "car", rerun::Rgba32::from_rgb(0, 0, 142)),
-            (4, "motorcycle", rerun::Rgba32::from_rgb(0, 0, 230)),
-            (5, "airplane", rerun::Rgba32::from_rgb(106, 0, 228)),
+        &simplant_lab::AnnotationContext::new([
+            (1, "person", simplant_lab::Rgba32::from_rgb(220, 20, 60)),
+            (2, "bicycle", simplant_lab::Rgba32::from_rgb(119, 11, 32)),
+            (3, "car", simplant_lab::Rgba32::from_rgb(0, 0, 142)),
+            (4, "motorcycle", simplant_lab::Rgba32::from_rgb(0, 0, 230)),
+            (5, "airplane", simplant_lab::Rgba32::from_rgb(106, 0, 228)),
         ]),
     )?;
 
@@ -86,7 +86,10 @@ fn log_state_data() -> Result<(), Box<dyn std::error::Error>> {
     for (tick, entity, label) in &states {
         rec.set_time_sequence("tick", *tick);
         rec.set_timestamp_secs_since_epoch("timestamp", base_ts + *tick as f64 * step_secs);
-        rec.log(*entity, &rerun::StateChange::new().with_state(*label))?;
+        rec.log(
+            *entity,
+            &simplant_lab::StateChange::new().with_state(*label),
+        )?;
     }
 
     // Log an alternative string component on robot_mode via DynamicArchetype.
@@ -98,7 +101,7 @@ fn log_state_data() -> Result<(), Box<dyn std::error::Error>> {
         rec.set_timestamp_secs_since_epoch("timestamp", base_ts + 2.0 * *tick as f64 * step_secs);
         rec.log(
             "state/robot_mode",
-            &rerun::DynamicArchetype::new("sensor_data").with_component_from_data(
+            &simplant_lab::DynamicArchetype::new("sensor_data").with_component_from_data(
                 "state",
                 Arc::new(arrow::array::StringArray::from(vec![*state])),
             ),
@@ -110,7 +113,10 @@ fn log_state_data() -> Result<(), Box<dyn std::error::Error>> {
         let t = tick as f64;
         rec.set_time_sequence("tick", tick);
         rec.set_timestamp_secs_since_epoch("timestamp", base_ts + t * step_secs);
-        rec.log("scalar/sine", &rerun::Scalars::new([f64::sin(t * 0.3)]))?;
+        rec.log(
+            "scalar/sine",
+            &simplant_lab::Scalars::new([f64::sin(t * 0.3)]),
+        )?;
     }
 
     let _ = rec.flush_blocking();

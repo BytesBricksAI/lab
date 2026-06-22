@@ -1,6 +1,6 @@
 """Log a `TextDocument`."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_text_document", spawn=True)
 

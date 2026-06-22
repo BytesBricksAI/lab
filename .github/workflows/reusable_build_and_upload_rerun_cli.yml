@@ -77,25 +77,25 @@ jobs:
               runner="ubuntu-arm-16-core"
               target="aarch64-unknown-linux-gnu"
               container="'ghcr.io/rerun-io/ci_docker:0.17.0'"
-              bin_name="rerun"
+              bin_name="simplant-lab"
               ;;
             linux-x64)
               runner="ubuntu-latest-16-cores"
               target="x86_64-unknown-linux-gnu"
               container="'ghcr.io/rerun-io/ci_docker:0.17.0'"
-              bin_name="rerun"
+              bin_name="simplant-lab"
               ;;
             windows-x64)
               runner="windows-latest-16-cores"
               target="x86_64-pc-windows-msvc"
               container="null"
-              bin_name="rerun.exe"
+              bin_name="simplant-lab.exe"
               ;;
             macos-arm64)
               runner="macos-26-xlarge" # See https://github.blog/2023-10-02-introducing-the-new-apple-silicon-powered-m1-macos-larger-runner-for-github-actions/
               target="aarch64-apple-darwin"
               container="null"
-              bin_name="rerun"
+              bin_name="simplant-lab"
               ;;
             *) echo "Invalid platform" && exit 1 ;;
           esac

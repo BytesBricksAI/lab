@@ -1,6 +1,6 @@
 //! Log an encoded depth image stored as a 16-bit PNG or RVL file
 
-use rerun::external::anyhow;
+use simplant_lab::external::anyhow;
 
 fn main() -> anyhow::Result<()> {
     let args = _args;
@@ -8,16 +8,17 @@ fn main() -> anyhow::Result<()> {
         anyhow::bail!("Usage: {} <path_to_depth_image.[png|rvl]>", args[0]);
     };
 
-    let rec =
-        rerun::RecordingStreamBuilder::new("rerun_example_encoded_depth_image")
-            .spawn()?;
+    let rec = simplant_lab::RecordingStreamBuilder::new(
+        "rerun_example_encoded_depth_image",
+    )
+    .spawn()?;
 
     let depth_blob = std::fs::read(path)?;
-    let encoded_depth = rerun::EncodedDepthImage::new(depth_blob)
+    let encoded_depth = simplant_lab::EncodedDepthImage::new(depth_blob)
         .with_media_type(if path.ends_with(".png") {
-            rerun::components::MediaType::PNG
+            simplant_lab::components::MediaType::PNG
         } else {
-            rerun::components::MediaType::RVL
+            simplant_lab::components::MediaType::RVL
         })
         .with_meter(0.001_f32);
 

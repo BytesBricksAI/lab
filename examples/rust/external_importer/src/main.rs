@@ -1,6 +1,6 @@
 //! Example of an external importer executable plugin for the Rerun Viewer.
 
-use rerun::EXTERNAL_IMPORTER_INCOMPATIBLE_EXIT_CODE;
+use simplant_lab::EXTERNAL_IMPORTER_INCOMPATIBLE_EXIT_CODE;
 
 // The Rerun Viewer will always pass at least these two pieces of information:
 // 1. The path to be loaded, as a positional arg.
@@ -23,7 +23,7 @@ use rerun::EXTERNAL_IMPORTER_INCOMPATIBLE_EXIT_CODE;
 /// To try it out, install it in your $PATH (`cargo install --path . -f`), then open a
 /// Rust source file with Rerun (`rerun file.rs`).
 ///
-/// [`rerun-importer-`]: `rerun::EXTERNAL_IMPORTER_PREFIX`
+/// [`rerun-importer-`]: `simplant_lab::EXTERNAL_IMPORTER_PREFIX`
 #[derive(argh::FromArgs, Debug)]
 struct Args {
     #[argh(positional)]
@@ -81,7 +81,7 @@ fn main() -> anyhow::Result<()> {
     let text = format!("## Some Rust code\n```rust\n{body}\n```\n");
 
     let rec = {
-        let mut rec = rerun::RecordingStreamBuilder::new(
+        let mut rec = simplant_lab::RecordingStreamBuilder::new(
             args.application_id
                 .as_deref()
                 .unwrap_or("rerun_example_external_importer"),
@@ -98,21 +98,22 @@ fn main() -> anyhow::Result<()> {
     // data at a specific timepoint without having to modify the global stateful clock.
     rec.set_timepoint(timepoint_from_args(&args)?);
 
-    let entity_path_prefix = args
-        .entity_path_prefix
-        .map_or_else(|| rerun::EntityPath::new(vec![]), rerun::EntityPath::from);
+    let entity_path_prefix = args.entity_path_prefix.map_or_else(
+        || simplant_lab::EntityPath::new(vec![]),
+        simplant_lab::EntityPath::from,
+    );
 
     rec.log_with_static(
-        entity_path_prefix.join(&rerun::EntityPath::from_file_path(&args.filepath)),
+        entity_path_prefix.join(&simplant_lab::EntityPath::from_file_path(&args.filepath)),
         args.static_,
-        &rerun::TextDocument::from_markdown(text),
+        &simplant_lab::TextDocument::from_markdown(text),
     )?;
 
     Ok::<_, anyhow::Error>(())
 }
 
-fn timepoint_from_args(args: &Args) -> anyhow::Result<rerun::TimePoint> {
-    let mut timepoint = rerun::TimePoint::default();
+fn timepoint_from_args(args: &Args) -> anyhow::Result<simplant_lab::TimePoint> {
+    let mut timepoint = simplant_lab::TimePoint::default();
 
     for seq_str in &args.time_sequence {
         let Some((seqline_name, seq)) = seq_str.split_once('=') else {
@@ -120,7 +121,7 @@ fn timepoint_from_args(args: &Args) -> anyhow::Result<rerun::TimePoint> {
         };
         timepoint.insert_cell(
             seqline_name,
-            rerun::TimeCell::from_sequence(seq.parse::<i64>()?),
+            simplant_lab::TimeCell::from_sequence(seq.parse::<i64>()?),
         );
     }
 
@@ -130,7 +131,7 @@ fn timepoint_from_args(args: &Args) -> anyhow::Result<rerun::TimePoint> {
         };
         timepoint.insert_cell(
             seqline_name,
-            rerun::TimeCell::from_duration_nanos(duration_nd.parse::<i64>()?),
+            simplant_lab::TimeCell::from_duration_nanos(duration_nd.parse::<i64>()?),
         );
     }
 
@@ -140,7 +141,7 @@ fn timepoint_from_args(args: &Args) -> anyhow::Result<rerun::TimePoint> {
         };
         timepoint.insert_cell(
             seqline_name,
-            rerun::TimeCell::from_timestamp_nanos_since_epoch(timestamp_nd.parse::<i64>()?),
+            simplant_lab::TimeCell::from_timestamp_nanos_since_epoch(timestamp_nd.parse::<i64>()?),
         );
     }
 

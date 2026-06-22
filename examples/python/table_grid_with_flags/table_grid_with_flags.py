@@ -27,8 +27,8 @@ import argparse
 
 import pyarrow as pa
 
-import rerun as rr
-from rerun.server import Server
+import simplant_lab as rr
+from simplant_lab.server import Server
 
 
 def main() -> None:

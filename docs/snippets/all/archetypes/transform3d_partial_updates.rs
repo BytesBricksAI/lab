@@ -1,9 +1,9 @@
 //! Update specific properties of a transform over time.
 
-use rerun::AsComponents;
+use simplant_lab::AsComponents;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new(
+    let rec = simplant_lab::RecordingStreamBuilder::new(
         "rerun_example_transform3d_partial_updates",
     )
     .spawn()?;
@@ -11,8 +11,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Set up a 3D box.
     rec.log(
         "box",
-        &[&rerun::Boxes3D::from_half_sizes([(4.0, 2.0, 1.0)])
-            .with_fill_mode(rerun::FillMode::Solid)
+        &[&simplant_lab::Boxes3D::from_half_sizes([(4.0, 2.0, 1.0)])
+            .with_fill_mode(simplant_lab::FillMode::Solid)
             as &dyn AsComponents],
     )?;
 
@@ -21,10 +21,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let rad = truncated_radians((deg * 4) as f32);
         rec.log(
             "box",
-            &rerun::Transform3D::new().with_rotation(
-                rerun::RotationAxisAngle::new(
+            &simplant_lab::Transform3D::new().with_rotation(
+                simplant_lab::RotationAxisAngle::new(
                     [0.0, 1.0, 0.0],
-                    rerun::Angle::from_radians(rad),
+                    simplant_lab::Angle::from_radians(rad),
                 ),
             ),
         )?;
@@ -34,7 +34,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     for t in 0..=50 {
         rec.log(
             "box",
-            &rerun::Transform3D::new().with_translation([
+            &simplant_lab::Transform3D::new().with_translation([
                 0.0,
                 0.0,
                 t as f32 / 10.0,
@@ -47,17 +47,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let rad = truncated_radians(((deg + 45) * 4) as f32);
         rec.log(
             "box",
-            &rerun::Transform3D::new().with_rotation(
-                rerun::RotationAxisAngle::new(
+            &simplant_lab::Transform3D::new().with_rotation(
+                simplant_lab::RotationAxisAngle::new(
                     [0.0, 1.0, 0.0],
-                    rerun::Angle::from_radians(rad),
+                    simplant_lab::Angle::from_radians(rad),
                 ),
             ),
         )?;
     }
 
     // Clear all of the box's attributes.
-    rec.log("box", &rerun::Transform3D::clear_fields())?;
+    rec.log("box", &simplant_lab::Transform3D::clear_fields())?;
 
     Ok(())
 }

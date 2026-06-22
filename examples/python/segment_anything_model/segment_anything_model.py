@@ -23,7 +23,7 @@ import torchvision
 from segment_anything import SamAutomaticMaskGenerator, sam_model_registry
 from tqdm import tqdm
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 import rerun.blueprint as rrb
 
 if TYPE_CHECKING:

@@ -13,7 +13,12 @@
 //! and demonstrates the `SimulatorPort` contract end-to-end without depending on DWSIM.
 //! Steady-state modular sequential solvers and DAE integration via diffsol will arrive in
 //! the full F6 engine.
+//!
+//! [`unit_ops`] provides termo-free steady-state calculations for mixer, splitter, valve,
+//! pump, and pipe unit operations.
 
 mod first_order;
+mod unit_ops;
 
 pub use first_order::FirstOrderEngine;
+pub use unit_ops::{StreamState, UnitOpError, mix, pipe, pump, split, valve};

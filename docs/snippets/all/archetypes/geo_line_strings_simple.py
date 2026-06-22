@@ -1,6 +1,6 @@
 """Log a simple geospatial line string."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_geo_line_strings", spawn=True)
 

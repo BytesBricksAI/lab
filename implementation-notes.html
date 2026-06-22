@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>SimPlant-Lab rebrand — implementation notes</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 52rem; margin: 2rem auto; line-height: 1.5; }
+    h1, h2 { line-height: 1.2; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+    th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }
+    code { background: #f4f4f4; padding: 0.1rem 0.3rem; }
+  </style>
+</head>
+<body>
+  <h1>SimPlant-Lab rebrand — implementation notes</h1>
+  <p>Living document. Markdown source: <a href="implementation-notes.md">implementation-notes.md</a></p>
+
+  <h2>Decisions not in the original plan</h2>
+  <table>
+    <tr><th>Decision</th><th>Rationale</th></tr>
+    <tr><td><code>DEFAULT_DOCS_URL</code> → GitHub repo</td><td>No production docs URL was specified.</td></tr>
+    <tr><td>PNG/ICO logos unchanged</td><td>No SimPlant artwork supplied; SVG wordmark is text-only placeholder.</td></tr>
+    <tr><td><code>import rerun</code> shim kept</td><td>Deprecated wrapper re-exports <code>simplant_lab</code>.</td></tr>
+    <tr><td>Pixi tasks <code>rerun-*</code> kept</td><td>Point at <code>simplant-lab-cli</code> for developer ergonomics.</td></tr>
+    <tr><td>FlatBuffers <code>namespace rerun</code> unchanged</td><td>Wire compatibility.</td></tr>
+    <tr><td><code>rerun-sdk</code> in uv workspace</td><td>Alongside <code>simplant-lab-sdk</code> until all refs migrated.</td></tr>
+  </table>
+
+  <h2>Concessions</h2>
+  <ul>
+    <li><code>pixi run codegen</code> / <code>pixi run man</code> not run (long build).</li>
+    <li>Generated docs under <code>docs/content/reference/types/</code> not regenerated.</li>
+    <li>Many <code>rerun.io</code> links remain in view help and intro cards.</li>
+    <li><code>cargo check</code> blocked locally by NASM permission in sandbox (manifest parses OK).</li>
+  </ul>
+
+  <h2>Major file areas touched</h2>
+  <ul>
+    <li><code>crates/viewer/re_ui/src/branding.rs</code> — central constants</li>
+    <li><code>crates/top/rerun</code> → <code>crates/top/simplant-lab</code></li>
+    <li><code>crates/top/rerun-cli</code> → <code>crates/top/simplant-lab-cli</code>, binary <code>simplant-lab</code></li>
+    <li><code>rerun_py/rerun_sdk/rerun</code> → <code>simplant_lab</code> + shim</li>
+    <li>Viewer/web strings, README, pixi.toml, CI <code>bin_name</code></li>
+  </ul>
+
+  <h2>Next steps for you</h2>
+  <ol>
+    <li>Replace logo PNGs and favicons with SimPlant-Lab artwork.</li>
+    <li>Run <code>pixi run rs-fmt</code> and <code>pixi run simplant-lab-build</code>.</li>
+    <li>Run <code>pixi run py-build</code> and <code>pixi run uvpy -c "import simplant_lab"</code>.</li>
+    <li>Run <code>pixi run codegen</code> after editing <code>.fbs</code> doc comments.</li>
+    <li>Point <code>DEFAULT_DOCS_URL</code> to your real docs site.</li>
+  </ol>
+</body>
+</html>

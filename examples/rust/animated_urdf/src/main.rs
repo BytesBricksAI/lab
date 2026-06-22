@@ -9,11 +9,11 @@
 #[clap(author, version, about)]
 struct Args {
     #[command(flatten)]
-    rerun: rerun::clap::RerunArgs,
+    rerun: simplant_lab::clap::RerunArgs,
 }
 
-use rerun::external::re_importer::UrdfTree;
-use rerun::external::{re_log, urdf_rs};
+use simplant_lab::external::re_importer::UrdfTree;
+use simplant_lab::external::{re_log, urdf_rs};
 
 fn main() -> anyhow::Result<()> {
     re_log::setup_logging();
@@ -25,7 +25,7 @@ fn main() -> anyhow::Result<()> {
     run(&rec, &args)
 }
 
-fn run(rec: &rerun::RecordingStream, _args: &Args) -> anyhow::Result<()> {
+fn run(rec: &simplant_lab::RecordingStream, _args: &Args) -> anyhow::Result<()> {
     let urdf_path = "examples/rust/animated_urdf/data/so100.urdf";
 
     // Log the URDF file one, as a static resource:

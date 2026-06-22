@@ -1,6 +1,6 @@
 """Log a single 3D Box."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_box3d", spawn=True)
 

@@ -21,7 +21,7 @@ import numpy.typing as npt
 import requests
 from tqdm import tqdm
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 import rerun.blueprint as rrb
 
 DESCRIPTION = """

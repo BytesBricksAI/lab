@@ -20,8 +20,8 @@ import lancedb
 import pyarrow as pa
 from platformdirs import user_cache_dir
 
-import rerun as rr
-from rerun.catalog import CatalogClient
+import simplant_lab as rr
+from simplant_lab.catalog import CatalogClient
 
 
 def _build_record_batch() -> tuple[str, pa.RecordBatch]:

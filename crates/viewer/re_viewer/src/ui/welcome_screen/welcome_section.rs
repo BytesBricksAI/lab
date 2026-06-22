@@ -1,9 +1,9 @@
 use re_ui::DesignTokens;
 
-pub(super) const DOCS_URL: &str = "https://www.rerun.io/docs";
-pub(super) const WELCOME_SCREEN_TITLE: &str = "Welcome to Rerun";
+pub(super) const DOCS_URL: &str = re_ui::branding::DEFAULT_DOCS_URL;
+pub(super) const WELCOME_SCREEN_TITLE: &str = "Welcome to SimPlant-Lab";
 pub(super) const WELCOME_SCREEN_BULLET_TEXT: &[&str] = &[
-    "Log data with the Rerun SDK in C++, Python, or Rust",
+    "Log data with the SimPlant-Lab SDK in C++, Python, or Rust",
     "Visualize and explore live or recorded data",
     "Configure the viewer interactively or through code",
 ];

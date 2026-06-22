@@ -14,8 +14,8 @@
 use std::path::PathBuf;
 
 use bytes::Bytes;
-use rerun::external::re_log;
-use rerun::{Color, Mesh3D, RecordingStream, Rgba32};
+use simplant_lab::external::re_log;
+use simplant_lab::{Color, Mesh3D, RecordingStream, Rgba32};
 
 // TODO(cmc): This example needs to support animations to showcase Rerun's time capabilities.
 
@@ -61,11 +61,11 @@ impl From<GltfPrimitive> for Mesh3D {
 }
 
 // Declare how to turn a glTF transform into a Rerun component (`Transform`).
-impl From<GltfTransform> for rerun::Transform3D {
+impl From<GltfTransform> for simplant_lab::Transform3D {
     fn from(transform: GltfTransform) -> Self {
-        rerun::Transform3D::from_translation_rotation_scale(
+        simplant_lab::Transform3D::from_translation_rotation_scale(
             transform.t,
-            rerun::datatypes::Quaternion::from_xyzw(transform.r),
+            simplant_lab::datatypes::Quaternion::from_xyzw(transform.r),
             transform.s,
         )
     }
@@ -75,7 +75,7 @@ impl From<GltfTransform> for rerun::Transform3D {
 fn log_node(rec: &RecordingStream, node: GltfNode) -> anyhow::Result<()> {
     rec.set_time_sequence("keyframe", 0);
 
-    if let Some(transform) = node.transform.map(rerun::Transform3D::from) {
+    if let Some(transform) = node.transform.map(simplant_lab::Transform3D::from) {
         rec.log(node.name.as_str(), &transform)?;
     }
 
@@ -109,7 +109,7 @@ enum Scene {
 #[clap(author, version, about)]
 struct Args {
     #[command(flatten)]
-    rerun: rerun::clap::RerunArgs,
+    rerun: simplant_lab::clap::RerunArgs,
 
     /// Specifies the glTF scene to load.
     #[clap(long, value_enum, default_value = "buggy")]
@@ -159,7 +159,7 @@ fn run(rec: &RecordingStream, args: &Args) -> anyhow::Result<()> {
         re_log::info!(scene = root.name, "logging glTF scene");
         rec.log_static(
             root.name.as_str(),
-            &rerun::ViewCoordinates::RIGHT_HAND_Y_UP(),
+            &simplant_lab::ViewCoordinates::RIGHT_HAND_Y_UP(),
         )?;
         log_node(rec, root)?;
     }

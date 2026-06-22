@@ -7,13 +7,13 @@
 //! cargo run -p log_file -- examples/assets
 //! ```
 
-use rerun::external::re_log;
+use simplant_lab::external::re_log;
 
 #[derive(Debug, clap::Parser)]
 #[clap(author, version, about)]
 struct Args {
     #[command(flatten)]
-    rerun: rerun::clap::RerunArgs,
+    rerun: simplant_lab::clap::RerunArgs,
 
     // Log the contents of the file directly (files only -- not supported by external loaders).
     #[clap(long, default_value = "false")]
@@ -35,7 +35,7 @@ fn main() -> anyhow::Result<()> {
     Ok(())
 }
 
-fn run(rec: &rerun::RecordingStream, args: &Args) -> anyhow::Result<()> {
+fn run(rec: &simplant_lab::RecordingStream, args: &Args) -> anyhow::Result<()> {
     let prefix = Some("log_file_example".into());
 
     for filepath in &args.filepaths {

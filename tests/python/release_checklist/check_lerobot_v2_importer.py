@@ -5,7 +5,7 @@ from pathlib import Path
 
 from huggingface_hub import snapshot_download
 
-import rerun as rr
+import simplant_lab as rr
 
 README = """\
 # LeRobot importer check

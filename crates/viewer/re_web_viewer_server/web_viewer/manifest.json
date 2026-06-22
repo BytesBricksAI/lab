@@ -1,6 +1,6 @@
 {
-  "name": "Rerun Viewer",
-  "short_name": "rerun-viewer-pwa",
+  "name": "SimPlant-Lab",
+  "short_name": "simplant-lab",
   "icons": [
     {
       "src": "./icon-256.png",

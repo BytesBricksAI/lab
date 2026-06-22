@@ -19,9 +19,9 @@ from pathlib import Path
 
 import pyarrow as pa
 
-import rerun as rr
-from rerun.experimental import Chunk, DeriveLens, LazyChunkStream, McapReader, MutateLens, OptimizationProfile, Selector
-from rerun.urdf import UrdfTree
+import simplant_lab as rr
+from simplant_lab.experimental import Chunk, DeriveLens, LazyChunkStream, McapReader, MutateLens, OptimizationProfile, Selector
+from simplant_lab.urdf import UrdfTree
 
 PARENT_DIR = Path(__file__).parent
 DATA_DIR = PARENT_DIR / "input_data"

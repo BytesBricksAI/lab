@@ -4,10 +4,10 @@
 
 use std::sync::Arc;
 
-use rerun::{TimeColumn, external::arrow};
+use simplant_lab::{TimeColumn, external::arrow};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new(
+    let rec = simplant_lab::RecordingStreamBuilder::new(
         "rerun_example_any_batch_value_column_updates",
     )
     .spawn()?;
@@ -16,18 +16,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let times = TimeColumn::new_sequence("step", 0..STEPS);
 
-    let one_per_timestamp = rerun::SerializedComponentBatch::new(
+    let one_per_timestamp = simplant_lab::SerializedComponentBatch::new(
         Arc::new(arrow::array::Float64Array::from_iter(
             (0..STEPS).map(|v| ((v as f64) / 10.0).sin()),
         )),
-        rerun::ComponentDescriptor::partial("custom_component_single"),
+        simplant_lab::ComponentDescriptor::partial("custom_component_single"),
     );
 
-    let ten_per_timestamp = rerun::SerializedComponentBatch::new(
+    let ten_per_timestamp = simplant_lab::SerializedComponentBatch::new(
         Arc::new(arrow::array::Float64Array::from_iter((0..STEPS).flat_map(
             |_| (0..STEPS * 10).map(|v| ((v as f64) / 100.0).cos()),
         ))),
-        rerun::ComponentDescriptor::partial("custom_component_multi"),
+        simplant_lab::ComponentDescriptor::partial("custom_component_multi"),
     );
 
     rec.send_columns(

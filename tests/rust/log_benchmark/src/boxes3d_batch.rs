@@ -1,4 +1,4 @@
-use rerun::external::re_log;
+use simplant_lab::external::re_log;
 
 const W: usize = 200;
 const H: usize = 200;
@@ -29,23 +29,23 @@ fn prepare() -> Input {
     Input { centers }
 }
 
-fn execute(rec: &rerun::RecordingStream, input: Input) -> anyhow::Result<()> {
+fn execute(rec: &simplant_lab::RecordingStream, input: Input) -> anyhow::Result<()> {
     re_tracing::profile_function!();
 
     let Input { centers } = input;
 
     rec.log(
         "large_batch",
-        &rerun::Boxes3D::update_fields()
-            .with_half_sizes([rerun::HalfSize3D::new(0.5, 0.5, 0.5)])
+        &simplant_lab::Boxes3D::update_fields()
+            .with_half_sizes([simplant_lab::HalfSize3D::new(0.5, 0.5, 0.5)])
             .with_centers(centers)
-            .with_fill_mode(rerun::FillMode::Solid),
+            .with_fill_mode(simplant_lab::FillMode::Solid),
     )?;
     Ok(())
 }
 
 /// Emulate a voxel occupancy grid
-pub fn run(rec: &rerun::RecordingStream) -> anyhow::Result<()> {
+pub fn run(rec: &simplant_lab::RecordingStream) -> anyhow::Result<()> {
     re_tracing::profile_function!();
     let input = std::hint::black_box(prepare());
     execute(rec, input)

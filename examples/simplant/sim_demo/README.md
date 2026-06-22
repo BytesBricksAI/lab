@@ -4,7 +4,7 @@ End-to-end SimPlant Lab native simulation demo: build an approved flowsheet and 
 run [`FirstOrderEngine`](../../../crates/simplant/sp_sim_engine) step-by-step, and record the
 trajectory to a `.rrd` file on the `sim_time` timeline.
 
-No DWSIM dependency — this exercises the `SimulatorPort` contract and Rerun recording in one
+No DWSIM dependency — this exercises the `SimulatorPort` contract and SimPlant Lab recording in one
 binary.
 
 ## Run

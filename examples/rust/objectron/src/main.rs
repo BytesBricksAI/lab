@@ -15,8 +15,8 @@ use std::path::{Path, PathBuf};
 use std::time::Duration;
 
 use anyhow::Context as _;
-use rerun::TimeCell;
-use rerun::external::re_log;
+use simplant_lab::TimeCell;
+use simplant_lab::external::re_log;
 
 // --- Rerun logging ---
 
@@ -24,14 +24,14 @@ struct ArFrame {
     dir: PathBuf,
     data: objectron::ArFrame,
     index: usize,
-    timepoint: rerun::TimePoint,
+    timepoint: simplant_lab::TimePoint,
 }
 
 impl ArFrame {
     fn from_raw(
         dir: PathBuf,
         index: usize,
-        timepoint: rerun::TimePoint,
+        timepoint: simplant_lab::TimePoint,
         ar_frame: objectron::ArFrame,
     ) -> Self {
         Self {
@@ -43,7 +43,7 @@ impl ArFrame {
     }
 }
 
-fn timepoint(frame: usize, time: f64) -> rerun::TimePoint {
+fn timepoint(frame: usize, time: f64) -> simplant_lab::TimePoint {
     [
         ("time", TimeCell::from_timestamp_secs_since_epoch(time)),
         ("frame", TimeCell::from_sequence(frame as i64)),
@@ -64,7 +64,7 @@ impl<'a> From<&'a [objectron::FrameAnnotation]> for AnnotationsPerFrame<'a> {
 }
 
 fn log_ar_frame(
-    rec: &rerun::RecordingStream,
+    rec: &simplant_lab::RecordingStream,
     annotations: &AnnotationsPerFrame<'_>,
     ar_frame: &ArFrame,
 ) -> anyhow::Result<()> {
@@ -86,7 +86,7 @@ fn log_ar_frame(
 }
 
 fn log_baseline_objects(
-    rec: &rerun::RecordingStream,
+    rec: &simplant_lab::RecordingStream,
     objects: &[objectron::Object],
 ) -> anyhow::Result<()> {
     let boxes = objects.iter().filter_map(|object| {
@@ -96,13 +96,13 @@ fn log_baseline_objects(
                 return None;
             }
 
-            let box_half_size: rerun::HalfSize3D =
+            let box_half_size: simplant_lab::HalfSize3D =
                 (glam::Vec3::from_slice(&object.scale) * 0.5).into();
             let transform = {
                 let translation = glam::Vec3::from_slice(&object.translation);
                 // NOTE: the dataset is all row-major, transpose those matrices!
                 let rotation = glam::Mat3::from_cols_slice(&object.rotation).transpose();
-                rerun::Transform3D::from_translation_mat3x3(translation, rotation)
+                simplant_lab::Transform3D::from_translation_mat3x3(translation, rotation)
             };
             let label = object.category.as_str();
 
@@ -114,9 +114,9 @@ fn log_baseline_objects(
         let path = format!("world/annotations/box-{id}");
         rec.log_static(
             path.clone(),
-            &rerun::Boxes3D::from_half_sizes([bbox_half_size])
+            &simplant_lab::Boxes3D::from_half_sizes([bbox_half_size])
                 .with_labels([label])
-                .with_colors([rerun::Color::from_rgb(160, 230, 130)]),
+                .with_colors([simplant_lab::Color::from_rgb(160, 230, 130)]),
         )?;
         rec.log_static(path, &transform)?;
     }
@@ -124,17 +124,20 @@ fn log_baseline_objects(
     Ok(())
 }
 
-fn log_video_frame(rec: &rerun::RecordingStream, ar_frame: &ArFrame) -> anyhow::Result<()> {
+fn log_video_frame(rec: &simplant_lab::RecordingStream, ar_frame: &ArFrame) -> anyhow::Result<()> {
     let image_path = ar_frame.dir.join(format!("video/{}.jpg", ar_frame.index));
 
     rec.set_timepoint(ar_frame.timepoint.clone());
-    rec.log("world/camera", &rerun::EncodedImage::from_file(image_path)?)
-        .map_err(Into::into)
+    rec.log(
+        "world/camera",
+        &simplant_lab::EncodedImage::from_file(image_path)?,
+    )
+    .map_err(Into::into)
 }
 
 fn log_ar_camera(
-    rec: &rerun::RecordingStream,
-    timepoint: rerun::TimePoint,
+    rec: &simplant_lab::RecordingStream,
+    timepoint: simplant_lab::TimePoint,
     ar_camera: &objectron::ArCamera,
 ) -> anyhow::Result<()> {
     // NOTE: the dataset is all row-major, transpose those matrices!
@@ -164,14 +167,14 @@ fn log_ar_camera(
 
     rec.log(
         "world/camera",
-        &rerun::Transform3D::from_translation_rotation(translation, rot),
+        &simplant_lab::Transform3D::from_translation_rotation(translation, rot),
     )?;
 
     rec.log(
         "world/camera",
-        &rerun::Pinhole::new(intrinsics)
+        &simplant_lab::Pinhole::new(intrinsics)
             // See https://github.com/google-research-datasets/Objectron/issues/39 for coordinate systems
-            .with_camera_xyz(rerun::components::ViewCoordinates::RDF)
+            .with_camera_xyz(simplant_lab::components::ViewCoordinates::RDF)
             .with_resolution(resolution),
     )?;
 
@@ -179,8 +182,8 @@ fn log_ar_camera(
 }
 
 fn log_feature_points(
-    rec: &rerun::RecordingStream,
-    timepoint: rerun::TimePoint,
+    rec: &simplant_lab::RecordingStream,
+    timepoint: simplant_lab::TimePoint,
     points: &objectron::ArPointCloud,
 ) -> anyhow::Result<()> {
     let points = points.point.iter();
@@ -188,22 +191,22 @@ fn log_feature_points(
     rec.set_timepoint(timepoint);
     rec.log(
         "world/points",
-        &rerun::Points3D::new(points.map(|p| {
+        &simplant_lab::Points3D::new(points.map(|p| {
             (
                 p.x.unwrap_or_default(),
                 p.y.unwrap_or_default(),
                 p.z.unwrap_or_default(),
             )
         }))
-        .with_colors([rerun::Color::from_rgb(255, 255, 255)]),
+        .with_colors([simplant_lab::Color::from_rgb(255, 255, 255)]),
     )?;
 
     Ok(())
 }
 
 fn log_frame_annotations(
-    rec: &rerun::RecordingStream,
-    timepoint: &rerun::TimePoint,
+    rec: &simplant_lab::RecordingStream,
+    timepoint: &simplant_lab::TimePoint,
     annotations: &objectron::FrameAnnotation,
 ) -> anyhow::Result<()> {
     for ann in &annotations.annotations {
@@ -251,13 +254,14 @@ fn log_frame_annotations(
             }
             rec.log(
                 ent_path,
-                &rerun::LineStrips2D::new(linestrips(&points))
-                    .with_colors([rerun::Color::from_rgb(130, 160, 250)]),
+                &simplant_lab::LineStrips2D::new(linestrips(&points))
+                    .with_colors([simplant_lab::Color::from_rgb(130, 160, 250)]),
             )?;
         } else {
             rec.log(
                 ent_path,
-                &rerun::Points2D::new(points).with_colors([rerun::Color::from_rgb(130, 160, 250)]),
+                &simplant_lab::Points2D::new(points)
+                    .with_colors([simplant_lab::Color::from_rgb(130, 160, 250)]),
             )?;
         }
     }
@@ -285,7 +289,7 @@ enum Recording {
 #[clap(author, version, about)]
 struct Args {
     #[command(flatten)]
-    rerun: rerun::clap::RerunArgs,
+    rerun: simplant_lab::clap::RerunArgs,
 
     /// Specifies the recording to replay.
     #[clap(long, value_enum, default_value = "book")]
@@ -313,7 +317,7 @@ fn parse_duration(arg: &str) -> anyhow::Result<std::time::Duration> {
     Ok(std::time::Duration::try_from_secs_f64(seconds)?)
 }
 
-fn run(rec: &rerun::RecordingStream, args: &Args) -> anyhow::Result<()> {
+fn run(rec: &simplant_lab::RecordingStream, args: &Args) -> anyhow::Result<()> {
     // Parse protobuf dataset
     let store_info = args.recording.info().with_context(|| {
         use clap::ValueEnum as _;
@@ -327,7 +331,7 @@ fn run(rec: &rerun::RecordingStream, args: &Args) -> anyhow::Result<()> {
     let annotations = read_annotations(&store_info.path_annotations)?;
 
     // See https://github.com/google-research-datasets/Objectron/issues/39 for coordinate systems
-    rec.log_static("world", &rerun::ViewCoordinates::RUB())?;
+    rec.log_static("world", &simplant_lab::ViewCoordinates::RUB())?;
 
     log_baseline_objects(rec, &annotations.objects)?;
 

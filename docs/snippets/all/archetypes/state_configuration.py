@@ -1,7 +1,7 @@
 # Log a `StateChange` together with a `StateConfiguration` that customizes
 # its display.
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_state_configuration", spawn=True)
 

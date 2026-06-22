@@ -2,7 +2,7 @@
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 rr.init("rerun_example_transform3d_hierarchy", spawn=True)

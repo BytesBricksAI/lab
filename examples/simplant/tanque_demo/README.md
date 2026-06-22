@@ -2,7 +2,7 @@
 
 End-to-end SimPlant Lab F1 pipeline demo without hardware.
 
-The example loads a plant asset catalog from TOML, validates domain invariants, replays historian CSV samples for a storage tank and transfer pump, and records everything to a Rerun `.rrd` file. Open the recording in SimPlant Lab to inspect process variable trends with engineering units, quality, and alarm limits.
+The example loads a plant asset catalog from TOML, validates domain invariants, replays historian CSV samples for a storage tank and transfer pump, and records everything to a `.rrd` file. Open the recording in SimPlant Lab to inspect process variable trends with engineering units, quality, and alarm limits.
 
 ## What it demonstrates
 

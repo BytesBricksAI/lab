@@ -11,7 +11,7 @@ import torch
 import umap
 from transformers import AutoModelForTokenClassification, AutoTokenizer, pipeline
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 DEFAULT_TEXT = """

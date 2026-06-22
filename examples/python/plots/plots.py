@@ -16,7 +16,7 @@ from math import cos, sin, tau
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 DESCRIPTION = """

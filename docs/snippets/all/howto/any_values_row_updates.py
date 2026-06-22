@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import math
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_any_values_row_updates", spawn=True)
 

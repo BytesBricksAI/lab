@@ -17,7 +17,7 @@ import time
 
 from numpy.random import default_rng
 
-import rerun as rr
+import simplant_lab as rr
 
 rng = default_rng(12345)
 

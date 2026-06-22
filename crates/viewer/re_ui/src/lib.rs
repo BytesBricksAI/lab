@@ -1,8 +1,9 @@
-//! Rerun GUI theme and helpers, built around [`egui`](https://www.egui.rs/).
+//! SimPlant-Lab GUI theme and helpers, built around [`egui`](https://www.egui.rs/).
 
 #![warn(clippy::iter_over_hash_type)] //  TODO(#6198): enable everywhere
 
 pub mod alert;
+pub mod branding;
 mod color_table;
 mod command;
 mod command_palette;

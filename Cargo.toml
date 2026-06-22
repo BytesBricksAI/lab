@@ -2,12 +2,14 @@
 resolver = "2"
 members = [
   "crates/build/*",
+  "crates/simplant/*",
   "crates/store/*",
   "crates/top/*",
   "crates/utils/*",
   "crates/viewer/*",
   "docs/snippets",
   "examples/rust/*",
+  "examples/simplant/*",
   "rerun_py",
   "run_wasm",
   "tests/rust/log_benchmark",
@@ -18,18 +20,18 @@ members = [
 exclude = ["examples/rust/revy", "examples/rust/chess_robby_fischer"]
 
 [workspace.package]
-authors = ["rerun.io <opensource@rerun.io>"]
+authors = ["SimPlant <dev@simplant.lab>"]
 edition = "2024"
-homepage = "https://rerun.io"
+homepage = "https://github.com/SimPlant/SimPlant-v2"
 include = [
-  "../../Cargo.lock", # So that users can pass `--locked` to `cargo install rerun-cli`
+  "../../Cargo.lock", # So that users can pass `--locked` to `cargo install simplant-lab-cli`
   "../../LICENSE-APACHE",
   "../../LICENSE-MIT",
   "**/*.rs",
   "Cargo.toml",
 ]
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/rerun-io/rerun"
+repository = "https://github.com/SimPlant/SimPlant-v2"
 rust-version = "1.92"
 version = "0.33.0-alpha.1+dev"
 
@@ -38,7 +40,7 @@ ignored = [
   # rerun crates
   "rerun_c",
   "re_dev_tools",
-  "rerun-cli",
+  "simplant-lab-cli",
   "re_types_builder",
   "re_protos_builder",
   "re_renderer_examples",
@@ -96,9 +98,9 @@ re_uri = { path = "crates/store/re_uri", version = "=0.33.0-alpha.1", default-fe
 
 # crates/top:
 re_sdk = { path = "crates/top/re_sdk", version = "=0.33.0-alpha.1", default-features = false }
-rerun = { path = "crates/top/rerun", version = "=0.33.0-alpha.1", default-features = false }
+simplant-lab = { path = "crates/top/simplant-lab", version = "=0.33.0-alpha.1", default-features = false }
 rerun_c = { path = "crates/top/rerun_c", version = "=0.33.0-alpha.1", default-features = false }
-rerun-cli = { path = "crates/top/rerun-cli", version = "=0.33.0-alpha.1", default-features = false }
+simplant-lab-cli = { path = "crates/top/simplant-lab-cli", version = "=0.33.0-alpha.1", default-features = false }
 
 # crates/utils:
 re_analytics = { path = "crates/utils/re_analytics", version = "=0.33.0-alpha.1", default-features = false }
@@ -415,6 +417,7 @@ tracing-web = "0.1.3"
 type-map = "0.5.1"
 typenum = "1.19"
 unindent = "0.2.4"
+dxf = "0.6"
 urdf-rs = "0.9.0"
 ureq = { version = "3.3.0", features = ["json"] }
 url = "2.5.8"

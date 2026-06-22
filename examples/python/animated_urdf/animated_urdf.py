@@ -12,7 +12,7 @@ import argparse
 import math
 from pathlib import Path
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 TIMELINE = "example_time"

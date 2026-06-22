@@ -13,12 +13,12 @@ import pyarrow as pa
 from datafusion import DataFrame, col
 from datafusion import functions as F
 
-import rerun as rr
-from rerun.server import Server
-from rerun.utilities.datafusion.collect import collect_to_string_list
+import simplant_lab as rr
+from simplant_lab.server import Server
+from simplant_lab.utilities.datafusion.collect import collect_to_string_list
 
 if TYPE_CHECKING:
-    from rerun.catalog import CatalogClient, DatasetEntry
+    from simplant_lab.catalog import CatalogClient, DatasetEntry
 
 DATASET_NAME = "dataset"
 

@@ -8,7 +8,7 @@ import math
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 
 parser = argparse.ArgumentParser(description=__doc__)
 rr.script_add_args(parser)

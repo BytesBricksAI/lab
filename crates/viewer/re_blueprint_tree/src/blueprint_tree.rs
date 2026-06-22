@@ -97,7 +97,7 @@ impl BlueprintTree {
 
                         if let Some(title_response) = title_response {
                             title_response.on_hover_text(
-                                "The blueprint is where you can configure the Rerun Viewer",
+                                "The blueprint is where you can configure the SimPlant-Lab",
                             );
                         }
                     })

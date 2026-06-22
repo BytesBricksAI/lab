@@ -1,6 +1,6 @@
 # Releases and versioning
 
-This document describes the current release and versioning strategy. This strategy is likely to change as Rerun matures.
+This document describes the current release and versioning strategy. This strategy is likely to change as SimPlant Lab matures.
 
 ## See also
 
@@ -16,7 +16,7 @@ This document describes the current release and versioning strategy. This strate
 
 ## Release cadence
 
-New Rerun versions are released approximately once every month. Sometimes we do out-of-schedule patch releases.
+New SimPlant Lab versions are released approximately once every month. Sometimes we do out-of-schedule patch releases.
 
 ## Library versioning and release cadence
 
@@ -49,7 +49,7 @@ Our Minimum Supported Rust Version (MSRV) is always _at least_ one minor release
 
 We have not yet committed to any backwards or forwards compatibility.
 
-We tag all data files (`.rrd` files) and communication protocols with the Rerun version number. If there is a version mismatch, a warning is logged, but an attempt is still made to load the older or newer data.
+We tag all data files (`.rrd` files) and communication protocols with the SimPlant Lab version number. If there is a version mismatch, a warning is logged, but an attempt is still made to load the older or newer data.
 As of 0.23, we automatically migrate data from older versions, with an N-1 compatibility policy. That means `0.24` supports migrating `0.23` data, `0.25` supports migrating `0.24` data, etc.
 
 # Release process

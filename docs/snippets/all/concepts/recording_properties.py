@@ -1,6 +1,6 @@
 """Sets the recording properties."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rec = rr.RecordingStream("rerun_example_recording_properties")
 rec.spawn()

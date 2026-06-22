@@ -2,7 +2,7 @@
 
 from numpy.random import default_rng
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_points3d_random", spawn=True)
 rng = default_rng(12345)

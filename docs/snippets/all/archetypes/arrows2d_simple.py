@@ -1,6 +1,6 @@
 """Log a batch of 2D arrows."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_arrow2d", spawn=True)
 

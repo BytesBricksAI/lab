@@ -1,6 +1,6 @@
 """Log different data on different timelines."""
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 rr.init("rerun_example_different_data_per_timeline", spawn=True)

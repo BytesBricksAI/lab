@@ -1,6 +1,6 @@
 """Update specific properties of a point cloud over time."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_points3d_partial_updates", spawn=True)
 

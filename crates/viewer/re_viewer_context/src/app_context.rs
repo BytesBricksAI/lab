@@ -84,7 +84,7 @@ pub struct AppContext<'a> {
     /// Where we are getting our data from.
     pub connected_receivers: &'a re_log_channel::LogReceiverSet,
 
-    /// Are we logged in to Rerun Hub?
+    /// Are we logged in to SimPlant-Lab Hub?
     pub auth_context: Option<&'a AuthContext>,
 
     /// Whether `OAuth` login is enabled in this viewer instance.

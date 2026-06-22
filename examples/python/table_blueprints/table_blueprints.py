@@ -36,11 +36,11 @@ from typing import Any
 
 import pyarrow as pa
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 from rerun import bindings
-from rerun.recording_stream import RecordingStream
-from rerun.server import Server
+from simplant_lab.recording_stream import RecordingStream
+from simplant_lab.server import Server
 
 
 def make_table_blueprint(

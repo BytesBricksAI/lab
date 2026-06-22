@@ -13,7 +13,7 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

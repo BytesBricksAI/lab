@@ -12,7 +12,7 @@ import numpy.typing as npt
 import requests
 from tqdm import tqdm
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 DATASET_DIR = Path(__file__).parent / "dataset"

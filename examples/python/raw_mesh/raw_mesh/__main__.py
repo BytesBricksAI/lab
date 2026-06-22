@@ -17,7 +17,7 @@ from typing import cast
 import numpy as np
 import trimesh
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 import rerun.blueprint as rrb
 
 from .download_dataset import AVAILABLE_MESHES, ensure_mesh_downloaded

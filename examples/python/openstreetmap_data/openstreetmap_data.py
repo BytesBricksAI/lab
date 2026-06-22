@@ -9,7 +9,7 @@ from urllib.parse import urlencode
 
 import requests
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 CACHE_DIR = Path(__file__).parent / "cache"

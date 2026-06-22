@@ -7,16 +7,19 @@ use std::f64::consts::TAU;
 
 use rand::prelude::*;
 
-use rerun::blueprint::VisualizableArchetype as _;
+use simplant_lab::blueprint::VisualizableArchetype as _;
 
-fn colormap(t: f64, stops: &[(f64, [u8; 3])]) -> rerun::components::Color {
+fn colormap(
+    t: f64,
+    stops: &[(f64, [u8; 3])],
+) -> simplant_lab::components::Color {
     for i in 0..stops.len() - 1 {
         if t <= stops[i + 1].0 {
             let frac =
                 ((t - stops[i].0) / (stops[i + 1].0 - stops[i].0)) as f32;
             let [r0, g0, b0] = stops[i].1.map(|c| c as f32);
             let [r1, g1, b1] = stops[i + 1].1.map(|c| c as f32);
-            return rerun::components::Color::from_rgb(
+            return simplant_lab::components::Color::from_rgb(
                 (r0 + frac * (r1 - r0)) as u8,
                 (g0 + frac * (g1 - g0)) as u8,
                 (b0 + frac * (b1 - b0)) as u8,
@@ -24,11 +27,11 @@ fn colormap(t: f64, stops: &[(f64, [u8; 3])]) -> rerun::components::Color {
         }
     }
     let [r, g, b] = stops.last().expect("stops must not be empty").1;
-    rerun::components::Color::from_rgb(r, g, b)
+    simplant_lab::components::Color::from_rgb(r, g, b)
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new(
+    let rec = simplant_lab::RecordingStreamBuilder::new(
         "rerun_example_custom_color_archetypes",
     )
     .spawn()?;
@@ -76,50 +79,50 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     rec.log(
         "pointcloud",
         &[
-            &rerun::Points3D::new(positions)
-                .with_radii([rerun::components::Radius::from(0.06)])
-                as &dyn rerun::AsComponents,
-            &rerun::DynamicArchetype::new("HeightColors")
-                .with_component::<rerun::components::Color>(
+            &simplant_lab::Points3D::new(positions)
+                .with_radii([simplant_lab::components::Radius::from(0.06)])
+                as &dyn simplant_lab::AsComponents,
+            &simplant_lab::DynamicArchetype::new("HeightColors")
+                .with_component::<simplant_lab::components::Color>(
                 "colors",
                 height_colors,
             ),
-            &rerun::DynamicArchetype::new("SpinColors")
-                .with_component::<rerun::components::Color>(
-                    "colors",
-                    spin_colors,
-                ),
+            &simplant_lab::DynamicArchetype::new("SpinColors")
+                .with_component::<simplant_lab::components::Color>(
+                "colors",
+                spin_colors,
+            ),
         ],
     )?;
     // endregion: log_custom_archetypes
 
     // region: blueprint
     // --- Blueprint: two side-by-side 3D views with different color mappings ---
-    let blueprint = rerun::blueprint::Blueprint::new(rerun::blueprint::Horizontal::new([
-        rerun::blueprint::Spatial3DView::new("Height Colors")
+    let blueprint = simplant_lab::blueprint::Blueprint::new(simplant_lab::blueprint::Horizontal::new([
+        simplant_lab::blueprint::Spatial3DView::new("Height Colors")
             .with_origin("/")
             .with_overrides(
                 "pointcloud",
-                [rerun::Points3D::update_fields()
+                [simplant_lab::Points3D::update_fields()
                     .visualizer()
                     .with_mappings(vec![
-                        rerun::blueprint::VisualizerComponentMapping::new_source_component(
-                            rerun::Points3D::descriptor_colors().component,
+                        simplant_lab::blueprint::VisualizerComponentMapping::new_source_component(
+                            simplant_lab::Points3D::descriptor_colors().component,
                             "HeightColors:colors",
                         )
                         .into(),
                     ])],
             )
             .into(),
-        rerun::blueprint::Spatial3DView::new("Spin Colors")
+        simplant_lab::blueprint::Spatial3DView::new("Spin Colors")
             .with_origin("/")
             .with_overrides(
                 "pointcloud",
-                [rerun::Points3D::update_fields()
+                [simplant_lab::Points3D::update_fields()
                     .visualizer()
                     .with_mappings(vec![
-                        rerun::blueprint::VisualizerComponentMapping::new_source_component(
-                            rerun::Points3D::descriptor_colors().component,
+                        simplant_lab::blueprint::VisualizerComponentMapping::new_source_component(
+                            simplant_lab::Points3D::descriptor_colors().component,
                             "SpinColors:colors",
                         )
                         .into(),
@@ -128,7 +131,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .into(),
     ]));
 
-    blueprint.send(&rec, rerun::blueprint::BlueprintActivation::default())?;
+    blueprint.send(
+        &rec,
+        simplant_lab::blueprint::BlueprintActivation::default(),
+    )?;
     // endregion: blueprint
 
     Ok(())

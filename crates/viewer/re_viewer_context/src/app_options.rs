@@ -25,7 +25,8 @@ pub struct AppOptions {
 
     /// Include the "Welcome screen" application in the recordings panel?
     #[serde(alias = "include_welcome_screen_button_in_recordings_panel")]
-    pub include_rerun_examples_button_in_recordings_panel: bool,
+    #[serde(alias = "include_rerun_examples_button_in_recordings_panel")]
+    pub include_simplant_lab_examples_button_in_recordings_panel: bool,
 
     /// Displays an overlay for debugging picking.
     pub show_picking_debug_overlay: bool,
@@ -86,7 +87,7 @@ impl Default for AppOptions {
 
             show_notification_toasts: true,
 
-            include_rerun_examples_button_in_recordings_panel: true,
+            include_simplant_lab_examples_button_in_recordings_panel: true,
 
             show_picking_debug_overlay: false,
 
@@ -146,7 +147,7 @@ impl AppOptions {
 
     /// Default cache directory
     pub fn default_cache_directory() -> Option<std::path::PathBuf> {
-        directories::ProjectDirs::from("io", "rerun", "Rerun")
+        directories::ProjectDirs::from("io", "simplant-lab", "SimPlant-Lab")
             .map(|dirs| dirs.cache_dir().to_owned())
     }
 

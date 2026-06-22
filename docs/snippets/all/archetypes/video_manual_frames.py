@@ -2,7 +2,7 @@
 
 import sys
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 if len(sys.argv) < 2:

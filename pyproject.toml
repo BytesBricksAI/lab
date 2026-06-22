@@ -163,6 +163,7 @@ package = false
 # override-dependencies = ["rerun-sdk"]
 
 [tool.uv.sources]
+simplant-lab-sdk = { workspace = true }
 rerun-sdk = { workspace = true }
 rerun-notebook = { workspace = true }
 rerun-dev-fixup = { path = "rerun_py/rerun_dev_fixup", editable = false }

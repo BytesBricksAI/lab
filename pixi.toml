@@ -21,15 +21,15 @@
 # Check your environment is correct by running: pixi run check-env
 
 [workspace]
-name = "rerun"
-authors = ["rerun.io <opensource@rerun.io>"]
+name = "simplant-lab"
+authors = ["SimPlant <dev@simplant.lab>"]
 channels = ["conda-forge"]
-description = "Log images, point clouds, etc, and visualize them effortlessly"
-homepage = "https://rerun.io"
+description = "SimPlant-Lab — log images, point clouds, etc, and visualize them effortlessly"
+homepage = "https://github.com/SimPlant/SimPlant-v2"
 license = "MIT OR Apache-2.0"
 platforms = ["linux-64", "linux-aarch64", "osx-arm64", "osx-64", "win-64"]
 readme = "README.md"
-repository = "https://github.com/rerun-io/rerun"
+repository = "https://github.com/SimPlant/SimPlant-v2"
 version = "0.1.0" # TODO(emilk): sync version with `Cargo.toml` with help from `crates.py`
 requires-pixi = ">=0.55.0" # Make sure to keep this in sync with the version on our CI jobs!
 
@@ -124,46 +124,48 @@ codegen-protos-check = "before=$(./scripts/ci/compare_path_digest.py crates/stor
 # Generate the Rerun CLI manual.
 
 # NOTE: must be --all-features, otherwise we might miss some optional commands.
-man = "RERUN_DISABLE_WEB_VIEWER_SERVER=1 cargo run --package rerun-cli --all-features -- man > docs/content/reference/cli.md"
+man = "RERUN_DISABLE_WEB_VIEWER_SERVER=1 cargo run --package simplant-lab-cli --all-features -- man > docs/content/reference/cli.md"
 
-# Compile and run the rerun viewer.
+# Compile and run SimPlant-Lab (native viewer).
 #
 # You can also give an argument for what to view (e.g. an .rrd file).
-rerun = "cargo run --package rerun-cli --no-default-features --features release_no_web_viewer --"
+simplant-lab = "cargo run --package simplant-lab-cli --no-default-features --features release_no_web_viewer --"
+rerun = "cargo run --package simplant-lab-cli --no-default-features --features release_no_web_viewer --"
 
-# Compile and run the rerun viewer, with performance telemetry including Tracy profiler.
+# Compile and run the viewer, with performance telemetry including Tracy profiler.
 #
 # You can also give an argument for what to view (e.g. an .rrd file).
-rerun-perf-debug = "cargo run --package rerun-cli --no-default-features --features release_no_web_viewer,rerun/perf_telemetry_tracy --"
+rerun-perf-debug = "cargo run --package simplant-lab-cli --no-default-features --features release_no_web_viewer,simplant-lab/perf_telemetry_tracy --"
 
-# Compile `rerun-cli` without the web-viewer.
-rerun-build = "cargo build --package rerun-cli --no-default-features --features release_no_web_viewer"
+# Compile SimPlant-Lab without the web-viewer.
+simplant-lab-build = "cargo build --package simplant-lab-cli --no-default-features --features release_no_web_viewer"
+rerun-build = "cargo build --package simplant-lab-cli --no-default-features --features release_no_web_viewer"
 
-
-# Compile `rerun-cli` without the web-viewer.
-rerun-build-release = "cargo build --package rerun-cli --release --no-default-features --features release_no_web_viewer"
+# Compile without the web-viewer (release).
+simplant-lab-build-release = "cargo build --package simplant-lab-cli --release --no-default-features --features release_no_web_viewer"
+rerun-build-release = "cargo build --package simplant-lab-cli --release --no-default-features --features release_no_web_viewer"
 
 # Compile and run the rerun viewer with --release.
 #
 # You can also give an argument for what to view (e.g. an .rrd file).
-rerun-release = "cargo run --package rerun-cli --no-default-features --features release_no_web_viewer --release --"
+rerun-release = "cargo run --package simplant-lab-cli --no-default-features --features release_no_web_viewer --release --"
 
 # Compile and run the rerun viewer in release mode, with performance telemetry including Tracy profiler.
 #
 # You can also give an argument for what to view (e.g. an .rrd file).
-rerun-perf = "cargo run --package rerun-cli --no-default-features --features release_no_web_viewer,rerun/perf_telemetry_tracy --release --"
+rerun-perf = "cargo run --package simplant-lab-cli --no-default-features --features release_no_web_viewer,simplant-lab/perf_telemetry_tracy --release --"
 
 # Compile `rerun-cli` with the same feature set as we build for releases.
-rerun-build-native-and-web = { cmd = "cargo build --package rerun-cli --no-default-features --features release_full --", depends-on = [
+rerun-build-native-and-web = { cmd = "cargo build --package simplant-lab-cli --no-default-features --features release_full --", depends-on = [
   "rerun-build-web",
 ] }
 
 # Compile `rerun-cli` with the same feature set as we build for releases.
-rerun-build-native-and-web-release = { cmd = "cargo build --package rerun-cli --no-default-features --features release_full --release --", depends-on = [
+rerun-build-native-and-web-release = { cmd = "cargo build --package simplant-lab-cli --no-default-features --features release_full --release --", depends-on = [
   "rerun-build-web-release",
 ] }
 
-rerun-build-native-and-pending-web-release = { cmd = "cargo build --package rerun-cli --no-default-features --features release_full --release --", env = { RERUN_TRAILING_WEB_VIEWER = "1" } }
+rerun-build-native-and-pending-web-release = { cmd = "cargo build --package simplant-lab-cli --no-default-features --features release_full --release --", env = { RERUN_TRAILING_WEB_VIEWER = "1" } }
 
 # Compile and run the web-viewer via rerun-cli.
 #
@@ -171,7 +173,7 @@ rerun-build-native-and-pending-web-release = { cmd = "cargo build --package reru
 #
 # This installs the `wasm32-unknown-unknown` rust target if it's not already installed.
 # (this looks heavy but takes typically below 0.1s!)
-rerun-web = { cmd = "cargo run --package rerun-cli --no-default-features --features web_viewer -- --web-viewer", depends-on = [
+rerun-web = { cmd = "cargo run --package simplant-lab-cli --no-default-features --features web_viewer -- --web-viewer", depends-on = [
   "rerun-build-web",
 ] }
 
@@ -185,7 +187,7 @@ rerun-build-web = "rustup target add wasm32-unknown-unknown && cargo run -p re_d
 #
 # This installs the `wasm32-unknown-unknown` rust target if it's not already installed.
 # (this looks heavy but takes typically below 0.1s!)
-rerun-build-web-cli = "rustup target add wasm32-unknown-unknown && cargo run -p re_dev_tools -- build-web-viewer --no-default-features --features analytics,map_view --debug && cargo build --package rerun-cli --no-default-features --features web_viewer"
+rerun-build-web-cli = "rustup target add wasm32-unknown-unknown && cargo run -p re_dev_tools -- build-web-viewer --no-default-features --features analytics,map_view --debug && cargo build --package simplant-lab-cli --no-default-features --features web_viewer"
 
 # Compile and run the web-viewer in release mode via rerun-cli.
 #
@@ -193,7 +195,7 @@ rerun-build-web-cli = "rustup target add wasm32-unknown-unknown && cargo run -p 
 #
 # This installs the `wasm32-unknown-unknown` rust target if it's not already installed.
 # (this looks heavy but takes typically below 0.1s!)
-rerun-web-release = { cmd = "cargo run --package rerun-cli --no-default-features --features map_view,web_viewer --release -- --web-viewer", depends-on = [
+rerun-web-release = { cmd = "cargo run --package simplant-lab-cli --no-default-features --features map_view,web_viewer --release -- --web-viewer", depends-on = [
   "rerun-build-web-release",
 ] }
 
@@ -208,7 +210,7 @@ rs-check = "python scripts/ci/rust_checks.py"
 # Check that old .rrd files can still be read and understood.
 # See tests/assets/rrd/README.md for more.
 # Note that we run with `--check-footers=false`: it is expected that these RRDs do not have proper footers (they predate them).
-check-backwards-compatibility = { cmd = "find tests/assets/rrd -name '*.rrd' -type f -print0 | xargs -0 cargo run --package rerun-cli --no-default-features rrd verify --check-footers=false" }
+check-backwards-compatibility = { cmd = "find tests/assets/rrd -name '*.rrd' -type f -print0 | xargs -0 cargo run --package simplant-lab-cli --no-default-features rrd verify --check-footers=false" }
 
 # `cargo fmt --all` only sees files reachable from each crate's lib.rs/main.rs.
 # Snippets in `docs/snippets/all/*.rs` are copied into the crate by `build.rs`,
@@ -216,7 +218,8 @@ check-backwards-compatibility = { cmd = "find tests/assets/rrd -name '*.rrd' -ty
 # directly so `docs/snippets/rustfmt.toml` (max_width=80) is applied.
 # We filter to files containing `fn main()` to skip partial fragments
 # (they don't parse standalone).
-rs-fmt = { cmd = "cargo fmt --all && grep -rl 'fn main()' --include='*.rs' docs/snippets/all | xargs rustfmt --edition 2024" }
+# The `snippets` crate references `mod snippets` generated by `build.rs`; build it first.
+rs-fmt = { cmd = "cargo build -p snippets && cargo fmt --all && grep -rl 'fn main()' --include='*.rs' docs/snippets/all | xargs rustfmt --edition 2024" }
 
 # Code formatting for all languages.
 format = { depends-on = ["cpp-fmt", "misc-fmt", "pb-fmt", "py-fmt", "rs-fmt", "toml-fmt"] }
@@ -422,7 +425,7 @@ py-build-wheel = { cmd = "cp target/release/rerun$EXECUTABLE_EXTENSION rerun_py/
 py-sync-examples = { cmd = "pixi run uv sync --group examples --inexact --no-install-package rerun-sdk" }
 # Install example snippet dependencies without rebuilding rerun-sdk.
 # Use this after `py-build` to add snippet-specific dependencies.
-py-sync-snippets = { cmd = "pixi run uv sync --group snippets --inexact --no-install-package rerun-sdk" }
+py-sync-snippets = { cmd = "pixi run uv sync --group snippets --inexact --no-install-package simplant-lab-sdk" }
 
 
 # Build the `rerun-sdk` package in release mode.

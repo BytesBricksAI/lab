@@ -4,7 +4,7 @@ import av
 import numpy as np
 import numpy.typing as npt
 
-import rerun as rr
+import simplant_lab as rr
 
 fps = 30
 duration_seconds = 4

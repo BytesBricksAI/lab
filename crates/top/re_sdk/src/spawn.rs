@@ -69,7 +69,7 @@ pub struct SpawnOptions {
 }
 
 // NOTE: No need for .exe extension on windows.
-const RERUN_BINARY: &str = "rerun";
+const SIMPLANT_LAB_BINARY: &str = "simplant-lab";
 
 impl Default for SpawnOptions {
     fn default() -> Self {
@@ -78,7 +78,7 @@ impl Default for SpawnOptions {
             wait_for_bind: false,
             memory_limit: "75%".into(),
             server_memory_limit: "1GiB".into(),
-            executable_name: RERUN_BINARY.into(),
+            executable_name: SIMPLANT_LAB_BINARY.into(),
             executable_path: None,
             extra_args: Vec::new(),
             extra_env: Vec::new(),

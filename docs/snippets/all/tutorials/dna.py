@@ -5,8 +5,8 @@ from math import tau
 
 import numpy as np
 
-import rerun as rr
-from rerun.utilities import bounce_lerp, build_color_spiral
+import simplant_lab as rr
+from simplant_lab.utilities import bounce_lerp, build_color_spiral
 
 # endregion: imports
 

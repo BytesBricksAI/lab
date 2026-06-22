@@ -1,6 +1,6 @@
 """Log simple MCAP recording statistics."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_mcap_statistics", spawn=True)
 

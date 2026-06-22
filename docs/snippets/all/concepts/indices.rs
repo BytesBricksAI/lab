@@ -1,9 +1,10 @@
 //! Set different types of indices.
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec =
-        rerun::RecordingStreamBuilder::new("rerun_example_different_indices")
-            .spawn()?;
+    let rec = simplant_lab::RecordingStreamBuilder::new(
+        "rerun_example_different_indices",
+    )
+    .spawn()?;
 
     rec.set_time_sequence("frame_nr", 42);
     rec.set_duration_secs("elapsed", 12.0);
@@ -15,7 +16,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     );
 
     // All following logged data will be timestamped with the above times:
-    rec.log("points", &rerun::Points2D::new([(0.0, 0.0), (1.0, 1.0)]))?;
+    rec.log(
+        "points",
+        &simplant_lab::Points2D::new([(0.0, 0.0), (1.0, 1.0)]),
+    )?;
 
     Ok(())
 }

@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import sys
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 
 # sanity-check since all other example scripts take arguments:
 assert len(sys.argv) == 1, f"{sys.argv[0]} does not take any arguments"

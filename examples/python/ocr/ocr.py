@@ -20,7 +20,7 @@ import tqdm
 from paddleocr import PPStructure
 from paddleocr.ppstructure.recovery.recovery_to_doc import sorted_layout_boxes
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 import rerun.blueprint as rrb
 
 if TYPE_CHECKING:

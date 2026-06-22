@@ -1,6 +1,6 @@
 //! Log a simple 3D asset.
 
-use rerun::external::anyhow;
+use simplant_lab::external::anyhow;
 
 fn main() -> anyhow::Result<()> {
     let args = std::env::args().collect::<Vec<_>>();
@@ -9,10 +9,11 @@ fn main() -> anyhow::Result<()> {
     };
 
     let rec =
-        rerun::RecordingStreamBuilder::new("rerun_example_asset3d").spawn()?;
+        simplant_lab::RecordingStreamBuilder::new("rerun_example_asset3d")
+            .spawn()?;
 
-    rec.log_static("world", &rerun::ViewCoordinates::RIGHT_HAND_Z_UP())?; // Set an up-axis
-    rec.log("world/asset", &rerun::Asset3D::from_file_path(path)?)?;
+    rec.log_static("world", &simplant_lab::ViewCoordinates::RIGHT_HAND_Z_UP())?; // Set an up-axis
+    rec.log("world/asset", &simplant_lab::Asset3D::from_file_path(path)?)?;
 
     Ok(())
 }

@@ -8,7 +8,7 @@ from pathlib import Path
 
 from datafusion import col
 
-import rerun as rr
+import simplant_lab as rr
 
 RRD_DIR = Path(tempfile.mkdtemp())
 atexit.register(

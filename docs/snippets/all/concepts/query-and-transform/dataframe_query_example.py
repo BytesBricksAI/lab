@@ -7,7 +7,7 @@ import tempfile
 
 from datafusion import col
 
-import rerun as rr
+import simplant_lab as rr
 
 # should be a cross-platform way to generate a rrd path.
 RRD_PATH = tempfile.mktemp(suffix=".rrd")

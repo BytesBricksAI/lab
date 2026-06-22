@@ -14,7 +14,7 @@ import threading
 import time
 from typing import TYPE_CHECKING, Any
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 if TYPE_CHECKING:

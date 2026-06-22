@@ -1,9 +1,9 @@
 use std::time::Instant;
 
-use rerun::external::egui::{self, ScrollArea};
-use rerun::external::re_log::ResultExt;
-use rerun::external::re_ui::{UiExt, list_item};
-use rerun::external::{eframe, re_viewer};
+use simplant_lab::external::egui::{self, ScrollArea};
+use simplant_lab::external::re_log::ResultExt;
+use simplant_lab::external::re_ui::{UiExt, list_item};
+use simplant_lab::external::{eframe, re_viewer};
 
 use crate::comms::protocol::Message;
 use crate::comms::viewer::ControlViewerHandle;

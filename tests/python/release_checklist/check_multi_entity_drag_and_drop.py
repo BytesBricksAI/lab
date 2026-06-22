@@ -6,7 +6,7 @@ from uuid import uuid4
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 README = """\

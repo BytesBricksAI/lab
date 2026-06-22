@@ -1,5 +1,5 @@
 // 0.8
-use rerun::{components::Point3D, MsgSender};
+use simplant_lab::{components::Point3D, MsgSender};
 let positions = vec![Point3D::from([1.0, 2.0, 3.0])];
 
 MsgSender::new("points")
@@ -9,5 +9,5 @@ MsgSender::new("points")
 // 0.9
 rec.log(
     "points",
-    &rerun::Points3D::new([(1.0, 2.0, 3.0)]),
+    &simplant_lab::Points3D::new([(1.0, 2.0, 3.0)]),
 )?;

@@ -4,7 +4,7 @@ Guidance for LLMs working in this repo.
 
 ## Project overview
 
-Rerun: time-aware multimodal data stack + visualization for robotics, spatial AI, computer vision. SDKs (Python, Rust, C++) log rich data (images, point clouds, tensors, etc.). Viewer for visualization.
+SimPlant Lab: time-aware multimodal data stack + visualization for robotics, spatial AI, computer vision (fork of [Rerun](https://github.com/rerun-io/rerun)). SDKs (Python, Rust, C++) log rich data (images, point clouds, tensors, etc.). Viewer for visualization.
 
 ## Build system
 
@@ -14,13 +14,13 @@ Rerun: time-aware multimodal data stack + visualization for robotics, spatial AI
 
 **Building:**
 - `pixi run py-build` - Build Python SDK into local .venv (uses uv)
-- `pixi run rerun-build` - Build native viewer (without web viewer)
-- `pixi run rerun-build-web` - Build web viewer (wasm)
+- `pixi run simplant-lab-build` - Build native viewer (without web viewer)
+- `pixi run simplant-lab-build-web` - Build web viewer (wasm)
 - `pixi run cpp-build-all` - Build all C++ artifacts
 
 **Running:**
-- `pixi run rerun` - Run viewer
-- `pixi run uvpy script.py` - Run Python scripts with rerun SDK
+- `pixi run simplant-lab` - Run viewer
+- `pixi run uvpy script.py` - Run Python scripts with simplant-lab SDK
 - `cargo run -p <package_name>` - Run specific Rust example (e.g., `cargo run -p dna`)
 
 **Code generation:**
@@ -148,7 +148,7 @@ See [`docs/snippets/README.md`](docs/snippets/README.md) for running, building, 
 Python uses separate uv-managed .venv (not pixi's conda env):
 
 ```bash
-pixi run py-build              # Build rerun-sdk into .venv
+pixi run py-build              # Build simplant-lab-sdk into .venv
 pixi run uvpy script.py        # Run Python scripts via uv
 pixi run uv run script.py      # Explicit uv run
 ```

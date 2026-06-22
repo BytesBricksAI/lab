@@ -8,7 +8,7 @@ import multiprocessing
 import os
 import threading
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 
 
 # Python does not guarantee that the normal atexit-handlers will be called at the

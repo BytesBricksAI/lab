@@ -9,7 +9,7 @@ import time
 import cv2
 import numpy as np
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 
 
 def bgr2nv12(bgr: cv2.typing.MatLike) -> cv2.typing.MatLike:

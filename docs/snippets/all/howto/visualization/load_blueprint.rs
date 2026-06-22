@@ -10,7 +10,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let path_to_rrd = &args[1];
     let path_to_rbl = &args[2];
 
-    let rec = rerun::RecordingStreamBuilder::new(
+    let rec = simplant_lab::RecordingStreamBuilder::new(
         "rerun_example_dataframe_view_query_external",
     )
     .spawn()?;

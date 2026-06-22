@@ -226,7 +226,7 @@ fn show_warnings(frame: &eframe::Frame, ui: &mut egui::Ui, app_env: &crate::AppE
                 .color(ui.visuals().warn_fg_color);
             let url = "https://github.com/rerun-io/rerun/issues/6835";
             ui.hyperlink_to(text,url).on_hover_ui(|ui| {
-                ui.label("It looks like the Rerun Viewer is running inside a Docker container. This is not officially supported, and may lead to subtle bugs. ");
+                ui.label("It looks like the SimPlant-Lab is running inside a Docker container. This is not officially supported, and may lead to subtle bugs. ");
                 ui.label("Click for more info.");
             });
         });
@@ -523,7 +523,7 @@ fn frame_time_label_ui(ui: &mut egui::Ui, app: &App) {
         // we use monospace so the width doesn't fluctuate as the numbers change.
         let text = format!("{ms:.1} ms");
         ui.label(egui::RichText::new(text).monospace().color(color))
-            .on_hover_text("CPU time used by Rerun Viewer each frame. Lower is better.");
+            .on_hover_text("CPU time used by SimPlant-Lab each frame. Lower is better.");
     }
 }
 
@@ -601,7 +601,7 @@ fn memory_use_label_ui(ui: &mut egui::Ui, gpu_resource_stats: &WgpuResourcePoolS
                 .color(ui.visuals().weak_text_color()),
         )
         .on_hover_text(format!(
-            "Rerun Viewer is using {} of RAM in {} separate allocations,\n\
+            "SimPlant-Lab is using {} of RAM in {} separate allocations,\n\
             plus {} of GPU memory in {} textures and {} buffers.",
             bytes_used_text,
             format_uint(count.count),
@@ -613,7 +613,7 @@ fn memory_use_label_ui(ui: &mut egui::Ui, gpu_resource_stats: &WgpuResourcePoolS
         let bytes_used_text = re_format::format_bytes(rss as _);
         click_to_copy(ui, &bytes_used_text, |ui| {
             ui.label(format!(
-                "Rerun Viewer is using {} of Resident memory (RSS),\n\
+                "SimPlant-Lab is using {} of Resident memory (RSS),\n\
                 plus {} of GPU memory in {} textures and {} buffers.",
                 bytes_used_text,
                 re_format::format_bytes(gpu_resource_stats.total_bytes() as _),

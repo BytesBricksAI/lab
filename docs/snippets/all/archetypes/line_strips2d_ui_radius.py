@@ -1,6 +1,6 @@
 """Log lines with ui points & scene unit radii."""
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 rr.init("rerun_example_line_strip2d_ui_radius", spawn=True)

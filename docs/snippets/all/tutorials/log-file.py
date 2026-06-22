@@ -1,6 +1,6 @@
 import sys
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_log_file", spawn=True)
 

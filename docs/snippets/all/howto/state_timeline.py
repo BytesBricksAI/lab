@@ -1,6 +1,6 @@
 """Demonstrates the experimental state timeline view."""
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 rr.init("rerun_example_howto_state_timeline", spawn=True)

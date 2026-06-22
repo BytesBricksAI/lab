@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-import rerun as rr
+import simplant_lab as rr
 
 image_file_path = Path(__file__).parent / "ferris.png"
 

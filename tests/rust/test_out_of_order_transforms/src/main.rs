@@ -4,8 +4,8 @@
 
 use std::f32::consts::TAU;
 
-use rerun::external::re_log;
-use rerun::{
+use simplant_lab::external::re_log;
+use simplant_lab::{
     Angle, Color, EntityPath, LineStrips3D, Points3D, Position3D, RecordingStream,
     RotationAxisAngle, Transform3D, TransformRelation, ViewCoordinates,
 };
@@ -108,7 +108,7 @@ fn log_transforms(rec: &RecordingStream, sim_time: f32) -> anyhow::Result<()> {
 #[clap(author, version, about)]
 struct Args {
     #[command(flatten)]
-    rerun: rerun::clap::RerunArgs,
+    rerun: simplant_lab::clap::RerunArgs,
 
     #[clap(long, default_value = "0.008")] // 120fps
     log_frequency_secs: f64,

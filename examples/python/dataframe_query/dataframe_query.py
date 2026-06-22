@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import argparse
 
-import rerun as rr
+import simplant_lab as rr
 
 DESCRIPTION = """
 Usage: python dataframe_query.py <path_to_rrd> [entity_path_filter]

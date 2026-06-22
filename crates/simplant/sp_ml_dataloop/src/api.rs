@@ -7,6 +7,7 @@ pub use crate::domain::{
     FeatureSpec, Result, SCHEMA_VERSION,
 };
 pub use crate::infrastructure::csv_sink::CsvDatasetSink;
+pub use crate::infrastructure::parquet_sink::ParquetDatasetSink;
 pub use crate::infrastructure::toml_spec::{
     dataset_spec_from_str, load_dataset_spec, save_dataset_spec,
 };

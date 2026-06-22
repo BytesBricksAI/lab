@@ -2,7 +2,7 @@
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 
 tensor = np.random.randint(
     0, 256, (8, 6, 3, 5), dtype=np.uint8

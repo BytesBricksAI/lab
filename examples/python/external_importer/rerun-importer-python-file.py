@@ -7,7 +7,7 @@ import argparse
 import os
 import sys
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 
 # The Rerun Viewer will always pass these two pieces of information:
 # 1. The path to be loaded, as a positional arg.

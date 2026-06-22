@@ -7,14 +7,14 @@
 //! ```
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new("rerun_example_stdio").stdout()?;
+    let rec = simplant_lab::RecordingStreamBuilder::new("rerun_example_stdio").stdout()?;
 
     let input = std::io::stdin()
         .lines()
         .collect::<Result<Vec<_>, _>>()?
         .join("\n");
 
-    rec.log("stdin", &rerun::TextDocument::new(input))?;
+    rec.log("stdin", &simplant_lab::TextDocument::new(input))?;
 
     Ok(())
 }

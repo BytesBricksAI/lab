@@ -11,9 +11,9 @@ from __future__ import annotations
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
-from rerun.blueprint.datatypes import ComponentSourceKind, VisualizerComponentMapping
+from simplant_lab.blueprint.datatypes import ComponentSourceKind, VisualizerComponentMapping
 
 
 def simulate_robot_controller() -> None:

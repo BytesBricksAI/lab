@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import rerun as rr
+import simplant_lab as rr
 from rerun import RecordingStream
 
 with RecordingStream("rerun_example_load_urdf") as rec:

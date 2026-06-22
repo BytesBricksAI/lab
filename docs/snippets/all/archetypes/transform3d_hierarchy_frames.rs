@@ -1,7 +1,7 @@
 //! Logs a transform hierarchy using named transform frame relationships.
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new(
+    let rec = simplant_lab::RecordingStreamBuilder::new(
         "rerun_example_transform3d_hierarchy_frames",
     )
     .spawn()?;
@@ -9,54 +9,54 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     rec.set_duration_secs("sim_time", 0.0);
 
     // Planetary motion is typically in the XY plane.
-    rec.log_static("/", &rerun::ViewCoordinates::RIGHT_HAND_Z_UP())?;
+    rec.log_static("/", &simplant_lab::ViewCoordinates::RIGHT_HAND_Z_UP())?;
 
     // Setup spheres, all are in the center of their own space:
     rec.log(
         "sun",
         &[
-            &rerun::Ellipsoids3D::from_centers_and_half_sizes(
+            &simplant_lab::Ellipsoids3D::from_centers_and_half_sizes(
                 [[0.0, 0.0, 0.0]],
                 [[1.0, 1.0, 1.0]],
             )
-            .with_colors([rerun::Color::from_rgb(255, 200, 10)])
-            .with_fill_mode(rerun::components::FillMode::Solid)
-                as &dyn rerun::AsComponents,
-            &rerun::CoordinateFrame::new("sun_frame"),
+            .with_colors([simplant_lab::Color::from_rgb(255, 200, 10)])
+            .with_fill_mode(simplant_lab::components::FillMode::Solid)
+                as &dyn simplant_lab::AsComponents,
+            &simplant_lab::CoordinateFrame::new("sun_frame"),
         ],
     )?;
 
     rec.log(
         "planet",
         &[
-            &rerun::Ellipsoids3D::from_centers_and_half_sizes(
+            &simplant_lab::Ellipsoids3D::from_centers_and_half_sizes(
                 [[0.0, 0.0, 0.0]],
                 [[0.4, 0.4, 0.4]],
             )
-            .with_colors([rerun::Color::from_rgb(40, 80, 200)])
-            .with_fill_mode(rerun::components::FillMode::Solid)
-                as &dyn rerun::AsComponents,
-            &rerun::CoordinateFrame::new("planet_frame"),
+            .with_colors([simplant_lab::Color::from_rgb(40, 80, 200)])
+            .with_fill_mode(simplant_lab::components::FillMode::Solid)
+                as &dyn simplant_lab::AsComponents,
+            &simplant_lab::CoordinateFrame::new("planet_frame"),
         ],
     )?;
 
     rec.log(
         "moon",
         &[
-            &rerun::Ellipsoids3D::from_centers_and_half_sizes(
+            &simplant_lab::Ellipsoids3D::from_centers_and_half_sizes(
                 [[0.0, 0.0, 0.0]],
                 [[0.15, 0.15, 0.15]],
             )
-            .with_colors([rerun::Color::from_rgb(180, 180, 180)])
-            .with_fill_mode(rerun::components::FillMode::Solid)
-                as &dyn rerun::AsComponents,
-            &rerun::CoordinateFrame::new("moon_frame"),
+            .with_colors([simplant_lab::Color::from_rgb(180, 180, 180)])
+            .with_fill_mode(simplant_lab::components::FillMode::Solid)
+                as &dyn simplant_lab::AsComponents,
+            &simplant_lab::CoordinateFrame::new("moon_frame"),
         ],
     )?;
 
     // The viewer automatically creates a 3D view at `/`. To connect it to our transform hierarchy, we set its coordinate frame
     // to `sun_frame` as well. Alternatively, we could also set a blueprint that makes `/sun` the space origin.
-    rec.log("/", &rerun::CoordinateFrame::new("sun_frame"))?;
+    rec.log("/", &simplant_lab::CoordinateFrame::new("sun_frame"))?;
 
     // Draw fixed paths where the planet & moon move.
     let d_planet = 6.0;
@@ -67,21 +67,25 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     rec.log(
         "planet_path",
         &[
-            &rerun::LineStrips3D::new([rerun::LineStrip3D::from_iter(
-                circle
-                    .iter()
-                    .map(|p| [p[0] * d_planet, p[1] * d_planet, 0.0]),
-            )]) as &dyn rerun::AsComponents,
-            &rerun::CoordinateFrame::new("sun_frame"),
+            &simplant_lab::LineStrips3D::new([
+                simplant_lab::LineStrip3D::from_iter(
+                    circle
+                        .iter()
+                        .map(|p| [p[0] * d_planet, p[1] * d_planet, 0.0]),
+                ),
+            ]) as &dyn simplant_lab::AsComponents,
+            &simplant_lab::CoordinateFrame::new("sun_frame"),
         ],
     )?;
     rec.log(
         "moon_path",
         &[
-            &rerun::LineStrips3D::new([rerun::LineStrip3D::from_iter(
-                circle.iter().map(|p| [p[0] * d_moon, p[1] * d_moon, 0.0]),
-            )]) as &dyn rerun::AsComponents,
-            &rerun::CoordinateFrame::new("planet_frame"),
+            &simplant_lab::LineStrips3D::new([
+                simplant_lab::LineStrip3D::from_iter(
+                    circle.iter().map(|p| [p[0] * d_moon, p[1] * d_moon, 0.0]),
+                ),
+            ]) as &dyn simplant_lab::AsComponents,
+            &simplant_lab::CoordinateFrame::new("planet_frame"),
         ],
     )?;
 
@@ -94,11 +98,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         rec.log(
             "planet_transforms",
-            &rerun::Transform3D::from_translation_rotation(
+            &simplant_lab::Transform3D::from_translation_rotation(
                 [r_planet.sin() * d_planet, r_planet.cos() * d_planet, 0.0],
-                rerun::RotationAxisAngle {
+                simplant_lab::RotationAxisAngle {
                     axis: [1.0, 0.0, 0.0].into(),
-                    angle: rerun::Angle::from_degrees(20.0),
+                    angle: simplant_lab::Angle::from_degrees(20.0),
                 },
             )
             .with_child_frame("planet_frame")
@@ -106,12 +110,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         )?;
         rec.log(
             "moon_transforms",
-            &rerun::Transform3D::from_translation([
+            &simplant_lab::Transform3D::from_translation([
                 r_moon.cos() * d_moon,
                 r_moon.sin() * d_moon,
                 0.0,
             ])
-            .with_relation(rerun::TransformRelation::ChildFromParent)
+            .with_relation(simplant_lab::TransformRelation::ChildFromParent)
             .with_child_frame("moon_frame")
             .with_parent_frame("planet_frame"),
         )?;

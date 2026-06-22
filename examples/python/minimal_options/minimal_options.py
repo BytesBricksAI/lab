@@ -7,7 +7,7 @@ import argparse
 
 import numpy as np
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 
 
 def main() -> None:

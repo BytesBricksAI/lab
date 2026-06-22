@@ -1,6 +1,6 @@
 """Add a component default."""
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 rr.init("rerun_example_component_override", spawn=True)

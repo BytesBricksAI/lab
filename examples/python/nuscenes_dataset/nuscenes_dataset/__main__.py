@@ -10,7 +10,7 @@ import matplotlib
 import numpy as np
 from nuscenes import nuscenes
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 from .download_dataset import MINISPLIT_SCENES, download_minisplit

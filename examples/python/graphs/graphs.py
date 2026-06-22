@@ -9,11 +9,11 @@ import random
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
-from rerun.blueprint.archetypes.force_collision_radius import ForceCollisionRadius
-from rerun.blueprint.archetypes.force_link import ForceLink
-from rerun.blueprint.archetypes.force_many_body import ForceManyBody
+from simplant_lab.blueprint.archetypes.force_collision_radius import ForceCollisionRadius
+from simplant_lab.blueprint.archetypes.force_link import ForceLink
+from simplant_lab.blueprint.archetypes.force_many_body import ForceManyBody
 
 color_scheme = [
     [228, 26, 28, 255],  # Red

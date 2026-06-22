@@ -1,24 +1,25 @@
 //! Log a batch of cylinders.
 
-use rerun::external::glam::vec3;
+use simplant_lab::external::glam::vec3;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec =
-        rerun::RecordingStreamBuilder::new("rerun_example_cylinders3d_batch")
-            .spawn()?;
+    let rec = simplant_lab::RecordingStreamBuilder::new(
+        "rerun_example_cylinders3d_batch",
+    )
+    .spawn()?;
 
     rec.log(
         "cylinders",
-        &rerun::Cylinders3D::from_lengths_and_radii(
+        &simplant_lab::Cylinders3D::from_lengths_and_radii(
             [0.0, 2.0, 4.0, 6.0, 8.0],
             [1.0, 0.5, 0.5, 0.5, 1.0],
         )
         .with_colors([
-            rerun::Color::from_rgb(255, 0, 0),
-            rerun::Color::from_rgb(188, 188, 0),
-            rerun::Color::from_rgb(0, 255, 0),
-            rerun::Color::from_rgb(0, 188, 188),
-            rerun::Color::from_rgb(0, 0, 255),
+            simplant_lab::Color::from_rgb(255, 0, 0),
+            simplant_lab::Color::from_rgb(188, 188, 0),
+            simplant_lab::Color::from_rgb(0, 255, 0),
+            simplant_lab::Color::from_rgb(0, 188, 188),
+            simplant_lab::Color::from_rgb(0, 0, 255),
         ])
         .with_centers([
             vec3(0., 0., 0.),
@@ -28,9 +29,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             vec3(8., 0., 0.),
         ])
         .with_rotation_axis_angles((0..5).map(|i| {
-            rerun::RotationAxisAngle::new(
+            simplant_lab::RotationAxisAngle::new(
                 [1.0, 0.0, 0.0],
-                rerun::Angle::from_degrees(i as f32 * -22.5),
+                simplant_lab::Angle::from_degrees(i as f32 * -22.5),
             )
         })),
     )?;

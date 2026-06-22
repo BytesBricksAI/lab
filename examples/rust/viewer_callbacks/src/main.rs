@@ -3,9 +3,11 @@
 use std::rc::Rc;
 use std::sync::Arc;
 
-use rerun::external::parking_lot::Mutex;
-use rerun::external::re_viewer::{self, ViewerEvent, ViewerEventKind};
-use rerun::external::{eframe, egui, re_crash_handler, re_grpc_server, re_log, re_memory, tokio};
+use simplant_lab::external::parking_lot::Mutex;
+use simplant_lab::external::re_viewer::{self, ViewerEvent, ViewerEventKind};
+use simplant_lab::external::{
+    eframe, egui, re_crash_handler, re_grpc_server, re_log, re_memory, tokio,
+};
 
 // By using `re_memory::AccountingAllocator` Rerun can keep track of exactly how much memory it is using,
 // and prune the data store when it goes above a certain limit.

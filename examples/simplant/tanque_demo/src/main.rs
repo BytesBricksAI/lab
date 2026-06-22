@@ -44,13 +44,9 @@ fn main() -> anyhow::Result<()> {
 
     let tag_count = bindings.len();
 
-    let mut session = AcquisitionSession::create(
-        "tanque-demo",
-        bindings,
-        SamplingPolicy::default(),
-        &catalog,
-    )
-    .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+    let mut session =
+        AcquisitionSession::create("tanque-demo", bindings, SamplingPolicy::default(), &catalog)
+            .map_err(|e| anyhow::anyhow!(e.to_string()))?;
 
     let source = CsvReplaySource::new(&csv_path);
     let recorder = RerunRecorder::to_file("simplant_lab_tanque_demo", &output_path)
@@ -69,7 +65,10 @@ fn main() -> anyhow::Result<()> {
     println!("Tags recorded:      {tag_count}");
     println!("Batches recorded:   {batches_recorded}");
     println!("Output file:        {}", absolute_rrd.display());
-    println!("Open it with:  pixi run simplant-lab {}", absolute_rrd.display());
+    println!(
+        "Open it with:  pixi run simplant-lab {}",
+        absolute_rrd.display()
+    );
 
     Ok(())
 }

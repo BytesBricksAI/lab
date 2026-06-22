@@ -5,7 +5,7 @@
 #![expect(clippy::disallowed_methods)] // We forbid naked `send` calls in core Rerun, but they are fine in snippets
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new(
+    let rec = simplant_lab::RecordingStreamBuilder::new(
         "rerun_example_check_connection_status",
     )
     .connect_grpc()?;
@@ -16,7 +16,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let tx = tx.clone();
         rec.inspect_sink(move |sink| {
             let grpc_sink = (sink as &dyn std::any::Any)
-                .downcast_ref::<rerun::sink::GrpcSink>()
+                .downcast_ref::<simplant_lab::sink::GrpcSink>()
                 .expect("Expected a GrpcSink");
             tx.send(grpc_sink.status()).ok();
         });
@@ -26,7 +26,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             if matches!(
                 status,
-                rerun::sink::GrpcSinkConnectionState::Disconnected(_)
+                simplant_lab::sink::GrpcSinkConnectionState::Disconnected(_)
             ) {
                 println!("Connection lost, exiting");
                 break;

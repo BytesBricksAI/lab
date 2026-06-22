@@ -5,7 +5,7 @@ This instantiate the mesh several times and will not
 affect its children. This is known as mesh instancing.
 """
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_mesh3d_instancing", spawn=True)
 rr.set_time("frame", sequence=0)

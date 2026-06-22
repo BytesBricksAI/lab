@@ -1,6 +1,6 @@
 """Log arbitrary archetype data."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_dynamic_archetype", spawn=True)
 

@@ -2,7 +2,7 @@
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_image_formats", spawn=True)
 

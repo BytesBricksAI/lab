@@ -1,6 +1,6 @@
 """Log a simple line strip."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_line_strip3d", spawn=True)
 

@@ -2,7 +2,7 @@
 
 from numpy.random import default_rng
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 rr.init("rerun_example_spatial_3d", spawn=True)

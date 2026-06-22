@@ -1,6 +1,6 @@
 """Log a simple colored triangle."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_mesh3d_indexed", spawn=True)
 

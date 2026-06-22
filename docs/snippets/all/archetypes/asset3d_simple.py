@@ -2,7 +2,7 @@
 
 import sys
 
-import rerun as rr
+import simplant_lab as rr
 
 if len(sys.argv) < 2:
     print(f"Usage: {sys.argv[0]} <path_to_asset.[gltf|glb|obj|stl]>")

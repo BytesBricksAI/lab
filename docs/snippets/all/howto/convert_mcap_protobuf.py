@@ -21,7 +21,7 @@ from google.protobuf.json_format import MessageToDict
 from mcap.reader import make_reader
 from mcap_protobuf.decoder import DecoderFactory
 
-import rerun as rr
+import simplant_lab as rr
 
 
 @dataclass

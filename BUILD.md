@@ -1,6 +1,5 @@
-# Building Rerun
-This is a guide to how to build Rerun.
-
+# Building SimPlant Lab
+This is a guide to how to build SimPlant Lab.
 
 ## See also
 * [`rerun_py/README.md`](rerun_py/README.md) - build instructions for Python SDK
@@ -104,7 +103,7 @@ pixi run check-env
 Use this command for building and running the viewer:
 
 ```sh
-pixi run rerun
+pixi run simplant-lab
 ```
 
 
@@ -116,13 +115,13 @@ All Rust examples are set up as separate executables, so they can be run by spec
 cargo run -p dna
 ```
 
-They will either connect to an already running rerun viewer, or spawn a new one.
-In debug builds, it will spawn `target/debug/rerun` if it exists, otherwise look for `rerun` on `PATH`.
+They will either connect to an already running SimPlant Lab viewer, or spawn a new one.
+In debug builds, it will spawn `target/debug/simplant-lab` if it exists, otherwise look for `simplant-lab` on `PATH`.
 
 
-## Building and installing the Rerun Python SDK
+## Building and installing the SimPlant Lab Python SDK
 
-Rerun is available as a package on PyPi and can be installed with `pip install rerun-sdk`.
+SimPlant Lab is available as a package on PyPi and can be installed with `pip install simplant-lab-sdk`.
 
 Additionally, nightly dev wheels from head of `main` are available at <https://github.com/rerun-io/rerun/releases/tag/prerelease>.
 
@@ -138,13 +137,13 @@ Or to create a wheel:
 pixi run py-build-wheel
 ```
 
-You can run scripts that depend on rerun within the uv environment. For example:
+You can run scripts that depend on simplant-lab within the uv environment. For example:
 ```sh
 pixi run uv run examples/python/minimal/minimal.py`
 ```
 
 ### Running the Python examples
-You can also install all rerun example and their dependencies into the same uv environment using:
+You can also install all SimPlant Lab examples and their dependencies into the same uv environment using:
 ```sh
 pixi run py-build-examples
 ```
@@ -181,7 +180,7 @@ pip install ./dist/CURRENT_ARCHITECTURE/*.whl
 
 **IMPORTANT**: unlike the official wheels, wheels produced by this method do _not_ contain the viewer, so they may only be used for logging purposes.
 
-## Building and installing the Rerun C++ SDK
+## Building and installing the SimPlant Lab C++ SDK
 
 On Windows you have to have a system install of Visual Studio 2022 in order to compile the SDK and samples.
 
@@ -199,7 +198,7 @@ This can be useful for developer tools, e.g. for [setting up IntelliSense in VSC
 
 ## Building the docs
 
-High-level documentation for Rerun can be found at [https://rerun.io/docs](https://rerun.io/docs). It is built from the separate repository [rerun-docs](https://github.com/rerun-io/rerun-docs).
+High-level documentation for SimPlant Lab can be found at [https://rerun.io/docs](https://rerun.io/docs). It is built from the separate repository [rerun-docs](https://github.com/rerun-io/rerun-docs).
 
 - 🌊 [C++ API docs](https://ref.rerun.io/docs/cpp) are built with `doxygen` and hosted on GitHub. Use `pixi run -e cpp cpp-docs` to build them locally. For details on the C++ doc-system, see [Writing Docs](rerun_cpp/docs/writing_docs.md).
 - 🐍 [Python API docs](https://ref.rerun.io/docs/python) are built via `mkdocs` and hosted on GitHub. For details on the Python doc-system, see [Writing Docs](rerun_py/docs/writing_docs.md).
@@ -207,8 +206,8 @@ High-level documentation for Rerun can be found at [https://rerun.io/docs](https
 
 ## Building for the web
 
-If you want to build a standalone Rerun executable that contains the web-viewer and a gRPC server,
-you need to install the `wasm32-unknown-unknown` Rust target and ensure the `web_viewer` feature flag is set when building rerun.
+If you want to build a standalone SimPlant Lab executable that contains the web-viewer and a gRPC server,
+you need to install the `wasm32-unknown-unknown` Rust target and ensure the `web_viewer` feature flag is set when building simplant-lab.
 This is automatically done by this shortcut which builds & runs the web viewer:
 ```
 pixi run rerun-web
@@ -301,7 +300,7 @@ rustflags = [
 The repository is configured to automatically generate a `PYO3_CONFIG_FILE` for stable
 Python builds. This file (`rerun_py/pyo3-build.cfg`) is automatically created when you
 first run any `pixi run` command, and ensures consistent cargo caching whether you build
-via `pixi run py-build`, `uv sync --package rerun-sdk`, or other methods.
+via `pixi run py-build`, `uv sync --package simplant-lab-sdk`, or other methods.
 
 The configuration is referenced in `.cargo/config.toml`:
 ```toml

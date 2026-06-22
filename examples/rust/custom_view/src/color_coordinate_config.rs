@@ -1,15 +1,15 @@
 //! Custom blueprint configuration for the color coordinates view.
 //!
 //! Built-in views get this from `.fbs` + codegen. This example does it manually:
-//! define a component, make it [`rerun::Loggable`], group it in an [`rerun::Archetype`], provide
+//! define a component, make it [`simplant_lab::Loggable`], group it in an [`simplant_lab::Archetype`], provide
 //! reflection, and register an editor UI.
 
-use rerun::external::egui;
-use rerun::external::re_sdk_types::reflection::{
+use simplant_lab::external::egui;
+use simplant_lab::external::re_sdk_types::reflection::{
     ArchetypeFieldFlags, ArchetypeFieldReflection, ArchetypeReflection,
 };
-use rerun::external::re_sdk_types::{ArchetypeName, ComponentDescriptor};
-use rerun::external::re_viewer_context::MaybeMutRef;
+use simplant_lab::external::re_sdk_types::{ArchetypeName, ComponentDescriptor};
+use simplant_lab::external::re_viewer_context::MaybeMutRef;
 
 /// Blueprint properties for the color coordinates view.
 pub struct ColorCoordinatesConfiguration;
@@ -17,9 +17,9 @@ pub struct ColorCoordinatesConfiguration;
 impl ColorCoordinatesConfiguration {
     pub fn descriptor_mode() -> ComponentDescriptor {
         ComponentDescriptor {
-            archetype: Some(<Self as rerun::Archetype>::name()),
+            archetype: Some(<Self as simplant_lab::Archetype>::name()),
             component: "ColorCoordinates:mode".into(),
-            component_type: Some(<ColorCoordinatesMode as rerun::Component>::name()),
+            component_type: Some(<ColorCoordinatesMode as simplant_lab::Component>::name()),
         }
     }
 
@@ -28,7 +28,7 @@ impl ColorCoordinatesConfiguration {
         ArchetypeFieldReflection {
             name: "mode",
             display_name: "Coordinates mode",
-            component_type: <ColorCoordinatesMode as rerun::Component>::name(),
+            component_type: <ColorCoordinatesMode as simplant_lab::Component>::name(),
             docstring_md: "The color channels to use as 2D coordinates.",
             flags: ArchetypeFieldFlags::UI_EDITABLE,
         }
@@ -36,11 +36,11 @@ impl ColorCoordinatesConfiguration {
 
     /// Reflection metadata for the custom archetype.
     ///
-    /// Register once with [`rerun::external::re_viewer::App::add_archetype_reflection`] to enable
+    /// Register once with [`simplant_lab::external::re_viewer::App::add_archetype_reflection`] to enable
     /// `re_view::view_property_ui::<ColorCoordinatesConfiguration>`.
     pub fn reflection() -> ArchetypeReflection {
         ArchetypeReflection {
-            display_name: <Self as rerun::Archetype>::display_name(),
+            display_name: <Self as simplant_lab::Archetype>::display_name(),
             deprecation_summary: None,
             view_types: &[],
             scope: Some("blueprint"),
@@ -49,7 +49,7 @@ impl ColorCoordinatesConfiguration {
     }
 }
 
-impl rerun::Archetype for ColorCoordinatesConfiguration {
+impl simplant_lab::Archetype for ColorCoordinatesConfiguration {
     fn name() -> ArchetypeName {
         "rerun.blueprint.archetypes.ColorCoordinates".into()
     }
@@ -67,7 +67,10 @@ impl rerun::Archetype for ColorCoordinatesConfiguration {
     }
 }
 
-impl rerun::external::re_sdk_types::ArchetypeReflectionMarker for ColorCoordinatesConfiguration {}
+impl simplant_lab::external::re_sdk_types::ArchetypeReflectionMarker
+    for ColorCoordinatesConfiguration
+{
+}
 
 /// The different modes for displaying color coordinates in the custom view.
 ///
@@ -95,19 +98,19 @@ impl ColorCoordinatesMode {
         }
     }
 
-    fn from_u32(value: u32) -> rerun::DeserializationResult<Self> {
+    fn from_u32(value: u32) -> simplant_lab::DeserializationResult<Self> {
         match value {
             0 => Ok(Self::Hs),
             1 => Ok(Self::Hv),
             2 => Ok(Self::Rg),
-            _ => Err(rerun::DeserializationError::ValidationError(format!(
-                "invalid color coordinates mode: {value}"
-            ))),
+            _ => Err(simplant_lab::DeserializationError::ValidationError(
+                format!("invalid color coordinates mode: {value}"),
+            )),
         }
     }
 }
 
-impl rerun::SizeBytes for ColorCoordinatesMode {
+impl simplant_lab::SizeBytes for ColorCoordinatesMode {
     fn heap_size_bytes(&self) -> u64 {
         0
     }
@@ -117,37 +120,37 @@ impl rerun::SizeBytes for ColorCoordinatesMode {
     }
 }
 
-impl rerun::Loggable for ColorCoordinatesMode {
+impl simplant_lab::Loggable for ColorCoordinatesMode {
     // Components are stored as Arrow arrays; encode the enum as stable `UInt32` values.
-    fn arrow_datatype() -> rerun::external::arrow::datatypes::DataType {
-        <rerun::datatypes::UInt32 as rerun::Loggable>::arrow_datatype()
+    fn arrow_datatype() -> simplant_lab::external::arrow::datatypes::DataType {
+        <simplant_lab::datatypes::UInt32 as simplant_lab::Loggable>::arrow_datatype()
     }
 
     fn to_arrow_opt<'a>(
         data: impl IntoIterator<Item = Option<impl Into<std::borrow::Cow<'a, Self>>>>,
-    ) -> rerun::SerializationResult<rerun::external::arrow::array::ArrayRef>
+    ) -> simplant_lab::SerializationResult<simplant_lab::external::arrow::array::ArrayRef>
     where
         Self: 'a,
     {
-        <rerun::datatypes::UInt32 as rerun::Loggable>::to_arrow_opt(
+        <simplant_lab::datatypes::UInt32 as simplant_lab::Loggable>::to_arrow_opt(
             data.into_iter()
-                .map(|mode| mode.map(|mode| rerun::datatypes::UInt32(mode.into().as_u32()))),
+                .map(|mode| mode.map(|mode| simplant_lab::datatypes::UInt32(mode.into().as_u32()))),
         )
     }
 
     fn from_arrow_opt(
-        data: &dyn rerun::external::arrow::array::Array,
-    ) -> rerun::DeserializationResult<Vec<Option<Self>>> {
-        <rerun::datatypes::UInt32 as rerun::Loggable>::from_arrow_opt(data)?
+        data: &dyn simplant_lab::external::arrow::array::Array,
+    ) -> simplant_lab::DeserializationResult<Vec<Option<Self>>> {
+        <simplant_lab::datatypes::UInt32 as simplant_lab::Loggable>::from_arrow_opt(data)?
             .into_iter()
             .map(|mode| mode.map(|mode| Self::from_u32(mode.0)).transpose())
             .collect()
     }
 }
 
-impl rerun::Component for ColorCoordinatesMode {
+impl simplant_lab::Component for ColorCoordinatesMode {
     // Pick a stable fully-qualified component type name.
-    fn name() -> rerun::ComponentType {
+    fn name() -> simplant_lab::ComponentType {
         "rerun.blueprint.components.ColorCoordinatesMode".into()
     }
 }

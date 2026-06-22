@@ -1,6 +1,6 @@
 """Log a batch of 3D line strips."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_line_strip3d_batch", spawn=True)
 

@@ -245,7 +245,7 @@ fn welcome_item_ui(
         Route::RedapServer(origin) if origin == &*EXAMPLES_ORIGIN
     );
 
-    let title = list_item::LabelContent::header("Welcome to rerun").with_icon(&icons::HOME);
+    let title = list_item::LabelContent::header("Welcome to SimPlant-Lab").with_icon(&icons::HOME);
 
     let list_item = ui.list_item().header().selected(selected).active(active);
 

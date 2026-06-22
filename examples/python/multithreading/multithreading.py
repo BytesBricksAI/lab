@@ -10,7 +10,7 @@ import threading
 import numpy as np
 import numpy.typing as npt
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 
 
 def rect_logger(path: str, color: npt.NDArray[np.float32]) -> None:

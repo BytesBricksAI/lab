@@ -10,10 +10,10 @@ publish = false
 default = []
 
 # Turn on if you want to share analytics with Rerun (e.g. callstacks on crashes).
-analytics = ["rerun/analytics"]
+analytics = ["simplant-lab/analytics"]
 
 [dependencies]
-rerun = { path = "../../../crates/top/rerun", default-features = false, features = [
+simplant-lab = { path = "../../../crates/top/simplant-lab", default-features = false, features = [
   "native_viewer",
   "run",
   "server",

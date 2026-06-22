@@ -9,7 +9,7 @@ import pyarrow as pa
 from lerobot.datasets.lerobot_dataset import LeRobotDataset
 from tqdm import tqdm
 
-import rerun as rr
+import simplant_lab as rr
 from rerun_export.lerobot.converter import convert_dataframe_to_episode
 from rerun_export.lerobot.feature_inference import infer_features
 from rerun_export.lerobot.types import LeRobotConversionConfig, VideoSpec

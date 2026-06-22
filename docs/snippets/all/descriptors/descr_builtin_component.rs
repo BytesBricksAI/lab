@@ -1,18 +1,18 @@
-use rerun::{ChunkStore, ChunkStoreConfig, ComponentDescriptor};
+use simplant_lab::{ChunkStore, ChunkStoreConfig, ComponentDescriptor};
 
 fn example(
-    rec: &rerun::RecordingStream,
+    rec: &simplant_lab::RecordingStream,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    use rerun::ComponentBatch as _;
+    use simplant_lab::ComponentBatch as _;
     rec.log_static(
         "data",
         &[
-            rerun::components::Position3D::new(1.0, 2.0, 3.0)
+            simplant_lab::components::Position3D::new(1.0, 2.0, 3.0)
                 .try_serialized(ComponentDescriptor {
                 archetype: Some("user.CustomPoints3D".into()),
                 component: "user.CustomPoints3D:points".into(),
                 component_type: Some(
-                    <rerun::components::Position3D as rerun::Component>::name(),
+                    <simplant_lab::components::Position3D as simplant_lab::Component>::name(),
                 ),
             })?,
         ],
@@ -27,7 +27,7 @@ fn example(
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     const APP_ID: &str = "rerun_example_descriptors_builtin_component";
-    let rec = rerun::RecordingStreamBuilder::new(APP_ID).spawn()?;
+    let rec = simplant_lab::RecordingStreamBuilder::new(APP_ID).spawn()?;
 
     example(&rec)?;
 
@@ -37,7 +37,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 #[expect(clippy::unwrap_used)]
-fn check_tags(rec: &rerun::RecordingStream) {
+fn check_tags(rec: &simplant_lab::RecordingStream) {
     // When this snippet runs through the snippet comparison machinery, this environment variable
     // will point to the output RRD.
     // We can thus load this RRD to check that the proper tags were indeed forwarded.
@@ -72,7 +72,7 @@ fn check_tags(rec: &rerun::RecordingStream) {
                 archetype: Some("user.CustomPoints3D".into()),
                 component: "user.CustomPoints3D:points".into(),
                 component_type: Some(
-                    <rerun::components::Position3D as rerun::Component>::name(),
+                    <simplant_lab::components::Position3D as simplant_lab::Component>::name(),
                 ),
             }, //
         ];

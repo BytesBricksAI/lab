@@ -20,9 +20,9 @@ from lerobot.policies.act.configuration_act import ACTConfig
 from lerobot.policies.act.modeling_act import ACTPolicy
 from torch.utils.data import DataLoader
 
-from rerun._tracing import tracing_scope, with_tracing
-from rerun.catalog import CatalogClient
-from rerun.experimental.dataloader import (
+from simplant_lab._tracing import tracing_scope, with_tracing
+from simplant_lab.catalog import CatalogClient
+from simplant_lab.experimental.dataloader import (
     DataSource,
     Field,
     NumericDecoder,

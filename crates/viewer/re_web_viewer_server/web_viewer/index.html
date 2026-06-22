@@ -19,7 +19,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100;500&display=swap"
       rel="stylesheet"
     />
-    <title>Rerun Viewer</title>
+    <title>SimPlant-Lab</title>
     <style>
       html {
         /* Remove touch delay: */
@@ -200,7 +200,7 @@
       ) {
         show_center_html(`
           <p>
-              Rerun is not yet supported on mobile browsers.
+              SimPlant-Lab is not yet supported on mobile browsers.
           </p>
           <p>
               <a class="button" href="#" id="try_anyways">Try anyways</a>
@@ -362,13 +362,13 @@
 
         function check_for_panic() {
           if (handle.has_panicked()) {
-            console.error("Rerun has crashed");
+            console.error("SimPlant-Lab has crashed");
 
             document.getElementById("the_canvas_id").remove();
 
             show_center_html(`
               <p class="strong">
-                  Rerun has crashed.
+                  SimPlant-Lab has crashed.
               </p>
               <pre align="left">${handle.panic_message()}</pre>
               <p>

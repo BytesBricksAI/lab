@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 
 rr.init("rerun_example_descriptors_builtin_archetype")
 rr.spawn()

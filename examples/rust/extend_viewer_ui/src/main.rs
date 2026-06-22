@@ -1,6 +1,6 @@
 //! This example shows how to wrap the Rerun Viewer in your own GUI.
 
-use rerun::external::{
+use simplant_lab::external::{
     arrow, eframe, egui, re_chunk_store, re_crash_handler, re_entity_db, re_grpc_server, re_log,
     re_log_types, re_memory, re_sdk_types, re_viewer, tokio,
 };

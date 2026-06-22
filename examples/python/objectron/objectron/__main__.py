@@ -16,7 +16,7 @@ from typing import TYPE_CHECKING
 import numpy as np
 from scipy.spatial.transform import Rotation as R
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 import rerun.blueprint as rrb
 
 from .download_dataset import (

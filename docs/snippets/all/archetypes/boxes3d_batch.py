@@ -1,6 +1,6 @@
 """Log a batch of oriented bounding boxes."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_box3d_batch", spawn=True)
 

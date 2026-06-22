@@ -1,12 +1,11 @@
 <h3 align="center">
-  <a href="https://www.rerun.io/">
-    <img alt="Banner with Rerun logo" src="https://github.com/user-attachments/assets/be5a4dfd-e3d7-4718-b770-ca8d30bac18f" />
-  </a>
+  <strong>SimPlant-Lab</strong>
 </h3>
+<p align="center">Fork of <a href="https://rerun.io">Rerun</a> for reinforcement learning, simulation, and multimodal visualization.</p>
 
 <h3 align="center">
-  <a href="https://pypi.org/project/rerun-sdk/">                        <img alt="PyPi"           src="https://img.shields.io/pypi/v/rerun-sdk.svg">                              </a>
-  <a href="https://crates.io/crates/rerun">                             <img alt="crates.io"      src="https://img.shields.io/crates/v/rerun.svg">                                </a>
+  <a href="https://pypi.org/project/simplant-lab-sdk/">               <img alt="PyPi"           src="https://img.shields.io/pypi/v/simplant-lab-sdk.svg?label=simplant-lab-sdk"> </a>
+  <a href="https://crates.io/crates/simplant-lab">                    <img alt="crates.io"      src="https://img.shields.io/crates/v/simplant-lab.svg">                         </a>
   <a href="https://github.com/rerun-io/rerun/blob/main/LICENSE-MIT">    <img alt="MIT"            src="https://img.shields.io/badge/license-MIT-blue.svg">                        </a>
   <a href="https://github.com/rerun-io/rerun/blob/main/LICENSE-APACHE"> <img alt="Apache"         src="https://img.shields.io/badge/license-Apache-blue.svg">                     </a>
   <a href="https://discord.gg/Gcm8BbTaAj">                              <img alt="Rerun Discord"  src="https://img.shields.io/discord/1062300748202921994?label=Rerun%20Discord"> </a>
@@ -16,12 +15,12 @@
 
 Log, query, visualize, and stream to training on shared columnar storage built for multimodal data.
 
-**What it does:** Rerun ingests multi-rate, multimodal data (images, point clouds, transforms, time series, joint states, video) from many sources and formats (robot logs, human-data rigs, sim, web video; MCAP, rrd, LeRobot). The built-in viewer renders everything in sync, in realtime: scrub episodes, compare sensors side-by-side, watch CV pipelines run live. The same data is queryable with [dataframes](https://rerun.io/docs/howto/query-and-transform/get-data-out) or SQL, and streams directly into training. Built in Rust on column-chunk storage purpose-built for multi-rate physical data. SDKs in Python, Rust, and C++.
+**What it does:** SimPlant Lab ingests multi-rate, multimodal data (images, point clouds, transforms, time series, joint states, video) from many sources and formats (robot logs, human-data rigs, sim, web video; MCAP, rrd, LeRobot). The built-in viewer renders everything in sync, in realtime: scrub episodes, compare sensors side-by-side, watch CV pipelines run live. The same data is queryable with [dataframes](https://rerun.io/docs/howto/query-and-transform/get-data-out) or SQL, and streams directly into training. Built in Rust on column-chunk storage purpose-built for multi-rate physical data. SDKs in Python, Rust, and C++.
 
-**Quickstart:** `pip install rerun-sdk` — log your first multimodal data and see it in the viewer in under 2 minutes.
+**Quickstart:** `pip install simplant-lab-sdk` — log your first multimodal data and open SimPlant Lab.
 
-* [Run the Rerun Viewer in your browser](https://www.rerun.io/viewer)
-* [Read about what Rerun is and who it is for](https://www.rerun.io/docs/overview/what-is-rerun)
+* Build and run: `pixi run simplant-lab-build` then `pixi run simplant-lab`
+* Python: `import simplant_lab as spl` (legacy: `import rerun as rr`)
 
 ### Use cases
 - Ingest robot logs, egocentric/UMI rigs, sim, and web video into one substrate
@@ -35,19 +34,19 @@ Multi-rate, multimodal, spatial: images, point clouds, time series, tensors, tra
 
 ### A short taste
 ```py
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as spl  # pip install simplant-lab-sdk
 
-rr.init("rerun_example_app")
+spl.init("simplant_lab_example_app")
 
-rr.spawn()  # Spawn a child process with a viewer and connect
-# rr.save("recording.rrd")  # Stream all logs to disk
-# rr.connect_grpc()  # Connect to a remote viewer
+spl.spawn()  # Spawn a child process with a viewer and connect
+# spl.save("recording.rrd")  # Stream all logs to disk
+# spl.connect_grpc()  # Connect to a remote viewer
 
 # Associate subsequent data with 42 on the “frame” timeline
-rr.set_time("frame", sequence=42)
+spl.set_time("frame", sequence=42)
 
 # Log colored 3D points to the entity at `path/to/points`
-rr.log("path/to/points", rr.Points3D(positions, colors=colors))
+spl.log("path/to/points", spl.Points3D(positions, colors=colors))
 …
 ```
 
@@ -63,18 +62,18 @@ rr.log("path/to/points", rr.Points3D(positions, colors=colors))
 
 ## Getting started
 * [**C++**](https://www.rerun.io/docs/getting-started/data-in/cpp)
-* [**Python**](https://www.rerun.io/docs/getting-started/data-in/python): `pip install rerun-sdk` or on [`conda`](https://github.com/conda-forge/rerun-sdk-feedstock)
-* [**Rust**](https://www.rerun.io/docs/getting-started/data-in/rust): `cargo add rerun`
+* [**Python**](https://www.rerun.io/docs/getting-started/data-in/python): `pip install simplant-lab-sdk` or on [`conda`](https://github.com/conda-forge/rerun-sdk-feedstock)
+* [**Rust**](https://www.rerun.io/docs/getting-started/data-in/rust): `cargo add simplant-lab`
 
-### Installing the Rerun Viewer binary
-To stream log data over the network or load our `.rrd` data files you also need the `rerun` binary.
-It can be installed with `pip install rerun-sdk` or with `cargo install rerun-cli --locked --features nasm` (see note below).
-Note that only the Python SDK comes bundled with the Viewer whereas C++ & Rust always rely on a separate install.
+### Installing the SimPlant Lab viewer binary
+To stream log data over the network or load our `.rrd` data files you also need the `simplant-lab` binary.
+It can be installed with `pip install simplant-lab-sdk` or with `cargo install simplant-lab-cli --locked --features nasm` (see note below).
+Note that only the Python SDK comes bundled with the viewer whereas C++ & Rust always rely on a separate install.
 
 **Note**: the `nasm` Cargo feature requires the [`nasm`](https://github.com/netwide-assembler/nasm) CLI to be installed and available in your path.
 Alternatively, you may skip enabling this feature, but this may result in inferior video decoding performance.
 
-You should now be able to run `rerun --help` in any terminal.
+You should now be able to run `simplant-lab --help` in any terminal.
 
 
 ### Documentation
@@ -98,10 +97,10 @@ Some shortcomings:
 * [Multi-million point clouds can be slow](https://github.com/rerun-io/rerun/issues/1136)
 
 
-## What is Rerun for?
+## What is SimPlant Lab for?
 
-Rerun is built to help you understand and improve complex processes that include rich multimodal data, like 2D, 3D, text, time series, tensors, etc.
-It is used in many industries, including robotics, simulation, computer vision,
+SimPlant Lab is built to help you understand and improve complex processes that include rich multimodal data, like 2D, 3D, text, time series, tensors, etc.
+It is used in reinforcement learning, simulation, robotics, computer vision,
 or anything that involves a lot of sensors or other signals that evolve over time.
 
 ### Example use case
@@ -120,32 +119,35 @@ What you need is a visual and temporal debugger, that can log all the different 
 
 You also want to see how all these streams of data evolve over time so you can go back and pinpoint exactly what went wrong, when and why.
 
-Maybe it turns out that a glare from the sun hit one of the sensors in the wrong way, confusing the segmentation network leading to bad object detection. Or maybe it was a bug in the lidar scanning code. Or maybe the robot thought it was somewhere else in the apartment, because its odometry was broken. Or it could be one of a thousand other things. Rerun will help you find out!
+Maybe it turns out that a glare from the sun hit one of the sensors in the wrong way, confusing the segmentation network leading to bad object detection. Or maybe it was a bug in the lidar scanning code. Or maybe the robot thought it was somewhere else in the apartment, because its odometry was broken. Or it could be one of a thousand other things. SimPlant Lab will help you find out!
 
-But seeing the world from the point of the view of the robot is not just for debugging - it will also give you ideas on how to improve the algorithms, new test cases to set up, or datasets to collect. It will also let you explain the brains of the robot to your colleagues, boss, and customers. And so on. Seeing is believing, and an image is worth a thousand words, and multimodal temporal logging is worth a thousand images :)
+But seeing the world from the point of the view of the robot is not just for debugging — it will also give you ideas on how to improve the algorithms, new test cases to set up, or datasets to collect. It will also let you explain the brains of the robot to your colleagues, boss, and customers. And so on. Seeing is believing, and an image is worth a thousand words, and multimodal temporal logging is worth a thousand images :)
 
 While seeing and understanding your data is core to making progress in robotics, there is one more thing:
 You can also use the data you collected for visualization to create new datasets for training and evaluating the models and algorithms that run on your robot.
-Rerun provides query APIs to make it easy to extract clean datasets from your recording for exactly that purpose.
+SimPlant Lab provides query APIs to make it easy to extract clean datasets from your recording for exactly that purpose.
 
-Of course, Rerun is useful for much more than just robots. Any time you have any form of sensors, or 2D or 3D state evolving over time, Rerun is a great tool.
+Of course, SimPlant Lab is useful for much more than just robots. Any time you have any form of sensors, or 2D or 3D state evolving over time, SimPlant Lab is a great tool.
 
-### Rerun vs. Rviz
+### SimPlant Lab vs. RViz
 
 When coming from pure visualization tools like [RViz](https://docs.ros.org/en/rolling/Tutorials/Intermediate/RViz/RViz-Main.html), you might be used to seeing the latest data only.
-Rerun is more than a pure visualization solution, it provides a platform for multimodal data with a powerful visualizer, storage model and query engine (see also: [*"What is Rerun?"*](https://rerun.io/docs/overview/what-is-rerun)).
-In robotics, you can use Rerun e.g. to record test runs, manage and query training data, visually debug live streams or recordings (also from third-party formats like [MCAP](https://rerun.io/docs/howto/logging-and-ingestion/mcap)) and much more.
+SimPlant Lab is more than a pure visualization solution — it provides a platform for multimodal data with a powerful visualizer, storage model and query engine (see also: [*"What is Rerun?"*](https://rerun.io/docs/overview/what-is-rerun)).
+In robotics, you can use SimPlant Lab e.g. to record test runs, manage and query training data, visually debug live streams or recordings (also from third-party formats like [MCAP](https://rerun.io/docs/howto/logging-and-ingestion/mcap)) and much more.
 
-So while Rerun makes your data streams visualizable in the viewer, integrating Rerun logging into your robotics applications also opens up the door for leveraging Rerun's broader capabilities.
+So while SimPlant Lab makes your data streams visualizable in the viewer, integrating SimPlant Lab logging into your robotics applications also opens up the door for leveraging its broader capabilities.
 
-If you are only interested in visualization, the Rerun viewer has powerful features like the ability to go back in time thanks to its time-aware in-memory database.
-You can adjust the size of this buffer to your needs (see [here](https://rerun.io/docs/howto/visualization/limit-ram)), e.g. to a smaller size if you want to use Rerun as an RViz replacement in long-running or memory-constrained applications.
+If you are only interested in visualization, the SimPlant Lab viewer has powerful features like the ability to go back in time thanks to its time-aware in-memory database.
+You can adjust the size of this buffer to your needs (see [here](https://rerun.io/docs/howto/visualization/limit-ram)), e.g. to a smaller size if you want to use SimPlant Lab as an RViz replacement in long-running or memory-constrained applications.
 
 
 ## Business model
-Rerun uses an open-core model. Everything in this repository will stay open source and free (both as in beer and as in freedom).
 
-We are also building Rerun Hub, a scalable catalog for robotic data.
+The following describes the business model of [Rerun](https://rerun.io), the upstream open-core project from which SimPlant Lab is a fork.
+
+Rerun uses an open-core model. Everything in the upstream repository stays open source and free (both as in beer and as in freedom).
+
+Rerun Technologies AB is also building Rerun Hub, a scalable catalog for robotic data.
 Right now that is only available for a few select design partners.
 [Click here if you're interested](https://rerun.io/pricing).
 
@@ -154,7 +156,7 @@ The commercial product targets the needs specific to teams that build and run co
 
 ## How to cite Rerun
 
-When using Rerun in your research, please cite it to acknowledge its contribution to your work. This can be done by
+SimPlant Lab is a fork of Rerun. When Rerun's SDK, storage model, or viewer contributed to your work, please cite the upstream project to acknowledge it. This can be done by
 including a reference to Rerun in the software or methods section of your paper.
 
 Suggested citation format:
@@ -192,4 +194,4 @@ facilitates the tool's discovery by other researchers.
 
 1. Download the correct `.whl` from [GitHub Releases](https://github.com/rerun-io/rerun/releases)
 2. Run `pip install rerun_sdk<…>.whl` (replace `<…>` with the actual filename)
-3. Test it: `rerun --version`
+3. Test it: `simplant-lab --version`

@@ -21,7 +21,7 @@ from PIL import Image
 from pyopf.io import load
 from pyopf.resolve import resolve
 
-import rerun as rr
+import simplant_lab as rr
 
 DESCRIPTION = """
 # Open Photogrammetry Format

@@ -22,16 +22,16 @@ dependencies = [
   "pyarrow>=18.0.0",
   "typing_extensions>=4.5",
 ]
-description = "The Rerun Logging SDK"
+description = "The SimPlant-Lab logging SDK"
 readme = "README.md"
-keywords = ["computer-vision", "logging", "rerun"]
-name = "rerun-sdk"
+keywords = ["computer-vision", "logging", "simplant-lab"]
+name = "simplant-lab-sdk"
 requires-python = ">=3.10"
 dynamic = ["version"]
 
 [[project.authors]]
 email = "opensource@rerun.io"
-name = "Rerun.io"
+name = "SimPlant"
 
 [project.license]
 text = "MIT OR Apache-2.0"
@@ -73,12 +73,13 @@ tracing = ["opentelemetry-api", "opentelemetry-sdk", "opentelemetry-exporter-otl
 all = ["datafusion==52.3.0", "pandas>=2", "rerun-notebook==0.33.0-alpha.1+dev"]
 
 [project.urls]
-documentation = "https://www.rerun.io/docs"
-homepage = "https://www.rerun.io"
-repository = "https://github.com/rerun-io/rerun"
+documentation = "https://github.com/SimPlant/SimPlant-v2"
+homepage = "https://github.com/SimPlant/SimPlant-v2"
+repository = "https://github.com/SimPlant/SimPlant-v2"
 
 [project.scripts]
-rerun = "rerun_cli.__main__:main"
+simplant-lab = "simplant_lab_cli.__main__:main"
+rerun = "simplant_lab_cli.__main__:main"
 
 
 ######################
@@ -254,7 +255,7 @@ known-first-party = ["rerun_bindings"]
 include = ["rerun_sdk.pth", "rerun_sdk/rerun_cli/rerun", "rerun_sdk/rerun_cli/rerun.exe"]
 locked = true
 name = "rerun_bindings"
-python-packages = ["rerun_sdk/rerun", "rerun_sdk/rerun_cli"]
+python-packages = ["rerun_sdk/simplant_lab", "rerun_sdk/simplant_lab_cli", "rerun_sdk/rerun", "rerun_sdk/rerun_cli"]
 
 # Use debug profile for editable installs (uv sync, pip install -e) to match
 # `pixi run py-build` and share the cargo cache.

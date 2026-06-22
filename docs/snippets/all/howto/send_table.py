@@ -2,7 +2,7 @@
 
 import pyarrow as pa
 
-from rerun.experimental import ViewerClient
+from simplant_lab.experimental import ViewerClient
 
 client = ViewerClient(addr="rerun+http://0.0.0.0:9876/proxy")
 client.send_table(

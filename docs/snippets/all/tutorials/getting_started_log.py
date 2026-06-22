@@ -1,6 +1,6 @@
 import math
 
-import rerun as rr
+import simplant_lab as rr
 
 with rr.RecordingStream(
     "rerun_example_getting_started", recording_id="run-1", send_properties=False

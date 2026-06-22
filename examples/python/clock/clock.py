@@ -13,7 +13,7 @@ from typing import Final
 
 import numpy as np
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install rerun-sdk
 
 LENGTH_S: Final = 20.0
 LENGTH_M: Final = 10.0

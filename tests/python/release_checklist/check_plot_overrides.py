@@ -4,7 +4,7 @@ import os
 from argparse import Namespace
 from uuid import uuid4
 
-import rerun as rr
+import simplant_lab as rr
 
 README = """\
 # Plot overrides

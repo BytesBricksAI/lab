@@ -1,6 +1,6 @@
 """Log a simple MCAP message with binary data."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_mcap_message", spawn=True)
 

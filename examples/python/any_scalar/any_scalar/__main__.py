@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import argparse
 
-import rerun as rr
+import simplant_lab as rr
 from any_scalar import market_demo, robotics_demo
 
 

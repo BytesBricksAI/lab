@@ -4,16 +4,16 @@
 //! cargo run -p test_data_density_graph
 //! ```
 
-use rerun::RecordingStream;
-use rerun::external::re_log_types::NonMinI64;
-use rerun::external::{re_chunk_store, re_log};
-use rerun::time::TimeInt;
+use simplant_lab::RecordingStream;
+use simplant_lab::external::re_log_types::NonMinI64;
+use simplant_lab::external::{re_chunk_store, re_log};
+use simplant_lab::time::TimeInt;
 
 fn main() -> anyhow::Result<()> {
     re_log::setup_logging();
 
-    let rec = rerun::RecordingStreamBuilder::new("rerun_example_test_data_density_graph")
-        .spawn_opts(&rerun::SpawnOptions {
+    let rec = simplant_lab::RecordingStreamBuilder::new("rerun_example_test_data_density_graph")
+        .spawn_opts(&simplant_lab::SpawnOptions {
             wait_for_bind: true,
             extra_env: {
                 use re_chunk_store::ChunkStoreConfig as C;
@@ -39,7 +39,7 @@ fn run(rec: &RecordingStream) -> anyhow::Result<()> {
     ";
     rec.log_static(
         "description",
-        &rerun::TextDocument::from_markdown(DESCRIPTION),
+        &simplant_lab::TextDocument::from_markdown(DESCRIPTION),
     )?;
 
     let entities = [
@@ -72,21 +72,21 @@ fn log(
     sorted: bool,
     time_start_ms: i64,
 ) -> anyhow::Result<()> {
-    let entity_path = rerun::EntityPath::parse_strict(entity_path)?;
+    let entity_path = simplant_lab::EntityPath::parse_strict(entity_path)?;
 
     // log points
     rec.send_chunk(
-        rerun::log::Chunk::builder(entity_path.clone())
+        simplant_lab::log::Chunk::builder(entity_path.clone())
             .with_archetype(
-                rerun::log::RowId::new(),
+                simplant_lab::log::RowId::new(),
                 [
                     (
-                        rerun::Timeline::log_time(),
-                        rerun::time::TimeInt::from_millis(NonMinI64::ZERO),
+                        simplant_lab::Timeline::log_time(),
+                        simplant_lab::time::TimeInt::from_millis(NonMinI64::ZERO),
                     ),
-                    (rerun::Timeline::log_tick(), TimeInt::ZERO),
+                    (simplant_lab::Timeline::log_tick(), TimeInt::ZERO),
                 ],
-                &rerun::Points3D::new(rerun::demo_util::grid(
+                &simplant_lab::Points3D::new(simplant_lab::demo_util::grid(
                     (-10.0, -10.0, -10.0).into(),
                     (10.0, 10.0, 10.0).into(),
                     10,
@@ -113,18 +113,24 @@ fn log(
 
         let components = (0..num_rows_per_chunk).map(|i| {
             let angle_deg = i as f32 % 360.0;
-            rerun::Transform3D::from_rotation(rerun::Rotation3D::AxisAngle(
-                ((0.0, 0.0, 1.0), rerun::Angle::from_degrees(angle_deg)).into(),
+            simplant_lab::Transform3D::from_rotation(simplant_lab::Rotation3D::AxisAngle(
+                (
+                    (0.0, 0.0, 1.0),
+                    simplant_lab::Angle::from_degrees(angle_deg),
+                )
+                    .into(),
             ))
         });
 
-        let mut chunk = rerun::log::Chunk::builder(entity_path.clone());
+        let mut chunk = simplant_lab::log::Chunk::builder(entity_path.clone());
         for (time, component) in log_times.iter().zip(components) {
             chunk = chunk.with_archetype(
-                rerun::log::RowId::new(),
+                simplant_lab::log::RowId::new(),
                 [(
-                    rerun::Timeline::log_time(),
-                    rerun::time::TimeInt::from_millis((*time).try_into().unwrap_or_default()),
+                    simplant_lab::Timeline::log_time(),
+                    simplant_lab::time::TimeInt::from_millis(
+                        (*time).try_into().unwrap_or_default(),
+                    ),
                 )],
                 &component,
             );

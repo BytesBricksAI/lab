@@ -65,4 +65,7 @@
     "[yaml]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "cursorpyright.analysis.extraPaths": [
+        "rerun_py/rerun_sdk"
+    ],
 }

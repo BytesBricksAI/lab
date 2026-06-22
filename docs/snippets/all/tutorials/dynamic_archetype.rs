@@ -2,14 +2,15 @@
 
 use std::sync::Arc;
 
-use rerun::external::arrow;
+use simplant_lab::external::arrow;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec =
-        rerun::RecordingStreamBuilder::new("rerun_example_dynamic_archetype")
-            .spawn()?;
+    let rec = simplant_lab::RecordingStreamBuilder::new(
+        "rerun_example_dynamic_archetype",
+    )
+    .spawn()?;
 
-    let new_archetype = rerun::DynamicArchetype::new("MyArchetype")
+    let new_archetype = simplant_lab::DynamicArchetype::new("MyArchetype")
         // Using arbitrary Arrow data.
         .with_component_from_data(
             "homepage",
@@ -24,11 +25,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             ])),
         )
         // Using Rerun's builtin components.
-        .with_component::<rerun::components::Scalar>(
+        .with_component::<simplant_lab::components::Scalar>(
             "confidence",
             [1.2, 3.4, 5.6],
         )
-        .with_component::<rerun::components::Text>(
+        .with_component::<simplant_lab::components::Text>(
             "description",
             vec!["Bla bla bla…"],
         );

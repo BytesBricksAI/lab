@@ -1,6 +1,6 @@
 """Logs a point cloud and a perspective camera looking at it."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_pinhole_perspective", spawn=True)
 

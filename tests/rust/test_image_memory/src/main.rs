@@ -5,8 +5,8 @@
 
 use mimalloc::MiMalloc;
 use re_memory::AccountingAllocator;
-use rerun::archetypes::Image;
-use rerun::external::image;
+use simplant_lab::archetypes::Image;
+use simplant_lab::external::image;
 
 #[global_allocator]
 static GLOBAL: AccountingAllocator<MiMalloc> = AccountingAllocator::new(MiMalloc);
@@ -14,13 +14,13 @@ static GLOBAL: AccountingAllocator<MiMalloc> = AccountingAllocator::new(MiMalloc
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     re_memory::accounting_allocator::turn_on_tracking_if_env_var("RERUN_TRACK_ALLOCATIONS");
 
-    let rec = rerun::RecordingStreamBuilder::new("rerun_example_image_memory").spawn()?;
+    let rec = simplant_lab::RecordingStreamBuilder::new("rerun_example_image_memory").spawn()?;
     log_images(&rec).unwrap();
 
     Ok(())
 }
 
-fn log_images(rec: &rerun::RecordingStream) -> Result<(), Box<dyn std::error::Error>> {
+fn log_images(rec: &simplant_lab::RecordingStream) -> Result<(), Box<dyn std::error::Error>> {
     let (w, h) = (2048, 1024);
     let n = 100;
 

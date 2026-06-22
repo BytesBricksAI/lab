@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import argparse
 
-import rerun as rr
-from rerun.datatypes import ClassDescription
+import simplant_lab as rr
+from simplant_lab.datatypes import ClassDescription
 
 parser = argparse.ArgumentParser()
 rr.script_add_args(parser)

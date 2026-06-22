@@ -1,6 +1,6 @@
 """Demonstrates using explicit `CoordinateFrame` with implicit transforms."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_transform3d_hierarchy", spawn=True)
 

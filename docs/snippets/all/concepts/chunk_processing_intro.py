@@ -14,7 +14,7 @@ mcap_path = (
 output_path = Path("chunk_processing_intro.rrd")
 
 # region: read
-from rerun.experimental import McapReader
+from simplant_lab.experimental import McapReader
 
 stream = McapReader(mcap_path).stream()
 # endregion: read

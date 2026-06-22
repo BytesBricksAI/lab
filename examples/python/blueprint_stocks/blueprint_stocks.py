@@ -15,7 +15,7 @@ import humanize
 import pytz
 import yfinance as yf
 
-import rerun as rr
+import simplant_lab as rr
 import rerun.blueprint as rrb
 
 ################################################################################

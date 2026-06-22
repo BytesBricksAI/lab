@@ -10,7 +10,7 @@ import numpy as np
 import numpy.typing as npt
 import pytest
 
-import rerun as rr
+import simplant_lab as rr
 
 from . import Point3DInput, Transform3DInput
 
