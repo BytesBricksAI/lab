@@ -1,0 +1,34 @@
+[package]
+name = "sp_python"
+authors.workspace = true
+description = "SimPlant Lab Python bindings: pyo3 bridge for sp_* domain crates."
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish = false
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true
+
+[lib]
+crate-type = ["rlib"]
+
+[dependencies]
+jiff.workspace = true
+pyo3.workspace = true
+re_sdk.workspace = true
+sp_acquisition = { path = "../sp_acquisition" }
+sp_acquisition_modbus = { path = "../sp_acquisition_modbus" }
+sp_acquisition_replay = { path = "../sp_acquisition_replay" }
+sp_asset_model = { path = "../sp_asset_model" }
+sp_dataframe_query = { path = "../sp_dataframe_query" }
+sp_kernel = { path = "../sp_kernel" }
+sp_ml_dataloop = { path = "../sp_ml_dataloop" }
+sp_recording = { path = "../sp_recording" }
+sp_sim_engine = { path = "../sp_sim_engine" }
+sp_simulation = { path = "../sp_simulation" }
+sp_stress_testing = { path = "../sp_stress_testing" }
+sp_types = { path = "../sp_types" }

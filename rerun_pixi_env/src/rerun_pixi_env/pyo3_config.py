@@ -18,6 +18,59 @@ from pathlib import Path
 from typing import Any
 
 
+def _strip_lib_prefix(filename: str) -> str:
+    """Remove a leading `lib` prefix from a library filename."""
+    if filename.startswith("lib"):
+        return filename[3:]
+    return filename
+
+
+def _lib_name_from_filename(filename: str) -> str:
+    """Convert LDLIBRARY filename to pyo3 `lib_name` field."""
+    name = _strip_lib_prefix(filename)
+    if name.endswith((".so", ".dylib")):
+        return name.rsplit(".", 1)[0]
+    return name
+
+
+def _resolve_linkage(lib_dir: Path, ld_library: str, shared_hint: bool) -> tuple[bool, str]:
+    """Pick shared/static linkage based on libraries present on disk.
+
+    Conda/pixi Python often reports ``LDLIBRARY=libpythonX.Y.a`` with
+    ``Py_ENABLE_SHARED=0`` while only shipping ``libpythonX.Y.so``.
+    """
+    if sys.platform == "win32":
+        return shared_hint, "python3"
+
+    if ld_library:
+        static_path = lib_dir / ld_library
+        if ld_library.endswith(".a") and static_path.exists():
+            return False, _lib_name_from_filename(ld_library)
+
+        if ld_library.endswith(".a"):
+            shared_filename = f"{ld_library[:-2]}.so"
+            if (lib_dir / shared_filename).exists():
+                return True, _lib_name_from_filename(shared_filename)
+
+        if ld_library.endswith((".so", ".dylib")) and static_path.exists():
+            return True, _lib_name_from_filename(ld_library)
+
+    major, minor = sys.version_info.major, sys.version_info.minor
+    fallback = f"python{major}.{minor}"
+    shared_path = lib_dir / f"lib{fallback}.so"
+    if shared_path.exists():
+        return True, fallback
+    static_path = lib_dir / f"lib{fallback}.a"
+    if static_path.exists():
+        return False, f"{fallback}.a"
+
+    if ld_library:
+        if ld_library.endswith(".a"):
+            return False, _lib_name_from_filename(ld_library)
+        return shared_hint, _lib_name_from_filename(ld_library)
+    return shared_hint, fallback
+
+
 def get_python_config() -> dict[str, Any]:
     """Get Python configuration from the current interpreter."""
     config = sysconfig.get_config_vars()
@@ -41,16 +94,7 @@ def get_python_config() -> dict[str, Any]:
     is_framework = bool(config.get("PYTHONFRAMEWORK"))
     is_pypy = impl_name == "pypy"
     py_enable_shared = bool(config.get("Py_ENABLE_SHARED", 0))
-    shared = is_windows or is_framework or is_pypy or py_enable_shared
-
-    # Get library name
-    # For abi3 builds, use "python3" not version-specific name
-    if sys.platform == "win32":
-        lib_name = "python3"
-    else:
-        lib_name = config.get("LDLIBRARY", "").replace(".so", "").replace("lib", "", 1)
-        if not lib_name:
-            lib_name = f"python{sys.version_info.major}.{sys.version_info.minor}"
+    shared_hint = is_windows or is_framework or is_pypy or py_enable_shared
 
     # Get library directory - match pyo3-build-config's logic exactly:
     # On Windows: sys.base_prefix + "\\libs"
@@ -61,6 +105,9 @@ def get_python_config() -> dict[str, Any]:
         lib_dir = config.get("LIBDIR", "")
         if not lib_dir:
             lib_dir = str(Path(sys.base_prefix) / "lib")
+
+    ld_library = config.get("LDLIBRARY", "")
+    shared, lib_name = _resolve_linkage(Path(lib_dir), ld_library, shared_hint)
 
     # Pointer width
     pointer_width = struct.calcsize("P") * 8

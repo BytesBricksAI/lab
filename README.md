@@ -1,7 +1,7 @@
 <h3 align="center">
   <strong>SimPlant-Lab</strong>
 </h3>
-<p align="center">Fork of <a href="https://rerun.io">Rerun</a> for reinforcement learning, simulation, and multimodal visualization.</p>
+
 
 <h3 align="center">
   <a href="https://pypi.org/project/simplant-lab-sdk/">               <img alt="PyPi"           src="https://img.shields.io/pypi/v/simplant-lab-sdk.svg?label=simplant-lab-sdk"> </a>

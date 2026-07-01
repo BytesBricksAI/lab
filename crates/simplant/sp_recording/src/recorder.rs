@@ -78,6 +78,10 @@ impl RecorderPort for RerunRecorder {
     }
 
     fn record_event(&self, event: &AcquisitionEvent) -> Result<()> {
+        // Control-plane events carry no plant-side timestamp. Clear the `plant_time`
+        // left sticky by the last sample batch so events stay on the wall-clock
+        // timeline instead of inheriting an unrelated plant_time instant.
+        self.rec.disable_timeline(PLANT_TIME);
         self.rec
             .log(EVENTS_PATH, &TextLog::new(format!("{event:?}")))
             .map_err(|err| AcquisitionError::Recording(err.to_string()))

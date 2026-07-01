@@ -381,6 +381,21 @@ fn rerun_bindings(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     // lenses
     crate::lenses::register(m)?;
 
+    sp_python::register_recording_stream_extractor(Box::new(|obj| {
+        if let Ok(recording) = obj.extract::<PyRef<'_, PyRecordingStream>>() {
+            return Ok(recording.0.clone());
+        }
+        if let Ok(inner) = obj.getattr("inner") {
+            if let Ok(recording) = inner.extract::<PyRef<'_, PyRecordingStream>>() {
+                return Ok(recording.0.clone());
+            }
+        }
+        Err(pyo3::exceptions::PyTypeError::new_err(
+            "expected rerun RecordingStream or PyRecordingStream",
+        ))
+    }));
+    sp_python::register(py, m)?;
+
     Ok(())
 }
 

@@ -71,4 +71,67 @@ mod tests {
 
         fs::remove_file(&path).ok();
     }
+
+    /// Control-plane events have no plant-side timestamp, so they must not inherit
+    /// the `plant_time` left "sticky" on the stream by the preceding sample batch.
+    /// Otherwise a dataframe view indexed by `plant_time` shows phantom event rows.
+    #[test]
+    fn events_are_not_anchored_to_plant_time() {
+        use re_sdk::RecordingStreamBuilder;
+        use re_sdk::log::{Chunk, LogMsg};
+        use std::str::FromStr as _;
+
+        let (stream, storage) = RecordingStreamBuilder::new("simplant_test")
+            .memory()
+            .expect("memory stream");
+        let recorder = RerunRecorder::new(stream);
+
+        // Logging a sample batch sets `plant_time` and leaves it sticky on the stream.
+        let ts = jiff::Timestamp::from_str("2026-01-01T00:29:00Z").expect("ts");
+        let batch = MeasurementBatch::new(
+            TagId::new("LT-101").expect("tag id"),
+            vec![Measurement::new(70.0, Quality::Good, ts)],
+        );
+        recorder.record_batch(&batch).expect("record batch");
+
+        // A control-plane event logged afterwards must not be anchored to plant_time.
+        let event = AcquisitionEvent::Started(AcquisitionStarted {
+            session: "test-session".to_owned(),
+            tag_count: 1,
+        });
+        recorder.record_event(&event).expect("record event");
+
+        recorder.flush();
+
+        let mut event_has_plant_time: Option<bool> = None;
+        let mut tag_has_plant_time = false;
+        for msg in &storage.take() {
+            let LogMsg::ArrowMsg(_, arrow_msg) = msg else {
+                continue;
+            };
+            let chunk = Chunk::from_arrow_msg(arrow_msg).expect("decode chunk");
+            let entity = chunk.entity_path().to_string();
+            let entity = entity.trim_start_matches('/');
+            let on_plant_time = chunk
+                .timelines()
+                .keys()
+                .any(|name| name.as_str() == super::PLANT_TIME);
+
+            if entity == super::EVENTS_PATH {
+                event_has_plant_time = Some(on_plant_time);
+            } else if entity.starts_with("tags/") && on_plant_time {
+                tag_has_plant_time = true;
+            }
+        }
+
+        assert!(
+            tag_has_plant_time,
+            "sanity: tag samples must live on the plant_time timeline"
+        );
+        assert_eq!(
+            event_has_plant_time,
+            Some(false),
+            "control-plane events must not be anchored to plant_time"
+        );
+    }
 }

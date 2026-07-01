@@ -12,4 +12,5 @@ sp_asset_model = { path = "../../../crates/simplant/sp_asset_model" }
 sp_acquisition = { path = "../../../crates/simplant/sp_acquisition" }
 sp_acquisition_replay = { path = "../../../crates/simplant/sp_acquisition_replay" }
 sp_recording = { path = "../../../crates/simplant/sp_recording" }
+re_sdk = { workspace = true }
 anyhow = "1.0"

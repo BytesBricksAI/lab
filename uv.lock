@@ -49,19 +49,20 @@ members = [
     "plots",
     "raw-mesh",
     "rerun-notebook",
-    "rerun-sdk",
     "rerun-workspace",
     "rgbd",
     "rrt-star",
     "segment-anything-model",
     "server-tables",
     "shared-recording",
+    "simplant-lab-sdk",
     "stdio",
     "structure-from-motion",
     "table-blueprints",
     "table-grid-with-flags",
     "table-zoo",
     "template",
+    "training",
     "using-index-values",
 ]
 
@@ -96,8 +97,8 @@ dependencies = [
     { name = "pyproj", version = "3.7.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "pyproj", version = "3.7.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "requests" },
-    { name = "rerun-sdk" },
     { name = "shapely" },
+    { name = "simplant-lab-sdk" },
     { name = "tqdm" },
 ]
 
@@ -108,8 +109,8 @@ requires-dist = [
     { name = "polars" },
     { name = "pyproj" },
     { name = "requests" },
-    { name = "rerun-sdk", editable = "rerun_py" },
     { name = "shapely" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "tqdm" },
 ]
 
@@ -122,7 +123,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "rerun-sdk" }]
 
 [[package]]
 name = "annotated-types"
@@ -148,7 +149,7 @@ dependencies = [
 requires-dist = [
     { name = "psutil" },
     { name = "pyarrow" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "yfinance" },
 ]
 
@@ -259,7 +260,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python" },
     { name = "pandas" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "scipy" },
     { name = "tqdm" },
     { name = "trimesh" },
@@ -504,7 +505,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -520,7 +521,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "humanize" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "yfinance" },
 ]
 
@@ -545,7 +546,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "av", specifier = ">=14.2.0" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -659,7 +660,16 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
+]
+
+[[package]]
+name = "cloudpickle"
+version = "3.1.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/27/fb/576f067976d320f5f0114a8d9fa1215425441bb35627b1993e5afd8111e5/cloudpickle-3.1.2.tar.gz", hash = "sha256:7fda9eb655c9c230dab534f1983763de5835249750e85fbcef43aaa30a9a2414", size = 22330, upload-time = "2025-11-03T09:25:26.604Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/88/39/799be3f2f0f38cc727ee3b4f1445fe6d5e4133064ec2e4115069418a5bb6/cloudpickle-3.1.2-py3-none-any.whl", hash = "sha256:9acb47f6afd73f60dc1df93bb801b472f05ff42fa6c84167d25cb206be1fbf4a", size = 22228, upload-time = "2025-11-03T09:25:25.534Z" },
 ]
 
 [[package]]
@@ -779,9 +789,52 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python" },
     { name = "pillow" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "torch" },
     { name = "transformers" },
+]
+
+[[package]]
+name = "coverage"
+version = "7.14.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/b4/91/0a7c28934e50d8ac9a7b117712d176f2953c3170bccced5eaacfa3e96175/coverage-7.14.3.tar.gz", hash = "sha256:1a7563a443f3d53fdeb040ec8c9f7466aed7ca3dc5891aa09d3ca3625fa4387f", size = 924398, upload-time = "2026-06-22T23:10:25.584Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ec/bd/b01188f0de73ee8b6597cf20c63fccd898ad31405772f15165cb61a62c00/coverage-7.14.3-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:360bec1f58e7243e3405d3bdf7a1a8115aa9b448d54dc7cd6f7b7e0e9406b62e", size = 220378, upload-time = "2026-06-22T23:07:38.925Z" },
+    { url = "https://files.pythonhosted.org/packages/33/eb/f7aa3cb46500b709070c8d12335446971ec8b8c2ea155fea05d2000b4b1f/coverage-7.14.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:ed68faa5e85de2f3e400bc3f122e5c82735a58c8bb24b9f63a2215954ba17b2d", size = 220895, upload-time = "2026-06-22T23:07:41.536Z" },
+    { url = "https://files.pythonhosted.org/packages/c3/c0/b41b8499fc9060ca40ad2a197d301155be1ead398f0f0bfdb27b2b4a660f/coverage-7.14.3-cp310-cp310-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:830c1fca669c572dec37ce9c838224ee45aac5be0f6961edf871e82e49d6537c", size = 247631, upload-time = "2026-06-22T23:07:43.244Z" },
+    { url = "https://files.pythonhosted.org/packages/da/bb/e9ecea1307c6a549c223842cccbd5d55193cc27b82f26338782d4355047c/coverage-7.14.3-cp310-cp310-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:a64caee2193563601dbaaa55fe2dcf597debef04a2f8f1fa8a07aa4bb7ac7a1e", size = 249460, upload-time = "2026-06-22T23:07:45.147Z" },
+    { url = "https://files.pythonhosted.org/packages/59/cb/3821542809b7b726296fd364ed1c23d10a5770f1469957010c3b4bc5d408/coverage-7.14.3-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:0096fd7559178f0cc9cf088f2dbd2a02ef85bacaa69732c633517286b4494610", size = 251324, upload-time = "2026-06-22T23:07:46.875Z" },
+    { url = "https://files.pythonhosted.org/packages/76/27/f34f66f0ff152189ccc7b3f0582cf7909e239cb3b8c214362ed2149719b8/coverage-7.14.3-cp310-cp310-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:6197e5a00183c11a8ce7c6abd18be1a9189fd8399084ffc95196f4f0db4f2137", size = 253237, upload-time = "2026-06-22T23:07:48.352Z" },
+    { url = "https://files.pythonhosted.org/packages/22/81/aa363fa95d14fc892bd5de80edadc8d7cce584a0f6376f6336e492618e67/coverage-7.14.3-cp310-cp310-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:7dfe427045520d6abca33687dfef767b4f635015893a1816c5decb12eb72ce18", size = 248344, upload-time = "2026-06-22T23:07:49.896Z" },
+    { url = "https://files.pythonhosted.org/packages/66/fe/dc8a149441a3fea611cbbaf46bb12099adbe08f69903df1794581b0504b8/coverage-7.14.3-cp310-cp310-musllinux_1_2_aarch64.whl", hash = "sha256:9a3f142070eb7b82fc4085a55d887396f9c4e21250bccebe2ba22502c45b9647", size = 249365, upload-time = "2026-06-22T23:07:51.464Z" },
+    { url = "https://files.pythonhosted.org/packages/f8/a2/0004127deee122e020be24a4d86ce72fa14ae28198811b945aabf91293b5/coverage-7.14.3-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:64b2055bb6e0dc945af35cdeceb3633e6ed9273475ef3af85592410fd6803803", size = 247369, upload-time = "2026-06-22T23:07:53.064Z" },
+    { url = "https://files.pythonhosted.org/packages/1e/72/3654c004f4df4f0c5a9643d9abaed5b26e5d3c1d0ecabe788786cb425efa/coverage-7.14.3-cp310-cp310-musllinux_1_2_ppc64le.whl", hash = "sha256:1551b4caac3e3ec9f2bfcec6bf3776e01c0edbdd2e240431a50ca1a1aac72c27", size = 251182, upload-time = "2026-06-22T23:07:54.789Z" },
+    { url = "https://files.pythonhosted.org/packages/a5/2f/7bdcdf1e7c4d0632648852768063c25582a0a747bb5f8036a04e211e7eb7/coverage-7.14.3-cp310-cp310-musllinux_1_2_riscv64.whl", hash = "sha256:583d50d59142f8549470bd6390471d0fe8b8c8d69d6a0f28ac71e05380cef640", size = 247639, upload-time = "2026-06-22T23:07:56.254Z" },
+    { url = "https://files.pythonhosted.org/packages/03/dc/0e01b071f69021d262a51ce39345dd6bc194465db0acfc7b34fd89e6b787/coverage-7.14.3-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:e0bb8a6bc7015efdf8a928753b25da1b9ca2d6f24ef04d2ee0688e486f32aae7", size = 248242, upload-time = "2026-06-22T23:07:57.692Z" },
+    { url = "https://files.pythonhosted.org/packages/1c/51/08279e6ebe3479bf705db5fdc1a968e44ba1567e4cbc567f76b45f5e646e/coverage-7.14.3-cp310-cp310-win32.whl", hash = "sha256:d48400185564042287dc487c1f016a3397f18ab4f4c5d5ec36edc218f7ffa35b", size = 222431, upload-time = "2026-06-22T23:07:59.094Z" },
+    { url = "https://files.pythonhosted.org/packages/40/2f/5c56670781fee5722ef0c415a74750c9a033bfacdb9d07b1493a0308108d/coverage-7.14.3-cp310-cp310-win_amd64.whl", hash = "sha256:eadea7aba74e40adee867a8c0eec17b820b061d308a4b014f7a0e118c2b0aa61", size = 223059, upload-time = "2026-06-22T23:08:00.662Z" },
+    { url = "https://files.pythonhosted.org/packages/f1/24/efb17eb94018dd3415d0e8a76a4786a866e8964aa9c50f033399d23939c2/coverage-7.14.3-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:e574801e1d643561594aa021206c46d80b257e9853087090ba97bed8b0a509d3", size = 220501, upload-time = "2026-06-22T23:08:02.182Z" },
+    { url = "https://files.pythonhosted.org/packages/76/93/32f1bfca6cdd34259c8af42820a034b7a28dfb44969a13ed38c17e0ba5b0/coverage-7.14.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:f82b6bb7d75a2613e85d07cefa3a8c973d0544a8993337f6e2728e4a1e94c305", size = 221008, upload-time = "2026-06-22T23:08:03.701Z" },
+    { url = "https://files.pythonhosted.org/packages/eb/88/0d0f974855ff905d15a64f7873d00bdc4182e2736267486c6634f4af293c/coverage-7.14.3-cp311-cp311-manylinux1_i686.manylinux_2_28_i686.manylinux_2_5_i686.whl", hash = "sha256:a2335ea5fed26af2e831094964fa3f8fae60b45f7e37fcc2d3b615b2add3ad87", size = 251420, upload-time = "2026-06-22T23:08:05.211Z" },
+    { url = "https://files.pythonhosted.org/packages/39/7f/117dd2ec65e4140576f8ef991d88220f9b806769f7a8c20e0550c0f924e2/coverage-7.14.3-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:fbb8c3a98e779013786ae01d229662aeacbc77100efbd3f2f245219ace5af700", size = 253331, upload-time = "2026-06-22T23:08:06.672Z" },
+    { url = "https://files.pythonhosted.org/packages/87/55/f0bd6d6538e3f16829fb8a44b6c0d2fe9da638bbfdd6a20f8b5da8f4fa81/coverage-7.14.3-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:ac082660de8f429ba0ea363595abb838998570b9a7546777c60f413ab902bbde", size = 255441, upload-time = "2026-06-22T23:08:08.208Z" },
+    { url = "https://files.pythonhosted.org/packages/1e/98/aa71f7879019c846a8a9662579ea4484b0202cf1e252ffeed647075e7eca/coverage-7.14.3-cp311-cp311-manylinux2014_ppc64le.manylinux_2_17_ppc64le.manylinux_2_28_ppc64le.whl", hash = "sha256:8ac012839ff7e396030f1e94e10553a431d14e4de2ab65cb3acb72bbd5628ca2", size = 257398, upload-time = "2026-06-22T23:08:09.749Z" },
+    { url = "https://files.pythonhosted.org/packages/f3/4f/5fd367e59844190f5965015d7bee899e67a89d13eb2760118479bf836f2f/coverage-7.14.3-cp311-cp311-manylinux_2_31_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:5952f8c1bda2a5347154450379316e6dfa4d934d62ca35f6784451e6f55074fb", size = 251558, upload-time = "2026-06-22T23:08:11.37Z" },
+    { url = "https://files.pythonhosted.org/packages/8f/de/5383a6ee5a6376701fe07d980fa8e4a66c0c377fead16712720340d701a3/coverage-7.14.3-cp311-cp311-musllinux_1_2_aarch64.whl", hash = "sha256:8cf0f2509acb4619e2471a1951089054dd58ebea7a912066d2ea56dd4c24ca4a", size = 253134, upload-time = "2026-06-22T23:08:13.04Z" },
+    { url = "https://files.pythonhosted.org/packages/01/99/09542b1a99f788e3daec7f0fadc288821e71aca9ea298d51bfa1ba79fed5/coverage-7.14.3-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:2e41fd3aab806770008279a93879b0924b16247e09ab537c043d08bbca53b4ab", size = 251195, upload-time = "2026-06-22T23:08:14.606Z" },
+    { url = "https://files.pythonhosted.org/packages/02/9d/722fe8c13f0fbb064491b9e8656e56a606286792e5068c47ca1042e773e8/coverage-7.14.3-cp311-cp311-musllinux_1_2_ppc64le.whl", hash = "sha256:f0a47095963cfe054e0df178daca95aec21e680d6076da807c3add28dfe920f7", size = 254959, upload-time = "2026-06-22T23:08:16.431Z" },
+    { url = "https://files.pythonhosted.org/packages/fb/58/943627179ff1d82da9e54d0a5b0bb907bb19cf19515599ccd921de50b469/coverage-7.14.3-cp311-cp311-musllinux_1_2_riscv64.whl", hash = "sha256:a090cbf9521e78ffdb2fcf448b72902afe9f5923ff6a12d5c0d0120200348af9", size = 250914, upload-time = "2026-06-22T23:08:18.03Z" },
+    { url = "https://files.pythonhosted.org/packages/a5/d4/803efcbf9ae5567454a0c71e983589529448e2704ee0da2dc0163d482f18/coverage-7.14.3-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:4d310baf69a4fbe8a098ce727e4808a34866ac718a6f759ae659cbd3221358bc", size = 251824, upload-time = "2026-06-22T23:08:19.704Z" },
+    { url = "https://files.pythonhosted.org/packages/32/79/3f78ea9563132746eed5cecb75d2e576f9d8fec45a47242b5ae0950b82a3/coverage-7.14.3-cp311-cp311-win32.whl", hash = "sha256:74fdd718d88fe144f4579b8747873a07ec3f04cb837d5faec5a25d9e22fa31a8", size = 222594, upload-time = "2026-06-22T23:08:21.311Z" },
+    { url = "https://files.pythonhosted.org/packages/85/22/9ebbc5a2ab42ac5d0eea1f48648629e1de9bbe41ec243ed6b93d55a5a53f/coverage-7.14.3-cp311-cp311-win_amd64.whl", hash = "sha256:cc96aa922e21d4bc5d5ed3c915cef27dfcbc13686f47d5e378d647fbfba655a2", size = 223073, upload-time = "2026-06-22T23:08:23.318Z" },
+    { url = "https://files.pythonhosted.org/packages/71/af/69d5fcc16cb555153f99cec5467922f226be0369f7335a9506856d2a7bd0/coverage-7.14.3-cp311-cp311-win_arm64.whl", hash = "sha256:c66f9f9d4f1e9712eb9b1de5310f881d4e2188cfcba5065e1a8490f38687f2c4", size = 222617, upload-time = "2026-06-22T23:08:25.054Z" },
+    { url = "https://files.pythonhosted.org/packages/eb/e3/a0aa32bfa3a081951f60a23bc0e7b512891ef0eecda1153cf1d8ba36c6b1/coverage-7.14.3-py3-none-any.whl", hash = "sha256:fb7e18afb6e903c1a92401a2f0501ac277dca527bb9ca6fe1f691a8a0026a0e8", size = 212469, upload-time = "2026-06-22T23:10:23.405Z" },
+]
+
+[package.optional-dependencies]
+toml = [
+    { name = "tomli", marker = "python_full_version <= '3.11'" },
 ]
 
 [[package]]
@@ -947,7 +1000,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "rerun-sdk" }]
 
 [[package]]
 name = "datafusion"
@@ -1059,7 +1112,7 @@ requires-dist = [
     { name = "opencv-python", specifier = ">4.9" },
     { name = "pillow" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "timm", specifier = "==1.0.19" },
     { name = "torch" },
     { name = "transformers", specifier = ">=4.55.0" },
@@ -1085,7 +1138,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "pydicom", specifier = "==2.4.5" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "types-requests", specifier = ">=2.31,<3" },
 ]
 
@@ -1148,7 +1201,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "scipy" },
 ]
 
@@ -1170,7 +1223,7 @@ requires-dist = [
     { name = "laspy" },
     { name = "numpy" },
     { name = "requests" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "tqdm" },
 ]
 
@@ -1193,6 +1246,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/cc/28/c14e053b6762b1044f34a13aab6859bbf40456d37d23aa286ac24cfd9a5d/executing-2.2.1.tar.gz", hash = "sha256:3632cc370565f6648cc328b32435bd120a1e4ebb20c77e3fdde9a13cd1e533c4", size = 1129488, upload-time = "2025-09-01T09:48:10.866Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c1/ea/53f2148663b321f21b5a606bd5f191517cf40b7072c0497d3c92c4a13b1e/executing-2.2.1-py2.py3-none-any.whl", hash = "sha256:760643d3452b4d777d295bb167ccc74c64a81df23fb5e08eff250c425a4b2017", size = 28317, upload-time = "2025-09-01T09:48:08.5Z" },
+]
+
+[[package]]
+name = "farama-notifications"
+version = "0.0.6"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ec/91/14397890dde30adc4bee6462158933806207bc5dd10d7b4d09d5c33845cf/farama_notifications-0.0.6.tar.gz", hash = "sha256:b19acac4bb41d76e59e03394b5dd165f4761c86fa327f56307a35cbee3b60158", size = 2517, upload-time = "2026-04-24T08:43:57.603Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7c/f0/21f81892e4ed10f4ec3ef2e7cf8635fb76e7c0907c55d0da66be50094760/farama_notifications-0.0.6-py3-none-any.whl", hash = "sha256:f84839188efa1ce5bb361c2a84881b2dc2c0d0d7fb661ff00421820170930935", size = 2897, upload-time = "2026-04-24T08:43:56.785Z" },
 ]
 
 [[package]]
@@ -1223,6 +1285,14 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/c0/00/f8d10588d2019d6d6452653def1ee807353b21983db48550318424b5ff18/fire-0.7.1.tar.gz", hash = "sha256:3b208f05c736de98fb343310d090dcc4d8c78b2a89ea4f32b837c586270a9cbf", size = 88720, upload-time = "2025-08-16T20:20:24.175Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e5/4c/93d0f85318da65923e4b91c1c2ff03d8a458cbefebe3bc612a6693c7906d/fire-0.7.1-py3-none-any.whl", hash = "sha256:e43fd8a5033a9001e7e2973bab96070694b9f12f2e0ecf96d4683971b5ab1882", size = 115945, upload-time = "2025-08-16T20:20:22.87Z" },
+]
+
+[[package]]
+name = "flatbuffers"
+version = "25.12.19"
+source = { registry = "https://pypi.org/simple" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e8/2d/d2a548598be01649e2d46231d151a6c56d10b964d94043a335ae56ea2d92/flatbuffers-25.12.19-py2.py3-none-any.whl", hash = "sha256:7634f50c427838bb021c2d66a3d1168e9d199b0607e6329399f04846d42e20b4", size = 26661, upload-time = "2025-12-19T23:16:13.622Z" },
 ]
 
 [[package]]
@@ -1490,7 +1560,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "rerun-sdk" }]
 
 [[package]]
 name = "graphs"
@@ -1501,7 +1571,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "rerun-sdk" }]
 
 [[package]]
 name = "griffe"
@@ -1595,6 +1665,22 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/19/75/0f0d3524b38b35e5cd07334b754aa9bd0570140ad982131b04ebfa3b0374/grpclib-0.4.8.tar.gz", hash = "sha256:d8823763780ef94fed8b2c562f7485cf0bbee15fc7d065a640673667f7719c9a", size = 62793, upload-time = "2025-05-04T16:27:30.051Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/03/8b/ad381ec1b8195fa4a9a693cb8087e031b99530c0d6b8ad036dcb99e144c4/grpclib-0.4.8-py3-none-any.whl", hash = "sha256:a5047733a7acc1c1cee6abf3c841c7c6fab67d2844a45a853b113fa2e6cd2654", size = 76311, upload-time = "2025-05-04T16:27:22.818Z" },
+]
+
+[[package]]
+name = "gymnasium"
+version = "1.3.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cloudpickle" },
+    { name = "farama-notifications" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4d/ff/14b6880d703dfaca204490979d3254ccd280c99550798993319902873658/gymnasium-1.3.0.tar.gz", hash = "sha256:6939e86e835d6b71b6ba6bfd360487420876deafc79bfb7bacba83a7c446bcf3", size = 830646, upload-time = "2026-04-22T13:47:14.155Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e9/73/fda6a25f3beeb5e49d74330b44092b9e5a547395ccd478d1103ddcbff1fc/gymnasium-1.3.0-py3-none-any.whl", hash = "sha256:6b8c159a8540dcbcb221722d7efda24d78ebbcbc3bd2ea1c2611aa2a34471fc2", size = 953904, upload-time = "2026-04-22T13:47:12.13Z" },
 ]
 
 [[package]]
@@ -1803,7 +1889,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "pandas" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "tqdm" },
 ]
 
@@ -1820,7 +1906,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -2504,7 +2590,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "nuscenes-devkit" },
     { name = "requests" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -2519,7 +2605,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "opencv-python" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -2535,7 +2621,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -2551,7 +2637,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "torch" },
     { name = "transformers" },
     { name = "umap-learn" },
@@ -2582,7 +2668,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "rerun-sdk" }]
 
 [[package]]
 name = "lz4"
@@ -2804,7 +2890,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -2820,7 +2906,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -2988,6 +3074,27 @@ wheels = [
 ]
 
 [[package]]
+name = "ml-dtypes"
+version = "0.5.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0e/4a/c27b42ed9b1c7d13d9ba8b6905dece787d6259152f2309338aed29b2447b/ml_dtypes-0.5.4.tar.gz", hash = "sha256:8ab06a50fb9bf9666dd0fe5dfb4676fa2b0ac0f31ecff72a6c3af8e22c063453", size = 692314, upload-time = "2025-11-17T22:32:31.031Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fe/3a/c5b855752a70267ff729c349e650263adb3c206c29d28cc8ea7ace30a1d5/ml_dtypes-0.5.4-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:b95e97e470fe60ed493fd9ae3911d8da4ebac16bd21f87ffa2b7c588bf22ea2c", size = 679735, upload-time = "2025-11-17T22:31:31.367Z" },
+    { url = "https://files.pythonhosted.org/packages/41/79/7433f30ee04bd4faa303844048f55e1eb939131c8e5195a00a96a0939b64/ml_dtypes-0.5.4-cp310-cp310-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:b4b801ebe0b477be666696bda493a9be8356f1f0057a57f1e35cd26928823e5a", size = 5051883, upload-time = "2025-11-17T22:31:33.658Z" },
+    { url = "https://files.pythonhosted.org/packages/10/b1/8938e8830b0ee2e167fc75a094dea766a1152bde46752cd9bfc57ee78a82/ml_dtypes-0.5.4-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:388d399a2152dd79a3f0456a952284a99ee5c93d3e2f8dfe25977511e0515270", size = 5030369, upload-time = "2025-11-17T22:31:35.595Z" },
+    { url = "https://files.pythonhosted.org/packages/c7/a3/51886727bd16e2f47587997b802dd56398692ce8c6c03c2e5bb32ecafe26/ml_dtypes-0.5.4-cp310-cp310-win_amd64.whl", hash = "sha256:4ff7f3e7ca2972e7de850e7b8fcbb355304271e2933dd90814c1cb847414d6e2", size = 210738, upload-time = "2025-11-17T22:31:37.43Z" },
+    { url = "https://files.pythonhosted.org/packages/c6/5e/712092cfe7e5eb667b8ad9ca7c54442f21ed7ca8979745f1000e24cf8737/ml_dtypes-0.5.4-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:6c7ecb74c4bd71db68a6bea1edf8da8c34f3d9fe218f038814fd1d310ac76c90", size = 679734, upload-time = "2025-11-17T22:31:39.223Z" },
+    { url = "https://files.pythonhosted.org/packages/4f/cf/912146dfd4b5c0eea956836c01dcd2fce6c9c844b2691f5152aca196ce4f/ml_dtypes-0.5.4-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:bc11d7e8c44a65115d05e2ab9989d1e045125d7be8e05a071a48bc76eb6d6040", size = 5056165, upload-time = "2025-11-17T22:31:41.071Z" },
+    { url = "https://files.pythonhosted.org/packages/a9/80/19189ea605017473660e43762dc853d2797984b3c7bf30ce656099add30c/ml_dtypes-0.5.4-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:19b9a53598f21e453ea2fbda8aa783c20faff8e1eeb0d7ab899309a0053f1483", size = 5034975, upload-time = "2025-11-17T22:31:42.758Z" },
+    { url = "https://files.pythonhosted.org/packages/b4/24/70bd59276883fdd91600ca20040b41efd4902a923283c4d6edcb1de128d2/ml_dtypes-0.5.4-cp311-cp311-win_amd64.whl", hash = "sha256:7c23c54a00ae43edf48d44066a7ec31e05fdc2eee0be2b8b50dd1903a1db94bb", size = 210742, upload-time = "2025-11-17T22:31:44.068Z" },
+    { url = "https://files.pythonhosted.org/packages/a0/c9/64230ef14e40aa3f1cb254ef623bf812735e6bec7772848d19131111ac0d/ml_dtypes-0.5.4-cp311-cp311-win_arm64.whl", hash = "sha256:557a31a390b7e9439056644cb80ed0735a6e3e3bb09d67fd5687e4b04238d1de", size = 160709, upload-time = "2025-11-17T22:31:46.557Z" },
+]
+
+[[package]]
 name = "more-itertools"
 version = "10.8.0"
 source = { registry = "https://pypi.org/simple" }
@@ -3062,7 +3169,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "rerun-sdk" }]
 
 [[package]]
 name = "multitasking"
@@ -3083,7 +3190,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -3371,7 +3478,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "nuscenes-devkit" },
     { name = "requests" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -3416,7 +3523,7 @@ dependencies = [
 requires-dist = [
     { name = "numpy" },
     { name = "opencv-python" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk", specifier = ">=0.10" },
 ]
 
 [[package]]
@@ -3589,8 +3696,125 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python", specifier = ">4.6" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "scipy" },
+]
+
+[[package]]
+name = "onnx"
+version = "1.22.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "ml-dtypes" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "protobuf" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/04/19/8ea73a64b368b75fe339771a20a02bc61ea1f551484c9e3d9d0bfbd0450f/onnx-1.22.0.tar.gz", hash = "sha256:ef40c0aaf0b643857ea9306fc7eddce17eaf9fb0407e4801f1fc5758443a38e0", size = 12024721, upload-time = "2026-06-15T12:50:05.354Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ce/04/471f234e2716c83f17a26e1b50cd64c39428373e91dd018aafb3d499c108/onnx-1.22.0-cp310-cp310-macosx_12_0_universal2.whl", hash = "sha256:6d0ffffd63a4ecc21ddaeddd5bf02099cb701aa4243f2de00122726869065ca4", size = 20167110, upload-time = "2026-06-15T12:48:59.152Z" },
+    { url = "https://files.pythonhosted.org/packages/99/40/540a2fe3c49ce1709ff2015de20d9a351264fb442f8998f92cf0ba7e279e/onnx-1.22.0-cp310-cp310-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:33ce94119bbb7f05d9caea4ea7549f5185a54369f6bbc9f70171bd5ee6935bbc", size = 18892738, upload-time = "2026-06-15T12:49:02.139Z" },
+    { url = "https://files.pythonhosted.org/packages/f8/0c/f41d5b89c38fb2ec410ab23c24fa110af786093b140644f7f953e436743b/onnx-1.22.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:87a3077958f66f9a26dec10077ac28326d9cec2cbe1f0b040947243449754573", size = 19110354, upload-time = "2026-06-15T12:49:05.031Z" },
+    { url = "https://files.pythonhosted.org/packages/11/8e/9f41d132855e93c2808cdd4afab1b5af67bd5e82e4a4fa9248006e4df87e/onnx-1.22.0-cp310-cp310-win32.whl", hash = "sha256:8a5eccce2d5fc6c5046928a9aa7cdd9750ea4a586f8de341d3d40d820c35fdec", size = 17083595, upload-time = "2026-06-15T12:49:08.599Z" },
+    { url = "https://files.pythonhosted.org/packages/e8/52/86caff81786a5428485795c79175ae2b12a630795bcb267b84e5f9e98450/onnx-1.22.0-cp310-cp310-win_amd64.whl", hash = "sha256:5c1c0408a9d4b4df33851672e5fc7590b96301ee123396d608f9ab6f045ab06b", size = 17215270, upload-time = "2026-06-15T12:49:11.483Z" },
+    { url = "https://files.pythonhosted.org/packages/0c/55/30825c02c92a0380ce84c3feeeec95d329fa77548ba58cb10ad4bbfd83c6/onnx-1.22.0-cp311-cp311-macosx_12_0_universal2.whl", hash = "sha256:2d8f229a553fa440fe623ed7b36fca5e7762da3af871c3f8f8ce451df73e2914", size = 20167891, upload-time = "2026-06-15T12:49:14.212Z" },
+    { url = "https://files.pythonhosted.org/packages/4b/24/cd4ab52ecaf41c3fbed674772ccbfe39041cb257b8471a47a37e48bff3f8/onnx-1.22.0-cp311-cp311-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a1a89a7cb9ba13d78f009bdec448ec82a98972589734f157022a2bff7a5973a6", size = 18892720, upload-time = "2026-06-15T12:49:16.904Z" },
+    { url = "https://files.pythonhosted.org/packages/2b/a0/c9d9d56ceadb1c0a90a7cbec5a0510520ab6538938944fa84548e4b5b054/onnx-1.22.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:1d0a2bdb15eb2b3cb65c438f3423d9620d14fdce32f92380e6bb1b2e09568ef5", size = 19110720, upload-time = "2026-06-15T12:49:19.812Z" },
+    { url = "https://files.pythonhosted.org/packages/0a/6e/e43e5a68d9cadde55df75310027f87127333a77e5ddcea14c73e96a10cac/onnx-1.22.0-cp311-cp311-win32.whl", hash = "sha256:239958534464612fbcb6ed23d5228aaa925b39b8773f58726809ffdccb4edd1c", size = 17083746, upload-time = "2026-06-15T12:49:22.935Z" },
+    { url = "https://files.pythonhosted.org/packages/54/57/cc0a9f2cf4522e42829d089927b4b75924d32f50dca237482e7b741df003/onnx-1.22.0-cp311-cp311-win_amd64.whl", hash = "sha256:8561a2c00041c07e08db0c228593b5b4694100398685f348532af7dbb84189da", size = 17215684, upload-time = "2026-06-15T12:49:26.084Z" },
+    { url = "https://files.pythonhosted.org/packages/c9/99/0f049f9eaa06c8383060c5f0a338e3a6caac8822e6e326c9162f05abf95a/onnx-1.22.0-cp311-cp311-win_arm64.whl", hash = "sha256:8907b9b9389893bc0dc6314cc00ee1e3a69844e48d689eacc6a0340411a7da58", size = 17210398, upload-time = "2026-06-15T12:49:29.091Z" },
+    { url = "https://files.pythonhosted.org/packages/ee/6a/481561f1093834376ed493e4ca42a73e5be0d50031f2969c86593bdc7c96/onnx-1.22.0-cp312-abi3-macosx_12_0_universal2.whl", hash = "sha256:596fbf0490947533c1c1045ba860851dc9fb77471023dac9a71ba5b42ceab103", size = 20167081, upload-time = "2026-06-15T12:49:32.078Z" },
+    { url = "https://files.pythonhosted.org/packages/84/55/b34fc2aa30aa54b4a775402d24c4082242c720283a274fe976ac8eb94480/onnx-1.22.0-cp312-abi3-manylinux_2_26_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:ae5a563f281cd9d2845622cecf6c092a57e4ee1b138f66fdbbdd4200567a5e16", size = 18889249, upload-time = "2026-06-15T12:49:34.7Z" },
+    { url = "https://files.pythonhosted.org/packages/09/a6/bd32357e6cc1ecb473afd78193d7231724f284435d2db25696ecfaaa1503/onnx-1.22.0-cp312-abi3-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:955e02e1f6d385b53d52f9cd7b9cdf5caf417c300bcfe3c64c6d542be763845b", size = 19106514, upload-time = "2026-06-15T12:49:37.424Z" },
+    { url = "https://files.pythonhosted.org/packages/5a/9d/3af461ac6c714b8b369cb71499659932f4f12cfb066250b62f7567c3d530/onnx-1.22.0-cp312-abi3-pyemscripten_2025_0_wasm32.whl", hash = "sha256:82e9f27fc1223cb06d68a56bed6f9d3caf3d0dad1b61bce45006d529b15bd94c", size = 16966387, upload-time = "2026-06-15T12:49:40.918Z" },
+    { url = "https://files.pythonhosted.org/packages/d0/f0/68195b5e5a53e333faf2660f5352ee43738d0e42fc5216cc6b1871a9fbfb/onnx-1.22.0-cp312-abi3-win32.whl", hash = "sha256:cc8b66b312f8f03a53e268afb67180a2d97dd12cc79e2b61361c6c0073448016", size = 17081568, upload-time = "2026-06-15T12:49:43.398Z" },
+    { url = "https://files.pythonhosted.org/packages/13/a8/734725bb703c5fabb687f79c79e51249475212b3eb37771ac4a4ac9b487f/onnx-1.22.0-cp312-abi3-win_amd64.whl", hash = "sha256:72ccebab3bac07215c204ce8848d42e78eaaa666badbf72d25cd359b9f269e3a", size = 17213290, upload-time = "2026-06-15T12:49:45.933Z" },
+    { url = "https://files.pythonhosted.org/packages/bd/2a/8ce48d8ae26a8761ad4e5dc771961b155c5c3c7c8540ec7f2f2d71b69af0/onnx-1.22.0-cp312-abi3-win_arm64.whl", hash = "sha256:f3c120dcdb70ad738f3c061b32798f408ea299eb69f84dd69ab4a6bf3c2ec01f", size = 17207030, upload-time = "2026-06-15T12:49:48.635Z" },
+]
+
+[[package]]
+name = "onnx-ir"
+version = "0.2.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "ml-dtypes" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "onnx" },
+    { name = "sympy" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/35/e6/672fefb2f108d077f58181a7babf4c0f8d1182a30353ffc9c79c63afc5ee/onnx_ir-0.2.1.tar.gz", hash = "sha256:8b8b10a93f43e65962104de6070c43c5dacb0e3cdfefc7c8059dd83c9db64f35", size = 144279, upload-time = "2026-04-20T20:21:47.735Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8c/aa/f7a53321c60b9ad9ee184b6018292ed6b5389947592a2c8c09c736bb7f9e/onnx_ir-0.2.1-py3-none-any.whl", hash = "sha256:c7285da889312f91882de2092e298a9eeeefbfc1d1951c49d983992967eb09a7", size = 166792, upload-time = "2026-04-20T20:21:46.357Z" },
+]
+
+[[package]]
+name = "onnxruntime"
+version = "1.24.3"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version < '3.11' and platform_machine == 'aarch64' and sys_platform == 'linux'",
+    "python_full_version < '3.11' and platform_machine != 'aarch64' and sys_platform == 'linux'",
+    "python_full_version < '3.11' and sys_platform != 'darwin' and sys_platform != 'linux'",
+    "python_full_version < '3.11' and sys_platform == 'darwin'",
+]
+dependencies = [
+    { name = "flatbuffers", marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "packaging", marker = "python_full_version < '3.11'" },
+    { name = "protobuf", marker = "python_full_version < '3.11'" },
+    { name = "sympy", marker = "python_full_version < '3.11'" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/15/41/3253db975a90c3ce1d475e2a230773a21cd7998537f0657947df6fb79861/onnxruntime-1.24.3-cp311-cp311-macosx_14_0_arm64.whl", hash = "sha256:3e6456801c66b095c5cd68e690ca25db970ea5202bd0c5b84a2c3ef7731c5a3c", size = 17332766, upload-time = "2026-03-05T17:18:59.714Z" },
+    { url = "https://files.pythonhosted.org/packages/7e/c5/3af6b325f1492d691b23844d88ed26844c1164620860c5efe95c0e22782d/onnxruntime-1.24.3-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:8b2ebc54c6d8281dccff78d4b06e47d4cf07535937584ab759448390a70f4978", size = 15130330, upload-time = "2026-03-05T16:34:53.831Z" },
+    { url = "https://files.pythonhosted.org/packages/03/4b/f96b46c1866a293ed23ca2cf5e5a63d413ad3a951da60dd877e3c56cbbca/onnxruntime-1.24.3-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:fb56575d7794bf0781156955610c9e651c9504c64d42ec880784b6106244882d", size = 17213247, upload-time = "2026-03-05T17:17:59.812Z" },
+    { url = "https://files.pythonhosted.org/packages/36/13/27cf4d8df2578747584e8758aeb0b673b60274048510257f1f084b15e80e/onnxruntime-1.24.3-cp311-cp311-win_amd64.whl", hash = "sha256:c958222ef9eff54018332beecd32d5d94a3ab079d8821937b333811bf4da0d39", size = 12595530, upload-time = "2026-03-05T17:18:49.356Z" },
+    { url = "https://files.pythonhosted.org/packages/19/8c/6d9f31e6bae72a8079be12ed8ba36c4126a571fad38ded0a1b96f60f6896/onnxruntime-1.24.3-cp311-cp311-win_arm64.whl", hash = "sha256:a8f761857ebaf58a85b9e42422d03207f1d39e6bb8fecfdbf613bac5b9710723", size = 12261715, upload-time = "2026-03-05T17:18:39.699Z" },
+]
+
+[[package]]
+name = "onnxruntime"
+version = "1.27.0"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.11' and platform_machine == 'aarch64' and sys_platform == 'linux'",
+    "python_full_version >= '3.11' and platform_machine != 'aarch64' and sys_platform == 'linux'",
+    "python_full_version >= '3.11' and sys_platform != 'darwin' and sys_platform != 'linux'",
+    "python_full_version >= '3.11' and sys_platform == 'darwin'",
+]
+dependencies = [
+    { name = "flatbuffers", marker = "python_full_version >= '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "packaging", marker = "python_full_version >= '3.11'" },
+    { name = "protobuf", marker = "python_full_version >= '3.11'" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d4/e4/5353d7e09ced4a8f473f843223fc75d726b2b5519dcefc12f22a6c92852d/onnxruntime-1.27.0-cp311-cp311-macosx_14_0_arm64.whl", hash = "sha256:8ba14a38c570087f3cdb8cfba33f7a38a1e826c1e5b29e17c28ceda0cc910016", size = 18416484, upload-time = "2026-06-15T22:43:43.894Z" },
+    { url = "https://files.pythonhosted.org/packages/ed/1f/a2117aa3f144fce88774efa37440d0ca72d0c9144854dfc0961f2b04c6fc/onnxruntime-1.27.0-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:2eb083321af8a236a84c7c140a7f4cecbfa2a987a18c07c78db471c20cd390ef", size = 16419330, upload-time = "2026-06-15T22:42:37.58Z" },
+    { url = "https://files.pythonhosted.org/packages/e0/cd/74bb804170ceb622fda9111df31a07b3024f7491472256d3a90b5391a4d2/onnxruntime-1.27.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:e4f7b0e90d2d212e2c2deaa6c8291616183ab815d3ec558ea12d3ac8b26d36f4", size = 18636930, upload-time = "2026-06-15T22:43:01.584Z" },
+    { url = "https://files.pythonhosted.org/packages/fe/8f/5b8e2b85e81735696887175dbaf6409f215683f5ca9d4928fbb038211d32/onnxruntime-1.27.0-cp311-cp311-win_amd64.whl", hash = "sha256:ff050e4f6bf7f12918fa14dcb047c0b02e295f35e86d42532552be4b3d54e977", size = 13356110, upload-time = "2026-06-15T22:43:32.172Z" },
+    { url = "https://files.pythonhosted.org/packages/b0/3a/4f568de678126b6a371a93862f015a82138359decd97fcac61fc84b5b774/onnxruntime-1.27.0-cp311-cp311-win_arm64.whl", hash = "sha256:75fbc1e1fb43a39a856c8209c544cca7817b5de7ac16b15b1bdf55d1cc67b9df", size = 13098635, upload-time = "2026-06-15T22:43:19.607Z" },
+]
+
+[[package]]
+name = "onnxscript"
+version = "0.7.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "ml-dtypes" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "onnx" },
+    { name = "onnx-ir" },
+    { name = "packaging" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c4/3a/4d79bce3f460e0df7fed54a92ce80827f25da66511da368bb00783ad8d20/onnxscript-0.7.1.tar.gz", hash = "sha256:309fb86484b11fa4ded90dba580e0d63f1a0827588e521cecaf2eeddb46d6e86", size = 618160, upload-time = "2026-06-29T23:33:21.526Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/dd/bd/a0c8e737b6afda10e42a597787d53d5b66e00268df6f59184701eeae37d9/onnxscript-0.7.1-py3-none-any.whl", hash = "sha256:544763b7fdef49940cdd9412ff5135cbae96d59ac6bc1921457f21280f40f4b7", size = 721970, upload-time = "2026-06-29T23:33:23.298Z" },
 ]
 
 [[package]]
@@ -3613,7 +3837,7 @@ requires-dist = [
     { name = "pillow" },
     { name = "pyopf" },
     { name = "requests" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "tqdm" },
 ]
 
@@ -3647,7 +3871,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "requests" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -3906,7 +4130,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -4504,6 +4728,20 @@ wheels = [
 ]
 
 [[package]]
+name = "pytest-cov"
+version = "7.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "coverage", extra = ["toml"] },
+    { name = "pluggy" },
+    { name = "pytest" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b1/51/a849f96e117386044471c8ec2bd6cfebacda285da9525c9106aeb28da671/pytest_cov-7.1.0.tar.gz", hash = "sha256:30674f2b5f6351aa09702a9c8c364f6a01c27aae0c1366ae8016160d1efc56b2", size = 55592, upload-time = "2026-03-21T20:11:16.284Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9d/7a/d968e294073affff457b041c2be9868a40c1c71f4a35fcc1e45e5493067b/pytest_cov-7.1.0-py3-none-any.whl", hash = "sha256:a0461110b7865f9a271aa1b51e516c9a95de9d696734a2f71e3e78f46e1d4678", size = 22876, upload-time = "2026-03-21T20:11:14.438Z" },
+]
+
+[[package]]
 name = "python-dateutil"
 version = "2.9.0.post0"
 source = { registry = "https://pypi.org/simple" }
@@ -4689,7 +4927,7 @@ dependencies = [
 requires-dist = [
     { name = "numpy" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "trimesh" },
 ]
 
@@ -4804,7 +5042,8 @@ provides-extras = ["dev", "test"]
 
 [[package]]
 name = "rerun-sdk"
-source = { editable = "rerun_py" }
+version = "0.33.1"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "attrs" },
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
@@ -4814,87 +5053,20 @@ dependencies = [
     { name = "pyarrow" },
     { name = "typing-extensions" },
 ]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/16/07/380198590b194f1c17052d672865aa4a56e606eae47665f66edfb391999d/rerun_sdk-0.33.1-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:c0115b710289022587bd2e9ecb715f98d1e87dd7d8ac48e053324131d4addc89", size = 125706253, upload-time = "2026-06-22T09:04:18.974Z" },
+    { url = "https://files.pythonhosted.org/packages/f8/eb/6741bbf6868175ab126aff58d372066241c6cd2fc1c4f82ed64069728e73/rerun_sdk-0.33.1-cp310-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:14451d31bc7bd0f7c6bcc9c1213ed679ab81b65ecd8b36eae99f738219897dc5", size = 135278374, upload-time = "2026-06-22T09:04:26.768Z" },
+    { url = "https://files.pythonhosted.org/packages/04/28/fd3b832652900fe3415739e7411c8af8af4c44e9e1a9d55d79e37f7f9094/rerun_sdk-0.33.1-cp310-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:0f87da7a270614074aca37846350f9e257f65081345474748f578c7da64fdeba", size = 139565470, upload-time = "2026-06-22T09:04:34.941Z" },
+    { url = "https://files.pythonhosted.org/packages/19/41/339920f5a6734054c07bcae543365a7ef3368ceee3eb67906e2e38bd1d67/rerun_sdk-0.33.1-cp310-abi3-win_amd64.whl", hash = "sha256:b2c2af67f3c2a85b282669d97b52596593fcfdd19bf57c423f18827c837a6e49", size = 120411717, upload-time = "2026-06-22T09:04:42.643Z" },
+]
 
 [package.optional-dependencies]
-all = [
-    { name = "datafusion" },
-    { name = "pandas" },
-    { name = "rerun-notebook" },
-]
-datafusion = [
-    { name = "datafusion" },
-    { name = "pandas" },
-]
 dataloader = [
     { name = "av" },
     { name = "pillow" },
     { name = "torch" },
     { name = "torchvision" },
 ]
-dataplatform = [
-    { name = "datafusion" },
-    { name = "pandas" },
-]
-notebook = [
-    { name = "rerun-notebook" },
-]
-tests = [
-    { name = "av" },
-    { name = "datafusion" },
-    { name = "inline-snapshot" },
-    { name = "opencv-python" },
-    { name = "pandas" },
-    { name = "polars" },
-    { name = "pytest" },
-    { name = "semver" },
-    { name = "syrupy" },
-    { name = "tomli" },
-    { name = "torch" },
-    { name = "torchvision" },
-]
-tracing = [
-    { name = "opentelemetry-api" },
-    { name = "opentelemetry-exporter-otlp-proto-grpc" },
-    { name = "opentelemetry-sdk" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "attrs", specifier = ">=23.1.0" },
-    { name = "av", marker = "extra == 'dataloader'" },
-    { name = "av", marker = "extra == 'tests'", specifier = ">=14.2.0" },
-    { name = "datafusion", marker = "extra == 'all'", specifier = "==52.3.0" },
-    { name = "datafusion", marker = "extra == 'datafusion'", specifier = "==52.3.0" },
-    { name = "datafusion", marker = "extra == 'dataplatform'", specifier = "==52.3.0" },
-    { name = "datafusion", marker = "extra == 'tests'", specifier = "==52.3.0" },
-    { name = "inline-snapshot", marker = "extra == 'tests'", specifier = "==0.31.1" },
-    { name = "numpy", specifier = ">=2" },
-    { name = "opencv-python", marker = "extra == 'tests'", specifier = ">4.6" },
-    { name = "opentelemetry-api", marker = "extra == 'tracing'" },
-    { name = "opentelemetry-exporter-otlp-proto-grpc", marker = "extra == 'tracing'" },
-    { name = "opentelemetry-sdk", marker = "extra == 'tracing'" },
-    { name = "pandas", marker = "extra == 'all'", specifier = ">=2" },
-    { name = "pandas", marker = "extra == 'datafusion'", specifier = ">=2" },
-    { name = "pandas", marker = "extra == 'dataplatform'", specifier = ">=2" },
-    { name = "pandas", marker = "extra == 'tests'", specifier = ">=2" },
-    { name = "pillow", specifier = ">=8.0.0" },
-    { name = "pillow", marker = "extra == 'dataloader'", specifier = ">=8.0.0" },
-    { name = "polars", marker = "extra == 'tests'", specifier = "==1.36.1" },
-    { name = "psutil", specifier = ">=7.0" },
-    { name = "pyarrow", specifier = ">=18.0.0" },
-    { name = "pytest", marker = "extra == 'tests'", specifier = "==9.0.3" },
-    { name = "rerun-notebook", marker = "extra == 'all'", editable = "rerun_notebook" },
-    { name = "rerun-notebook", marker = "extra == 'notebook'", editable = "rerun_notebook" },
-    { name = "semver", marker = "extra == 'tests'", specifier = ">=3.0,<3.1" },
-    { name = "syrupy", marker = "extra == 'tests'", specifier = "==5.0.0" },
-    { name = "tomli", marker = "extra == 'tests'", specifier = "==2.0.1" },
-    { name = "torch", marker = "extra == 'dataloader'", specifier = ">=2.5" },
-    { name = "torch", marker = "extra == 'tests'", specifier = ">=2.5" },
-    { name = "torchvision", marker = "extra == 'dataloader'" },
-    { name = "torchvision", marker = "extra == 'tests'" },
-    { name = "typing-extensions", specifier = ">=4.5" },
-]
-provides-extras = ["all", "datafusion", "dataloader", "dataplatform", "notebook", "tests", "tracing"]
 
 [[package]]
 name = "rerun-workspace"
@@ -5138,7 +5310,7 @@ snippets = [
     { name = "av" },
     { name = "mcap-protobuf-support" },
     { name = "pandas" },
-    { name = "rerun-sdk", extras = ["dataloader"], editable = "rerun_py" },
+    { name = "rerun-sdk", extras = ["dataloader"] },
 ]
 
 [[package]]
@@ -5192,7 +5364,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python", specifier = ">4.6" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "tqdm" },
 ]
 
@@ -5271,7 +5443,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -5494,7 +5666,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "segment-anything", git = "https://github.com/facebookresearch/segment-anything.git" },
     { name = "torch" },
     { name = "torchvision" },
@@ -5531,7 +5703,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "datafusion", specifier = "==52.3.0" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -5580,7 +5752,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "rerun-sdk" }]
 
 [[package]]
 name = "shellingham"
@@ -5590,6 +5762,100 @@ sdist = { url = "https://files.pythonhosted.org/packages/58/15/8b3609fd3830ef7b2
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e0/f9/0595336914c5619e5f28a1fb793285925a8cd4b432c9da0a987836c7f822/shellingham-1.5.4-py2.py3-none-any.whl", hash = "sha256:7ecfff8f2fd72616f7481040475a65b2bf8af90a56c89140852d1120324e8686", size = 9755, upload-time = "2023-10-24T04:13:38.866Z" },
 ]
+
+[[package]]
+name = "simplant-lab-sdk"
+source = { editable = "rerun_py" }
+dependencies = [
+    { name = "attrs" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "pillow" },
+    { name = "psutil" },
+    { name = "pyarrow" },
+    { name = "typing-extensions" },
+]
+
+[package.optional-dependencies]
+all = [
+    { name = "datafusion" },
+    { name = "pandas" },
+    { name = "rerun-notebook" },
+]
+datafusion = [
+    { name = "datafusion" },
+    { name = "pandas" },
+]
+dataloader = [
+    { name = "av" },
+    { name = "pillow" },
+    { name = "torch" },
+    { name = "torchvision" },
+]
+dataplatform = [
+    { name = "datafusion" },
+    { name = "pandas" },
+]
+notebook = [
+    { name = "rerun-notebook" },
+]
+tests = [
+    { name = "av" },
+    { name = "datafusion" },
+    { name = "inline-snapshot" },
+    { name = "opencv-python" },
+    { name = "pandas" },
+    { name = "polars" },
+    { name = "pytest" },
+    { name = "semver" },
+    { name = "syrupy" },
+    { name = "tomli" },
+    { name = "torch" },
+    { name = "torchvision" },
+]
+tracing = [
+    { name = "opentelemetry-api" },
+    { name = "opentelemetry-exporter-otlp-proto-grpc" },
+    { name = "opentelemetry-sdk" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "attrs", specifier = ">=23.1.0" },
+    { name = "av", marker = "extra == 'dataloader'" },
+    { name = "av", marker = "extra == 'tests'", specifier = ">=14.2.0" },
+    { name = "datafusion", marker = "extra == 'all'", specifier = "==52.3.0" },
+    { name = "datafusion", marker = "extra == 'datafusion'", specifier = "==52.3.0" },
+    { name = "datafusion", marker = "extra == 'dataplatform'", specifier = "==52.3.0" },
+    { name = "datafusion", marker = "extra == 'tests'", specifier = "==52.3.0" },
+    { name = "inline-snapshot", marker = "extra == 'tests'", specifier = "==0.31.1" },
+    { name = "numpy", specifier = ">=2" },
+    { name = "opencv-python", marker = "extra == 'tests'", specifier = ">4.6" },
+    { name = "opentelemetry-api", marker = "extra == 'tracing'" },
+    { name = "opentelemetry-exporter-otlp-proto-grpc", marker = "extra == 'tracing'" },
+    { name = "opentelemetry-sdk", marker = "extra == 'tracing'" },
+    { name = "pandas", marker = "extra == 'all'", specifier = ">=2" },
+    { name = "pandas", marker = "extra == 'datafusion'", specifier = ">=2" },
+    { name = "pandas", marker = "extra == 'dataplatform'", specifier = ">=2" },
+    { name = "pandas", marker = "extra == 'tests'", specifier = ">=2" },
+    { name = "pillow", specifier = ">=8.0.0" },
+    { name = "pillow", marker = "extra == 'dataloader'", specifier = ">=8.0.0" },
+    { name = "polars", marker = "extra == 'tests'", specifier = "==1.36.1" },
+    { name = "psutil", specifier = ">=7.0" },
+    { name = "pyarrow", specifier = ">=18.0.0" },
+    { name = "pytest", marker = "extra == 'tests'", specifier = "==9.0.3" },
+    { name = "rerun-notebook", marker = "extra == 'all'", editable = "rerun_notebook" },
+    { name = "rerun-notebook", marker = "extra == 'notebook'", editable = "rerun_notebook" },
+    { name = "semver", marker = "extra == 'tests'", specifier = ">=3.0,<3.1" },
+    { name = "syrupy", marker = "extra == 'tests'", specifier = "==5.0.0" },
+    { name = "tomli", marker = "extra == 'tests'", specifier = "==2.0.1" },
+    { name = "torch", marker = "extra == 'dataloader'", specifier = ">=2.5" },
+    { name = "torch", marker = "extra == 'tests'", specifier = ">=2.5" },
+    { name = "torchvision", marker = "extra == 'dataloader'" },
+    { name = "torchvision", marker = "extra == 'tests'" },
+    { name = "typing-extensions", specifier = ">=4.5" },
+]
+provides-extras = ["all", "datafusion", "dataloader", "dataplatform", "notebook", "tests", "tracing"]
 
 [[package]]
 name = "sitecustomize-entrypoints"
@@ -5664,7 +5930,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "rerun-sdk" }]
 
 [[package]]
 name = "stringcase"
@@ -5690,7 +5956,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python", specifier = ">4.6" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
     { name = "tqdm" },
 ]
 
@@ -5730,7 +5996,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "pyarrow" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -5745,7 +6011,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "pyarrow" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -5764,7 +6030,7 @@ requires-dist = [
     { name = "lancedb" },
     { name = "platformdirs" },
     { name = "pyarrow" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "rerun-sdk" },
 ]
 
 [[package]]
@@ -5785,7 +6051,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "rerun-sdk" }]
 
 [[package]]
 name = "termcolor"
@@ -5988,6 +6254,63 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/a8/4b/29b4ef32e036bb34e4ab51796dd745cdba7ed47ad142a9f4a1eb8e0c744d/tqdm-4.67.1.tar.gz", hash = "sha256:f8aef9c52c08c13a65f30ea34f4e5aac3fd1a34959879d7e59e63027286627f2", size = 169737, upload-time = "2024-11-24T20:12:22.481Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl", hash = "sha256:26445eca388f82e72884e0d580d5464cd801a3ea01e63e5601bdff9ba6a48de2", size = 78540, upload-time = "2024-11-24T20:12:19.698Z" },
+]
+
+[[package]]
+name = "training"
+version = "0.1.0"
+source = { editable = "examples/simplant/training" }
+dependencies = [
+    { name = "gymnasium" },
+    { name = "matplotlib" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "onnx" },
+    { name = "onnxruntime", version = "1.24.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "onnxruntime", version = "1.27.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "onnxscript" },
+    { name = "pyarrow" },
+    { name = "safetensors" },
+    { name = "simplant-lab-sdk" },
+    { name = "torch" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "onnx" },
+    { name = "onnxruntime", version = "1.24.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "onnxruntime", version = "1.27.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "safetensors" },
+    { name = "torch" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "gymnasium" },
+    { name = "matplotlib" },
+    { name = "numpy" },
+    { name = "onnx" },
+    { name = "onnxruntime" },
+    { name = "onnxscript" },
+    { name = "pyarrow" },
+    { name = "safetensors" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
+    { name = "torch" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "numpy" },
+    { name = "onnx" },
+    { name = "onnxruntime" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "safetensors" },
+    { name = "torch" },
 ]
 
 [[package]]
@@ -6258,7 +6581,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "rerun-sdk" }]
 
 [[package]]
 name = "uv"

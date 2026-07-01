@@ -31,7 +31,7 @@ if TYPE_CHECKING:
     import datafusion
 
     from simplant_lab.experimental import LazyStore
-    from simplant_lab.recording import Recording  # ty:ignore[deprecated]
+    from simplant_lab.rrd_recording import Recording  # ty:ignore[deprecated]
 
     from . import (
         CatalogClient,
@@ -527,7 +527,7 @@ class DatasetEntry(Entry[DatasetEntryInternal]):
     )
     def download_segment(self, segment_id: str) -> Recording:  # ty:ignore[deprecated]
         """Download a segment from the dataset."""
-        from simplant_lab.recording import Recording  # ty:ignore[deprecated]
+        from simplant_lab.rrd_recording import Recording  # ty:ignore[deprecated]
 
         return Recording(self._internal.download_segment(segment_id))  # ty: ignore[deprecated]
 

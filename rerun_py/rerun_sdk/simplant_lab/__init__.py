@@ -23,11 +23,21 @@ if sys.version_info < (3, 10):  # noqa: UP036
 #
 import rerun_bindings as bindings
 
+# SimPlant domain submodules (registered on this package by rerun_bindings init).
+from . import acquisition as acquisition
+from . import asset_model as asset_model
+from . import kernel as kernel
+from . import ml_dataloop as ml_dataloop
+from . import recording as recording
+from . import simulation as simulation
+from . import stress_testing as stress_testing
+from . import types as types
+
 from . import (
     blueprint as blueprint,
     catalog as catalog,
     experimental as experimental,
-    recording as recording,
+    rrd_recording as rrd_recording,
     server as server,
     urdf as urdf,
 )

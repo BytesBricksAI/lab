@@ -5,11 +5,11 @@ use uuid::Uuid;
 
 use re_log_types::EntityPath;
 use re_sdk_types::blueprint::archetypes::{
-    ActiveVisualizers, ForceCenter, ForceCollisionRadius, ForceLink, ForceManyBody, ForcePosition,
-    GraphBackground, MapBackground, ViewBlueprint, ViewContents, VisualBounds2D,
+    ActiveVisualizers, DataframeQuery, ForceCenter, ForceCollisionRadius, ForceLink, ForceManyBody,
+    ForcePosition, GraphBackground, MapBackground, ViewBlueprint, ViewContents, VisualBounds2D,
     VisualizerInstruction,
 };
-use re_sdk_types::blueprint::components::{QueryExpression, ViewClass};
+use re_sdk_types::blueprint::components::{QueryExpression, TimelineName, ViewClass};
 use re_sdk_types::components::{Name, Visible};
 use re_sdk_types::datatypes::Bool;
 use re_sdk_types::{AsComponents, SerializedComponentBatch, Visualizer};
@@ -564,5 +564,112 @@ impl TextDocumentView {
     ) -> Self {
         self.0.add_overrides(entity_path, visualizers);
         self
+    }
+}
+
+/// Dataframe (table) view: shows any data from the store in tabular form.
+///
+/// Rows are indexed by a timeline (see [`Self::with_timeline`]); columns are the
+/// components found under the view contents.
+pub struct DataframeView(pub(crate) View);
+
+impl DataframeView {
+    /// Create a new dataframe view.
+    pub fn new(name: impl Into<String>) -> Self {
+        Self(View {
+            class_identifier: "Dataframe".into(),
+            name: Some(name.into()),
+            ..Default::default()
+        })
+    }
+
+    /// Set the origin entity path.
+    pub fn with_origin(mut self, origin: impl Into<EntityPath>) -> Self {
+        self.0.origin = origin.into();
+        self
+    }
+
+    /// Set the contents query expressions.
+    pub fn with_contents(mut self, queries: impl IntoIterator<Item = impl Into<String>>) -> Self {
+        self.0.contents = queries.into_iter().map(Into::into).collect();
+        self
+    }
+
+    /// Set visibility.
+    pub fn with_visible(mut self, visible: bool) -> Self {
+        self.0.visible = Some(visible);
+        self
+    }
+
+    /// Index the table rows by the given timeline (e.g. `"plant_time"`).
+    ///
+    /// If unset, the timeline currently active on the time panel is used.
+    pub fn with_timeline(mut self, timeline: impl Into<TimelineName>) -> Self {
+        self.0.add_property(
+            "DataframeQuery",
+            &DataframeQuery::update_fields().with_timeline(timeline),
+        );
+        self
+    }
+}
+
+/// Text log view: shows `TextLog` entries (level and body) in chronological order.
+pub struct TextLogView(pub(crate) View);
+
+impl TextLogView {
+    /// Create a new text log view.
+    pub fn new(name: impl Into<String>) -> Self {
+        Self(View {
+            class_identifier: "TextLog".into(),
+            name: Some(name.into()),
+            ..Default::default()
+        })
+    }
+
+    /// Set the origin entity path.
+    pub fn with_origin(mut self, origin: impl Into<EntityPath>) -> Self {
+        self.0.origin = origin.into();
+        self
+    }
+
+    /// Set the contents query expressions.
+    pub fn with_contents(mut self, queries: impl IntoIterator<Item = impl Into<String>>) -> Self {
+        self.0.contents = queries.into_iter().map(Into::into).collect();
+        self
+    }
+
+    /// Set visibility.
+    pub fn with_visible(mut self, visible: bool) -> Self {
+        self.0.visible = Some(visible);
+        self
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn dataframe_view_uses_dataframe_class() {
+        let view = DataframeView::new("Tag table");
+        assert_eq!(view.0.class_identifier, "Dataframe");
+    }
+
+    #[test]
+    fn dataframe_view_with_timeline_logs_query_at_expected_property() {
+        // The viewer resolves the query at `view/<id>/DataframeQuery` (the archetype
+        // short name), so the property key must match that name exactly.
+        let view = DataframeView::new("Tag table").with_timeline("plant_time");
+        assert!(
+            view.0.properties.contains_key("DataframeQuery"),
+            "expected a DataframeQuery property, got: {:?}",
+            view.0.properties.keys().collect::<Vec<_>>()
+        );
+    }
+
+    #[test]
+    fn text_log_view_uses_text_log_class() {
+        let view = TextLogView::new("Events");
+        assert_eq!(view.0.class_identifier, "TextLog");
     }
 }

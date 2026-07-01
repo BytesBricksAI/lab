@@ -4,7 +4,7 @@ Guidance for LLMs working in this repo.
 
 ## Project overview
 
-SimPlant Lab: time-aware multimodal data stack + visualization for robotics, spatial AI, computer vision (fork of [Rerun](https://github.com/rerun-io/rerun)). SDKs (Python, Rust, C++) log rich data (images, point clouds, tensors, etc.). Viewer for visualization.
+SimPlant Lab: time-aware multimodal data stack + visualization for Oil & Gas Industry (fork of [Rerun](https://github.com/rerun-io/rerun)). SDKs (Python, Rust, C++) log rich data (images, point clouds, tensors, etc.). Viewer for visualization.
 
 ## Build system
 

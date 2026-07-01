@@ -3,6 +3,10 @@
 use std::path::PathBuf;
 
 use anyhow::Context as _;
+use re_sdk::RecordingStreamBuilder;
+use re_sdk::blueprint::{
+    Blueprint, ContainerLike, DataframeView, Grid, TextLogView, TimePanel, TimeSeriesView,
+};
 use sp_acquisition::{AcquisitionSession, SamplingPolicy, TagBinding, run_session};
 use sp_acquisition_replay::CsvReplaySource;
 use sp_asset_model::{AssetCatalogPort as _, TomlCatalogRepository};
@@ -49,8 +53,36 @@ fn main() -> anyhow::Result<()> {
             .map_err(|e| anyhow::anyhow!(e.to_string()))?;
 
     let source = CsvReplaySource::new(&csv_path);
-    let recorder = RerunRecorder::to_file("simplant_lab_tanque_demo", &output_path)
+
+    // Ship a blueprint inside the .rrd so the recording opens with the process
+    // variables already laid out: a table and trends indexed by plant_time, plus
+    // the acquisition event log. Without this the viewer auto-layout drops the
+    // events into a table and the tank level never shows up there.
+    let blueprint = Blueprint::new(Grid::new(vec![
+        ContainerLike::from(
+            DataframeView::new("Tabla de proceso")
+                .with_origin("/tags")
+                .with_contents(["/tags/**"])
+                .with_timeline("plant_time"),
+        ),
+        ContainerLike::from(
+            TimeSeriesView::new("Tendencias")
+                .with_origin("/tags")
+                .with_contents(["/tags/**"]),
+        ),
+        ContainerLike::from(
+            TextLogView::new("Eventos")
+                .with_origin("/events")
+                .with_contents(["/events/**"]),
+        ),
+    ]))
+    .with_time_panel(TimePanel::new().with_timeline("plant_time"));
+
+    let stream = RecordingStreamBuilder::new("simplant_lab_tanque_demo")
+        .with_blueprint(blueprint)
+        .save(&output_path)
         .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+    let recorder = RerunRecorder::new(stream);
 
     let batches_recorded = run_session(&mut session, &catalog, &source, &recorder)
         .map_err(|e| anyhow::anyhow!(e.to_string()))?;

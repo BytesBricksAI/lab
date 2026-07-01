@@ -17,7 +17,7 @@ members = [
   "tests/rust/re_integration_test",
   "tests/rust/test_*",
 ]
-exclude = ["examples/rust/revy", "examples/rust/chess_robby_fischer"]
+exclude = ["examples/rust/revy", "examples/rust/chess_robby_fischer", "examples/simplant/training"]
 
 [workspace.package]
 authors = ["SimPlant <dev@simplant.lab>"]

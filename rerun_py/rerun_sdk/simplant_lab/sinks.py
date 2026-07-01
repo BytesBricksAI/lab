@@ -18,7 +18,7 @@ from ._spawn import _spawn_viewer
 if TYPE_CHECKING:
     import pathlib
 
-    from simplant_lab.recording import Recording  # ty:ignore[deprecated]
+    from simplant_lab.rrd_recording import Recording  # ty:ignore[deprecated]
     from simplant_lab.recording_stream import RecordingStream
 
 

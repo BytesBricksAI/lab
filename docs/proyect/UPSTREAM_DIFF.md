@@ -129,6 +129,19 @@ Comando base: `git status --short` filtrado (sin `crates/simplant/*` ni `example
 | `rerun_py/src/python_bridge.rs` | `OTEL_SERVICE_NAME` → `simplant-lab-py`; `executable_name` → `simplant-lab` |
 | `rerun_py/pyproject.toml` | `name = "simplant-lab-sdk"`; scripts `simplant-lab` + alias `rerun`; `python-packages` incluye shims de compat |
 
+### 2.2.1 Bindings pyo3 del dominio SimPlant (`sp_python`)
+
+Integración mínima en la zona upstream del fork: el crate puente `sp_python` (código SimPlant en
+`crates/simplant/sp_python/`, fuera de este registro) se registra desde el `#[pymodule]` existente.
+
+| Archivo | Cambio |
+|---|---|
+| `rerun_py/Cargo.toml` | Dep workspace `sp_python = { path = "../crates/simplant/sp_python" }` |
+| `rerun_py/src/python_bridge.rs` | Tras `lenses::register(m)?;`: hook `sp_python::register_recording_stream_extractor(Box::new(\|obj\| { … }))` para extraer `RecordingStream` desde Python; luego `sp_python::register(py, m)?;` (registra submódulos `simplant_lab.kernel`, `.asset_model`, `.acquisition`, `.simulation`, `.ml_dataloop`, `.stress_testing`, `.recording`, `.types`) |
+
+**Razón:** exponer los crates `sp_*` de dominio a Python sin tocar los crates de dominio (ADR-0002);
+toda la frontera pyo3 vive en `sp_python` + estas dos líneas de wiring upstream.
+
 ### 2.3 Viewer — branding centralizado y strings de UI (36 archivos en `crates/`)
 
 **Nuevo módulo referenciado** (archivo untracked, ver §3): `crates/viewer/re_ui/src/branding.rs` con `PRODUCT_NAME`, `PRODUCT_NAME_LOWERCASE`, URLs.
@@ -217,6 +230,16 @@ Comando base: `git status --short` filtrado (sin `crates/simplant/*` ni `example
 | `rerun_js/web-viewer/package.json` | Metadatos del paquete |
 | `rerun_js/web-viewer-react/package.json` | Metadatos del paquete |
 
+### 2.10 API de blueprint en Rust — `DataframeView` y `TextLogView` (extensión funcional)
+
+| Archivo | Cambio |
+|---|---|
+| `crates/top/re_sdk/src/blueprint/view.rs` | Nuevos `DataframeView` (con `with_timeline`, vía archetype `DataframeQuery`) y `TextLogView`, espejando el patrón de los views existentes; tests de construcción |
+| `crates/top/re_sdk/src/blueprint/mod.rs` | Exporta `DataframeView` y `TextLogView` |
+| `crates/top/re_sdk/src/blueprint/container.rs` | `impl From<…>` de ambos para `ContainerLike` |
+
+**Razón:** la API de blueprint de Rust upstream expone `TimeSeries`/`Spatial2D`/`Spatial3D`/`Map`/`Graph`/`TextDocument` pero **no** `Dataframe` (tabla) ni `TextLog` — en upstream esos views solo se construyen desde la API de Python. El demo `tanque_demo` los necesita para abrir con una tabla de variables de proceso indexada por `plant_time`. La extensión replica el patrón existente (`class_identifier` + builders `with_*`) y es **candidata a PR upstream**. No toca tipos wire ni el namespace FlatBuffers.
+
 ---
 
 ## 3. Archivos NUEVOS en zona upstream (untracked)
@@ -303,4 +326,4 @@ git diff upstream/main --stat -- ':!crates/simplant' ':!examples/simplant'
 
 ---
 
-*Última actualización: 2026-06-15 — generado desde el working tree de `feat/simplant-domain-crates`.*
+*Última actualización: 2026-06-29 — agregado §2.2.1 (`sp_python::register` en `python_bridge.rs`); resto generado desde el working tree de `feat/simplant-domain-crates`.*
