@@ -10,8 +10,8 @@ from typing import Any
 import numpy as np
 import pytest
 
-import simplant_lab as rr
 import rerun_bindings as bindings
+import simplant_lab as rr
 from simplant_lab._log import _log_components
 
 ARCHETYPE_CASES = [

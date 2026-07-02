@@ -24,21 +24,21 @@ class ClassDescription(ClassDescriptionExt):
     """
     **Datatype**: The description of a semantic Class.
 
-    If an entity is annotated with a corresponding [`components.ClassId`][rerun.components.ClassId], Rerun will use
-    the attached [`datatypes.AnnotationInfo`][rerun.datatypes.AnnotationInfo] to derive labels and colors.
+    If an entity is annotated with a corresponding [`components.ClassId`][simplant_lab.components.ClassId], Rerun will use
+    the attached [`datatypes.AnnotationInfo`][simplant_lab.datatypes.AnnotationInfo] to derive labels and colors.
 
     Keypoints within an annotation class can similarly be annotated with a
-    [`components.KeypointId`][rerun.components.KeypointId] in which case we should defer to the label and color for the
-    [`datatypes.AnnotationInfo`][rerun.datatypes.AnnotationInfo] specifically associated with the Keypoint.
+    [`components.KeypointId`][simplant_lab.components.KeypointId] in which case we should defer to the label and color for the
+    [`datatypes.AnnotationInfo`][simplant_lab.datatypes.AnnotationInfo] specifically associated with the Keypoint.
 
     Keypoints within the class can also be decorated with skeletal edges.
-    Keypoint-connections are pairs of [`components.KeypointId`][rerun.components.KeypointId]s. If an edge is
+    Keypoint-connections are pairs of [`components.KeypointId`][simplant_lab.components.KeypointId]s. If an edge is
     defined, and both keypoints exist within the instance of the class, then the
     keypoints should be connected with an edge. The edge should be labeled and
-    colored as described by the class's [`datatypes.AnnotationInfo`][rerun.datatypes.AnnotationInfo].
+    colored as described by the class's [`datatypes.AnnotationInfo`][simplant_lab.datatypes.AnnotationInfo].
 
-    Note that a `ClassDescription` can be directly logged using `rerun.log`.
-    This is equivalent to logging a `rerun.AnnotationContext` containing
+    Note that a `ClassDescription` can be directly logged using `simplant_lab.log`.
+    This is equivalent to logging a `simplant_lab.AnnotationContext` containing
     a single `ClassDescription`.
     """
 
@@ -47,14 +47,14 @@ class ClassDescription(ClassDescriptionExt):
     info: datatypes.AnnotationInfo = field(
         converter=ClassDescriptionExt.info__field_converter_override,  # type: ignore[misc]
     )
-    # The [`datatypes.AnnotationInfo`][rerun.datatypes.AnnotationInfo] for the class.
+    # The [`datatypes.AnnotationInfo`][simplant_lab.datatypes.AnnotationInfo] for the class.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 
     keypoint_annotations: list[datatypes.AnnotationInfo] = field(
         converter=ClassDescriptionExt.keypoint_annotations__field_converter_override,  # type: ignore[misc]
     )
-    # The [`datatypes.AnnotationInfo`][rerun.datatypes.AnnotationInfo] for all of the keypoints.
+    # The [`datatypes.AnnotationInfo`][simplant_lab.datatypes.AnnotationInfo] for all of the keypoints.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 

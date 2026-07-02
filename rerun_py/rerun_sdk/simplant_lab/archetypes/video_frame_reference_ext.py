@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 
 class VideoFrameReferenceExt:
-    """Extension for [VideoFrameReference][rerun.archetypes.VideoFrameReference]."""
+    """Extension for [VideoFrameReference][simplant_lab.archetypes.VideoFrameReference]."""
 
     def __init__(
         self: Any,
@@ -46,7 +46,7 @@ class VideoFrameReferenceExt:
 
             Mutually exclusive with `timestamp` and `seconds`.
         video_reference:
-            Optional reference to an entity with a [`archetypes.AssetVideo`][rerun.archetypes.AssetVideo].
+            Optional reference to an entity with a [`archetypes.AssetVideo`][simplant_lab.archetypes.AssetVideo].
 
             If none is specified, the video is assumed to be at the same entity.
             Note that blueprint overrides on the referenced video will be ignored regardless,

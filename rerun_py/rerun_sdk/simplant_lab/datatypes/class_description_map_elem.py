@@ -37,9 +37,9 @@ def _class_description_map_elem__class_id__special_field_converter_override(
 @define(init=False)
 class ClassDescriptionMapElem(ClassDescriptionMapElemExt):
     """
-    **Datatype**: A helper type for mapping [`datatypes.ClassId`][rerun.datatypes.ClassId]s to class descriptions.
+    **Datatype**: A helper type for mapping [`datatypes.ClassId`][simplant_lab.datatypes.ClassId]s to class descriptions.
 
-    This is internal to [`components.AnnotationContext`][rerun.components.AnnotationContext].
+    This is internal to [`components.AnnotationContext`][simplant_lab.components.AnnotationContext].
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**
     """
@@ -51,7 +51,7 @@ class ClassDescriptionMapElem(ClassDescriptionMapElemExt):
         Parameters
         ----------
         class_id:
-            The key: the [`components.ClassId`][rerun.components.ClassId].
+            The key: the [`components.ClassId`][simplant_lab.components.ClassId].
         class_description:
             The value: class name, color, etc.
 
@@ -63,7 +63,7 @@ class ClassDescriptionMapElem(ClassDescriptionMapElemExt):
     class_id: datatypes.ClassId = field(
         converter=_class_description_map_elem__class_id__special_field_converter_override
     )
-    # The key: the [`components.ClassId`][rerun.components.ClassId].
+    # The key: the [`components.ClassId`][simplant_lab.components.ClassId].
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 

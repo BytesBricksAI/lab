@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pytest
-import rerun as rr
-from rerun.error_utils import RerunWarning
+import simplant_lab as rr
+from simplant_lab.error_utils import RerunWarning
 
 if TYPE_CHECKING:
     from collections.abc import Callable

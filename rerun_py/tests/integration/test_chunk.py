@@ -6,9 +6,9 @@ from typing import TYPE_CHECKING
 
 import pyarrow as pa
 import pytest
-import rerun as rr
+import simplant_lab as rr
 from inline_snapshot import snapshot as inline_snapshot
-from rerun.experimental import Chunk, DeriveLens, LazyChunkStream, Lens, MutateLens, RrdReader, Selector
+from simplant_lab.experimental import Chunk, DeriveLens, LazyChunkStream, Lens, MutateLens, RrdReader, Selector
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -142,7 +142,7 @@ def test_chunk_format_keeps_rerun_metadata_prefixes() -> None:
 
 def test_chunk_from_columns_into_store() -> None:
     """Chunks built via from_columns can be inserted into a ChunkStore."""
-    from rerun.experimental import ChunkStore
+    from simplant_lab.experimental import ChunkStore
 
     chunk = Chunk.from_columns(
         "/test",

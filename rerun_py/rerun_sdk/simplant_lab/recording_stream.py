@@ -10,9 +10,9 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast, overload
 
 from typing_extensions import Self, deprecated
 
+import rerun_bindings as bindings
 import simplant_lab as rr
-from rerun import bindings
-from rerun_bindings import ChunkBatcherConfig as ChunkBatcherConfig  # noqa: TC001
+from rerun_bindings import ChunkBatcherConfig as ChunkBatcherConfig
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
@@ -23,8 +23,10 @@ if TYPE_CHECKING:
     import numpy as np
     import pyarrow as pa
 
-    from rerun import AsComponents, BlueprintLike, ComponentColumn, DescribedComponentBatch as DescribedComponentBatch
+    from simplant_lab._baseclasses import AsComponents, DescribedComponentBatch as DescribedComponentBatch
     from simplant_lab._memory import MemoryRecording
+    from simplant_lab._send_columns import ComponentColumn
+    from simplant_lab.blueprint.api import BlueprintLike
     from simplant_lab.experimental import Chunk, ChunkStore, LazyChunkStream, LazyStore
     from simplant_lab.sinks import LogSinkLike
 
@@ -42,7 +44,7 @@ Used to manage and detect interactions between generators and RecordingStream co
 
 def binary_stream(recording: RecordingStream | None = None) -> BinaryStream:
     """
-    Sends all log-data to a [`rerun.BinaryStream`] object that can be read from.
+    Sends all log-data to a [`simplant_lab.BinaryStream`] object that can be read from.
 
     The contents of this stream are encoded in the Rerun Record Data format (rrd).
 
@@ -63,9 +65,9 @@ def binary_stream(recording: RecordingStream | None = None) -> BinaryStream:
     Parameters
     ----------
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     Returns
     -------
@@ -87,7 +89,7 @@ def is_enabled(
 
     If false, all calls to the recording are ignored.
 
-    The default can be set in [`rerun.init`][], but is otherwise `True`.
+    The default can be set in [`simplant_lab.init`][], but is otherwise `True`.
 
     This can be controlled with the environment variable `RERUN` (e.g. `RERUN=on` or `RERUN=off`).
 
@@ -104,9 +106,9 @@ def get_application_id(
     Parameters
     ----------
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     Returns
     -------
@@ -136,9 +138,9 @@ def get_recording_id(
     Parameters
     ----------
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     Returns
     -------
@@ -154,15 +156,15 @@ class RecordingStream:
     """
     A RecordingStream is used to send data to Rerun.
 
-    You can instantiate a RecordingStream by calling either [`rerun.init`][] (to create a global
-    recording) or [`rerun.RecordingStream`][] (for more advanced use cases).
+    You can instantiate a RecordingStream by calling either [`simplant_lab.init`][] (to create a global
+    recording) or [`simplant_lab.RecordingStream`][] (for more advanced use cases).
 
     Multithreading
     --------------
 
     A RecordingStream can safely be copied and sent to other threads.
-    You can also set a recording as the global active one for all threads ([`rerun.set_global_data_recording`][])
-    or just for the current thread ([`rerun.set_thread_local_data_recording`][]).
+    You can also set a recording as the global active one for all threads ([`simplant_lab.set_global_data_recording`][])
+    or just for the current thread ([`simplant_lab.set_thread_local_data_recording`][]).
 
     Similarly, the `with` keyword can be used to temporarily set the active recording for the
     current thread, e.g.:
@@ -173,22 +175,22 @@ class RecordingStream:
     WARNING: if using a RecordingStream as a context manager, yielding from a generator function
     while holding the context open will leak the context and likely cause your program to send data
     to the wrong stream. See: <https://github.com/rerun-io/rerun/issues/6238>. You can work around this
-    by using the [`rerun.recording_stream_generator_ctx`][] decorator.
+    by using the [`simplant_lab.recording_stream_generator_ctx`][] decorator.
 
     Flushing or context manager exit guarantees that all previous data sent by the calling thread
     has been recorded and (if applicable) flushed to the underlying OS-managed file descriptor,
     but other threads may still have data in flight.
 
-    On context manager exit, file-like sinks (e.g. those created by [`rerun.RecordingStream.save`][])
+    On context manager exit, file-like sinks (e.g. those created by [`simplant_lab.RecordingStream.save`][])
     are also finalized so the resulting `.rrd` is consumable immediately — without this, the file's
     footer would only be written when the `RecordingStream` is garbage-collected. Streaming sinks
-    (e.g. [`rerun.RecordingStream.connect_grpc`][], [`rerun.RecordingStream.serve_grpc`][]) are left
+    (e.g. [`simplant_lab.RecordingStream.connect_grpc`][], [`simplant_lab.RecordingStream.serve_grpc`][]) are left
     intact and continue to receive data after the `with`-block exits. After a file-like sink has
     been finalized this way, subsequent log calls on the same `RecordingStream` go to a buffered
     sink until a new sink is attached.
 
-    See also: [`rerun.get_data_recording`][], [`rerun.get_global_data_recording`][],
-    [`rerun.get_thread_local_data_recording`][].
+    See also: [`simplant_lab.get_data_recording`][], [`simplant_lab.get_global_data_recording`][],
+    [`simplant_lab.get_thread_local_data_recording`][].
 
     Available methods
     -----------------
@@ -199,13 +201,13 @@ class RecordingStream:
     This includes, but isn't limited to:
 
     - Metadata-related functions:
-        [`rerun.is_enabled`][], [`rerun.get_recording_id`][], …
+        [`simplant_lab.is_enabled`][], [`simplant_lab.get_recording_id`][], …
     - Sink-related functions:
-        [`rerun.connect_grpc`][], [`rerun.spawn`][], …
+        [`simplant_lab.connect_grpc`][], [`simplant_lab.spawn`][], …
     - Time-related functions:
-        [`rerun.set_time`][], [`rerun.disable_timeline`][], [`rerun.reset_time`][], …
+        [`simplant_lab.set_time`][], [`simplant_lab.disable_timeline`][], [`simplant_lab.reset_time`][], …
     - Log-related functions:
-        [`rerun.log`][], …
+        [`simplant_lab.log`][], …
 
     For an exhaustive list, see `help(rerun.RecordingStream)`.
 
@@ -241,10 +243,10 @@ class RecordingStream:
         """
         Creates a new recording stream with a user-chosen application id (name) that can be used to log data.
 
-        If you only need a single global recording, [`rerun.init`][] might be simpler.
+        If you only need a single global recording, [`simplant_lab.init`][] might be simpler.
 
         Note that new recording streams always begin connected to a buffered sink.
-        To send the data to a viewer or file you will likely want to call [`rerun.connect_grpc`][] or [`rerun.save`][]
+        To send the data to a viewer or file you will likely want to call [`simplant_lab.connect_grpc`][] or [`simplant_lab.save`][]
         explicitly.
 
         !!! Warning
@@ -275,7 +277,7 @@ class RecordingStream:
 
             For example, if you have one application doing object detection
             and another doing camera calibration, you could have
-            `rerun.init("object_detector")` and `rerun.init("calibrator")`.
+            `simplant_lab.init("object_detector")` and `simplant_lab.init("calibrator")`.
         recording_id:
             Set the recording ID that this process is logging to, as a UUIDv4.
 
@@ -304,7 +306,7 @@ class RecordingStream:
         Returns
         -------
         RecordingStream
-            A handle to the [`rerun.RecordingStream`][]. Use it to log data to Rerun.
+            A handle to the [`simplant_lab.RecordingStream`][]. Use it to log data to Rerun.
 
         Examples
         --------
@@ -457,7 +459,7 @@ class RecordingStream:
         """
         Stream data to multiple different sinks.
 
-        Duplicate sinks are not allowed. For example, two [`rerun.GrpcSink`][]s that
+        Duplicate sinks are not allowed. For example, two [`simplant_lab.GrpcSink`][]s that
         use the same `url` will cause this function to throw a `ValueError`.
 
         This _replaces_ existing sinks. Calling `rr.init(spawn=True)`, `rr.spawn()`,
@@ -471,12 +473,12 @@ class RecordingStream:
         sinks:
             A list of sinks to wrap.
 
-            See [`rerun.GrpcSink`][], [`rerun.FileSink`][].
+            See [`simplant_lab.GrpcSink`][], [`simplant_lab.FileSink`][].
         default_blueprint:
             Optionally set a default blueprint to use for this application. If the application
             already has an active blueprint, the new blueprint won't become active until the user
             clicks the "reset blueprint" button. If you want to activate the new blueprint
-            immediately, instead use the [`rerun.send_blueprint`][] API.
+            immediately, instead use the [`simplant_lab.send_blueprint`][] API.
 
         Example
         -------
@@ -519,7 +521,7 @@ class RecordingStream:
             Optionally set a default blueprint to use for this application. If the application
             already has an active blueprint, the new blueprint won't become active until the user
             clicks the "reset blueprint" button. If you want to activate the new blueprint
-            immediately, instead use the [`rerun.send_blueprint`][] API.
+            immediately, instead use the [`simplant_lab.send_blueprint`][] API.
 
         """
 
@@ -551,10 +553,10 @@ class RecordingStream:
             Optionally set a default blueprint to use for this application. If the application
             already has an active blueprint, the new blueprint won't become active until the user
             clicks the "reset blueprint" button. If you want to activate the new blueprint
-            immediately, instead use the [`rerun.send_blueprint`][] API.
+            immediately, instead use the [`simplant_lab.send_blueprint`][] API.
         write_footer:
             Whether to emit a complete RRD footer (including a manifest of every chunk) at the
-            end of the stream. Defaults to `True`. See [`rerun.save`][] for details and
+            end of the stream. Defaults to `True`. See [`simplant_lab.save`][] for details and
             trade-offs (notably memory usage in long-running streaming sessions).
 
             *Warning*: lack of footer will significantly hurt random-access performance and some
@@ -588,10 +590,10 @@ class RecordingStream:
             Optionally set a default blueprint to use for this application. If the application
             already has an active blueprint, the new blueprint won't become active until the user
             clicks the "reset blueprint" button. If you want to activate the new blueprint
-            immediately, instead use the [`rerun.send_blueprint`][] API.
+            immediately, instead use the [`simplant_lab.send_blueprint`][] API.
         write_footer:
             Whether to emit a complete RRD footer (including a manifest of every chunk) at the
-            end of the stream. Defaults to `True`. See [`rerun.save`][] for details.
+            end of the stream. Defaults to `True`. See [`simplant_lab.save`][] for details.
 
             *Warning*: lack of footer will significantly hurt random-access performance and some
             tools (e.g. LazyStore) may not work properly.
@@ -607,7 +609,7 @@ class RecordingStream:
         Streams all log-data to a memory buffer.
 
         This can be used to display the RRD to alternative formats such as html.
-        See: [rerun.notebook_show][].
+        See: [simplant_lab.notebook_show][].
 
         Returns
         -------
@@ -625,8 +627,8 @@ class RecordingStream:
         Closes all gRPC connections, servers, and files.
 
         Closes all gRPC connections, servers, and files that have been opened with
-        [`rerun.RecordingStream.connect_grpc`][], [`rerun.RecordingStream.serve_grpc`][],
-        [`rerun.RecordingStream.save`][] or [`rerun.RecordingStream.spawn`][].
+        [`simplant_lab.RecordingStream.connect_grpc`][], [`simplant_lab.RecordingStream.serve_grpc`][],
+        [`simplant_lab.RecordingStream.save`][] or [`simplant_lab.RecordingStream.spawn`][].
         """
 
         from .sinks import disconnect
@@ -666,7 +668,7 @@ class RecordingStream:
             Optionally set a default blueprint to use for this application. If the application
             already has an active blueprint, the new blueprint won't become active until the user
             clicks the "reset blueprint" button. If you want to activate the new blueprint
-            immediately, instead use the [`rerun.RecordingStream.send_blueprint`][] API.
+            immediately, instead use the [`simplant_lab.RecordingStream.send_blueprint`][] API.
         server_memory_limit:
             Maximum amount of memory to use for buffering log data for clients that connect late.
             This can be a percentage of the total ram (e.g. "50%") or an absolute value (e.g. "4GB").
@@ -759,7 +761,7 @@ class RecordingStream:
         """
         Spawn a Rerun Viewer, listening on the given port.
 
-        You can also call [rerun.init][] with a `spawn=True` argument.
+        You can also call [simplant_lab.init][] with a `spawn=True` argument.
 
         Parameters
         ----------
@@ -779,7 +781,7 @@ class RecordingStream:
             Optionally set a default blueprint to use for this application. If the application
             already has an active blueprint, the new blueprint won't become active until the user
             clicks the "reset blueprint" button. If you want to activate the new blueprint
-            immediately, instead use the [`rerun.RecordingStream.send_blueprint`][] API.
+            immediately, instead use the [`simplant_lab.RecordingStream.send_blueprint`][] API.
 
         """
 
@@ -821,7 +823,7 @@ class RecordingStream:
             A blueprint object to send to the viewer.
             It will be made active and set as the default blueprint in the recording.
 
-            Setting this is equivalent to calling [`rerun.RecordingStream.send_blueprint`][] before initializing the viewer.
+            Setting this is equivalent to calling [`simplant_lab.RecordingStream.send_blueprint`][] before initializing the viewer.
 
         """
         try:
@@ -854,7 +856,7 @@ class RecordingStream:
             Name of the property.
 
         values:
-            Anything that implements the [`rerun.AsComponents`][] interface, usually an archetype,
+            Anything that implements the [`simplant_lab.AsComponents`][] interface, usually an archetype,
             or an iterable of (described)component batches.
 
         """
@@ -918,8 +920,8 @@ class RecordingStream:
         Set the current time of a timeline for this thread.
 
         Used for all subsequent logging on the same thread, until the next call to
-        [`rerun.RecordingStream.set_time`][], [`rerun.RecordingStream.reset_time`][] or
-        [`rerun.RecordingStream.disable_timeline`][].
+        [`simplant_lab.RecordingStream.set_time`][], [`simplant_lab.RecordingStream.reset_time`][] or
+        [`simplant_lab.RecordingStream.disable_timeline`][].
 
         For example: `set_time("frame_nr", sequence=frame_nr)`.
 
@@ -929,7 +931,7 @@ class RecordingStream:
         You may NOT change the type of a timeline, so if you use `duration` for a specific timeline,
         you must only use `duration` for that timeline going forward.
 
-        The columnar equivalent to this function is [`rerun.TimeColumn`][].
+        The columnar equivalent to this function is [`simplant_lab.TimeColumn`][].
 
         Parameters
         ----------
@@ -983,7 +985,7 @@ class RecordingStream:
         This is the same as calling `disable_timeline` for all of the active timelines.
 
         Used for all subsequent logging on the same thread,
-        until the next call to [`rerun.RecordingStream.set_time`][].
+        until the next call to [`simplant_lab.RecordingStream.set_time`][].
         """
 
         bindings.reset_time(recording=self.to_native())
@@ -1000,7 +1002,7 @@ class RecordingStream:
         Log data to Rerun.
 
         This is the main entry point for logging data to rerun. It can be used to log anything
-        that implements the [`rerun.AsComponents`][] interface, or a collection of [`rerun.ComponentBatchLike`][] objects.
+        that implements the [`simplant_lab.AsComponents`][] interface, or a collection of [`simplant_lab.ComponentBatchLike`][] objects.
 
         When logging data, you must always provide an [entity_path](https://www.rerun.io/docs/concepts/logging-and-ingestion/entity-path)
         for identifying the data. Note that paths prefixed with "__" are considered reserved for use by the Rerun SDK
@@ -1008,7 +1010,7 @@ class RecordingStream:
         such as properties and warnings.
 
         The most common way to log is with one of the rerun archetypes, all of which implement
-        the [`rerun.AsComponents`][] interface.
+        the [`simplant_lab.AsComponents`][] interface.
 
         For example, to log a 3D point:
         ```py
@@ -1042,10 +1044,10 @@ class RecordingStream:
             See <https://www.rerun.io/docs/concepts/logging-and-ingestion/entity-path> for more on entity paths.
 
         entity:
-            Anything that implements the [`rerun.AsComponents`][] interface, usually an archetype.
+            Anything that implements the [`simplant_lab.AsComponents`][] interface, usually an archetype.
 
         *extra:
-            An arbitrary number of additional component bundles implementing the [`rerun.AsComponents`][]
+            An arbitrary number of additional component bundles implementing the [`simplant_lab.AsComponents`][]
             interface, that are logged to the same entity path.
 
         static:
@@ -1055,12 +1057,12 @@ class RecordingStream:
             any temporal data of the same type.
 
             Otherwise, the data will be timestamped automatically with `log_time` and `log_tick`.
-            Additional timelines set by [`rerun.RecordingStream.set_time`][] will also be included.
+            Additional timelines set by [`simplant_lab.RecordingStream.set_time`][] will also be included.
 
         strict:
             If True, raise exceptions on non-loggable data.
             If False, warn on non-loggable data.
-            if None, use the global default from [`rerun.strict_mode`][]
+            if None, use the global default from [`simplant_lab.strict_mode`][]
 
         """
 
@@ -1104,7 +1106,7 @@ class RecordingStream:
             any temporal data of the same type.
 
             Otherwise, the data will be timestamped automatically with `log_time` and `log_tick`.
-            Additional timelines set by [`rerun.RecordingStream.set_time`][] will also be included.
+            Additional timelines set by [`simplant_lab.RecordingStream.set_time`][] will also be included.
 
         """
 
@@ -1150,7 +1152,7 @@ class RecordingStream:
             any temporal data of the same type.
 
             Otherwise, the data will be timestamped automatically with `log_time` and `log_tick`.
-            Additional timelines set by [`rerun.RecordingStream.set_time`][] will also be included.
+            Additional timelines set by [`simplant_lab.RecordingStream.set_time`][] will also be included.
 
         """
 
@@ -1180,7 +1182,7 @@ class RecordingStream:
         data that shares the same index across the different columns will act as a single logical row,
         equivalent to a single call to `rr.log()`.
 
-        Note that this API ignores any stateful time set on the log stream via [`rerun.RecordingStream.set_time`][].
+        Note that this API ignores any stateful time set on the log stream via [`simplant_lab.RecordingStream.set_time`][].
         Furthermore, this will _not_ inject the default timelines `log_tick` and `log_time` timeline columns.
 
         Parameters
@@ -1191,16 +1193,16 @@ class RecordingStream:
             See <https://www.rerun.io/docs/concepts/logging-and-ingestion/entity-path> for more on entity paths.
         indexes:
             The time values of this batch of data. Each `TimeColumnLike` object represents a single column
-            of timestamps. Generally, you should use one of the provided class [`TimeColumn`][rerun.TimeColumn].
+            of timestamps. Generally, you should use one of the provided class [`TimeColumn`][simplant_lab.TimeColumn].
         columns:
             The columns of components to log. Each object represents a single column of data.
 
-            In order to send multiple components per time value, explicitly create a [`ComponentColumn`][rerun.ComponentColumn]
+            In order to send multiple components per time value, explicitly create a [`ComponentColumn`][simplant_lab.ComponentColumn]
             either by constructing it directly, or by calling the `.columns()` method on an `Archetype` type.
         strict:
             If True, raise exceptions on non-loggable data.
             If False, warn on non-loggable data.
-            If None, use the global default from [`rerun.strict_mode`][]
+            If None, use the global default from [`simplant_lab.strict_mode`][]
 
         """
 
@@ -1215,7 +1217,7 @@ class RecordingStream:
         """
         Send chunks to this recording stream. Blocks until every chunk has been queued.
 
-        See [`rerun.experimental.send_chunks`][].
+        See [`simplant_lab.experimental.send_chunks`][].
 
         !!! note
             For a `LazyChunkStream` and `LazyStore` inputs, this call triggers execution
@@ -1226,12 +1228,12 @@ class RecordingStream:
         chunks:
             One of:
 
-            - A single [`Chunk`][rerun.experimental.Chunk].
-            - A [`LazyChunkStream`][rerun.experimental.LazyChunkStream] — consume
+            - A single [`Chunk`][simplant_lab.experimental.Chunk].
+            - A [`LazyChunkStream`][simplant_lab.experimental.LazyChunkStream] — consume
               the stream and forward all chunks to this recording stream.
-            - A [`LazyStore`][rerun.experimental.LazyStore] — send all chunks to this
+            - A [`LazyStore`][simplant_lab.experimental.LazyStore] — send all chunks to this
               recording stream. This triggers loading all chunks from the source.
-            - A [`ChunkStore`][rerun.experimental.ChunkStore] — send all chunks to
+            - A [`ChunkStore`][simplant_lab.experimental.ChunkStore] — send all chunks to
               this recording stream (fast since all chunks are already loaded).
             - Any iterable of `Chunk` objects.
 
@@ -1323,9 +1325,9 @@ def get_data_recording(
     Parameters
     ----------
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     Returns
     -------

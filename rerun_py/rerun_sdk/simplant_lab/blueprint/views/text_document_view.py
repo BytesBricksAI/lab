@@ -24,7 +24,7 @@ if TYPE_CHECKING:
 
 class TextDocumentView(View):
     """
-    **View**: A view of a single text document, for use with [`archetypes.TextDocument`][rerun.archetypes.TextDocument].
+    **View**: A view of a single text document, for use with [`archetypes.TextDocument`][simplant_lab.archetypes.TextDocument].
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**
 
@@ -33,7 +33,7 @@ class TextDocumentView(View):
     ### Use a blueprint to show a text document.:
     ```python
     import simplant_lab as rr
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_text_document", spawn=True)
 
@@ -118,7 +118,7 @@ class TextDocumentView(View):
         contents:
             The contents of the view specified as a query expression.
             This is either a single expression, or a list of multiple expressions.
-            See [rerun.blueprint.archetypes.ViewContents][].
+            See [simplant_lab.blueprint.archetypes.ViewContents][].
         name:
             The display name of the view.
         visible:

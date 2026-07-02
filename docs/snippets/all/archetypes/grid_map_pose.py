@@ -3,10 +3,10 @@
 import math
 from pathlib import Path
 
+import rerun.blueprint as rrb
 from PIL import Image as PILImage
 
 import simplant_lab as rr
-import rerun.blueprint as rrb
 
 rr.init("rerun_example_grid_map_pose", spawn=True)
 

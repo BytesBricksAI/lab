@@ -32,8 +32,8 @@ class McapStatistics(Archetype):
     spanning the full recording duration. It is typically logged once per recording to provide
     an overview of the dataset's structure and content.
 
-    See also [`archetypes.McapChannel`][rerun.archetypes.McapChannel] for individual channel definitions,
-    [`archetypes.McapMessage`][rerun.archetypes.McapMessage] for message content, [`archetypes.McapSchema`][rerun.archetypes.McapSchema] for schema definitions,
+    See also [`archetypes.McapChannel`][simplant_lab.archetypes.McapChannel] for individual channel definitions,
+    [`archetypes.McapMessage`][simplant_lab.archetypes.McapMessage] for message content, [`archetypes.McapSchema`][simplant_lab.archetypes.McapSchema] for schema definitions,
     and the [MCAP specification](https://mcap.dev/) for complete format details.
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**

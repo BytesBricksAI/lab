@@ -5,8 +5,8 @@ from __future__ import annotations
 import threading
 from typing import TYPE_CHECKING
 
-import rerun as rr
-from rerun.experimental import RrdReader
+import simplant_lab as rr
+from simplant_lab.experimental import RrdReader
 
 if TYPE_CHECKING:
     from pathlib import Path

@@ -42,7 +42,7 @@ def _to_numpy(tensor: ImageLike) -> npt.NDArray[Any]:
 
 
 class Mesh3DExt:
-    """Extension for [Mesh3D][rerun.archetypes.Mesh3D]."""
+    """Extension for [Mesh3D][simplant_lab.archetypes.Mesh3D]."""
 
     def __init__(
         self: Any,

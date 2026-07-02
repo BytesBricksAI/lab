@@ -24,7 +24,7 @@ __all__ = ["VideoTimestamp", "VideoTimestampArrayLike", "VideoTimestampBatch", "
 @define(init=False)
 class VideoTimestamp:
     """
-    **Datatype**: Presentation timestamp within a [`archetypes.AssetVideo`][rerun.archetypes.AssetVideo].
+    **Datatype**: Presentation timestamp within a [`archetypes.AssetVideo`][simplant_lab.archetypes.AssetVideo].
 
     Specified in nanoseconds.
     Presentation timestamps are typically measured as time since video start.

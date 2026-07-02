@@ -7,9 +7,9 @@ from argparse import Namespace
 from uuid import uuid4
 
 import numpy as np
+import rerun.blueprint as rrb
 
 import simplant_lab as rr
-import rerun.blueprint as rrb
 
 README = """\
 # Parallelism, caching, reentrancy, etc

@@ -16,13 +16,13 @@ __all__ = ["IsKeyframe", "IsKeyframeBatch"]
 
 class IsKeyframe(datatypes.Bool, ComponentMixin):
     """
-    **Component**: Whether a [`components.VideoSample`][rerun.components.VideoSample] contains a keyframe (also known as a sync sample or IDR).
+    **Component**: Whether a [`components.VideoSample`][simplant_lab.components.VideoSample] contains a keyframe (also known as a sync sample or IDR).
 
     A keyframe in this sense must be _decoder re-entrant_: a decoder must be able to start
     decoding the stream from this sample alone, with no prior decoder state.
     Not every intra-coded frame qualifies. Some codecs have intra-only frames that may
     still reference existing decoder state and are therefore not valid sync points.
-    See [`components.VideoCodec`][rerun.components.VideoCodec] for the codec-specific definition of a keyframe.
+    See [`components.VideoCodec`][simplant_lab.components.VideoCodec] for the codec-specific definition of a keyframe.
     """
 
     _BATCH_TYPE = None

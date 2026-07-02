@@ -24,7 +24,7 @@ __all__ = ["AbsoluteTimeRange", "AbsoluteTimeRangeArrayLike", "AbsoluteTimeRange
 
 @define(init=False)
 class AbsoluteTimeRange(AbsoluteTimeRangeExt):
-    """**Datatype**: Two [`datatypes.TimeInt`][rerun.datatypes.TimeInt] describing a range of time."""
+    """**Datatype**: Two [`datatypes.TimeInt`][simplant_lab.datatypes.TimeInt] describing a range of time."""
 
     # __init__ can be found in absolute_time_range_ext.py
 

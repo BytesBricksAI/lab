@@ -21,7 +21,7 @@ __all__ = ["TensorBuffer", "TensorBufferArrayLike", "TensorBufferBatch", "Tensor
 @define
 class TensorBuffer(TensorBufferExt):
     """
-    **Datatype**: The underlying storage for [`archetypes.Tensor`][rerun.archetypes.Tensor].
+    **Datatype**: The underlying storage for [`archetypes.Tensor`][simplant_lab.archetypes.Tensor].
 
     Tensor elements are stored in a contiguous buffer of a single type.
     """

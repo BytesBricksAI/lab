@@ -5,7 +5,7 @@ import logging
 import uuid
 from typing import TYPE_CHECKING, Any
 
-from rerun import bindings
+import rerun_bindings as bindings
 
 from ._memory import memory_recording
 from .recording_stream import RecordingStream, get_application_id
@@ -83,15 +83,15 @@ def as_html(
         The height of the viewer in pixels.
     app_url:
         Alternative HTTP url to find the Rerun web viewer. This will default to using `https://app.rerun.io`
-        or localhost if [rerun.start_web_viewer_server][] has been called.
+        or localhost if [simplant_lab.start_web_viewer_server][] has been called.
     timeout_ms:
         The number of milliseconds to wait for the Rerun web viewer to load.
     blueprint:
         The blueprint to display in the viewer.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     """
 
@@ -144,7 +144,7 @@ def legacy_notebook_show(
     This is a legacy function that uses a limited mechanism of inlining an RRD into a self-contained
     HTML template that loads the viewer in an iframe.
 
-    In general, [rerun.notebook_show][] should be preferred. However, this function can be useful
+    In general, [simplant_lab.notebook_show][] should be preferred. However, this function can be useful
     in some systems with incomplete support for the `anywidget` library.
 
     Parameters
@@ -155,15 +155,15 @@ def legacy_notebook_show(
         The height of the viewer in pixels.
     app_url:
         Alternative HTTP url to find the Rerun web viewer. This will default to using `https://app.rerun.io`
-        or localhost if [rerun.start_web_viewer_server][] has been called.
+        or localhost if [simplant_lab.start_web_viewer_server][] has been called.
     timeout_ms:
         The number of milliseconds to wait for the Rerun web viewer to load.
     blueprint:
         The blueprint to display in the viewer.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     """
     html = as_html(

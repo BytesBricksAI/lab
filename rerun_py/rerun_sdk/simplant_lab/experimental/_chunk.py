@@ -7,10 +7,9 @@ if TYPE_CHECKING:
 
     import pyarrow as pa
 
-    from rerun import ComponentColumn
-    from simplant_lab._baseclasses import ComponentDescriptor
-    from simplant_lab._send_columns import TimeColumnLike
     from rerun_bindings import ChunkInternal
+    from simplant_lab._baseclasses import ComponentDescriptor
+    from simplant_lab._send_columns import ComponentColumn, TimeColumnLike
 
     from ._lens import Lens
     from ._selector import Selector
@@ -56,7 +55,7 @@ class Chunk:
         columns: Iterable[ComponentColumn],
     ) -> Chunk:
         """
-        Create a Chunk from columns, mirroring the [`rerun.send_columns`][] API.
+        Create a Chunk from columns, mirroring the [`simplant_lab.send_columns`][] API.
 
         A fresh chunk ID and sequential row IDs are auto-generated.
 
@@ -90,8 +89,8 @@ class Chunk:
         ```
 
         """
-        from simplant_lab._send_columns import build_column_args
         from rerun_bindings import ChunkInternal
+        from simplant_lab._send_columns import build_column_args
 
         timelines_args, columns_args = build_column_args(indexes, columns)
 
@@ -162,8 +161,8 @@ class Chunk:
         All other columns (timelines, other components) are preserved unchanged.
         The source component's existing descriptor is preserved.
 
-        For better performance, prefer [`MutateLens`][rerun.experimental.MutateLens]
-        with [`apply_lenses`][rerun.experimental.Chunk.apply_lenses]
+        For better performance, prefer [`MutateLens`][simplant_lab.experimental.MutateLens]
+        with [`apply_lenses`][simplant_lab.experimental.Chunk.apply_lenses]
         which processes multiple transformations in a single pass.
 
         Parameters
@@ -172,11 +171,11 @@ class Chunk:
             A `ComponentDescriptor` or component identifier string for the
             input column to transform.
         selector:
-            A [`Selector`][rerun.experimental.Selector] or selector query string to apply to the component.
+            A [`Selector`][simplant_lab.experimental.Selector] or selector query string to apply to the component.
 
         Returns
         -------
-        A new [`Chunk`][rerun.experimental.Chunk] with the component transformed.
+        A new [`Chunk`][simplant_lab.experimental.Chunk] with the component transformed.
 
         Raises
         ------
@@ -212,7 +211,7 @@ class Chunk:
         Parameters
         ----------
         lenses:
-            One or more [`Lens`][rerun.experimental.Lens] objects.
+            One or more [`Lens`][simplant_lab.experimental.Lens] objects.
 
         Returns
         -------

@@ -1,7 +1,8 @@
 """Use a blueprint to customize a graph view."""
 
-import simplant_lab as rr
 import rerun.blueprint as rrb
+
+import simplant_lab as rr
 
 rr.init("rerun_example_graph_view", spawn=True)
 

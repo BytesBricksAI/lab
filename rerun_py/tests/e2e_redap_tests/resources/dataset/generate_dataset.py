@@ -13,7 +13,7 @@ import typing
 from datetime import datetime, timedelta
 import numpy as np
 import random
-import rerun as rr
+import simplant_lab as rr
 
 
 _T = typing.TypeVar("_T")

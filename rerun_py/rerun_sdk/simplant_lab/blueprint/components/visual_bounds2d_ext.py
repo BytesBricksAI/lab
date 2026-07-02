@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 
 
 class VisualBounds2DExt:
-    """Extension for [VisualBounds2D][rerun.blueprint.components.VisualBounds2D]."""
+    """Extension for [VisualBounds2D][simplant_lab.blueprint.components.VisualBounds2D]."""
 
     def __init__(
         self: Any,

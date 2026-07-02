@@ -23,7 +23,7 @@ from enum import Enum
 
 class Eye3DKind(Enum):
     """
-    **Component**: The kind of the 3D eye to view a scene in a [`views.Spatial3DView`][rerun.blueprint.views.Spatial3DView].
+    **Component**: The kind of the 3D eye to view a scene in a [`views.Spatial3DView`][simplant_lab.blueprint.views.Spatial3DView].
 
     This is used to specify how the controls of the view react to user input (such as mouse gestures).
     """

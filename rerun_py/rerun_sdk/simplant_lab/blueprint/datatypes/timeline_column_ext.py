@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 
 
 class TimelineColumnExt:
-    """Extension for [TimelineColumn][rerun.blueprint.datatypes.TimelineColumn]."""
+    """Extension for [TimelineColumn][simplant_lab.blueprint.datatypes.TimelineColumn]."""
 
     def __init__(self: Any, timeline: datatypes.Utf8Like, *, visible: datatypes.BoolLike = True) -> None:
         """

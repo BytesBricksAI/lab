@@ -1,7 +1,8 @@
 """Log extra values with a `Points2D`."""
 
-import simplant_lab as rr
 import rerun.blueprint as rrb
+
+import simplant_lab as rr
 
 rr.init("rerun_example_extra_values", spawn=True)
 

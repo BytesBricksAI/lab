@@ -28,8 +28,8 @@ This example demonstrates how to:
 The key steps are:
 
 ```python
-import rerun as rr
-import rerun.urdf import UrdfTree
+import simplant_lab as rr
+from simplant_lab.urdf import UrdfTree
 
 # Log the URDF file once, as a static resource
 rec.log_file_from_path(urdf_path, static=True)

@@ -30,9 +30,9 @@ class FillMode(Enum):
 
     Examples of what this means:
 
-    * An [`archetypes.Ellipsoids3D`][rerun.archetypes.Ellipsoids3D] will draw three axis-aligned ellipses that are cross-sections
+    * An [`archetypes.Ellipsoids3D`][simplant_lab.archetypes.Ellipsoids3D] will draw three axis-aligned ellipses that are cross-sections
       of each ellipsoid, each of which displays two out of three of the sizes of the ellipsoid.
-    * For [`archetypes.Boxes3D`][rerun.archetypes.Boxes3D], it is the edges of the box, identical to [`components.FillMode.DenseWireframe`][rerun.components.FillMode.DenseWireframe].
+    * For [`archetypes.Boxes3D`][simplant_lab.archetypes.Boxes3D], it is the edges of the box, identical to [`components.FillMode.DenseWireframe`][simplant_lab.components.FillMode.DenseWireframe].
     """
 
     DenseWireframe = 2
@@ -41,9 +41,9 @@ class FillMode(Enum):
 
     Examples of what this means:
 
-    * An [`archetypes.Ellipsoids3D`][rerun.archetypes.Ellipsoids3D] will draw a wireframe triangle mesh that approximates each
+    * An [`archetypes.Ellipsoids3D`][simplant_lab.archetypes.Ellipsoids3D] will draw a wireframe triangle mesh that approximates each
       ellipsoid.
-    * For [`archetypes.Boxes3D`][rerun.archetypes.Boxes3D], it is the edges of the box, identical to [`components.FillMode.MajorWireframe`][rerun.components.FillMode.MajorWireframe].
+    * For [`archetypes.Boxes3D`][simplant_lab.archetypes.Boxes3D], it is the edges of the box, identical to [`components.FillMode.MajorWireframe`][simplant_lab.components.FillMode.MajorWireframe].
     """
 
     Solid = 3

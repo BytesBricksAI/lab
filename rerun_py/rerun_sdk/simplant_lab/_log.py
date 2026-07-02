@@ -29,7 +29,7 @@ def log(
     Log data to Rerun.
 
     This is the main entry point for logging data to rerun. It can be used to log anything
-    that implements the [`rerun.AsComponents`][] interface, or a collection of `ComponentBatchLike`
+    that implements the [`simplant_lab.AsComponents`][] interface, or a collection of `ComponentBatchLike`
     objects.
 
     When logging data, you must always provide an [entity_path](https://www.rerun.io/docs/concepts/logging-and-ingestion/entity-path)
@@ -72,11 +72,11 @@ def log(
         See <https://www.rerun.io/docs/concepts/logging-and-ingestion/entity-path> for more on entity paths.
 
     entity:
-        Anything that implements the [`rerun.AsComponents`][] interface, usually an archetype,
+        Anything that implements the [`simplant_lab.AsComponents`][] interface, usually an archetype,
         or an iterable of (described)component batches.
 
     *extra:
-        An arbitrary number of additional component bundles implementing the [`rerun.AsComponents`][]
+        An arbitrary number of additional component bundles implementing the [`simplant_lab.AsComponents`][]
         interface, that are logged to the same entity path.
 
     static:
@@ -86,17 +86,17 @@ def log(
         any temporal data of the same type.
 
         Otherwise, the data will be timestamped automatically with `log_time` and `log_tick`.
-        Additional timelines set by [`rerun.set_time`][] will also be included.
+        Additional timelines set by [`simplant_lab.set_time`][] will also be included.
 
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     strict:
         If True, raise exceptions on non-loggable data.
         If False, warn on non-loggable data.
-        if None, use the global default from `rerun.strict_mode()`
+        if None, use the global default from `simplant_lab.strict_mode()`
 
     """
 
@@ -146,7 +146,7 @@ def _log_components(
     r"""
     Internal method to log an entity from a collection of `ComponentBatchLike` objects.
 
-    See also: [`rerun.log`][].
+    See also: [`simplant_lab.log`][].
 
     Parameters
     ----------
@@ -171,12 +171,12 @@ def _log_components(
         any temporal data of the same type.
 
         Otherwise, the data will be timestamped automatically with `log_time` and `log_tick`.
-        Additional timelines set by [`rerun.set_time`][] will also be included.
+        Additional timelines set by [`simplant_lab.set_time`][] will also be included.
 
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use. If left unspecified,
+        Specifies the [`simplant_lab.RecordingStream`][] to use. If left unspecified,
         defaults to the current active data recording, if there is one. See
-        also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     """
 
@@ -251,12 +251,12 @@ def log_file_from_path(
         any temporal data of the same type.
 
         Otherwise, the data will be timestamped automatically with `log_time` and `log_tick`.
-        Additional timelines set by [`rerun.set_time`][] will also be included.
+        Additional timelines set by [`simplant_lab.set_time`][] will also be included.
 
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use. If left unspecified,
+        Specifies the [`simplant_lab.RecordingStream`][] to use. If left unspecified,
         defaults to the current active data recording, if there is one. See
-        also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     """
     bindings.log_file_from_path(
@@ -305,12 +305,12 @@ def log_file_from_contents(
         any temporal data of the same type.
 
         Otherwise, the data will be timestamped automatically with `log_time` and `log_tick`.
-        Additional timelines set by [`rerun.set_time`][] will also be included.
+        Additional timelines set by [`simplant_lab.set_time`][] will also be included.
 
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use. If left unspecified,
+        Specifies the [`simplant_lab.RecordingStream`][] to use. If left unspecified,
         defaults to the current active data recording, if there is one. See
-        also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     """
 

@@ -16,7 +16,7 @@ def next_offset(acc: int, arr: Sized) -> int:
 
 
 class GeoLineStringExt:
-    """Extension for [GeoLineString][rerun.components.GeoLineString]."""
+    """Extension for [GeoLineString][simplant_lab.components.GeoLineString]."""
 
     # TODO(ab): the only purpose of this override is to make the `lat_lon` arg kw-only. Should be codegen-able?
     def __init__(self: Any, *, lat_lon: GeoLineStringLike) -> None:

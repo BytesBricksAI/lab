@@ -44,7 +44,7 @@ def _to_numpy(tensor: TensorLike) -> npt.NDArray[Any]:
 
 
 class TensorDataExt:
-    """Extension for [TensorData][rerun.datatypes.TensorData]."""
+    """Extension for [TensorData][simplant_lab.datatypes.TensorData]."""
 
     # TODO(jleibs): Should also provide custom converters for shape / buffer
     # assignment that prevent the user from putting the TensorData into an

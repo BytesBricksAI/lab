@@ -23,9 +23,9 @@ from enum import Enum
 
 class ColorModel(ColorModelExt, Enum):
     """
-    **Datatype**: Specified what color components are present in an [`archetypes.Image`][rerun.archetypes.Image].
+    **Datatype**: Specified what color components are present in an [`archetypes.Image`][simplant_lab.archetypes.Image].
 
-    This combined with [`datatypes.ChannelDatatype`][rerun.datatypes.ChannelDatatype] determines the pixel format of an image.
+    This combined with [`datatypes.ChannelDatatype`][simplant_lab.datatypes.ChannelDatatype] determines the pixel format of an image.
     """
 
     L = 1

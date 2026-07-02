@@ -12,7 +12,7 @@ import numpy as np
 import numpy.typing as npt
 import pyarrow as pa
 from attrs import define, field
-from rerun._baseclasses import (
+from simplant_lab._baseclasses import (
     BaseBatch,
 )
 

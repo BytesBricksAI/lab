@@ -5,8 +5,8 @@ from typing import Any
 import numpy as np
 import pyarrow as pa
 import pytest
-import rerun as rr
-from rerun.error_utils import RerunWarning
+import simplant_lab as rr
+from simplant_lab.error_utils import RerunWarning
 
 
 def test_any_value() -> None:

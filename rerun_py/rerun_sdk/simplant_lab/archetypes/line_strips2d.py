@@ -36,7 +36,7 @@ class LineStrips2D(Archetype, VisualizableArchetype):
     ### `line_strips2d_batch`:
     ```python
     import simplant_lab as rr
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_line_strip2d_batch", spawn=True)
 
@@ -73,7 +73,7 @@ class LineStrips2D(Archetype, VisualizableArchetype):
     ### Lines with scene & UI radius each:
     ```python
     import simplant_lab as rr
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_line_strip2d_ui_radius", spawn=True)
 
@@ -155,9 +155,9 @@ class LineStrips2D(Archetype, VisualizableArchetype):
             Objects with higher values are drawn on top of those with lower values.
             Defaults to `20.0`.
         class_ids:
-            Optional [`components.ClassId`][rerun.components.ClassId]s for the lines.
+            Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the lines.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -236,9 +236,9 @@ class LineStrips2D(Archetype, VisualizableArchetype):
             Objects with higher values are drawn on top of those with lower values.
             Defaults to `20.0`.
         class_ids:
-            Optional [`components.ClassId`][rerun.components.ClassId]s for the lines.
+            Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the lines.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -368,9 +368,9 @@ class LineStrips2D(Archetype, VisualizableArchetype):
             Objects with higher values are drawn on top of those with lower values.
             Defaults to `20.0`.
         class_ids:
-            Optional [`components.ClassId`][rerun.components.ClassId]s for the lines.
+            Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the lines.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -500,9 +500,9 @@ class LineStrips2D(Archetype, VisualizableArchetype):
         default=None,
         converter=components.ClassIdBatch._converter,  # type: ignore[misc]
     )
-    # Optional [`components.ClassId`][rerun.components.ClassId]s for the lines.
+    # Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the lines.
     #
-    # The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+    # The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 

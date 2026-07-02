@@ -36,7 +36,7 @@ class DescribedComponentBatch:
         """
         Returns a `pyarrow.Array` of the component data.
 
-        Part of the [`rerun.ComponentBatchLike`][] logging interface.
+        Part of the [`simplant_lab.ComponentBatchLike`][] logging interface.
         """
         return self._batch.as_arrow_array()
 
@@ -124,7 +124,7 @@ class Archetype(AsComponents):
     @classmethod
     def archetype(cls) -> str:
         # Make sure to not include a leading "rerun_sdk.",
-        # to support both `import rerun_sdk.rerun` and `import rerun`.
+        # to support both `import simplant_lab` and the deprecated `import rerun` shim.
         module = cls.__module__.removeprefix("rerun_sdk.")
         return ".".join([*module.rsplit(".", 1)[:-1], cls.__name__])
 
@@ -179,7 +179,7 @@ class BaseBatch(Generic[T]):
             The data to convert into an Arrow array.
         strict:
             Whether to raise an exception if the data cannot be converted into an Arrow array. If None, the value
-            defaults to the value of the `rerun.strict` global setting.
+            defaults to the value of the `simplant_lab.strict` global setting.
 
         Returns
         -------
@@ -265,7 +265,7 @@ class BaseBatch(Generic[T]):
         """
         The component as an arrow batch.
 
-        Part of the [`rerun.ComponentBatchLike`][] logging interface.
+        Part of the [`simplant_lab.ComponentBatchLike`][] logging interface.
         """
         return self.pa_array
 
@@ -276,7 +276,7 @@ class ComponentColumn:
 
     This is represented by a ComponentBatch array that has been partitioned into multiple segments.
     This is useful for reinterpreting a single contiguous batch as multiple sub-batches
-    to use with the [`send_columns`][rerun.send_columns] API.
+    to use with the [`send_columns`][simplant_lab.send_columns] API.
     """
 
     @overload
@@ -372,7 +372,7 @@ class ComponentColumn:
         """
         Returns the complete descriptor of the component.
 
-        Part of the [`rerun.ComponentBatchLike`][] logging interface.
+        Part of the [`simplant_lab.ComponentBatchLike`][] logging interface.
         """
         return self.descriptor
 
@@ -380,7 +380,7 @@ class ComponentColumn:
         """
         The component as an arrow batch.
 
-        Part of the [`rerun.ComponentBatchLike`][] logging interface.
+        Part of the [`simplant_lab.ComponentBatchLike`][] logging interface.
         """
         array = self.component_batch.as_arrow_array()
         return pa.ListArray.from_arrays(self._offsets, array)
@@ -409,7 +409,7 @@ class ComponentColumn:
 
 class ComponentColumnList(Iterable[ComponentColumn]):
     """
-    A collection of [`ComponentColumn`][rerun.ComponentColumn]s.
+    A collection of [`ComponentColumn`][simplant_lab.ComponentColumn]s.
 
     Useful to partition and log multiple columns at once.
     """
@@ -452,7 +452,7 @@ class ComponentBatchMixin(ComponentBatchLike):
         """
         Returns the name of the component.
 
-        Part of the [`rerun.ComponentBatchLike`][] logging interface.
+        Part of the [`simplant_lab.ComponentBatchLike`][] logging interface.
         """
         return self._COMPONENT_TYPE  # type: ignore[attr-defined, no-any-return]
 
@@ -498,7 +498,7 @@ class ComponentMixin(ComponentBatchLike):
         """
         The pyarrow type of this batch.
 
-        Part of the [`rerun.ComponentBatchLike`][] logging interface.
+        Part of the [`simplant_lab.ComponentBatchLike`][] logging interface.
         """
         return cls._BATCH_TYPE._ARROW_DATATYPE  # type: ignore[attr-defined]
 
@@ -507,7 +507,7 @@ class ComponentMixin(ComponentBatchLike):
         """
         Returns the name of the component.
 
-        Part of the [`rerun.ComponentBatchLike`][] logging interface.
+        Part of the [`simplant_lab.ComponentBatchLike`][] logging interface.
         """
         return cls._BATCH_TYPE._COMPONENT_TYPE  # type: ignore[attr-defined, no-any-return]
 
@@ -515,7 +515,7 @@ class ComponentMixin(ComponentBatchLike):
         """
         The component as an arrow batch.
 
-        Part of the [`rerun.ComponentBatchLike`][] logging interface.
+        Part of the [`simplant_lab.ComponentBatchLike`][] logging interface.
         """
         return self._BATCH_TYPE([self]).as_arrow_array()  # type: ignore[attr-defined]
 

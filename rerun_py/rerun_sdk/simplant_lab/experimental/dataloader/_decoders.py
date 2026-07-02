@@ -35,9 +35,9 @@ class ColumnDecoder(ABC):
     Base class for column decoders.
 
     Subclasses convert raw Arrow data into tensors. Stateless decoders
-    (images, scalars) only need to implement [`decode`][rerun.experimental.dataloader.ColumnDecoder.decode].
+    (images, scalars) only need to implement [`decode`][simplant_lab.experimental.dataloader.ColumnDecoder.decode].
     Context-aware decoders (compressed video) should also override
-    [`context_range`][rerun.experimental.dataloader.ColumnDecoder.context_range] so the prefetcher fetches surrounding data.
+    [`context_range`][simplant_lab.experimental.dataloader.ColumnDecoder.context_range] so the prefetcher fetches surrounding data.
     """
 
     @abstractmethod

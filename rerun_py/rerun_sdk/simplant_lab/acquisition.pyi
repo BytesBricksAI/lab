@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from . import modbus as modbus
-from . import replay as replay
+from . import modbus as modbus, replay as replay
 from .asset_model import AssetCatalog
 from .kernel import TagId
 from .recording import RerunRecorder

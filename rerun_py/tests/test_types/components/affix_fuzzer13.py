@@ -10,7 +10,7 @@ from typing import Any
 
 import pyarrow as pa
 from attrs import define, field
-from rerun._baseclasses import (
+from simplant_lab._baseclasses import (
     BaseBatch,
     ComponentBatchMixin,
     ComponentMixin,

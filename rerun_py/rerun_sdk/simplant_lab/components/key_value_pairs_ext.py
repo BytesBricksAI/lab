@@ -14,7 +14,7 @@ from ..datatypes.utf8pair_ext import _utf8_pair_converter
 
 
 class KeyValuePairsExt:
-    """Extension for [KeyValuePairs][rerun.components.KeyValuePairs]."""
+    """Extension for [KeyValuePairs][simplant_lab.components.KeyValuePairs]."""
 
     @staticmethod
     def pairs__field_converter_override(data: Sequence[Utf8PairLike]) -> list[Utf8PairLike]:

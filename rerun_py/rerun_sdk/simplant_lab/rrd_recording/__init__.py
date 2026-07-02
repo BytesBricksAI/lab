@@ -18,7 +18,7 @@ __all__ = ["RRDArchive", "Recording", "load_archive", "load_recording"]
 
 
 @deprecated(
-    "load_recording is deprecated since 0.32. Use rerun.experimental.RrdReader(path).store() instead.",
+    "load_recording is deprecated since 0.32. Use simplant_lab.experimental.RrdReader(path).store() instead.",
 )
 def load_recording(path_to_rrd: str | Path) -> Recording:  # ty:ignore[deprecated]
     """
@@ -41,7 +41,7 @@ def load_recording(path_to_rrd: str | Path) -> Recording:  # ty:ignore[deprecate
 
 
 @deprecated(
-    "load_archive is deprecated since 0.32. Use rerun.experimental.RrdReader(path) instead.",
+    "load_archive is deprecated since 0.32. Use simplant_lab.experimental.RrdReader(path) instead.",
 )
 def load_archive(path_to_rrd: str | Path) -> RRDArchive:  # ty:ignore[deprecated]
     """

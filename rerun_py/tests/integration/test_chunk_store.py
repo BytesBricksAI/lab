@@ -6,9 +6,9 @@ import pathlib
 from typing import TYPE_CHECKING
 
 import pytest
-import rerun as rr
+import simplant_lab as rr
 from inline_snapshot import snapshot as inline_snapshot
-from rerun.experimental import (
+from simplant_lab.experimental import (
     ChunkStore,
     LazyChunkStream,
     OptimizationProfile,

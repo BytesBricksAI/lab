@@ -112,7 +112,7 @@ class GeoPoints(GeoPointsExt, Archetype, VisualizableArchetype):
         class_ids:
             Optional class Ids for the points.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors if not specified explicitly.
 
         """
 
@@ -204,7 +204,7 @@ class GeoPoints(GeoPointsExt, Archetype, VisualizableArchetype):
         class_ids:
             Optional class Ids for the points.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors if not specified explicitly.
 
         """
 
@@ -299,7 +299,7 @@ class GeoPoints(GeoPointsExt, Archetype, VisualizableArchetype):
     )
     # Optional class Ids for the points.
     #
-    # The [`components.ClassId`][rerun.components.ClassId] provides colors if not specified explicitly.
+    # The [`components.ClassId`][simplant_lab.components.ClassId] provides colors if not specified explicitly.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 

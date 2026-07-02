@@ -5,13 +5,13 @@ from typing import Any, cast
 
 import numpy as np
 import pytest
-import rerun as rr
+import simplant_lab as rr
 import torch
-from rerun.components import (
+from simplant_lab.components import (
     GeoLineStringArrayLike,
     GeoLineStringBatch,
 )
-from rerun.datatypes import DVec2D, Float32ArrayLike, Rgba32ArrayLike
+from simplant_lab.datatypes import DVec2D, Float32ArrayLike, Rgba32ArrayLike
 
 from .common_arrays import (
     colors_arrays,

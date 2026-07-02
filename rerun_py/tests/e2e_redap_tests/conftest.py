@@ -15,14 +15,14 @@ from typing import TYPE_CHECKING
 
 import pyarrow as pa
 import pytest
-from rerun.catalog import CatalogClient, TableEntry
-from rerun.server import Server
+from simplant_lab.catalog import CatalogClient, TableEntry
+from simplant_lab.server import Server
 from syrupy.extensions.amber import AmberSnapshotExtension
 
 if TYPE_CHECKING:
     from collections.abc import Generator
 
-    from rerun.catalog import DatasetEntry
+    from simplant_lab.catalog import DatasetEntry
     from syrupy import SnapshotAssertion
 
 # Marker expressions for test profiles. Each profile defines a `-m`-style expression

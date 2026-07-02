@@ -15,7 +15,7 @@ NUMPY_VERSION = tuple(map(int, np.version.version.split(".")[:2]))
 
 
 class UuidExt:
-    """Extension for [Uuid][rerun.datatypes.Uuid]."""
+    """Extension for [Uuid][simplant_lab.datatypes.Uuid]."""
 
     @staticmethod
     def native_to_pa_array_override(data: UuidArrayLike, data_type: pa.DataType) -> pa.Array:

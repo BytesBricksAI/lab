@@ -6,13 +6,13 @@ from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
     from collections.abc import Iterator, Sequence
 
-    from simplant_lab._baseclasses import Archetype
     from rerun_bindings import (
         ComponentColumnDescriptor,
         ComponentColumnSelector,
         IndexColumnDescriptor,
         SchemaInternal,
     )
+    from simplant_lab._baseclasses import Archetype
 
 
 class Schema:

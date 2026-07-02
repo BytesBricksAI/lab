@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 
 class AssetVideoExt:
-    """Extension for [AssetVideo][rerun.archetypes.AssetVideo]."""
+    """Extension for [AssetVideo][simplant_lab.archetypes.AssetVideo]."""
 
     def __init__(
         self: Any,

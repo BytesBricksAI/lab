@@ -5,10 +5,10 @@ from typing import TYPE_CHECKING, Any, cast
 
 import numpy as np
 import pytest
-import rerun as rr
+import simplant_lab as rr
 import torch
-from rerun.components.line_strip3d import LineStrip3DArrayLike, LineStrip3DBatch
-from rerun.datatypes import Float32ArrayLike, Vec3D
+from simplant_lab.components.line_strip3d import LineStrip3DArrayLike, LineStrip3DBatch
+from simplant_lab.datatypes import Float32ArrayLike, Vec3D
 
 from .common_arrays import (
     class_ids_arrays,
@@ -23,9 +23,9 @@ from .common_arrays import (
 )
 
 if TYPE_CHECKING:
-    from rerun.datatypes.class_id import ClassIdArrayLike
-    from rerun.datatypes.rgba32 import Rgba32ArrayLike
-    from rerun.datatypes.utf8 import Utf8ArrayLike
+    from simplant_lab.datatypes.class_id import ClassIdArrayLike
+    from simplant_lab.datatypes.rgba32 import Rgba32ArrayLike
+    from simplant_lab.datatypes.utf8 import Utf8ArrayLike
 
 # fmt: off
 strips_arrays: list[LineStrip3DArrayLike] = [

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pyarrow as pa
 import pytest
-from rerun.server import Server
+from simplant_lab.server import Server
 
 RESOURCES_DIR = Path(__file__).parent.parent / "e2e_redap_tests" / "resources"
 DATASET_DIR = RESOURCES_DIR / "dataset"

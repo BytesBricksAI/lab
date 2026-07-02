@@ -72,7 +72,7 @@ def _to_numpy(tensor: ImageLike) -> npt.NDArray[Any]:
 
 
 class ImageExt:
-    """Extension for [Image][rerun.archetypes.Image]."""
+    """Extension for [Image][simplant_lab.archetypes.Image]."""
 
     def __init__(
         self: Any,

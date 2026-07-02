@@ -3,7 +3,7 @@
 # Pixi (pixi.toml) manages build tools, while uv uses this file to manage
 # Python runtime dependencies in a .venv directory. The two work together:
 #
-#   pixi run py-build    # Uses maturin to build rerun-sdk into .venv
+#   pixi run py-build    # Uses maturin to build simplant-lab-sdk into .venv
 #   pixi run uv run …  # Runs Python scripts using .venv
 #
 # Workspace members (rerun_py, rerun_notebook, examples) are defined in
@@ -17,11 +17,11 @@ requires-python = ">=3.10,<3.13"
 
 [dependency-groups]
 dev = [
-  # NOTE: we leave `rerun-sdk` and `rerun-notebook` out of the basic dev dependency list.
+  # NOTE: we leave `simplant-lab-sdk` and `rerun-notebook` out of the basic dev dependency list.
   # This is because they can be slow to build in a clean environment and it's useful to
   # be able to run tools like linting, etc. without having built all the bindings.
   #
-  # This fixup package installs a .pth file that makes `import rerun` work
+  # This fixup package installs a .pth file that makes `import simplant_lab` work
   # with editable installs by adding rerun_py/rerun_sdk to the Python path.
   "rerun-dev-fixup",
   "opentelemetry-exporter-otlp-proto-grpc==1.39.0",
@@ -40,7 +40,7 @@ dev = [
   "colorama>=0.4",
   "types-colorama>=0.4.15",
   "Pillow>=12.2.0,<13", # has py.typed, no stubs needed
-  "types-psutil>=7.0", # Stubs for `psutil`, used by `rerun.tracing_session()`.
+  "types-psutil>=7.0", # Stubs for `psutil`, used by `simplant_lab.tracing_session()`.
   # Typed packages needed for linting scripts/examples
   "attrs>=23.1.0",
   "semver>=3.0,<3.1",
@@ -77,7 +77,7 @@ dev = [
   "tabulate>=0.9.0",
   "types-tabulate>=0.9.0",
 ]
-snippets = ["rerun-sdk[dataloader]", "av", "pandas", "mcap-protobuf-support"]
+snippets = ["simplant-lab-sdk[dataloader]", "av", "pandas", "mcap-protobuf-support"]
 examples = [
   # External deps used by examples
   "polars>=0.12.0",
@@ -158,13 +158,12 @@ docs = [
 [tool.uv]
 package = false
 
-# Override lerobot's dependency on rerun-sdk to use the workspace version
+# Override lerobot's dependency on simplant-lab-sdk to use the workspace version
 # TODO(RR-3548): Figure out how to have lerobot as a workspace member without causing dependency issues.
-# override-dependencies = ["rerun-sdk"]
+# override-dependencies = ["simplant-lab-sdk"]
 
 [tool.uv.sources]
 simplant-lab-sdk = { workspace = true }
-rerun-sdk = { workspace = true }
 rerun-notebook = { workspace = true }
 rerun-dev-fixup = { path = "rerun_py/rerun_dev_fixup", editable = false }
 # Example packages
@@ -205,7 +204,7 @@ open_photogrammetry_format = { workspace = true }
 openstreetmap_data = { workspace = true }
 # TODO(RR-3548): Figure out a way to include this, without lerobot causing dependency issues.
 # rerun_export = { workspace = true }
-# dataloader = { workspace = true }  # Excluded: same RR-3548 reason (lerobot pins old rerun-sdk).
+# dataloader = { workspace = true }  # Excluded: same RR-3548 reason (lerobot pins old simplant-lab-sdk).
 plots = { workspace = true }
 raw_mesh = { workspace = true }
 rgbd = { workspace = true }

@@ -77,7 +77,7 @@ class GridMap(Archetype):
     from PIL import Image as PILImage
 
     import simplant_lab as rr
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_grid_map_pose", spawn=True)
 
@@ -174,22 +174,22 @@ class GridMap(Archetype):
         translation:
             Translation of the lower-left corner of the grid map in space.
 
-            Together with [`components.RotationAxisAngle`][rerun.components.RotationAxisAngle] or [`components.RotationQuat`][rerun.components.RotationQuat], this defines the pose of the
+            Together with [`components.RotationAxisAngle`][simplant_lab.components.RotationAxisAngle] or [`components.RotationQuat`][simplant_lab.components.RotationQuat], this defines the pose of the
             lower-left image corner relative to the map's parent coordinate frame.
 
             If not set, the lower-left image corner is placed at origin of the map's parent coordinate frame.
         rotation_axis_angle:
             Rotation of the lower-left corner of the grid map in space via axis + angle.
 
-            Together with [`components.Translation3D`][rerun.components.Translation3D], this defines the pose of the
+            Together with [`components.Translation3D`][simplant_lab.components.Translation3D], this defines the pose of the
             lower-left image corner relative to the map's parent coordinate frame.
 
-            Note: either this or [`components.RotationQuat`][rerun.components.RotationQuat] can be set to specify the grid map's rotation, but not both.
-            If both this and [`components.RotationQuat`][rerun.components.RotationQuat] are set, this is ignored in favor of the quaternion.
+            Note: either this or [`components.RotationQuat`][simplant_lab.components.RotationQuat] can be set to specify the grid map's rotation, but not both.
+            If both this and [`components.RotationQuat`][simplant_lab.components.RotationQuat] are set, this is ignored in favor of the quaternion.
         quaternion:
             Rotation of the lower-left corner of the grid map in space via quaternion.
 
-            Together with [`components.Translation3D`][rerun.components.Translation3D], this defines the pose of the
+            Together with [`components.Translation3D`][simplant_lab.components.Translation3D], this defines the pose of the
             lower-left image corner relative to the map's parent coordinate frame.
         opacity:
             Opacity of the grid map texture after all image decoding and colormap application.
@@ -202,7 +202,7 @@ class GridMap(Archetype):
         colormap:
             Colormap to use for rendering single-channel grid maps.
 
-            If not set, the grid map is shown using the underlying [`components.ImageFormat`][rerun.components.ImageFormat]
+            If not set, the grid map is shown using the underlying [`components.ImageFormat`][simplant_lab.components.ImageFormat]
             interpretation.
 
         """
@@ -275,22 +275,22 @@ class GridMap(Archetype):
         translation:
             Translation of the lower-left corner of the grid map in space.
 
-            Together with [`components.RotationAxisAngle`][rerun.components.RotationAxisAngle] or [`components.RotationQuat`][rerun.components.RotationQuat], this defines the pose of the
+            Together with [`components.RotationAxisAngle`][simplant_lab.components.RotationAxisAngle] or [`components.RotationQuat`][simplant_lab.components.RotationQuat], this defines the pose of the
             lower-left image corner relative to the map's parent coordinate frame.
 
             If not set, the lower-left image corner is placed at origin of the map's parent coordinate frame.
         rotation_axis_angle:
             Rotation of the lower-left corner of the grid map in space via axis + angle.
 
-            Together with [`components.Translation3D`][rerun.components.Translation3D], this defines the pose of the
+            Together with [`components.Translation3D`][simplant_lab.components.Translation3D], this defines the pose of the
             lower-left image corner relative to the map's parent coordinate frame.
 
-            Note: either this or [`components.RotationQuat`][rerun.components.RotationQuat] can be set to specify the grid map's rotation, but not both.
-            If both this and [`components.RotationQuat`][rerun.components.RotationQuat] are set, this is ignored in favor of the quaternion.
+            Note: either this or [`components.RotationQuat`][simplant_lab.components.RotationQuat] can be set to specify the grid map's rotation, but not both.
+            If both this and [`components.RotationQuat`][simplant_lab.components.RotationQuat] are set, this is ignored in favor of the quaternion.
         quaternion:
             Rotation of the lower-left corner of the grid map in space via quaternion.
 
-            Together with [`components.Translation3D`][rerun.components.Translation3D], this defines the pose of the
+            Together with [`components.Translation3D`][simplant_lab.components.Translation3D], this defines the pose of the
             lower-left image corner relative to the map's parent coordinate frame.
         opacity:
             Opacity of the grid map texture after all image decoding and colormap application.
@@ -303,7 +303,7 @@ class GridMap(Archetype):
         colormap:
             Colormap to use for rendering single-channel grid maps.
 
-            If not set, the grid map is shown using the underlying [`components.ImageFormat`][rerun.components.ImageFormat]
+            If not set, the grid map is shown using the underlying [`components.ImageFormat`][simplant_lab.components.ImageFormat]
             interpretation.
 
         """
@@ -441,22 +441,22 @@ class GridMap(Archetype):
         translation:
             Translation of the lower-left corner of the grid map in space.
 
-            Together with [`components.RotationAxisAngle`][rerun.components.RotationAxisAngle] or [`components.RotationQuat`][rerun.components.RotationQuat], this defines the pose of the
+            Together with [`components.RotationAxisAngle`][simplant_lab.components.RotationAxisAngle] or [`components.RotationQuat`][simplant_lab.components.RotationQuat], this defines the pose of the
             lower-left image corner relative to the map's parent coordinate frame.
 
             If not set, the lower-left image corner is placed at origin of the map's parent coordinate frame.
         rotation_axis_angle:
             Rotation of the lower-left corner of the grid map in space via axis + angle.
 
-            Together with [`components.Translation3D`][rerun.components.Translation3D], this defines the pose of the
+            Together with [`components.Translation3D`][simplant_lab.components.Translation3D], this defines the pose of the
             lower-left image corner relative to the map's parent coordinate frame.
 
-            Note: either this or [`components.RotationQuat`][rerun.components.RotationQuat] can be set to specify the grid map's rotation, but not both.
-            If both this and [`components.RotationQuat`][rerun.components.RotationQuat] are set, this is ignored in favor of the quaternion.
+            Note: either this or [`components.RotationQuat`][simplant_lab.components.RotationQuat] can be set to specify the grid map's rotation, but not both.
+            If both this and [`components.RotationQuat`][simplant_lab.components.RotationQuat] are set, this is ignored in favor of the quaternion.
         quaternion:
             Rotation of the lower-left corner of the grid map in space via quaternion.
 
-            Together with [`components.Translation3D`][rerun.components.Translation3D], this defines the pose of the
+            Together with [`components.Translation3D`][simplant_lab.components.Translation3D], this defines the pose of the
             lower-left image corner relative to the map's parent coordinate frame.
         opacity:
             Opacity of the grid map texture after all image decoding and colormap application.
@@ -469,7 +469,7 @@ class GridMap(Archetype):
         colormap:
             Colormap to use for rendering single-channel grid maps.
 
-            If not set, the grid map is shown using the underlying [`components.ImageFormat`][rerun.components.ImageFormat]
+            If not set, the grid map is shown using the underlying [`components.ImageFormat`][simplant_lab.components.ImageFormat]
             interpretation.
 
         """
@@ -570,7 +570,7 @@ class GridMap(Archetype):
     )
     # Translation of the lower-left corner of the grid map in space.
     #
-    # Together with [`components.RotationAxisAngle`][rerun.components.RotationAxisAngle] or [`components.RotationQuat`][rerun.components.RotationQuat], this defines the pose of the
+    # Together with [`components.RotationAxisAngle`][simplant_lab.components.RotationAxisAngle] or [`components.RotationQuat`][simplant_lab.components.RotationQuat], this defines the pose of the
     # lower-left image corner relative to the map's parent coordinate frame.
     #
     # If not set, the lower-left image corner is placed at origin of the map's parent coordinate frame.
@@ -584,11 +584,11 @@ class GridMap(Archetype):
     )
     # Rotation of the lower-left corner of the grid map in space via axis + angle.
     #
-    # Together with [`components.Translation3D`][rerun.components.Translation3D], this defines the pose of the
+    # Together with [`components.Translation3D`][simplant_lab.components.Translation3D], this defines the pose of the
     # lower-left image corner relative to the map's parent coordinate frame.
     #
-    # Note: either this or [`components.RotationQuat`][rerun.components.RotationQuat] can be set to specify the grid map's rotation, but not both.
-    # If both this and [`components.RotationQuat`][rerun.components.RotationQuat] are set, this is ignored in favor of the quaternion.
+    # Note: either this or [`components.RotationQuat`][simplant_lab.components.RotationQuat] can be set to specify the grid map's rotation, but not both.
+    # If both this and [`components.RotationQuat`][simplant_lab.components.RotationQuat] are set, this is ignored in favor of the quaternion.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 
@@ -599,7 +599,7 @@ class GridMap(Archetype):
     )
     # Rotation of the lower-left corner of the grid map in space via quaternion.
     #
-    # Together with [`components.Translation3D`][rerun.components.Translation3D], this defines the pose of the
+    # Together with [`components.Translation3D`][simplant_lab.components.Translation3D], this defines the pose of the
     # lower-left image corner relative to the map's parent coordinate frame.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
@@ -633,7 +633,7 @@ class GridMap(Archetype):
     )
     # Colormap to use for rendering single-channel grid maps.
     #
-    # If not set, the grid map is shown using the underlying [`components.ImageFormat`][rerun.components.ImageFormat]
+    # If not set, the grid map is shown using the underlying [`components.ImageFormat`][simplant_lab.components.ImageFormat]
     # interpretation.
     #
     # (Docstring intentionally commented out to hide this field from the docs)

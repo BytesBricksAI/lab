@@ -137,7 +137,7 @@ class Arrows3D(Arrows3DExt, Archetype, VisualizableArchetype):
         class_ids:
             Optional class Ids for the points.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -271,7 +271,7 @@ class Arrows3D(Arrows3DExt, Archetype, VisualizableArchetype):
         class_ids:
             Optional class Ids for the points.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -405,7 +405,7 @@ class Arrows3D(Arrows3DExt, Archetype, VisualizableArchetype):
     )
     # Optional class Ids for the points.
     #
-    # The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+    # The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 

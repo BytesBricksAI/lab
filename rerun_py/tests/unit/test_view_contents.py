@@ -3,11 +3,11 @@ from __future__ import annotations
 import itertools
 from typing import TYPE_CHECKING, cast
 
-from rerun.blueprint.archetypes.view_contents import ViewContents
-from rerun.blueprint.components.query_expression import QueryExpression, QueryExpressionBatch
+from simplant_lab.blueprint.archetypes.view_contents import ViewContents
+from simplant_lab.blueprint.components.query_expression import QueryExpression, QueryExpressionBatch
 
 if TYPE_CHECKING:
-    from rerun.datatypes.utf8 import Utf8ArrayLike
+    from simplant_lab.datatypes.utf8 import Utf8ArrayLike
 
 
 def test_view_contents() -> None:

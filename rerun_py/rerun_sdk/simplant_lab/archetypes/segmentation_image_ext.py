@@ -37,7 +37,7 @@ def _to_numpy(tensor: ImageLike) -> npt.NDArray[Any]:
 
 
 class SegmentationImageExt:
-    """Extension for [SegmentationImage][rerun.archetypes.SegmentationImage]."""
+    """Extension for [SegmentationImage][simplant_lab.archetypes.SegmentationImage]."""
 
     def __init__(
         self: Any,

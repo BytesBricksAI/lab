@@ -3,11 +3,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from datafusion import Expr, col, functions as f, lit
-from rerun.experimental import query_metrics
+from simplant_lab.experimental import query_metrics
 
 if TYPE_CHECKING:
     import pyarrow as pa
-    from rerun.catalog import CatalogClient, DatasetEntry
+    from simplant_lab.catalog import CatalogClient, DatasetEntry
 
 
 # Filter classification — encodes which expression kinds we expect the

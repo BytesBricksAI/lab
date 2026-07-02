@@ -64,11 +64,11 @@ dataloader = ["torch>=2.5", "torchvision", "av", "pillow>=8.0.0"]
 
 # Client-side OpenTelemetry export, enabled by setting `TELEMETRY_ENABLED=true`
 # along with an OTLP endpoint env var (e.g. `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=...`).
-# Only needed for developers profiling the SDK — see `rerun._tracing`.
+# Only needed for developers profiling the SDK — see `simplant_lab._tracing`.
 tracing = ["opentelemetry-api", "opentelemetry-sdk", "opentelemetry-exporter-otlp-proto-grpc"]
 
-# Note: We avoid self-referential extras like "rerun-sdk[notebook]" because they cause
-# uv to fetch rerun-sdk from PyPI when the local package isn't built yet.
+# Note: We avoid self-referential extras like "simplant-lab-sdk[notebook]" because they cause
+# uv to fetch simplant-lab-sdk from PyPI when the local package isn't built yet.
 # TODO(RR-3786): when pyarrow is fixed, we should remove the pandas dependency
 all = ["datafusion==52.3.0", "pandas>=2", "rerun-notebook==0.33.0-alpha.1+dev"]
 
@@ -241,18 +241,23 @@ known-first-party = ["rerun_bindings"]
 # `per-file-ignores` exceptions.
 [tool.ruff.lint.flake8-tidy-imports.banned-api]
 "rerun_bindings".msg = "Internal API"
-"rerun_cli".msg = "Only for running CLI"
+"simplant_lab_cli".msg = "Only for running CLI"
+"rerun_cli".msg = "Deprecated CLI shim — use simplant_lab_cli"
 
 
 [tool.maturin]
-# We use a python package from inside the rerun_sdk folder to avoid conflicting
-# with the other `rerun` pypi package. The rerun_sdk.pth adds this to the pythonpath
-# which then allows `import rerun` to work as expected.
-# See https://github.com/rerun-io/rerun/pull/1085 for more details
-# Even though both `rerun` and `rerun.exe` are here, only one will be included since
-# they both should not be fetched in CI when running the build.
-# Files missing from this list is not a packaging failure.
-include = ["rerun_sdk.pth", "rerun_sdk/rerun_cli/rerun", "rerun_sdk/rerun_cli/rerun.exe"]
+# Python packages live under rerun_sdk/; simplant_lab_sdk.pth adds rerun_sdk to sys.path.
+# See https://github.com/rerun-io/rerun/pull/1085 for more details.
+# Viewer binaries (simplant-lab, legacy rerun) are bundled for wheel installs when present.
+include = [
+  "rerun_sdk.pth",
+  "rerun_sdk/simplant_lab_cli/simplant-lab",
+  "rerun_sdk/simplant_lab_cli/simplant-lab.exe",
+  "rerun_sdk/simplant_lab_cli/rerun",
+  "rerun_sdk/simplant_lab_cli/rerun.exe",
+  "rerun_sdk/rerun_cli/rerun",
+  "rerun_sdk/rerun_cli/rerun.exe",
+]
 locked = true
 name = "rerun_bindings"
 python-packages = ["rerun_sdk/simplant_lab", "rerun_sdk/simplant_lab_cli", "rerun_sdk/rerun", "rerun_sdk/rerun_cli"]
@@ -261,8 +266,8 @@ python-packages = ["rerun_sdk/simplant_lab", "rerun_sdk/simplant_lab_cli", "reru
 # `pixi run py-build` and share the cargo cache.
 editable-profile = "dev"
 
-# Setting this to 1 causes lets the build.rs script know we are building a wheel,
-# which will cause it to check for the existence of the `rerun` binary.
+# Setting this to 1 lets the build.rs script know we are building a wheel,
+# which will cause it to check for the existence of the viewer binary.
 config = ["env.RERUN_BUILDING_WHEEL=\"1\""]
 
 

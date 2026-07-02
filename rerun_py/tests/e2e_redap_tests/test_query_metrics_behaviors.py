@@ -2,7 +2,7 @@
 End-to-end tests for behaviors that were previously unverifiable from Python.
 
 Each test exercises a query-planning or execution invariant that was
-inaccessible before `rerun.experimental.query_metrics()` — either because the
+inaccessible before `simplant_lab.experimental.query_metrics()` — either because the
 metric in question wasn't surfaced anywhere Python could read it, or because
 the DataFusion FFI bug stripped `df.explain(analyze=True)`'s `metrics=[…]`
 block.
@@ -18,10 +18,10 @@ from typing import TYPE_CHECKING
 
 import pytest
 from datafusion import col, lit
-from rerun.experimental import query_metrics
+from simplant_lab.experimental import query_metrics
 
 if TYPE_CHECKING:
-    from rerun.catalog import DatasetEntry
+    from simplant_lab.catalog import DatasetEntry
 
 
 # `time_1` hits the datafusion-python bug noted in other tests in this suite.

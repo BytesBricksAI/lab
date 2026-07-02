@@ -4,30 +4,30 @@ from typing import TYPE_CHECKING
 
 from typing_extensions import deprecated
 
-from simplant_lab.experimental import Chunk
 from rerun_bindings import recording_from_chunks
+from simplant_lab.experimental import Chunk
 
 if TYPE_CHECKING:
     from collections.abc import Generator, Iterable
     from pathlib import Path
 
-    from simplant_lab.catalog import Schema
     from rerun_bindings import RecordingInternal, RRDArchiveInternal
+    from simplant_lab.catalog import Schema
 
 
 @deprecated(
-    "Recording is deprecated since 0.32. Use rerun.experimental.RrdReader instead.",
+    "Recording is deprecated since 0.32. Use simplant_lab.experimental.RrdReader instead.",
 )
 class Recording:
     """
     A single Rerun recording.
 
-    This can be loaded from an RRD file using [`load_recording()`][rerun.recording.load_recording].
+    This can be loaded from an RRD file using [`load_recording()`][simplant_lab.recording.load_recording].
 
     A recording is a collection of data that was logged to Rerun. This data is organized
     as a column for each index (timeline) and each entity/component pair that was logged.
 
-    You can examine the [`.schema()`][rerun.recording.Recording.schema] of the recording to see
+    You can examine the [`.schema()`][simplant_lab.recording.Recording.schema] of the recording to see
     what data is available.
     """
 
@@ -90,7 +90,7 @@ class Recording:
 
 
 @deprecated(
-    "RRDArchive is deprecated since 0.32. Use rerun.experimental.RrdReader instead.",
+    "RRDArchive is deprecated since 0.32. Use simplant_lab.experimental.RrdReader instead.",
 )
 class RRDArchive:
     """

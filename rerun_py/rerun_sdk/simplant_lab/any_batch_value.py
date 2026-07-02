@@ -23,10 +23,10 @@ class _SupportsDLPack(Protocol):
 
 ComponentValueLike: TypeAlias = ComponentBatchLike | pa.Array | npt.ArrayLike | _SupportsDLPack
 """
-Type alias for values accepted by [`AnyBatchValue`][rerun.any_batch_value.AnyBatchValue] and [`DynamicArchetype`][rerun.dynamic_archetype.DynamicArchetype].
+Type alias for values accepted by [`AnyBatchValue`][simplant_lab.any_batch_value.AnyBatchValue] and [`DynamicArchetype`][simplant_lab.dynamic_archetype.DynamicArchetype].
 
 This includes:
-- Rerun component batch types implementing [`ComponentBatchLike`][rerun.ComponentBatchLike] (e.g. `rr.components.ColorBatch(...)`)
+- Rerun component batch types implementing [`ComponentBatchLike`][simplant_lab.ComponentBatchLike] (e.g. `rr.components.ColorBatch(...)`)
 - PyArrow arrays (`pa.Array`)
 - Any numpy-compatible data (`npt.ArrayLike`): scalars (`int`, `float`, `str`, `bool`, `bytes`),
   sequences (`list`, `tuple`), numpy arrays, and objects implementing `__array__`
@@ -188,7 +188,7 @@ class AnyBatchValue(ComponentBatchLike):
     This is a very simple helper that implements the `ComponentBatchLike` interface on top
     of the `pyarrow` library array conversion functions.
 
-    See also [rerun.AnyValues][].
+    See also [simplant_lab.AnyValues][].
     """
 
     def __init__(

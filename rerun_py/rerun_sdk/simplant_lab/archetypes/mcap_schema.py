@@ -32,8 +32,8 @@ class McapSchema(Archetype):
     types, and organization. Each schema is referenced by channels to indicate how their
     messages should be decoded and understood.
 
-    See also [`archetypes.McapChannel`][rerun.archetypes.McapChannel] for channels that reference these schemas,
-    [`archetypes.McapMessage`][rerun.archetypes.McapMessage] for the messages that conform to these schemas, and the
+    See also [`archetypes.McapChannel`][simplant_lab.archetypes.McapChannel] for channels that reference these schemas,
+    [`archetypes.McapMessage`][simplant_lab.archetypes.McapMessage] for the messages that conform to these schemas, and the
     [MCAP specification](https://mcap.dev/) for complete format details.
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**

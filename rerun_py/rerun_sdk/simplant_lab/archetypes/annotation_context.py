@@ -27,13 +27,13 @@ class AnnotationContext(Archetype):
     """
     **Archetype**: The annotation context provides additional information on how to display entities.
 
-    Entities can use [`components.ClassId`][rerun.components.ClassId]s and [`components.KeypointId`][rerun.components.KeypointId]s to provide annotations, and
+    Entities can use [`components.ClassId`][simplant_lab.components.ClassId]s and [`components.KeypointId`][simplant_lab.components.KeypointId]s to provide annotations, and
     the labels and colors will be looked up in the appropriate
     annotation context. We use the *first* annotation context we find in the
     path-hierarchy when searching up through the ancestors of a given entity
     path.
 
-    See also [`datatypes.ClassDescription`][rerun.datatypes.ClassDescription].
+    See also [`datatypes.ClassDescription`][simplant_lab.datatypes.ClassDescription].
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**
 

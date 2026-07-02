@@ -32,17 +32,17 @@ class Image(ImageExt, Archetype, VisualizableArchetype):
     """
     **Archetype**: A monochrome or color image.
 
-    See also [`archetypes.DepthImage`][rerun.archetypes.DepthImage] and [`archetypes.SegmentationImage`][rerun.archetypes.SegmentationImage].
+    See also [`archetypes.DepthImage`][simplant_lab.archetypes.DepthImage] and [`archetypes.SegmentationImage`][simplant_lab.archetypes.SegmentationImage].
 
-    Rerun also supports compressed images (JPEG, PNG, …), using [`archetypes.EncodedImage`][rerun.archetypes.EncodedImage].
-    For images that refer to video frames see [`archetypes.VideoFrameReference`][rerun.archetypes.VideoFrameReference].
+    Rerun also supports compressed images (JPEG, PNG, …), using [`archetypes.EncodedImage`][simplant_lab.archetypes.EncodedImage].
+    For images that refer to video frames see [`archetypes.VideoFrameReference`][simplant_lab.archetypes.VideoFrameReference].
     Compressing images or using video data instead can save a lot of bandwidth and memory.
 
-    The raw image data is stored as a single buffer of bytes in a [`components.Blob`][rerun.components.Blob].
-    The meaning of these bytes is determined by the [`components.ImageFormat`][rerun.components.ImageFormat] which specifies the resolution
+    The raw image data is stored as a single buffer of bytes in a [`components.Blob`][simplant_lab.components.Blob].
+    The meaning of these bytes is determined by the [`components.ImageFormat`][simplant_lab.components.ImageFormat] which specifies the resolution
     and the pixel format (e.g. RGB, RGBA, …).
 
-    The order of dimensions in the underlying [`components.Blob`][rerun.components.Blob] follows the typical
+    The order of dimensions in the underlying [`components.Blob`][simplant_lab.components.Blob] follows the typical
     row-major, interleaved-pixel image format.
 
     Examples

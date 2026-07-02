@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from inline_snapshot import snapshot as inline_snapshot
 
 if TYPE_CHECKING:
-    from rerun.catalog import DatasetEntry
+    from simplant_lab.catalog import DatasetEntry
 
 
 def test_index_ranges(readonly_test_dataset: DatasetEntry) -> None:

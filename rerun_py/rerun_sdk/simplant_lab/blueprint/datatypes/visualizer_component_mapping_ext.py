@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 
 class VisualizerComponentMappingExt:
-    """Extension for [VisualizerComponentMapping][rerun.blueprint.datatypes.VisualizerComponentMapping]."""
+    """Extension for [VisualizerComponentMapping][simplant_lab.blueprint.datatypes.VisualizerComponentMapping]."""
 
     @staticmethod
     def native_to_pa_array_override(data: VisualizerComponentMappingArrayLike, data_type: pa.DataType) -> pa.Array:

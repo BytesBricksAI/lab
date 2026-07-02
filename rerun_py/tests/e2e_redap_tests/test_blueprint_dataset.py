@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pytest
-import rerun as rr
-import rerun.blueprint as rrb
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 if TYPE_CHECKING:
     from pathlib import Path

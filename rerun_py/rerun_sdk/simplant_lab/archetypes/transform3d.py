@@ -38,7 +38,7 @@ class Transform3D(Transform3DExt, Archetype):
     it will be resolved to a transform with only a rotation.
     (This is unlike how we usually apply latest-at semantics on an archetype where we take the latest state of any component independently)
 
-    For transforms that affect only a single entity and do not propagate along the entity tree refer to [`archetypes.InstancePoses3D`][rerun.archetypes.InstancePoses3D].
+    For transforms that affect only a single entity and do not propagate along the entity tree refer to [`archetypes.InstancePoses3D`][simplant_lab.archetypes.InstancePoses3D].
 
     Examples
     --------
@@ -314,18 +314,18 @@ class Transform3D(Transform3DExt, Archetype):
             with the child frame `"robot_arm"` on any other entity than `"my_transforms"` unless one of them was logged with static time.
 
             If not specified, this is set to the implicit transform frame of the current entity path.
-            This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity/path`.
+            This means that if a [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity/path`.
 
-            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][simplant_lab.archetypes.CoordinateFrame].
 
             Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
         parent_frame:
             The parent frame this transform transforms into.
 
             If not specified, this is set to the implicit transform frame of the current entity path's parent.
-            This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity`.
+            This means that if a [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity`.
 
-            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][simplant_lab.archetypes.CoordinateFrame].
 
             Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
 
@@ -477,18 +477,18 @@ class Transform3D(Transform3DExt, Archetype):
             with the child frame `"robot_arm"` on any other entity than `"my_transforms"` unless one of them was logged with static time.
 
             If not specified, this is set to the implicit transform frame of the current entity path.
-            This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity/path`.
+            This means that if a [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity/path`.
 
-            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][simplant_lab.archetypes.CoordinateFrame].
 
             Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
         parent_frame:
             The parent frame this transform transforms into.
 
             If not specified, this is set to the implicit transform frame of the current entity path's parent.
-            This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity`.
+            This means that if a [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity`.
 
-            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][simplant_lab.archetypes.CoordinateFrame].
 
             Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
 
@@ -632,9 +632,9 @@ class Transform3D(Transform3DExt, Archetype):
     # with the child frame `"robot_arm"` on any other entity than `"my_transforms"` unless one of them was logged with static time.
     #
     # If not specified, this is set to the implicit transform frame of the current entity path.
-    # This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity/path`.
+    # This means that if a [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity/path`.
     #
-    # To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+    # To set the frame an entity is part of see [`archetypes.CoordinateFrame`][simplant_lab.archetypes.CoordinateFrame].
     #
     # Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
     #
@@ -648,9 +648,9 @@ class Transform3D(Transform3DExt, Archetype):
     # The parent frame this transform transforms into.
     #
     # If not specified, this is set to the implicit transform frame of the current entity path's parent.
-    # This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity`.
+    # This means that if a [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity`.
     #
-    # To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+    # To set the frame an entity is part of see [`archetypes.CoordinateFrame`][simplant_lab.archetypes.CoordinateFrame].
     #
     # Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
     #

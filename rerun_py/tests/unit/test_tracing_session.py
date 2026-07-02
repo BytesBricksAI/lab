@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pytest
-from rerun._tracing_session import (
+from simplant_lab._tracing_session import (
     _generate_session_id,
     _is_valid_session_id,
     tracing_session,
@@ -106,7 +106,7 @@ def test_skips_metrics_log_when_block_raises(monkeypatch: pytest.MonkeyPatch) ->
 
 def test_psutil_failure_does_not_propagate(monkeypatch: pytest.MonkeyPatch) -> None:
     """A psutil failure during snapshot or delta must never break the `with` block."""
-    import rerun._tracing_session as ts
+    import simplant_lab._tracing_session as ts
 
     import rerun_bindings  # noqa: TID251
 
@@ -171,7 +171,7 @@ def test_warns_and_no_ops_when_telemetry_inactive(
     # this case exercises in CI even when telemetry happens to be active.
     monkeypatch.setattr(rerun_bindings, "_is_telemetry_active", lambda: False)
 
-    with caplog.at_level("WARNING", logger="rerun"):
+    with caplog.at_level("WARNING", logger="simplant_lab"):
         with tracing_session() as sid:
             assert sid == ""
 

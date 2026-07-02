@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 
 class ChannelCountPairExt:
-    """Extension for [ChannelCountPair][rerun.datatypes.ChannelCountPair]."""
+    """Extension for [ChannelCountPair][simplant_lab.datatypes.ChannelCountPair]."""
 
     @staticmethod
     def native_to_pa_array_override(data: ChannelCountPairArrayLike, data_type: pa.DataType) -> pa.Array:

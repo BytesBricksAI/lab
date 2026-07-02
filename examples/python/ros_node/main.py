@@ -18,7 +18,7 @@ from collections.abc import Callable
 
 import numpy as np
 
-import simplant_lab as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install simplant-lab-sdk
 from simplant_lab.components import Colormap
 
 try:

@@ -33,9 +33,9 @@ class Cylinders3D(Cylinders3DExt, Archetype, VisualizableArchetype):
     **Archetype**: 3D cylinders with flat caps.
 
     This archetype is for cylinder primitives defined by their axial length and radius.
-    For points whose radii are for visualization purposes, use [`archetypes.Points3D`][rerun.archetypes.Points3D] instead.
+    For points whose radii are for visualization purposes, use [`archetypes.Points3D`][simplant_lab.archetypes.Points3D] instead.
 
-    Orienting and placing cylinders forms a separate transform that is applied prior to [`archetypes.InstancePoses3D`][rerun.archetypes.InstancePoses3D] and [`archetypes.Transform3D`][rerun.archetypes.Transform3D].
+    Orienting and placing cylinders forms a separate transform that is applied prior to [`archetypes.InstancePoses3D`][simplant_lab.archetypes.InstancePoses3D] and [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D].
 
     Example
     -------

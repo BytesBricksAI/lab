@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 
 class TensorViewFitExt:
-    """Extension for [TensorViewFit][rerun.blueprint.archetypes.TensorViewFit]."""
+    """Extension for [TensorViewFit][simplant_lab.blueprint.archetypes.TensorViewFit]."""
 
     def __init__(self: Any, scaling: blueprint_components.ViewFitLike | None = None) -> None:
         """

@@ -21,7 +21,7 @@ class VideoSample(datatypes.Blob, ComponentMixin):
     Each video sample must contain enough data for exactly one video frame
     (this restriction may be relaxed in the future for some codecs).
 
-    Keyframes may require additional data, for details see [`components.VideoCodec`][rerun.components.VideoCodec].
+    Keyframes may require additional data, for details see [`components.VideoCodec`][simplant_lab.components.VideoCodec].
     """
 
     _BATCH_TYPE = None

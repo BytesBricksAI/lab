@@ -33,23 +33,29 @@ fn main() {
         std::process::exit(1);
     }
 
-    // Fail if bin/rerun is missing and we haven't specified it's ok.
+    // Fail if the viewer binary is missing and we haven't specified it's ok.
     if re_build_tools::is_tracked_env_var_set("RERUN_BUILDING_WHEEL")
         && !re_build_tools::is_tracked_env_var_set("RERUN_ALLOW_MISSING_BIN")
     {
+        let cli_dir = std::env::current_dir()
+            .expect("std::env::current_dir() failed")
+            .join("rerun_sdk/simplant_lab_cli");
+
         #[cfg(target_os = "windows")]
-        #[expect(clippy::unwrap_used)]
-        let rerun_bin = std::env::current_dir()
-            .unwrap()
-            .join("rerun_sdk/rerun_cli/rerun.exe");
+        let viewer_names = ["simplant-lab.exe", "rerun.exe"];
 
         #[cfg(not(target_os = "windows"))]
-        let rerun_bin = std::env::current_dir()
-            .expect("std::env::current_dir() failed")
-            .join("rerun_sdk/rerun_cli/rerun");
+        let viewer_names = ["simplant-lab", "rerun"];
 
-        if !rerun_bin.exists() {
-            eprintln!("ERROR: Expected to find `rerun` at `{rerun_bin:?}`.");
+        let viewer_bin = viewer_names
+            .iter()
+            .map(|name| cli_dir.join(name))
+            .find(|path| path.exists());
+
+        if viewer_bin.is_none() {
+            eprintln!(
+                "ERROR: Expected to find `simplant-lab` (or legacy `rerun`) under `{cli_dir:?}`."
+            );
             std::process::exit(1);
         }
     }

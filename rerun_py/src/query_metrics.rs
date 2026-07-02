@@ -1,6 +1,6 @@
 //! PyO3 bridge for `rerun.experimental.query_metrics()`.
 //!
-//! See [`rerun_py/rerun_sdk/rerun/experimental/_query_metrics.py`] for the
+//! See [`rerun_py/rerun_sdk/simplant_lab/experimental/_query_metrics.py`] for the
 //! user-facing context manager. This file exposes:
 //!
 //! - [`PyQueryMetrics`]: a frozen, getter-only Python class mirroring

@@ -10,7 +10,7 @@ def _spawn_viewer(
     server_memory_limit: str = "1GiB",
     hide_welcome_screen: bool = False,
     detach_process: bool = True,
-    executable_name: str = "rerun",
+    executable_name: str = "simplant-lab",
     executable_path: str | None = None,
 ) -> None:
     """
@@ -18,7 +18,7 @@ def _spawn_viewer(
 
     Blocks until the viewer is ready to accept connections.
 
-    Used by [rerun.spawn][]
+    Used by [simplant_lab.spawn][]
 
     Parameters
     ----------
@@ -43,7 +43,7 @@ def _spawn_viewer(
         Specifies the name of the Rerun executable.
         You can omit the `.exe` suffix on Windows.
 
-        Defaults to `rerun`.
+        Defaults to `simplant-lab`.
     executable_path:
         Enforce a specific executable to use instead of searching
         through PATH for `executable_name`.

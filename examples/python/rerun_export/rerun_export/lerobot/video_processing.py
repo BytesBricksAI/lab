@@ -17,7 +17,7 @@ from rerun_export.utils import normalize_times, unwrap_singleton
 if TYPE_CHECKING:
     import numpy.typing as npt
 
-    import rerun as rr
+    import simplant_lab as rr
     from rerun_export.lerobot.types import VideoSampleData, VideoSpec
 
 

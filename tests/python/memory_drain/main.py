@@ -14,8 +14,9 @@ import threading
 import time
 from typing import TYPE_CHECKING, Any
 
-import simplant_lab as rr
 import rerun.blueprint as rrb
+
+import simplant_lab as rr
 
 if TYPE_CHECKING:
     from collections.abc import Iterator

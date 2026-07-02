@@ -31,13 +31,13 @@ class VideoStream(Archetype, VisualizableArchetype):
     """
     **Archetype**: Video stream consisting of raw video chunks.
 
-    For logging video containers like mp4, refer to [`archetypes.AssetVideo`][rerun.archetypes.AssetVideo] and [`archetypes.VideoFrameReference`][rerun.archetypes.VideoFrameReference].
+    For logging video containers like mp4, refer to [`archetypes.AssetVideo`][simplant_lab.archetypes.AssetVideo] and [`archetypes.VideoFrameReference`][simplant_lab.archetypes.VideoFrameReference].
     To learn more about video support in Rerun, check the [video reference](https://rerun.io/docs/reference/video).
 
     All components except `sample` are typically logged statically once per entity.
     `sample` is then logged repeatedly for each frame on the timeline.
 
-    TODO(#10422): [`archetypes.VideoFrameReference`][rerun.archetypes.VideoFrameReference] does not yet work with [`archetypes.VideoStream`][rerun.archetypes.VideoStream].
+    TODO(#10422): [`archetypes.VideoFrameReference`][simplant_lab.archetypes.VideoFrameReference] does not yet work with [`archetypes.VideoStream`][simplant_lab.archetypes.VideoStream].
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**
 
@@ -169,17 +169,17 @@ class VideoStream(Archetype, VisualizableArchetype):
             Each video sample must contain enough data for exactly one video frame
             (this restriction may be relaxed in the future for some codecs).
 
-            Unless your stream consists entirely of key-frames (in which case you should consider [`archetypes.EncodedImage`][rerun.archetypes.EncodedImage])
+            Unless your stream consists entirely of key-frames (in which case you should consider [`archetypes.EncodedImage`][simplant_lab.archetypes.EncodedImage])
             never log this component as static data as this means that you loose all information of
             previous samples which may be required to decode an image.
 
-            See [`components.VideoCodec`][rerun.components.VideoCodec] for codec specific requirements.
+            See [`components.VideoCodec`][simplant_lab.components.VideoCodec] for codec specific requirements.
         is_keyframe:
-            Whether the corresponding [`components.VideoSample`][rerun.components.VideoSample] contains a keyframe.
+            Whether the corresponding [`components.VideoSample`][simplant_lab.components.VideoSample] contains a keyframe.
 
             A keyframe (also known as a sync sample or IDR) is a frame from which a decoder can
-            start decoding the stream with no prior decoder state. See [`components.IsKeyframe`][rerun.components.IsKeyframe]
-            and [`components.VideoCodec`][rerun.components.VideoCodec] for the codec-specific definition.
+            start decoding the stream with no prior decoder state. See [`components.IsKeyframe`][simplant_lab.components.IsKeyframe]
+            and [`components.VideoCodec`][simplant_lab.components.VideoCodec] for the codec-specific definition.
 
             This field is optional. It does not change how the stream itself is decoded: it is
             metadata that travels with the sample and can be inspected when querying the data
@@ -262,17 +262,17 @@ class VideoStream(Archetype, VisualizableArchetype):
             Each video sample must contain enough data for exactly one video frame
             (this restriction may be relaxed in the future for some codecs).
 
-            Unless your stream consists entirely of key-frames (in which case you should consider [`archetypes.EncodedImage`][rerun.archetypes.EncodedImage])
+            Unless your stream consists entirely of key-frames (in which case you should consider [`archetypes.EncodedImage`][simplant_lab.archetypes.EncodedImage])
             never log this component as static data as this means that you loose all information of
             previous samples which may be required to decode an image.
 
-            See [`components.VideoCodec`][rerun.components.VideoCodec] for codec specific requirements.
+            See [`components.VideoCodec`][simplant_lab.components.VideoCodec] for codec specific requirements.
         is_keyframe:
-            Whether the corresponding [`components.VideoSample`][rerun.components.VideoSample] contains a keyframe.
+            Whether the corresponding [`components.VideoSample`][simplant_lab.components.VideoSample] contains a keyframe.
 
             A keyframe (also known as a sync sample or IDR) is a frame from which a decoder can
-            start decoding the stream with no prior decoder state. See [`components.IsKeyframe`][rerun.components.IsKeyframe]
-            and [`components.VideoCodec`][rerun.components.VideoCodec] for the codec-specific definition.
+            start decoding the stream with no prior decoder state. See [`components.IsKeyframe`][simplant_lab.components.IsKeyframe]
+            and [`components.VideoCodec`][simplant_lab.components.VideoCodec] for the codec-specific definition.
 
             This field is optional. It does not change how the stream itself is decoded: it is
             metadata that travels with the sample and can be inspected when querying the data
@@ -396,17 +396,17 @@ class VideoStream(Archetype, VisualizableArchetype):
             Each video sample must contain enough data for exactly one video frame
             (this restriction may be relaxed in the future for some codecs).
 
-            Unless your stream consists entirely of key-frames (in which case you should consider [`archetypes.EncodedImage`][rerun.archetypes.EncodedImage])
+            Unless your stream consists entirely of key-frames (in which case you should consider [`archetypes.EncodedImage`][simplant_lab.archetypes.EncodedImage])
             never log this component as static data as this means that you loose all information of
             previous samples which may be required to decode an image.
 
-            See [`components.VideoCodec`][rerun.components.VideoCodec] for codec specific requirements.
+            See [`components.VideoCodec`][simplant_lab.components.VideoCodec] for codec specific requirements.
         is_keyframe:
-            Whether the corresponding [`components.VideoSample`][rerun.components.VideoSample] contains a keyframe.
+            Whether the corresponding [`components.VideoSample`][simplant_lab.components.VideoSample] contains a keyframe.
 
             A keyframe (also known as a sync sample or IDR) is a frame from which a decoder can
-            start decoding the stream with no prior decoder state. See [`components.IsKeyframe`][rerun.components.IsKeyframe]
-            and [`components.VideoCodec`][rerun.components.VideoCodec] for the codec-specific definition.
+            start decoding the stream with no prior decoder state. See [`components.IsKeyframe`][simplant_lab.components.IsKeyframe]
+            and [`components.VideoCodec`][simplant_lab.components.VideoCodec] for the codec-specific definition.
 
             This field is optional. It does not change how the stream itself is decoded: it is
             metadata that travels with the sample and can be inspected when querying the data
@@ -511,11 +511,11 @@ class VideoStream(Archetype, VisualizableArchetype):
     # Each video sample must contain enough data for exactly one video frame
     # (this restriction may be relaxed in the future for some codecs).
     #
-    # Unless your stream consists entirely of key-frames (in which case you should consider [`archetypes.EncodedImage`][rerun.archetypes.EncodedImage])
+    # Unless your stream consists entirely of key-frames (in which case you should consider [`archetypes.EncodedImage`][simplant_lab.archetypes.EncodedImage])
     # never log this component as static data as this means that you loose all information of
     # previous samples which may be required to decode an image.
     #
-    # See [`components.VideoCodec`][rerun.components.VideoCodec] for codec specific requirements.
+    # See [`components.VideoCodec`][simplant_lab.components.VideoCodec] for codec specific requirements.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 
@@ -524,11 +524,11 @@ class VideoStream(Archetype, VisualizableArchetype):
         default=None,
         converter=components.IsKeyframeBatch._converter,  # type: ignore[misc]
     )
-    # Whether the corresponding [`components.VideoSample`][rerun.components.VideoSample] contains a keyframe.
+    # Whether the corresponding [`components.VideoSample`][simplant_lab.components.VideoSample] contains a keyframe.
     #
     # A keyframe (also known as a sync sample or IDR) is a frame from which a decoder can
-    # start decoding the stream with no prior decoder state. See [`components.IsKeyframe`][rerun.components.IsKeyframe]
-    # and [`components.VideoCodec`][rerun.components.VideoCodec] for the codec-specific definition.
+    # start decoding the stream with no prior decoder state. See [`components.IsKeyframe`][simplant_lab.components.IsKeyframe]
+    # and [`components.VideoCodec`][simplant_lab.components.VideoCodec] for the codec-specific definition.
     #
     # This field is optional. It does not change how the stream itself is decoded: it is
     # metadata that travels with the sample and can be inspected when querying the data

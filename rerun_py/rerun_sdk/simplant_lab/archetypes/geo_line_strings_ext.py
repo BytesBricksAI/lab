@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 
 class GeoLineStringsExt:
-    """Extension for [GeoLineStrings][rerun.archetypes.GeoLineStrings]."""
+    """Extension for [GeoLineStrings][simplant_lab.archetypes.GeoLineStrings]."""
 
     # TODO(ab): the purpose of this override is to rename the required parameter and make it keyword-only. Should be codegen-able?
     def __init__(

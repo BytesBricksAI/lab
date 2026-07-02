@@ -281,7 +281,7 @@ class RerunMissingDependencyError(ImportError):
     def __init__(self, package: str, optional_dep: str) -> None:
         super().__init__(
             f"'{package}' could not be imported. "
-            f"Please install it, or install rerun as rerun-sdk[{optional_dep}]/rerun-sdk[all] "
+            f"Please install it, or install simplant_lab as simplant-lab-sdk[{optional_dep}]/simplant-lab-sdk[all] "
             "to use this functionality."
         )
 
@@ -291,8 +291,8 @@ class RerunIncompatibleDependencyVersionError(ImportError):
 
     def __init__(self, package: str, actual_version: str, compatible_versions: list[int]) -> None:
         super().__init__(
-            f"'{package}' version {actual_version} is incompatible with rerun. "
-            f"Please install rerun as rerun-sdk[{package}]/rerun-sdk[all] "
+            f"'{package}' version {actual_version} is incompatible with simplant_lab. "
+            f"Please install simplant_lab as simplant-lab-sdk[{package}]/simplant-lab-sdk[all] "
             f"to use this functionality. "
             f"Compatible major version(s): {', '.join(map(str, compatible_versions))}"
         )

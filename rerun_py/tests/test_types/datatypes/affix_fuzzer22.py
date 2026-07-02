@@ -10,13 +10,13 @@ from typing import TYPE_CHECKING, Any
 
 import pyarrow as pa
 from attrs import define, field
-from rerun._baseclasses import (
+from simplant_lab._baseclasses import (
     BaseBatch,
 )
-from rerun._converters import (
+from simplant_lab._converters import (
     to_np_uint8,
 )
-from rerun._numpy_compatibility import asarray
+from simplant_lab._numpy_compatibility import asarray
 
 if TYPE_CHECKING:
     import numpy as np

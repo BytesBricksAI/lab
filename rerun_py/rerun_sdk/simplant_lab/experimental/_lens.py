@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Literal, TypeAlias
 
-from simplant_lab._baseclasses import ComponentDescriptor
 from rerun_bindings import DeriveLensInternal, MutateLensInternal
+from simplant_lab._baseclasses import ComponentDescriptor
 
 from ._selector import Selector
 
@@ -76,12 +76,12 @@ class DeriveLens:
             A `ComponentDescriptor` or a component identifier string
             for the output column (e.g. `"Scalars:scalars"`).
         selector:
-            A [`Selector`][rerun.experimental.Selector] or selector query string to apply to the
+            A [`Selector`][simplant_lab.experimental.Selector] or selector query string to apply to the
             input column.
 
         Returns
         -------
-        A new [`DeriveLens`][rerun.experimental.DeriveLens] with the component added.
+        A new [`DeriveLens`][simplant_lab.experimental.DeriveLens] with the component added.
 
         """
         sel = _normalize_selector(selector)
@@ -108,12 +108,12 @@ class DeriveLens:
             Type of the timeline: `"sequence"`, `"duration_ns"`,
             or `"timestamp_ns"`.
         selector:
-            A [`Selector`][rerun.experimental.Selector] or selector query string to extract time
+            A [`Selector`][simplant_lab.experimental.Selector] or selector query string to extract time
             values (must produce `Int64` arrays).
 
         Returns
         -------
-        A new [`DeriveLens`][rerun.experimental.DeriveLens] with the time column added.
+        A new [`DeriveLens`][simplant_lab.experimental.DeriveLens] with the time column added.
 
         """
         sel = _normalize_selector(selector)
@@ -153,7 +153,7 @@ class MutateLens:
         input_component:
             The component identifier to modify in-place.
         selector:
-            A [`Selector`][rerun.experimental.Selector] or selector query string to apply.
+            A [`Selector`][simplant_lab.experimental.Selector] or selector query string to apply.
         keep_row_ids:
             When `True`, preserve the original row IDs.
 

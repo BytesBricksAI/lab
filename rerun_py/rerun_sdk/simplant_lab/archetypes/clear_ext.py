@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 
 
 class ClearExt:
-    """Extension for [Clear][rerun.archetypes.Clear]."""
+    """Extension for [Clear][simplant_lab.archetypes.Clear]."""
 
     def __init__(
         self: Any,

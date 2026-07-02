@@ -4,8 +4,7 @@ import importlib
 from unittest.mock import Mock, patch
 
 import pytest
-import rerun.utilities.datafusion.functions.url_generation
-from rerun.error_utils import RerunMissingDependencyError
+from simplant_lab.error_utils import RerunMissingDependencyError
 
 
 def test_smoke() -> None:
@@ -14,7 +13,7 @@ def test_smoke() -> None:
 
 def test_segment_url_import_normal() -> None:
     """Check that we can import segment_url when datafusion is available."""
-    from rerun.utilities.datafusion.functions.url_generation import segment_url
+    from simplant_lab.utilities.datafusion.functions.url_generation import segment_url
 
     assert segment_url is not None
 
@@ -25,7 +24,7 @@ def test_segment_url_without_datafusion() -> None:
     with patch.dict("sys.modules", {"datafusion": None}):
         importlib.reload(rerun.utilities.datafusion.functions.url_generation)
         # Import the module - this should work
-        from rerun.utilities.datafusion.functions.url_generation import segment_url
+        from simplant_lab.utilities.datafusion.functions.url_generation import segment_url
 
         # Create a mock dataset for testing
         mock_dataset = Mock()

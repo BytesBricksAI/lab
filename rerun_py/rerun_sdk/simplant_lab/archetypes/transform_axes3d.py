@@ -29,7 +29,7 @@ __all__ = ["TransformAxes3D"]
 @define(str=False, repr=False, init=False)
 class TransformAxes3D(Archetype, VisualizableArchetype):
     """
-    **Archetype**: A visual representation of a [`archetypes.Transform3D`][rerun.archetypes.Transform3D].
+    **Archetype**: A visual representation of a [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D].
 
     Example
     -------

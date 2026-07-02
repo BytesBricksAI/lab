@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 
 class Plane3DExt:
-    """Extension for [Plane3D][rerun.datatypes.Plane3D]."""
+    """Extension for [Plane3D][simplant_lab.datatypes.Plane3D]."""
 
     # The Y^Z plane with normal = +X.
     YZ: Plane3D = None  # type: ignore[assignment]

@@ -7,8 +7,8 @@ from typing import TYPE_CHECKING
 
 from typing_extensions import Self, deprecated
 
-from simplant_lab.error_utils import _send_warning_or_raise
 from rerun_bindings import _ServerInternal
+from simplant_lab.error_utils import _send_warning_or_raise
 
 from .catalog import CatalogClient
 

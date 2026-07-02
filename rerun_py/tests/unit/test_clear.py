@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import numpy as np
-import rerun as rr
-from rerun.components import ClearIsRecursive, ClearIsRecursiveBatch
+import simplant_lab as rr
+from simplant_lab.components import ClearIsRecursive, ClearIsRecursiveBatch
 
 
 def test_clear() -> None:

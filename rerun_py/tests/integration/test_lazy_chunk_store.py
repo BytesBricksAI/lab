@@ -5,8 +5,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pytest
-import rerun as rr
-from rerun.experimental import (
+import simplant_lab as rr
+from simplant_lab.experimental import (
     LazyStore,
     OptimizationProfile,
     RrdReader,

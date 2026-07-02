@@ -31,7 +31,7 @@ class EntityBehavior(Archetype):
     ### `entity_behavior`:
     ```python
     import simplant_lab as rr
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_entity_behavior", spawn=True)
 

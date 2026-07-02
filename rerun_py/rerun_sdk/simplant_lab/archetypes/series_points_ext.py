@@ -7,7 +7,7 @@ from ..error_utils import catch_and_log_exceptions
 
 
 class SeriesPointsExt:
-    """Extension for [SeriesPoints][rerun.archetypes.SeriesPoints]."""
+    """Extension for [SeriesPoints][simplant_lab.archetypes.SeriesPoints]."""
 
     def __init__(
         self: Any,

@@ -16,7 +16,7 @@ __all__ = ["VideoTimestamp", "VideoTimestampBatch"]
 
 
 class VideoTimestamp(VideoTimestampExt, datatypes.VideoTimestamp, ComponentMixin):
-    """**Component**: Timestamp inside a [`archetypes.AssetVideo`][rerun.archetypes.AssetVideo]."""
+    """**Component**: Timestamp inside a [`archetypes.AssetVideo`][simplant_lab.archetypes.AssetVideo]."""
 
     _BATCH_TYPE = None
     # __init__ can be found in video_timestamp_ext.py

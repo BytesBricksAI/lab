@@ -80,7 +80,7 @@ class GraphEdges(Archetype, VisualizableArchetype):
         graph_type:
             Specifies if the graph is directed or undirected.
 
-            If no [`components.GraphType`][rerun.components.GraphType] is provided, the graph is assumed to be undirected.
+            If no [`components.GraphType`][simplant_lab.components.GraphType] is provided, the graph is assumed to be undirected.
 
         """
 
@@ -124,7 +124,7 @@ class GraphEdges(Archetype, VisualizableArchetype):
         graph_type:
             Specifies if the graph is directed or undirected.
 
-            If no [`components.GraphType`][rerun.components.GraphType] is provided, the graph is assumed to be undirected.
+            If no [`components.GraphType`][simplant_lab.components.GraphType] is provided, the graph is assumed to be undirected.
 
         """
 
@@ -187,7 +187,7 @@ class GraphEdges(Archetype, VisualizableArchetype):
         graph_type:
             Specifies if the graph is directed or undirected.
 
-            If no [`components.GraphType`][rerun.components.GraphType] is provided, the graph is assumed to be undirected.
+            If no [`components.GraphType`][simplant_lab.components.GraphType] is provided, the graph is assumed to be undirected.
 
         """
 
@@ -252,7 +252,7 @@ class GraphEdges(Archetype, VisualizableArchetype):
     )
     # Specifies if the graph is directed or undirected.
     #
-    # If no [`components.GraphType`][rerun.components.GraphType] is provided, the graph is assumed to be undirected.
+    # If no [`components.GraphType`][simplant_lab.components.GraphType] is provided, the graph is assumed to be undirected.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 

@@ -10,9 +10,9 @@ Shows features for "Any Scalar" visualization:
 from __future__ import annotations
 
 import numpy as np
+import simplant_lab.blueprint as rrb
 
 import simplant_lab as rr
-import rerun.blueprint as rrb
 from simplant_lab.blueprint.datatypes import ComponentSourceKind, VisualizerComponentMapping
 
 

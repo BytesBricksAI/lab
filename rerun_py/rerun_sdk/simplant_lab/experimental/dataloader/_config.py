@@ -26,10 +26,10 @@ class Field:
         `entity_path:Archetype:component` triple identifying the source
         column (e.g. `"/camera:EncodedImage:blob"`).
     decode
-        A [`ColumnDecoder`][rerun.experimental.dataloader.ColumnDecoder]
+        A [`ColumnDecoder`][simplant_lab.experimental.dataloader.ColumnDecoder]
         that turns the Arrow column into a tensor.
     select
-        Optional jq-like [`Selector`][rerun.experimental.Selector] applied
+        Optional jq-like [`Selector`][simplant_lab.experimental.Selector] applied
         client-side to the Arrow column before `decode`. Used for nested
         struct/list access. The server-side projection is unaffected.
 
@@ -47,7 +47,7 @@ class Field:
         sample. Offsets are in the index timeline's native unit:
         integer steps for integer-indexed timelines, nanoseconds for
         timestamp timelines (use multiples of the
-        [`FixedRateSampling`][rerun.experimental.dataloader.FixedRateSampling]
+        [`FixedRateSampling`][simplant_lab.experimental.dataloader.FixedRateSampling]
         period to align with the sampling grid). For example, `(1, 50)`
         on an integer timeline fetches the next 50 values after the
         current sample.

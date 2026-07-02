@@ -9,7 +9,6 @@ import pyarrow as pa
 from pyarrow import RecordBatchReader
 from typing_extensions import deprecated
 
-from simplant_lab._tracing import with_tracing
 from rerun_bindings import (
     DatasetEntryInternal,
     DatasetViewInternal,
@@ -17,6 +16,7 @@ from rerun_bindings import (
     TableInsertModeInternal,
     _IndexValuesLikeInternal,
 )
+from simplant_lab._tracing import with_tracing
 
 from . import ContentFilter, EntryId
 
@@ -533,11 +533,11 @@ class DatasetEntry(Entry[DatasetEntryInternal]):
 
     def segment_store(self, segment_id: str) -> LazyStore:
         """
-        Open a remote segment as a [`LazyStore`][rerun.experimental.LazyStore].
+        Open a remote segment as a [`LazyStore`][simplant_lab.experimental.LazyStore].
 
         The manifest is fetched immediately; chunk data is loaded on demand
-        via [`LazyStore.stream`][rerun.experimental.LazyStore.stream]. To fully
-        materialize into a [`ChunkStore`][rerun.experimental.ChunkStore], call
+        via [`LazyStore.stream`][simplant_lab.experimental.LazyStore.stream]. To fully
+        materialize into a [`ChunkStore`][simplant_lab.experimental.ChunkStore], call
         `lazy.stream().collect()`.
         """
         from simplant_lab.experimental import LazyStore

@@ -31,8 +31,8 @@ class McapChannel(Archetype):
     Each channel has a unique identifier and specifies the message schema and encoding used
     for all messages published to that topic.
 
-    See also [`archetypes.McapMessage`][rerun.archetypes.McapMessage] for individual messages within a channel,
-    [`archetypes.McapSchema`][rerun.archetypes.McapSchema] for the data structure definitions, and the
+    See also [`archetypes.McapMessage`][simplant_lab.archetypes.McapMessage] for individual messages within a channel,
+    [`archetypes.McapSchema`][simplant_lab.archetypes.McapSchema] for the data structure definitions, and the
     [MCAP specification](https://mcap.dev/) for complete format details.
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**

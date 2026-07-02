@@ -13,10 +13,10 @@ from typing import Any
 
 import humanize
 import pytz
+import simplant_lab.blueprint as rrb
 import yfinance as yf
 
 import simplant_lab as rr
-import rerun.blueprint as rrb
 
 ################################################################################
 # Helper functions to create blueprints

@@ -2,8 +2,9 @@
 
 import math
 
-import simplant_lab as rr
 import rerun.blueprint as rrb
+
+import simplant_lab as rr
 
 
 def point(t: float, phase: float) -> list[float]:

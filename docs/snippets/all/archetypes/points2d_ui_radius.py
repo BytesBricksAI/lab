@@ -1,7 +1,8 @@
 """Log some points with ui points & scene unit radii."""
 
-import simplant_lab as rr
 import rerun.blueprint as rrb
+
+import simplant_lab as rr
 
 rr.init("rerun_example_points2d_ui_radius", spawn=True)
 

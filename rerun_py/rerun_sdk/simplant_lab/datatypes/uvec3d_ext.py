@@ -15,7 +15,7 @@ NUMPY_VERSION = tuple(map(int, np.version.version.split(".")[:2]))
 
 
 class UVec3DExt:
-    """Extension for [UVec3D][rerun.datatypes.UVec3D]."""
+    """Extension for [UVec3D][simplant_lab.datatypes.UVec3D]."""
 
     @staticmethod
     def native_to_pa_array_override(data: UVec3DArrayLike, data_type: pa.DataType) -> pa.Array:

@@ -125,7 +125,7 @@ class LineStrips3D(Archetype, VisualizableArchetype):
     import math
 
     import simplant_lab as rr
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
 
     def point(t: float, phase: float) -> list[float]:
@@ -213,9 +213,9 @@ class LineStrips3D(Archetype, VisualizableArchetype):
             If not set, labels will automatically appear when there is exactly one label for this entity
             or the number of instances on this entity is under a certain threshold.
         class_ids:
-            Optional [`components.ClassId`][rerun.components.ClassId]s for the lines.
+            Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the lines.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -281,9 +281,9 @@ class LineStrips3D(Archetype, VisualizableArchetype):
             If not set, labels will automatically appear when there is exactly one label for this entity
             or the number of instances on this entity is under a certain threshold.
         class_ids:
-            Optional [`components.ClassId`][rerun.components.ClassId]s for the lines.
+            Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the lines.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -398,9 +398,9 @@ class LineStrips3D(Archetype, VisualizableArchetype):
             If not set, labels will automatically appear when there is exactly one label for this entity
             or the number of instances on this entity is under a certain threshold.
         class_ids:
-            Optional [`components.ClassId`][rerun.components.ClassId]s for the lines.
+            Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the lines.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -516,9 +516,9 @@ class LineStrips3D(Archetype, VisualizableArchetype):
         default=None,
         converter=components.ClassIdBatch._converter,  # type: ignore[misc]
     )
-    # Optional [`components.ClassId`][rerun.components.ClassId]s for the lines.
+    # Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the lines.
     #
-    # The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+    # The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 

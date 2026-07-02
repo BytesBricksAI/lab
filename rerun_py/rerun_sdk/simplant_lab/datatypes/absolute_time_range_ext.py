@@ -13,7 +13,7 @@ def converter(x: datatypes.TimeIntLike) -> datatypes.TimeInt:
 
 
 class AbsoluteTimeRangeExt:
-    """Extension for [AbsoluteTimeRange][rerun.datatypes.AbsoluteTimeRange]."""
+    """Extension for [AbsoluteTimeRange][simplant_lab.datatypes.AbsoluteTimeRange]."""
 
     def __init__(self: Any, min: datatypes.TimeIntLike, max: datatypes.TimeIntLike) -> None:
         """

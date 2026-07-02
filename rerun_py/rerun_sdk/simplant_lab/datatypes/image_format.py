@@ -25,7 +25,7 @@ __all__ = ["ImageFormat", "ImageFormatArrayLike", "ImageFormatBatch", "ImageForm
 
 @define(init=False)
 class ImageFormat(ImageFormatExt):
-    """**Datatype**: The metadata describing the contents of a [`components.ImageBuffer`][rerun.components.ImageBuffer]."""
+    """**Datatype**: The metadata describing the contents of a [`components.ImageBuffer`][simplant_lab.components.ImageBuffer]."""
 
     def __init__(
         self: Any,
@@ -48,15 +48,15 @@ class ImageFormat(ImageFormatExt):
         pixel_format:
             Used mainly for chroma downsampled formats and differing number of bits per channel.
 
-            If specified, this takes precedence over both [`datatypes.ColorModel`][rerun.datatypes.ColorModel] and [`datatypes.ChannelDatatype`][rerun.datatypes.ChannelDatatype] (which are ignored).
+            If specified, this takes precedence over both [`datatypes.ColorModel`][simplant_lab.datatypes.ColorModel] and [`datatypes.ChannelDatatype`][simplant_lab.datatypes.ChannelDatatype] (which are ignored).
         color_model:
             L, RGB, RGBA, …
 
-            Also requires a [`datatypes.ChannelDatatype`][rerun.datatypes.ChannelDatatype] to fully specify the pixel format.
+            Also requires a [`datatypes.ChannelDatatype`][simplant_lab.datatypes.ChannelDatatype] to fully specify the pixel format.
         channel_datatype:
             The data type of each channel (e.g. the red channel) of the image data (U8, F16, …).
 
-            Also requires a [`datatypes.ColorModel`][rerun.datatypes.ColorModel] to fully specify the pixel format.
+            Also requires a [`datatypes.ColorModel`][simplant_lab.datatypes.ColorModel] to fully specify the pixel format.
 
         """
 
@@ -85,7 +85,7 @@ class ImageFormat(ImageFormatExt):
     )
     # Used mainly for chroma downsampled formats and differing number of bits per channel.
     #
-    # If specified, this takes precedence over both [`datatypes.ColorModel`][rerun.datatypes.ColorModel] and [`datatypes.ChannelDatatype`][rerun.datatypes.ChannelDatatype] (which are ignored).
+    # If specified, this takes precedence over both [`datatypes.ColorModel`][simplant_lab.datatypes.ColorModel] and [`datatypes.ChannelDatatype`][simplant_lab.datatypes.ChannelDatatype] (which are ignored).
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 
@@ -95,7 +95,7 @@ class ImageFormat(ImageFormatExt):
     )
     # L, RGB, RGBA, …
     #
-    # Also requires a [`datatypes.ChannelDatatype`][rerun.datatypes.ChannelDatatype] to fully specify the pixel format.
+    # Also requires a [`datatypes.ChannelDatatype`][simplant_lab.datatypes.ChannelDatatype] to fully specify the pixel format.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 
@@ -105,7 +105,7 @@ class ImageFormat(ImageFormatExt):
     )
     # The data type of each channel (e.g. the red channel) of the image data (U8, F16, …).
     #
-    # Also requires a [`datatypes.ColorModel`][rerun.datatypes.ColorModel] to fully specify the pixel format.
+    # Also requires a [`datatypes.ColorModel`][simplant_lab.datatypes.ColorModel] to fully specify the pixel format.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 

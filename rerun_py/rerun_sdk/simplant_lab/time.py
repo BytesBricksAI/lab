@@ -49,7 +49,7 @@ def set_time(
     Set the current time of a timeline for this thread.
 
     Used for all subsequent logging on the same thread, until the next call to
-    [`rerun.set_time`][], [`rerun.reset_time`][] or [`rerun.disable_timeline`][].
+    [`simplant_lab.set_time`][], [`simplant_lab.reset_time`][] or [`simplant_lab.disable_timeline`][].
 
     For example: `set_time("frame_nr", sequence=frame_nr)`.
 
@@ -59,16 +59,16 @@ def set_time(
     You may NOT change the type of a timeline, so if you use `duration` for a specific timeline,
     you must only use `duration` for that timeline going forward.
 
-    The columnar equivalent to this function is [`rerun.TimeColumn`][].
+    The columnar equivalent to this function is [`simplant_lab.TimeColumn`][].
 
     Parameters
     ----------
     timeline:
         The name of the timeline to set the time for.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording (if there is one).
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
     sequence:
         Used for sequential indices, like `frame_nr`.
         Must be an integer.
@@ -168,9 +168,9 @@ def disable_timeline(timeline: str, recording: RecordingStream | None = None) ->
     timeline:
         The name of the timeline to clear the time for.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     """
 
@@ -188,14 +188,14 @@ def reset_time(recording: RecordingStream | None = None) -> None:
     This is the same as calling `disable_timeline` for all of the active timelines.
 
     Used for all subsequent logging on the same thread,
-    until the next call to [`rerun.set_time`][].
+    until the next call to [`simplant_lab.set_time`][].
 
     Parameters
     ----------
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     """
 

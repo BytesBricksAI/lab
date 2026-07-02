@@ -4,7 +4,7 @@ from ... import datatypes
 
 
 class FilterByRangeExt:
-    """Extension for [FilterByRange][rerun.blueprint.datatypes.FilterByRange]."""
+    """Extension for [FilterByRange][simplant_lab.blueprint.datatypes.FilterByRange]."""
 
     # These overrides are required because otherwise the codegen uses `TimeInt(x)`, which is not valid with the custom
     # `TimeInt.__init__` override.

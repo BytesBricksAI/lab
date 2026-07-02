@@ -5,11 +5,11 @@ from typing import Any
 
 import numpy as np
 import pytest
-import rerun as rr
+import simplant_lab as rr
 import torch
-from rerun.components import DepthMeter, ImageFormat
-from rerun.datatypes import ChannelDatatype, Float32Like
-from rerun.error_utils import RerunWarning
+from simplant_lab.components import DepthMeter, ImageFormat
+from simplant_lab.datatypes import ChannelDatatype, Float32Like
+from simplant_lab.error_utils import RerunWarning
 
 rng = np.random.default_rng(12345)
 RANDOM_IMAGE_SOURCE = rng.uniform(0.0, 1.0, (10, 20))
@@ -74,7 +74,7 @@ BAD_IMAGE_INPUTS: list[Any] = [
 
 
 def test_depth_image_shapes() -> None:
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.set_strict_mode(True)
 

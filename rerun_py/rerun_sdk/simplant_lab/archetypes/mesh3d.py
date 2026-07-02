@@ -32,9 +32,9 @@ class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
     """
     **Archetype**: A 3D triangle mesh as specified by its per-mesh and per-vertex properties.
 
-    See also [`archetypes.Asset3D`][rerun.archetypes.Asset3D].
+    See also [`archetypes.Asset3D`][simplant_lab.archetypes.Asset3D].
 
-    If there are multiple [`archetypes.InstancePoses3D`][rerun.archetypes.InstancePoses3D] instances logged to the same entity as a mesh,
+    If there are multiple [`archetypes.InstancePoses3D`][simplant_lab.archetypes.InstancePoses3D] instances logged to the same entity as a mesh,
     an instance of the mesh will be drawn for each transform.
 
     For transparency ordering, as well as back face culling (disabled by default),
@@ -184,11 +184,11 @@ class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
         face_rendering:
             Determines which faces of the mesh are rendered.
 
-            The default is [`components.MeshFaceRendering.DoubleSided`][rerun.components.MeshFaceRendering.DoubleSided], meaning both front and back faces are shown.
+            The default is [`components.MeshFaceRendering.DoubleSided`][simplant_lab.components.MeshFaceRendering.DoubleSided], meaning both front and back faces are shown.
         albedo_texture_buffer:
             Optional albedo texture.
 
-            Used with the [`components.Texcoord2D`][rerun.components.Texcoord2D] of the mesh.
+            Used with the [`components.Texcoord2D`][simplant_lab.components.Texcoord2D] of the mesh.
 
             Currently supports only sRGB(A) textures, ignoring alpha.
             (meaning that the tensor must have 3 or 4 channels and use the `u8` format)
@@ -199,7 +199,7 @@ class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
         class_ids:
             Optional class Ids for the vertices.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -358,11 +358,11 @@ class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
         face_rendering:
             Determines which faces of the mesh are rendered.
 
-            The default is [`components.MeshFaceRendering.DoubleSided`][rerun.components.MeshFaceRendering.DoubleSided], meaning both front and back faces are shown.
+            The default is [`components.MeshFaceRendering.DoubleSided`][simplant_lab.components.MeshFaceRendering.DoubleSided], meaning both front and back faces are shown.
         albedo_texture_buffer:
             Optional albedo texture.
 
-            Used with the [`components.Texcoord2D`][rerun.components.Texcoord2D] of the mesh.
+            Used with the [`components.Texcoord2D`][simplant_lab.components.Texcoord2D] of the mesh.
 
             Currently supports only sRGB(A) textures, ignoring alpha.
             (meaning that the tensor must have 3 or 4 channels and use the `u8` format)
@@ -373,7 +373,7 @@ class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
         class_ids:
             Optional class Ids for the vertices.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -508,7 +508,7 @@ class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
     )
     # Determines which faces of the mesh are rendered.
     #
-    # The default is [`components.MeshFaceRendering.DoubleSided`][rerun.components.MeshFaceRendering.DoubleSided], meaning both front and back faces are shown.
+    # The default is [`components.MeshFaceRendering.DoubleSided`][simplant_lab.components.MeshFaceRendering.DoubleSided], meaning both front and back faces are shown.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 
@@ -519,7 +519,7 @@ class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
     )
     # Optional albedo texture.
     #
-    # Used with the [`components.Texcoord2D`][rerun.components.Texcoord2D] of the mesh.
+    # Used with the [`components.Texcoord2D`][simplant_lab.components.Texcoord2D] of the mesh.
     #
     # Currently supports only sRGB(A) textures, ignoring alpha.
     # (meaning that the tensor must have 3 or 4 channels and use the `u8` format)
@@ -544,7 +544,7 @@ class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
     )
     # Optional class Ids for the vertices.
     #
-    # The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+    # The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 

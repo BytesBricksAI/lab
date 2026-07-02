@@ -26,10 +26,10 @@ class KeypointId:
     """
     **Datatype**: A 16-bit ID representing a type of semantic keypoint within a class.
 
-    `KeypointId`s are only meaningful within the context of a [`rerun.datatypes.ClassDescription`].
+    `KeypointId`s are only meaningful within the context of a [`simplant_lab.datatypes.ClassDescription`].
 
-    Used to look up an [`rerun.datatypes.AnnotationInfo`] for a Keypoint within the
-    [`rerun.components.AnnotationContext`].
+    Used to look up an [`simplant_lab.datatypes.AnnotationInfo`] for a Keypoint within the
+    [`simplant_lab.components.AnnotationContext`].
     """
 
     def __init__(self: Any, id: KeypointIdLike) -> None:

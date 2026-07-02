@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 
 class TensorDimensionSelectionExt:
-    """Extension for [TensorDimensionSelection][rerun.datatypes.TensorDimensionSelection]."""
+    """Extension for [TensorDimensionSelection][simplant_lab.datatypes.TensorDimensionSelection]."""
 
     # TODO(#2641): this is needed until we support default values.
     def __init__(self: Any, dimension: int, *, invert: bool = False) -> None:

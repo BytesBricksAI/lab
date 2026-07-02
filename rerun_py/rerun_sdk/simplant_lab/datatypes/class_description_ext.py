@@ -34,7 +34,7 @@ def _class_description_converter(
 
 
 class ClassDescriptionExt:
-    """Extension for [ClassDescription][rerun.datatypes.ClassDescription]."""
+    """Extension for [ClassDescription][simplant_lab.datatypes.ClassDescription]."""
 
     def __init__(
         self: Any,

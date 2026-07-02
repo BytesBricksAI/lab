@@ -5,7 +5,6 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
-
 import simplant_lab as sl
 
 LAB_ROOT = Path(__file__).resolve().parents[2]

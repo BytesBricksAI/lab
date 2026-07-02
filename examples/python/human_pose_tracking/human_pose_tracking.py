@@ -17,9 +17,9 @@ import mediapipe.python.solutions.pose as mp_pose
 import numpy as np
 import numpy.typing as npt
 import requests
+import simplant_lab.blueprint as rrb
 
-import simplant_lab as rr  # pip install rerun-sdk
-import rerun.blueprint as rrb
+import simplant_lab as rr  # pip install simplant-lab-sdk
 
 if TYPE_CHECKING:
     from collections.abc import Iterator

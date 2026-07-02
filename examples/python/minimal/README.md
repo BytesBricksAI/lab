@@ -27,7 +27,7 @@ The visualizations in this example were created with the following Rerun code:
 
 It logs 3D points, each associated with a specific color, forming a grid pattern using [`Points3D`](https://www.rerun.io/docs/reference/types/archetypes/points3d) archetype.
 ```python
-import rerun as rr
+import simplant_lab as rr
 import numpy as np
 
 rr.init("rerun_example_my_data", spawn=True)
@@ -46,7 +46,7 @@ rr.log("my_points", rr.Points3D(positions, colors=colors, radii=0.5))
 ## Run the code
 To run this example, make sure you have the Rerun repository checked out and the latest SDK installed:
 ```bash
-pip install --upgrade rerun-sdk  # install the latest Rerun SDK
+pip install --upgrade simplant-lab-sdk  # install the latest Rerun SDK
 git clone git@github.com:rerun-io/rerun.git  # Clone the repository
 cd rerun
 git checkout latest  # Check out the commit matching the latest SDK release

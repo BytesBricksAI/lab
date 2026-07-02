@@ -49,7 +49,7 @@ class AnyValues(AsComponents):
         fine as logging `None` to clear the value before it has been logged is
         meaningless unless you are logging out-of-order data. In such cases,
         consider introducing your own typed component via
-        [rerun.ComponentBatchLike][].
+        [simplant_lab.ComponentBatchLike][].
 
         You can change this behavior by setting `drop_untyped_nones` to `False`,
         but be aware that this will result in potential warnings (or exceptions
@@ -120,7 +120,7 @@ class AnyValues(AsComponents):
         fine as logging `None` to clear the value before it has been logged is
         meaningless unless you are logging out-of-order data. In such cases,
         consider introducing your own typed component via
-        [rerun.ComponentBatchLike][].
+        [simplant_lab.ComponentBatchLike][].
 
         You can change this behavior by setting `drop_untyped_nones` to `False`,
         but be aware that this will result in potential warnings (or exceptions

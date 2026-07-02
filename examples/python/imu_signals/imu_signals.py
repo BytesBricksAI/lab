@@ -11,7 +11,7 @@ import requests
 from tqdm.auto import tqdm
 
 import simplant_lab as rr
-from rerun import blueprint as rrb
+from simplant_lab import blueprint as rrb
 
 DATA_DIR = Path(__file__).parent / "dataset"
 

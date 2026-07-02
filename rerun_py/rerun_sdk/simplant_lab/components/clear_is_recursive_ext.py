@@ -4,7 +4,7 @@ from typing import Any
 
 
 class ClearIsRecursiveExt:
-    """Extension for [ClearIsRecursive][rerun.components.ClearIsRecursive]."""
+    """Extension for [ClearIsRecursive][simplant_lab.components.ClearIsRecursive]."""
 
     def __init__(
         self: Any,

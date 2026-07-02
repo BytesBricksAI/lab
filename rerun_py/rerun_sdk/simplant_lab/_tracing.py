@@ -1,8 +1,8 @@
 """
 OpenTelemetry tracing helpers shared across Rerun-based Python code.
 
-Provides [`with_tracing`][rerun._tracing.with_tracing] (decorator) and
-[`tracing_scope`][rerun._tracing.tracing_scope] (context manager), which both
+Provides [`with_tracing`][simplant_lab._tracing.with_tracing] (decorator) and
+[`tracing_scope`][simplant_lab._tracing.tracing_scope] (context manager), which both
 create a Python OpenTelemetry span and bridge the trace context into Rerun's
 Rust SDK so `#[instrument]` spans on the Rust side become children of the
 Python span.
@@ -12,7 +12,7 @@ endpoint is configured via `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` (or the umbrella
 `OTEL_EXPORTER_OTLP_ENDPOINT`). Otherwise both helpers are pass-throughs.
 
 This module is private — external callers should re-export these helpers from
-the consumer package rather than importing `rerun._tracing` directly.
+the consumer package rather than importing `simplant_lab._tracing` directly.
 """
 
 from __future__ import annotations
@@ -56,7 +56,7 @@ def _init_once() -> None:
         from opentelemetry.sdk.trace import TracerProvider
         from opentelemetry.sdk.trace.export import BatchSpanProcessor
     except ImportError:
-        logger.warning("`with_tracing` is a no-op: install OpenTelemetry via `pip install rerun-sdk[tracing]`")
+        logger.warning("`with_tracing` is a no-op: install OpenTelemetry via `pip install simplant-lab-sdk[tracing]`")
         return
 
     endpoint = os.environ.get("OTEL_EXPORTER_OTLP_TRACES_ENDPOINT") or os.environ.get("OTEL_EXPORTER_OTLP_ENDPOINT")
@@ -66,7 +66,7 @@ def _init_once() -> None:
         )
         return
 
-    service_name = os.environ.get("OTEL_SERVICE_NAME") or "rerun-py"
+    service_name = os.environ.get("OTEL_SERVICE_NAME") or "simplant-lab-py"
 
     provider = TracerProvider(resource=Resource.create({"service.name": service_name}))
     provider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter(endpoint=endpoint)))
@@ -82,7 +82,7 @@ def current_trace_carrier() -> dict[str, str] | None:
 
     Returns `None` if tracing is disabled or no context is active. The carrier
     is safe to pickle and pass across process boundaries; pair with
-    [`attach_parent_carrier`][rerun._tracing.attach_parent_carrier] in the child
+    [`attach_parent_carrier`][simplant_lab._tracing.attach_parent_carrier] in the child
     to make its spans children of the captured context.
     """
     _init_once()
@@ -101,7 +101,7 @@ def attach_parent_carrier(carrier: dict[str, str] | None) -> None:
     """
     Attach a W3C carrier as the ambient parent context for the current thread.
 
-    All subsequent spans created on this thread (via [`with_tracing`][rerun._tracing.with_tracing]
+    All subsequent spans created on this thread (via [`with_tracing`][simplant_lab._tracing.with_tracing]
     or otherwise) will be parented under the extracted context. The attachment
     is intentionally not detached — call this once per worker thread/process on
     entry, typically from `__setstate__` after unpickling.
@@ -152,7 +152,7 @@ def tracing_scope(name: str) -> Iterator[None]:
     """
     Open an OpenTelemetry span for the duration of a `with` block and propagate trace context into Rerun's Rust SDK.
 
-    Context-manager counterpart to [`with_tracing`][rerun._tracing.with_tracing] —
+    Context-manager counterpart to [`with_tracing`][simplant_lab._tracing.with_tracing] —
     use it to scope arbitrary blocks of code without extracting them into a
     function. Any Rust-side `#[instrument]` spans triggered from within will be
     parented under this span in Jaeger.
@@ -176,7 +176,7 @@ def tracing_scope(name: str) -> Iterator[None]:
 
     from opentelemetry import trace
 
-    with trace.get_tracer("rerun").start_as_current_span(name):
+    with trace.get_tracer("simplant_lab").start_as_current_span(name):
         attachment = _push_carrier_to_rust()
         try:
             yield
@@ -194,7 +194,7 @@ def with_tracing(name: str) -> Callable[[F], F]:
     parented under this span in Jaeger.
 
     For ad-hoc blocks that don't belong in a dedicated function, use
-    [`tracing_scope`][rerun._tracing.tracing_scope] instead.
+    [`tracing_scope`][simplant_lab._tracing.tracing_scope] instead.
 
     No-op unless `TELEMETRY_ENABLED=true` and an OTLP endpoint is configured
     (`OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` or `OTEL_EXPORTER_OTLP_ENDPOINT`).

@@ -2,13 +2,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-import rerun.components as rrc
-from rerun.archetypes import ViewCoordinates
+import simplant_lab.components as rrc
+from simplant_lab.archetypes import ViewCoordinates
 
 from .common_arrays import none_empty_or_value
 
 if TYPE_CHECKING:
-    from rerun.datatypes.view_coordinates import ViewCoordinatesArrayLike
+    from simplant_lab.datatypes.view_coordinates import ViewCoordinatesArrayLike
 
 
 def view_coordinates_expected(obj: Any) -> rrc.ViewCoordinatesBatch:

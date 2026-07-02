@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 
 class ComponentColumnSelectorExt:
-    """Extension for [ComponentColumnSelector][rerun.blueprint.datatypes.ComponentColumnSelector]."""
+    """Extension for [ComponentColumnSelector][simplant_lab.blueprint.datatypes.ComponentColumnSelector]."""
 
     def __init__(
         self: Any,

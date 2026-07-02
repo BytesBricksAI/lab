@@ -8,7 +8,7 @@ import argparse
 import numpy as np
 import pyrealsense2 as rs
 
-import simplant_lab as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install simplant-lab-sdk
 
 
 def run_realsense(num_frames: int | None) -> None:

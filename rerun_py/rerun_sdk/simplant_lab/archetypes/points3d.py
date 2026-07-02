@@ -248,11 +248,11 @@ class Points3D(Points3DExt, Archetype, VisualizableArchetype):
         class_ids:
             Optional class Ids for the points.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
         keypoint_ids:
             Optional keypoint IDs for the points, identifying them within a class.
 
-            If keypoint IDs are passed in but no [`components.ClassId`][rerun.components.ClassId]s were specified, the [`components.ClassId`][rerun.components.ClassId] will
+            If keypoint IDs are passed in but no [`components.ClassId`][simplant_lab.components.ClassId]s were specified, the [`components.ClassId`][simplant_lab.components.ClassId] will
             default to 0.
             This is useful to identify points within a single classification (which is identified
             with `class_id`).
@@ -387,11 +387,11 @@ class Points3D(Points3DExt, Archetype, VisualizableArchetype):
         class_ids:
             Optional class Ids for the points.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
         keypoint_ids:
             Optional keypoint IDs for the points, identifying them within a class.
 
-            If keypoint IDs are passed in but no [`components.ClassId`][rerun.components.ClassId]s were specified, the [`components.ClassId`][rerun.components.ClassId] will
+            If keypoint IDs are passed in but no [`components.ClassId`][simplant_lab.components.ClassId]s were specified, the [`components.ClassId`][simplant_lab.components.ClassId] will
             default to 0.
             This is useful to identify points within a single classification (which is identified
             with `class_id`).
@@ -519,7 +519,7 @@ class Points3D(Points3DExt, Archetype, VisualizableArchetype):
     )
     # Optional class Ids for the points.
     #
-    # The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+    # The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 
@@ -530,7 +530,7 @@ class Points3D(Points3DExt, Archetype, VisualizableArchetype):
     )
     # Optional keypoint IDs for the points, identifying them within a class.
     #
-    # If keypoint IDs are passed in but no [`components.ClassId`][rerun.components.ClassId]s were specified, the [`components.ClassId`][rerun.components.ClassId] will
+    # If keypoint IDs are passed in but no [`components.ClassId`][simplant_lab.components.ClassId]s were specified, the [`components.ClassId`][simplant_lab.components.ClassId] will
     # default to 0.
     # This is useful to identify points within a single classification (which is identified
     # with `class_id`).

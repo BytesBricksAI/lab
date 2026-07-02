@@ -46,7 +46,7 @@ class RerunIterableDataset(torch.utils.data.IterableDataset[dict[str, torch.Tens
         Sample fields, keyed by output name.
     timeline_sampling
         Required when `index` is a timestamp timeline; ignored for
-        integer indices. Pass [`FixedRateSampling`][rerun.experimental.dataloader.FixedRateSampling]
+        integer indices. Pass [`FixedRateSampling`][simplant_lab.experimental.dataloader.FixedRateSampling]
         to sample on a fixed grid (e.g. 30 Hz).
     fetch_size
         Number of samples to fetch per server query. Larger values
@@ -91,7 +91,7 @@ class RerunIterableDataset(torch.utils.data.IterableDataset[dict[str, torch.Tens
 
     @property
     def sample_index(self) -> SampleIndex:
-        """The underlying [`SampleIndex`][rerun.experimental.dataloader.SampleIndex]."""
+        """The underlying [`SampleIndex`][simplant_lab.experimental.dataloader.SampleIndex]."""
         return self._sample_index
 
     def __len__(self) -> int:

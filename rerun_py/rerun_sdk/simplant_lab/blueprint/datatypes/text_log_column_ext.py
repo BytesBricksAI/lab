@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 
 
 class TextLogColumnExt:
-    """Extension for [TextLogColumn][rerun.blueprint.datatypes.TextLogColumn]."""
+    """Extension for [TextLogColumn][simplant_lab.blueprint.datatypes.TextLogColumn]."""
 
     def __init__(self: Any, kind: TextLogColumnKindLike, *, visible: datatypes.BoolLike = True) -> None:
         """

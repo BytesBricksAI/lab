@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from rerun import bindings
+import rerun_bindings as bindings
 
 if TYPE_CHECKING:
     from .recording_stream import RecordingStream
@@ -15,14 +15,14 @@ def memory_recording(recording: RecordingStream | None = None) -> MemoryRecordin
     Streams all log-data to a memory buffer.
 
     This can be used to display the RRD to alternative formats such as html.
-    See: [rerun.notebook_show][].
+    See: [simplant_lab.notebook_show][].
 
     Parameters
     ----------
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     Returns
     -------

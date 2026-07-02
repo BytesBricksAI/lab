@@ -6,7 +6,7 @@ import pyarrow
 from datafusion import col
 
 if TYPE_CHECKING:
-    from rerun.catalog import DatasetEntry
+    from simplant_lab.catalog import DatasetEntry
 
     from .conftest import PrefilledCatalog
 
@@ -77,7 +77,7 @@ def test_tables_to_arrow_reader(prefilled_catalog: PrefilledCatalog) -> None:
 
 def test_query_view_from_schema(readonly_test_dataset: DatasetEntry) -> None:
     """Verify Our Schema is sufficiently descriptive to extract all contents from dataset."""
-    from rerun.catalog import IndexColumnDescriptor
+    from simplant_lab.catalog import IndexColumnDescriptor
 
     # TODO(nick): This only works for a single shared index column
     # We should consider if our schema is sufficiently descriptive for

@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 
 class TimeRangeBoundaryExt:
-    """Extension for [TimeRangeBoundary][rerun.datatypes.TimeRangeBoundary]."""
+    """Extension for [TimeRangeBoundary][simplant_lab.datatypes.TimeRangeBoundary]."""
 
     @overload
     @staticmethod

@@ -9,7 +9,7 @@ from collections.abc import Sequence
 from typing import Literal
 
 import pyarrow as pa
-from rerun._baseclasses import (
+from simplant_lab._baseclasses import (
     BaseBatch,
 )
 

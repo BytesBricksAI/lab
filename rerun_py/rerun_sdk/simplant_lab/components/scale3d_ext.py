@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 
 
 class Scale3DExt:
-    """Extension for [Scale3D][rerun.components.Scale3D]."""
+    """Extension for [Scale3D][simplant_lab.components.Scale3D]."""
 
     def __init__(
         self: Any,

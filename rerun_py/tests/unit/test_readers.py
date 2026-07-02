@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import pytest
-from rerun.experimental import (
+from simplant_lab.experimental import (
     IndexedReader,
     RrdReader,
     StreamingReader,

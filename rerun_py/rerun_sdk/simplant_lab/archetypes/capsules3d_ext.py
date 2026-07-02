@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 
 class Capsules3DExt:
-    """Extension for [Capsules3D][rerun.archetypes.Capsules3D]."""
+    """Extension for [Capsules3D][simplant_lab.archetypes.Capsules3D]."""
 
     def __init__(
         self: Any,

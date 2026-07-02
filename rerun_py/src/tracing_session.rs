@@ -1,6 +1,6 @@
 //! Python-side bridge for the `tracing_session()` context manager.
 //!
-//! See `rerun_py/rerun_sdk/rerun/_tracing_session.py` for the user-facing API.
+//! See `rerun_py/rerun_sdk/simplant_lab/_tracing_session.py` for the user-facing API.
 //!
 //! The bridge has two pyo3 entry points:
 //!

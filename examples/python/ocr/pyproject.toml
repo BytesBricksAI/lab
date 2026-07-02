@@ -10,7 +10,7 @@ dependencies = [
   "pandas",
   "pdf2image",
   "requests",
-  "rerun-sdk",
+  "simplant-lab-sdk",
   "setuptools",
   "tabulate",
   "tqdm",

@@ -16,7 +16,7 @@ def next_offset(acc: int, arr: Sized) -> int:
 
 
 class LineStrip3DExt:
-    """Extension for [LineStrip3D][rerun.components.LineStrip3D]."""
+    """Extension for [LineStrip3D][simplant_lab.components.LineStrip3D]."""
 
     @staticmethod
     def native_to_pa_array_override(data: LineStrip3DArrayLike, data_type: pa.DataType) -> pa.Array:

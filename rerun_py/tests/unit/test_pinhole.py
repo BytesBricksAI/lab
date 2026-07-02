@@ -4,11 +4,11 @@ import itertools
 from typing import TYPE_CHECKING
 
 import numpy as np
-import rerun as rr
-from rerun.components import PinholeProjectionBatch, ResolutionBatch, ViewCoordinatesBatch
+import simplant_lab as rr
+from simplant_lab.components import PinholeProjectionBatch, ResolutionBatch, ViewCoordinatesBatch
 
 if TYPE_CHECKING:
-    from rerun.datatypes import Mat3x3Like, Vec2DLike, ViewCoordinatesLike
+    from simplant_lab.datatypes import Mat3x3Like, Vec2DLike, ViewCoordinatesLike
 
 
 def test_pinhole() -> None:

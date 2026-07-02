@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import tempfile
 
-import rerun as rr
+import simplant_lab as rr
 
 import rerun_bindings  # noqa: TID251
 

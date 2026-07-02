@@ -32,7 +32,7 @@ class Scalars(Archetype):
     Number of scalars per timestamp is expected to be the same over time.
 
     When used to produce a plot, this archetype is used to provide the data that
-    is referenced by [`archetypes.SeriesLines`][rerun.archetypes.SeriesLines] or [`archetypes.SeriesPoints`][rerun.archetypes.SeriesPoints]. You can do
+    is referenced by [`archetypes.SeriesLines`][simplant_lab.archetypes.SeriesLines] or [`archetypes.SeriesPoints`][simplant_lab.archetypes.SeriesPoints]. You can do
     this by logging both archetypes to the same path, or alternatively configuring
     the plot-specific archetypes through the blueprint.
 

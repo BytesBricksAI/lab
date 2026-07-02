@@ -135,9 +135,9 @@ class Ellipses2D(Ellipses2DExt, Archetype, VisualizableArchetype):
             Objects with higher values are drawn on top of those with lower values.
             Defaults to `10.0`.
         class_ids:
-            Optional [`components.ClassId`][rerun.components.ClassId]s for the ellipses.
+            Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the ellipses.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -279,9 +279,9 @@ class Ellipses2D(Ellipses2DExt, Archetype, VisualizableArchetype):
             Objects with higher values are drawn on top of those with lower values.
             Defaults to `10.0`.
         class_ids:
-            Optional [`components.ClassId`][rerun.components.ClassId]s for the ellipses.
+            Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the ellipses.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -422,9 +422,9 @@ class Ellipses2D(Ellipses2DExt, Archetype, VisualizableArchetype):
         default=None,
         converter=components.ClassIdBatch._converter,  # type: ignore[misc]
     )
-    # Optional [`components.ClassId`][rerun.components.ClassId]s for the ellipses.
+    # Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the ellipses.
     #
-    # The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+    # The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 

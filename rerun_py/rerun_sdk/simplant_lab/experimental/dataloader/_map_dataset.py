@@ -26,7 +26,7 @@ class RerunMapDataset(torch.utils.data.Dataset[dict[str, torch.Tensor | None]]):
     are driven by the `DataLoader`'s sampler.
 
     For streaming iteration with internal shuffling, use
-    [`RerunIterableDataset`][rerun.experimental.dataloader.RerunIterableDataset] instead.
+    [`RerunIterableDataset`][simplant_lab.experimental.dataloader.RerunIterableDataset] instead.
 
     Parameters
     ----------
@@ -38,7 +38,7 @@ class RerunMapDataset(torch.utils.data.Dataset[dict[str, torch.Tensor | None]]):
         Sample fields, keyed by output name.
     timeline_sampling
         Required when `index` is a timestamp timeline; ignored for
-        integer indices. Pass [`FixedRateSampling`][rerun.experimental.dataloader.FixedRateSampling] to sample on
+        integer indices. Pass [`FixedRateSampling`][simplant_lab.experimental.dataloader.FixedRateSampling] to sample on
         a fixed grid (e.g. 30 Hz).
 
     Examples
@@ -87,7 +87,7 @@ class RerunMapDataset(torch.utils.data.Dataset[dict[str, torch.Tensor | None]]):
 
     @property
     def sample_index(self) -> SampleIndex:
-        """The underlying [`SampleIndex`][rerun.experimental.dataloader.SampleIndex]."""
+        """The underlying [`SampleIndex`][simplant_lab.experimental.dataloader.SampleIndex]."""
         return self._sample_index
 
     def __len__(self) -> int:

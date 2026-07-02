@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 
 
 class VisibleTimeRangeExt:
-    """Extension for [VisibleTimeRange][rerun.datatypes.VisibleTimeRange]."""
+    """Extension for [VisibleTimeRange][simplant_lab.datatypes.VisibleTimeRange]."""
 
     def __init__(
         self: Any,

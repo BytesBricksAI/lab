@@ -4,7 +4,7 @@ from typing import Any, overload
 
 
 class TimeIntExt:
-    """Extension for [TimeInt][rerun.datatypes.TimeInt]."""
+    """Extension for [TimeInt][simplant_lab.datatypes.TimeInt]."""
 
     @overload
     def __init__(self: Any, *, seq: int) -> None: ...

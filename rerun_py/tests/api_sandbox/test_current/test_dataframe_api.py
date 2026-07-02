@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import rerun as rr
+import simplant_lab as rr
 from inline_snapshot import snapshot as inline_snapshot
 
 if TYPE_CHECKING:

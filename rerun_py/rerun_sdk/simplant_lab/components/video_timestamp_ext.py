@@ -11,7 +11,7 @@ from .. import components
 
 
 class VideoTimestampExt:
-    """Extension for [VideoTimestamp][rerun.components.VideoTimestamp]."""
+    """Extension for [VideoTimestamp][simplant_lab.components.VideoTimestamp]."""
 
     def __init__(
         self: Any,

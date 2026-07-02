@@ -2,8 +2,9 @@
 
 import math
 
-import simplant_lab as rr
 import rerun.blueprint as rrb
+
+import simplant_lab as rr
 
 rr.init("rerun_example_timeseries", spawn=True)
 

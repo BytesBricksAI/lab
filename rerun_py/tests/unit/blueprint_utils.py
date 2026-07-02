@@ -4,7 +4,7 @@ import itertools
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
 
 def assert_blueprint_contents_are_equal(*contents: rrb.View | rrb.Container) -> None:

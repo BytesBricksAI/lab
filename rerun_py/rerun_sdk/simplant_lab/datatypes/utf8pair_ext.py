@@ -26,7 +26,7 @@ def _utf8_pair_converter(data: Utf8PairLike) -> Utf8Pair:
 
 
 class Utf8PairExt:
-    """Extension for [Utf8Pair][rerun.datatypes.Utf8Pair]."""
+    """Extension for [Utf8Pair][simplant_lab.datatypes.Utf8Pair]."""
 
     @staticmethod
     def native_to_pa_array_override(data: Utf8PairArrayLike, data_type: pa.DataType) -> pa.Array:

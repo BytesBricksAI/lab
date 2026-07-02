@@ -28,7 +28,7 @@ if TYPE_CHECKING:
 
 
 class EncodedImageExt:
-    """Extension for [EncodedImage][rerun.archetypes.EncodedImage]."""
+    """Extension for [EncodedImage][simplant_lab.archetypes.EncodedImage]."""
 
     def __init__(
         self: Any,

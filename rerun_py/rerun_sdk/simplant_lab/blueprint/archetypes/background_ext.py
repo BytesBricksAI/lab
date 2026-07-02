@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 
 class BackgroundExt:
-    """Extension for [Background][rerun.blueprint.archetypes.Background]."""
+    """Extension for [Background][simplant_lab.blueprint.archetypes.Background]."""
 
     def __init__(
         self: Any,

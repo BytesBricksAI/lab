@@ -22,17 +22,17 @@ from enum import Enum
 
 class PixelFormat(Enum):
     """
-    **Datatype**: Specifieds a particular format of an [`archetypes.Image`][rerun.archetypes.Image].
+    **Datatype**: Specifieds a particular format of an [`archetypes.Image`][simplant_lab.archetypes.Image].
 
-    Most images can be described by a [`datatypes.ColorModel`][rerun.datatypes.ColorModel] and a [`datatypes.ChannelDatatype`][rerun.datatypes.ChannelDatatype],
+    Most images can be described by a [`datatypes.ColorModel`][simplant_lab.datatypes.ColorModel] and a [`datatypes.ChannelDatatype`][simplant_lab.datatypes.ChannelDatatype],
     e.g. `RGB` and `U8` respectively.
 
     However, some image formats has chroma downsampling and/or
-    use differing number of bits per channel, and that is what this [`datatypes.PixelFormat`][rerun.datatypes.PixelFormat] is for.
+    use differing number of bits per channel, and that is what this [`datatypes.PixelFormat`][simplant_lab.datatypes.PixelFormat] is for.
 
     All these formats support random access.
 
-    For more compressed image formats, see [`archetypes.EncodedImage`][rerun.archetypes.EncodedImage].
+    For more compressed image formats, see [`archetypes.EncodedImage`][simplant_lab.archetypes.EncodedImage].
     """
 
     Y_U_V12_LimitedRange = 20
@@ -68,7 +68,7 @@ class PixelFormat(Enum):
     """
     Monochrome Y plane only, essentially a YUV 4:0:0 planar format.
 
-    Also known as just "gray". This is virtually identical to a 8bit luminance/grayscale (see [`datatypes.ColorModel`][rerun.datatypes.ColorModel]).
+    Also known as just "gray". This is virtually identical to a 8bit luminance/grayscale (see [`datatypes.ColorModel`][simplant_lab.datatypes.ColorModel]).
 
     This uses entire range YUV, i.e. Y is expected to be within [0, 255].
     (as opposed to "limited range" YUV as used e.g. in NV12).
@@ -100,7 +100,7 @@ class PixelFormat(Enum):
     Also known as just "gray".
 
     This uses limited range YUV, i.e. Y is expected to be within [16, 235].
-    If not for this range limitation/remapping, this is almost identical to 8bit luminace/grayscale (see [`datatypes.ColorModel`][rerun.datatypes.ColorModel]).
+    If not for this range limitation/remapping, this is almost identical to 8bit luminace/grayscale (see [`datatypes.ColorModel`][simplant_lab.datatypes.ColorModel]).
     """
 
     Y_U_V12_FullRange = 44

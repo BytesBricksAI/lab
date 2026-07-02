@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 
 class TensorExt:
-    """Extension for [Tensor][rerun.archetypes.Tensor]."""
+    """Extension for [Tensor][simplant_lab.archetypes.Tensor]."""
 
     def __init__(
         self: Any,

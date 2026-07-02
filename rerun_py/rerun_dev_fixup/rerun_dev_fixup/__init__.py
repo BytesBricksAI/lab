@@ -1,4 +1,4 @@
-"""Development helper for rerun-sdk editable installs."""
+"""Development helper for simplant-lab-sdk editable installs."""
 
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ def init() -> None:
     Sitecustomize entrypoint that sets RERUN_CLI_PATH.
 
     This runs early during Python startup (before .pth files),
-    ensuring the env var is set before rerun_sdk is imported.
+    ensuring the env var is set before simplant_lab is imported.
     """
     # Don't override if already set
     if "RERUN_CLI_PATH" in os.environ:
@@ -38,7 +38,9 @@ def init() -> None:
     if repo_root is None:
         return
 
-    cli_path = repo_root / "target" / "debug" / "rerun"
-
-    if cli_path.exists():
-        os.environ["RERUN_CLI_PATH"] = str(cli_path)
+    cargo_target = Path(os.environ.get("CARGO_TARGET_DIR", repo_root / "target"))
+    for name in ("simplant-lab", "rerun"):
+        cli_path = cargo_target / "debug" / name
+        if cli_path.exists():
+            os.environ["RERUN_CLI_PATH"] = str(cli_path)
+            break

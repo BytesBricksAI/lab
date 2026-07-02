@@ -32,10 +32,10 @@ class EncodedImage(EncodedImageExt, Archetype, VisualizableArchetype):
     """
     **Archetype**: An image encoded as e.g. a JPEG or PNG.
 
-    Rerun also supports uncompressed images with the [`archetypes.Image`][rerun.archetypes.Image].
-    For images that refer to video frames see [`archetypes.VideoFrameReference`][rerun.archetypes.VideoFrameReference].
+    Rerun also supports uncompressed images with the [`archetypes.Image`][simplant_lab.archetypes.Image].
+    For images that refer to video frames see [`archetypes.VideoFrameReference`][simplant_lab.archetypes.VideoFrameReference].
 
-    To compress an image, use [`rerun.Image.compress`][].
+    To compress an image, use [`simplant_lab.Image.compress`][].
 
     Example
     -------

@@ -18,7 +18,7 @@ from ..error_utils import catch_and_log_exceptions
 
 
 class Transform3DExt:
-    """Extension for [Transform3D][rerun.archetypes.Transform3D]."""
+    """Extension for [Transform3D][simplant_lab.archetypes.Transform3D]."""
 
     def __init__(
         self: Any,
@@ -78,22 +78,22 @@ class Transform3DExt:
             An exception to this rule is static time - you may first mention a child frame on one entity statically and later on
             another one temporally.
 
-            ⚠ This currently also affects the child frame of [`archetypes.Pinhole`][rerun.archetypes.Pinhole].
-            ⚠ This currently is also used as the frame id of [`archetypes.InstancePoses3D`][rerun.archetypes.InstancePoses3D].
+            ⚠ This currently also affects the child frame of [`archetypes.Pinhole`][simplant_lab.archetypes.Pinhole].
+            ⚠ This currently is also used as the frame id of [`archetypes.InstancePoses3D`][simplant_lab.archetypes.InstancePoses3D].
 
             If not specified, this is set to the implicit transform frame of the current entity path.
-            This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity/path`.
+            This means that if a [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity/path`.
 
-            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][simplant_lab.archetypes.CoordinateFrame].
         parent_frame:
             The parent frame this transform transforms into.
 
-            ⚠ This currently also affects the parent frame of [`archetypes.Pinhole`][rerun.archetypes.Pinhole].
+            ⚠ This currently also affects the parent frame of [`archetypes.Pinhole`][simplant_lab.archetypes.Pinhole].
 
             If not specified, this is set to the implicit transform frame of the current entity path's parent.
-            This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity`.
+            This means that if a [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity`.
 
-            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][simplant_lab.archetypes.CoordinateFrame].
 
         """
 

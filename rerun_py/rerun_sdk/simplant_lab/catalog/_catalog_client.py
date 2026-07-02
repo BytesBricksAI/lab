@@ -4,11 +4,11 @@ from dataclasses import dataclass
 from datetime import timedelta
 from typing import TYPE_CHECKING, overload
 
-from simplant_lab._tracing import with_tracing
-from simplant_lab.error_utils import _send_warning_or_raise
 from rerun_bindings import (
     CatalogClientInternal,
 )
+from simplant_lab._tracing import with_tracing
+from simplant_lab.error_utils import _send_warning_or_raise
 
 from ..error_utils import RerunIncompatibleDependencyVersionError, RerunMissingDependencyError
 from . import EntryId

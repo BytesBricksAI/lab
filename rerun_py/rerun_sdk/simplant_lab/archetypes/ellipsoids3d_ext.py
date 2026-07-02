@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class Ellipsoids3DExt:
-    """Extension for [Ellipsoids3D][rerun.archetypes.Ellipsoids3D]."""
+    """Extension for [Ellipsoids3D][simplant_lab.archetypes.Ellipsoids3D]."""
 
     def __init__(
         self: Any,

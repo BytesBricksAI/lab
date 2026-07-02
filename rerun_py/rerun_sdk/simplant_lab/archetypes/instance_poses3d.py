@@ -27,8 +27,8 @@ class InstancePoses3D(Archetype):
     """
     **Archetype**: One or more transforms applied on the current entity's transform frame.
 
-    Unlike [`archetypes.Transform3D`][rerun.archetypes.Transform3D], it is *not* propagated in the transform hierarchy.
-    If [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame] is specified, it acts relative to that coordinate frame,
+    Unlike [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D], it is *not* propagated in the transform hierarchy.
+    If [`archetypes.CoordinateFrame`][simplant_lab.archetypes.CoordinateFrame] is specified, it acts relative to that coordinate frame,
     otherwise it is relative to the entity's implicit coordinate frame.
 
     Whenever you log this archetype, the state of the resulting overall pose is fully reset to the new archetype.
@@ -43,7 +43,7 @@ class InstancePoses3D(Archetype):
 
     Currently, many visualizers support only a single instance transform per entity.
     Check archetype documentations for details - if not otherwise specified, only the first instance transform is applied.
-    Some visualizers like the mesh visualizer used for [`archetypes.Mesh3D`][rerun.archetypes.Mesh3D],
+    Some visualizers like the mesh visualizer used for [`archetypes.Mesh3D`][simplant_lab.archetypes.Mesh3D],
     will draw an object for every pose, a behavior also known as "instancing".
 
     Example

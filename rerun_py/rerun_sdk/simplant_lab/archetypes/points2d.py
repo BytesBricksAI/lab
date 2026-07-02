@@ -39,7 +39,7 @@ class Points2D(Points2DExt, Archetype, VisualizableArchetype):
     from numpy.random import default_rng
 
     import simplant_lab as rr
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_points2d_random", spawn=True)
     rng = default_rng(12345)
@@ -70,7 +70,7 @@ class Points2D(Points2DExt, Archetype, VisualizableArchetype):
     ### Log points with radii given in UI points:
     ```python
     import simplant_lab as rr
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_points2d_ui_radius", spawn=True)
 
@@ -191,11 +191,11 @@ class Points2D(Points2DExt, Archetype, VisualizableArchetype):
         class_ids:
             Optional class Ids for the points.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
         keypoint_ids:
             Optional keypoint IDs for the points, identifying them within a class.
 
-            If keypoint IDs are passed in but no [`components.ClassId`][rerun.components.ClassId]s were specified, the [`components.ClassId`][rerun.components.ClassId] will
+            If keypoint IDs are passed in but no [`components.ClassId`][simplant_lab.components.ClassId]s were specified, the [`components.ClassId`][simplant_lab.components.ClassId] will
             default to 0.
             This is useful to identify points within a single classification (which is identified
             with `class_id`).
@@ -345,11 +345,11 @@ class Points2D(Points2DExt, Archetype, VisualizableArchetype):
         class_ids:
             Optional class Ids for the points.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
         keypoint_ids:
             Optional keypoint IDs for the points, identifying them within a class.
 
-            If keypoint IDs are passed in but no [`components.ClassId`][rerun.components.ClassId]s were specified, the [`components.ClassId`][rerun.components.ClassId] will
+            If keypoint IDs are passed in but no [`components.ClassId`][simplant_lab.components.ClassId]s were specified, the [`components.ClassId`][simplant_lab.components.ClassId] will
             default to 0.
             This is useful to identify points within a single classification (which is identified
             with `class_id`).
@@ -491,7 +491,7 @@ class Points2D(Points2DExt, Archetype, VisualizableArchetype):
     )
     # Optional class Ids for the points.
     #
-    # The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+    # The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 
@@ -502,7 +502,7 @@ class Points2D(Points2DExt, Archetype, VisualizableArchetype):
     )
     # Optional keypoint IDs for the points, identifying them within a class.
     #
-    # If keypoint IDs are passed in but no [`components.ClassId`][rerun.components.ClassId]s were specified, the [`components.ClassId`][rerun.components.ClassId] will
+    # If keypoint IDs are passed in but no [`components.ClassId`][simplant_lab.components.ClassId]s were specified, the [`components.ClassId`][simplant_lab.components.ClassId] will
     # default to 0.
     # This is useful to identify points within a single classification (which is identified
     # with `class_id`).

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Literal
 
-from simplant_lab.catalog import ContentFilter
 from rerun_bindings import LazyChunkStreamInternal
+from simplant_lab.catalog import ContentFilter
 
 from ._chunk import Chunk
 from ._lens import Lens
@@ -168,7 +168,7 @@ class LazyChunkStream:
         Parameters
         ----------
         lenses:
-            One or more [`Lens`][rerun.experimental.Lens] objects.
+            One or more [`Lens`][simplant_lab.experimental.Lens] objects.
         output_mode:
             How to handle unmatched chunks:
 

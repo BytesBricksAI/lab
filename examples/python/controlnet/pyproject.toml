@@ -11,7 +11,7 @@ dependencies = [
   "numpy",
   "torch", # this will use the version defined in the uv workspace
   "transformers",
-  "rerun-sdk",
+  "simplant-lab-sdk",
 ]
 
 [project.scripts]

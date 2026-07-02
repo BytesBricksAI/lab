@@ -11,7 +11,7 @@ _GOLDEN_RATIO = (math.sqrt(5.0) - 1.0) / 2.0
 
 
 class ColorExt:
-    """Extension for [Color][rerun.components.Color]."""
+    """Extension for [Color][simplant_lab.components.Color]."""
 
     @staticmethod
     def from_string(s: str) -> Color:

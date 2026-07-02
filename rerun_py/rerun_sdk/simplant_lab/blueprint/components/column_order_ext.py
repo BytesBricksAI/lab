@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 
 class ColumnOrderExt:
-    """Extension for [ColumnOrder][rerun.blueprint.components.ColumnOrder]."""
+    """Extension for [ColumnOrder][simplant_lab.blueprint.components.ColumnOrder]."""
 
     @staticmethod
     def native_to_pa_array_override(input_data: ColumnOrderArrayLike, data_type: pa.DataType) -> pa.Array:

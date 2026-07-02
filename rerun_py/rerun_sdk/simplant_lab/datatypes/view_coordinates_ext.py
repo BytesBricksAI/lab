@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 
 class ViewCoordinatesExt:
-    """Extension for [ViewCoordinates][rerun.datatypes.ViewCoordinates]."""
+    """Extension for [ViewCoordinates][simplant_lab.datatypes.ViewCoordinates]."""
 
     @staticmethod
     def native_to_pa_array_override(data: ViewCoordinatesArrayLike, data_type: pa.DataType) -> pa.Array:

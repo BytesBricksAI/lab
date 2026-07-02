@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pyarrow as pa
 import pytest
-from rerun.catalog._entry import _python_objects_to_record_batch
+from simplant_lab.catalog._entry import _python_objects_to_record_batch
 
 
 def test_list_column_mismatch_error_message() -> None:

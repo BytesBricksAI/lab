@@ -7,7 +7,7 @@ import sys
 
 import numpy as np
 
-import simplant_lab as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install simplant-lab-sdk
 
 
 def main() -> None:

@@ -13,7 +13,7 @@ from typing import Any
 import numpy as np
 import numpy.typing as npt
 import pytest
-import rerun as rr
+import simplant_lab as rr
 
 
 def get_color_column(columns: list[Any]) -> list[Any]:

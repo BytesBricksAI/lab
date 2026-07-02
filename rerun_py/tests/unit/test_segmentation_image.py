@@ -4,7 +4,7 @@ from typing import Any
 
 import numpy as np
 import pytest
-import rerun as rr
+import simplant_lab as rr
 import torch
 
 rng = np.random.default_rng(12345)
@@ -55,7 +55,7 @@ BAD_IMAGE_INPUTS: list[Any] = [
 
 
 def test_segmentation_image_shapes() -> None:
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.set_strict_mode(True)
 

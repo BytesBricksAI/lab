@@ -45,15 +45,15 @@ class View:
 
     Consider using one of the subclasses instead of this class directly:
 
-    - [rerun.blueprint.BarChartView][]
-    - [rerun.blueprint.Spatial2DView][]
-    - [rerun.blueprint.Spatial3DView][]
-    - [rerun.blueprint.TensorView][]
-    - [rerun.blueprint.TextDocumentView][]
-    - [rerun.blueprint.TextLogView][]
-    - [rerun.blueprint.TimeSeriesView][]
+    - [simplant_lab.blueprint.BarChartView][]
+    - [simplant_lab.blueprint.Spatial2DView][]
+    - [simplant_lab.blueprint.Spatial3DView][]
+    - [simplant_lab.blueprint.TensorView][]
+    - [simplant_lab.blueprint.TextDocumentView][]
+    - [simplant_lab.blueprint.TextLogView][]
+    - [simplant_lab.blueprint.TimeSeriesView][]
 
-    These are ergonomic helpers on top of [rerun.blueprint.archetypes.ViewBlueprint][].
+    These are ergonomic helpers on top of [simplant_lab.blueprint.archetypes.ViewBlueprint][].
     """
 
     def __init__(
@@ -83,7 +83,7 @@ class View:
             to be displayed relative to this origin.
         contents
             The contents of the view specified as a query expression. This is either a single expression,
-            or a list of multiple expressions. See [rerun.blueprint.archetypes.ViewContents][].
+            or a list of multiple expressions. See [simplant_lab.blueprint.archetypes.ViewContents][].
         visible:
             Whether this view is visible.
 
@@ -233,12 +233,12 @@ class Container:
 
     Consider using one of the subclasses instead of this class directly:
 
-    - [rerun.blueprint.Horizontal][]
-    - [rerun.blueprint.Vertical][]
-    - [rerun.blueprint.Grid][]
-    - [rerun.blueprint.Tabs][]
+    - [simplant_lab.blueprint.Horizontal][]
+    - [simplant_lab.blueprint.Vertical][]
+    - [simplant_lab.blueprint.Grid][]
+    - [simplant_lab.blueprint.Tabs][]
 
-    These are ergonomic helpers on top of [rerun.blueprint.archetypes.ContainerBlueprint][].
+    These are ergonomic helpers on top of [simplant_lab.blueprint.archetypes.ContainerBlueprint][].
     """
 
     def __init__(
@@ -370,12 +370,12 @@ class Panel:
 
     Consider using one of the subclasses instead of this class directly:
 
-    - [TopPanel][rerun.blueprint.TopPanel]
-    - [BlueprintPanel][rerun.blueprint.BlueprintPanel]
-    - [SelectionPanel][rerun.blueprint.SelectionPanel]
-    - [TimePanel][rerun.blueprint.TimePanel]
+    - [TopPanel][simplant_lab.blueprint.TopPanel]
+    - [BlueprintPanel][simplant_lab.blueprint.BlueprintPanel]
+    - [SelectionPanel][simplant_lab.blueprint.SelectionPanel]
+    - [TimePanel][simplant_lab.blueprint.TimePanel]
 
-    These are ergonomic helpers on top of [rerun.blueprint.archetypes.PanelBlueprint][].
+    These are ergonomic helpers on top of [simplant_lab.blueprint.archetypes.PanelBlueprint][].
     """
 
     def __init__(
@@ -585,12 +585,12 @@ class Blueprint:
         """
         Construct a new blueprint from the given parts.
 
-        Each [BlueprintPart][rerun.blueprint.BlueprintPart] can be one of the following:
+        Each [BlueprintPart][simplant_lab.blueprint.BlueprintPart] can be one of the following:
 
-        - [ContainerLike][rerun.blueprint.ContainerLike]
-        - [BlueprintPanel][rerun.blueprint.BlueprintPanel]
-        - [SelectionPanel][rerun.blueprint.SelectionPanel]
-        - [TimePanel][rerun.blueprint.TimePanel]
+        - [ContainerLike][simplant_lab.blueprint.ContainerLike]
+        - [BlueprintPanel][simplant_lab.blueprint.BlueprintPanel]
+        - [SelectionPanel][simplant_lab.blueprint.SelectionPanel]
+        - [TimePanel][simplant_lab.blueprint.TimePanel]
 
         It is an error to provide more than one of instance of any of the panel types.
 

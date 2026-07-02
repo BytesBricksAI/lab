@@ -1,9 +1,9 @@
 """Log some random points with color and radii."""
 
+import rerun.blueprint as rrb
 from numpy.random import default_rng
 
 import simplant_lab as rr
-import rerun.blueprint as rrb
 
 rr.init("rerun_example_points2d_random", spawn=True)
 rng = default_rng(12345)

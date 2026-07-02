@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 
 class RadiusExt:
-    """Extension for [Radius][rerun.components.Radius]."""
+    """Extension for [Radius][simplant_lab.components.Radius]."""
 
     @staticmethod
     def ui_points(radii: numbers.Number | npt.ArrayLike) -> npt.ArrayLike:

@@ -6,20 +6,20 @@ from typing import TYPE_CHECKING, TypeAlias
 from typing_extensions import deprecated
 
 import rerun_bindings as bindings
-from simplant_lab.blueprint.api import BlueprintLike, create_in_memory_blueprint
-from simplant_lab.recording_stream import BinaryStream, RecordingStream, get_application_id
 from rerun_bindings import (
     FileSink,
     GrpcSink,
 )
+from simplant_lab.blueprint.api import BlueprintLike, create_in_memory_blueprint
+from simplant_lab.recording_stream import BinaryStream, RecordingStream, get_application_id
 
 from ._spawn import _spawn_viewer
 
 if TYPE_CHECKING:
     import pathlib
 
-    from simplant_lab.rrd_recording import Recording  # ty:ignore[deprecated]
     from simplant_lab.recording_stream import RecordingStream
+    from simplant_lab.rrd_recording import Recording  # ty:ignore[deprecated]
 
 
 # --- Sinks ---
@@ -42,7 +42,7 @@ def set_sinks(
     """
     Stream data to multiple different sinks.
 
-    Duplicate sinks are not allowed. For example, two [`rerun.GrpcSink`][]s that
+    Duplicate sinks are not allowed. For example, two [`simplant_lab.GrpcSink`][]s that
     use the same `url` will cause this function to throw a `ValueError`.
 
     This _replaces_ existing sinks. Calling `rr.init(spawn=True)`, `rr.spawn()`,
@@ -56,16 +56,16 @@ def set_sinks(
     sinks:
         A list of sinks to wrap.
 
-        See [`rerun.GrpcSink`][], [`rerun.FileSink`][], [`rerun.BinaryStream`][].
+        See [`simplant_lab.GrpcSink`][], [`simplant_lab.FileSink`][], [`simplant_lab.BinaryStream`][].
     default_blueprint:
         Optionally set a default blueprint to use for this application. If the application
         already has an active blueprint, the new blueprint won't become active until the user
         clicks the "reset blueprint" button. If you want to activate the new blueprint
-        immediately, instead use the [`rerun.send_blueprint`][] API.
+        immediately, instead use the [`simplant_lab.send_blueprint`][] API.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     Example
     -------
@@ -140,11 +140,11 @@ def connect_grpc(
         Optionally set a default blueprint to use for this application. If the application
         already has an active blueprint, the new blueprint won't become active until the user
         clicks the "reset blueprint" button. If you want to activate the new blueprint
-        immediately, instead use the [`rerun.send_blueprint`][] API.
+        immediately, instead use the [`simplant_lab.send_blueprint`][] API.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     """
     if not is_recording_enabled(recording):
@@ -198,11 +198,11 @@ def save(
         Optionally set a default blueprint to use for this application. If the application
         already has an active blueprint, the new blueprint won't become active until the user
         clicks the "reset blueprint" button. If you want to activate the new blueprint
-        immediately, instead use the [`rerun.send_blueprint`][] API.
+        immediately, instead use the [`simplant_lab.send_blueprint`][] API.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
     write_footer:
         Whether to emit a complete RRD footer (including a manifest of every chunk) at the
         end of the stream. Defaults to `True`.
@@ -267,14 +267,14 @@ def stdout(
         Optionally set a default blueprint to use for this application. If the application
         already has an active blueprint, the new blueprint won't become active until the user
         clicks the "reset blueprint" button. If you want to activate the new blueprint
-        immediately, instead use the [`rerun.send_blueprint`][] API.
+        immediately, instead use the [`simplant_lab.send_blueprint`][] API.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
     write_footer:
         Whether to emit a complete RRD footer (including a manifest of every chunk) at the
-        end of the stream. Defaults to `True`. See [`rerun.save`][] for details and trade-offs.
+        end of the stream. Defaults to `True`. See [`simplant_lab.save`][] for details and trade-offs.
 
         *Warning*: lack of footer will significantly hurt random-access performance and some
         tools (e.g. LazyStore) may not work properly.
@@ -313,14 +313,14 @@ def disconnect(recording: RecordingStream | None = None) -> None:
     Closes all gRPC connections, servers, and files.
 
     Closes all gRPC connections, servers, and files that have been opened with
-    [`rerun.connect_grpc`], [`rerun.serve`], [`rerun.save`] or [`rerun.spawn`].
+    [`simplant_lab.connect_grpc`], [`simplant_lab.serve`], [`simplant_lab.save`] or [`simplant_lab.spawn`].
 
     Parameters
     ----------
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     """
 
@@ -352,7 +352,7 @@ def serve_grpc(
     This function returns immediately. In order to keep the server running, you must keep the Python process running
     as well.
 
-    NOTE: The grpc server is associated with a [`rerun.RecordingStream`][] object. By default, if no other recording
+    NOTE: The grpc server is associated with a [`simplant_lab.RecordingStream`][] object. By default, if no other recording
     was specified, this will be the global recording. When that `RecordingStream` is disconnected, or otherwise goes
     out of scope, the associated gRPC server will be shut down.
     See: [Issue: #12313](https://github.com/rerun-io/rerun/issues/12313) for possible complications.
@@ -365,11 +365,11 @@ def serve_grpc(
         Optionally set a default blueprint to use for this application. If the application
         already has an active blueprint, the new blueprint won't become active until the user
         clicks the "reset blueprint" button. If you want to activate the new blueprint
-        immediately, instead use the [`rerun.send_blueprint`][] API.
+        immediately, instead use the [`simplant_lab.send_blueprint`][] API.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
     server_memory_limit:
         Maximum amount of memory to use for buffering log data for clients that connect late.
         This can be a percentage of the total ram (e.g. "50%") or an absolute value (e.g. "4GB").
@@ -440,9 +440,9 @@ def send_blueprint(
         blueprint for the app. It will also become the active blueprint if no other
         blueprint is currently active.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     """
 
@@ -464,7 +464,7 @@ def send_blueprint(
 
 
 @deprecated(
-    "send_recording is deprecated since 0.32. Use rerun.experimental.send_chunks(reader.store()) instead.",
+    "send_recording is deprecated since 0.32. Use simplant_lab.experimental.send_chunks(reader.store()) instead.",
 )
 def send_recording(rrd: Recording, recording: RecordingStream | None = None) -> None:  # ty:ignore[deprecated]
     """
@@ -478,9 +478,9 @@ def send_recording(rrd: Recording, recording: RecordingStream | None = None) -> 
     rrd:
         A recording loaded from a `.rrd` file.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     """
     application_id = get_application_id(recording=recording)  # NOLINT
@@ -502,7 +502,7 @@ def spawn(
     server_memory_limit: str = "1GiB",
     hide_welcome_screen: bool = False,
     detach_process: bool = True,
-    executable_name: str = "rerun",
+    executable_name: str = "simplant-lab",
     executable_path: str | None = None,
     default_blueprint: BlueprintLike | None = None,
     recording: RecordingStream | None = None,
@@ -513,7 +513,7 @@ def spawn(
     This is often the easiest and best way to use Rerun.
     Just call this once at the start of your program.
 
-    You can also call [rerun.init][] with a `spawn=True` argument.
+    You can also call [simplant_lab.init][] with a `spawn=True` argument.
 
     Parameters
     ----------
@@ -540,21 +540,21 @@ def spawn(
         Specifies the name of the Rerun executable.
         You can omit the `.exe` suffix on Windows.
 
-        Defaults to `rerun`.
+        Defaults to `simplant-lab`.
     executable_path:
         Enforce a specific executable to use instead of searching
         through PATH for `executable_name`.
 
         Unspecified by default.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use if `connect = True`.
+        Specifies the [`simplant_lab.RecordingStream`][] to use if `connect = True`.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
     default_blueprint
         Optionally set a default blueprint to use for this application. If the application
         already has an active blueprint, the new blueprint won't become active until the user
         clicks the "reset blueprint" button. If you want to activate the new blueprint
-        immediately, instead use the [`rerun.send_blueprint`][] API.
+        immediately, instead use the [`simplant_lab.send_blueprint`][] API.
 
     """
 

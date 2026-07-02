@@ -4,11 +4,11 @@ from typing import Any
 
 import numpy as np
 import pytest
-import rerun as rr
+import simplant_lab as rr
 import torch
-from rerun.archetypes.image import Image
-from rerun.datatypes.tensor_data import TensorData
-from rerun.error_utils import RerunWarning
+from simplant_lab.archetypes.image import Image
+from simplant_lab.datatypes.tensor_data import TensorData
+from simplant_lab.error_utils import RerunWarning
 
 rng = np.random.default_rng(12345)
 RANDOM_IMAGE_SOURCE = rng.uniform(0.0, 1.0, (10, 20, 3))
@@ -87,7 +87,7 @@ BAD_IMAGE_INPUTS: list[Any] = [
 
 
 def test_image_shapes() -> None:
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.set_strict_mode(True)
 

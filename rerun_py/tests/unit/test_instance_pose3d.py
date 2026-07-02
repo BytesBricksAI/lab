@@ -4,8 +4,8 @@ import itertools
 from fractions import Fraction
 from typing import cast
 
-import rerun as rr
-from rerun.datatypes import (
+import simplant_lab as rr
+from simplant_lab.datatypes import (
     Quaternion,
     RotationAxisAngle,
 )

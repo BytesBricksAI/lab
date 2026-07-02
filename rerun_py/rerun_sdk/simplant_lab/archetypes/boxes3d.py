@@ -33,7 +33,7 @@ class Boxes3D(Boxes3DExt, Archetype, VisualizableArchetype):
     **Archetype**: 3D boxes with half-extents and optional center, rotations, colors etc.
 
     If there's more instance poses than half sizes, the last box's orientation will be repeated for the remaining poses.
-    Orienting and placing boxes forms a separate transform that is applied prior to [`archetypes.InstancePoses3D`][rerun.archetypes.InstancePoses3D] and [`archetypes.Transform3D`][rerun.archetypes.Transform3D].
+    Orienting and placing boxes forms a separate transform that is applied prior to [`archetypes.InstancePoses3D`][simplant_lab.archetypes.InstancePoses3D] and [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D].
 
     Example
     -------
@@ -155,9 +155,9 @@ class Boxes3D(Boxes3DExt, Archetype, VisualizableArchetype):
             If not set, labels will automatically appear when there is exactly one label for this entity
             or the number of instances on this entity is under a certain threshold.
         class_ids:
-            Optional [`components.ClassId`][rerun.components.ClassId]s for the boxes.
+            Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the boxes.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -328,9 +328,9 @@ class Boxes3D(Boxes3DExt, Archetype, VisualizableArchetype):
             If not set, labels will automatically appear when there is exactly one label for this entity
             or the number of instances on this entity is under a certain threshold.
         class_ids:
-            Optional [`components.ClassId`][rerun.components.ClassId]s for the boxes.
+            Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the boxes.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
 
         """
 
@@ -498,9 +498,9 @@ class Boxes3D(Boxes3DExt, Archetype, VisualizableArchetype):
         default=None,
         converter=components.ClassIdBatch._converter,  # type: ignore[misc]
     )
-    # Optional [`components.ClassId`][rerun.components.ClassId]s for the boxes.
+    # Optional [`components.ClassId`][simplant_lab.components.ClassId]s for the boxes.
     #
-    # The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+    # The [`components.ClassId`][simplant_lab.components.ClassId] provides colors and labels if not specified explicitly.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 

@@ -32,7 +32,7 @@ class AssetVideo(AssetVideoExt, Archetype):
 
     See <https://rerun.io/docs/reference/video> for codec support and more general information.
 
-    In order to display a video, you also need to log a [`archetypes.VideoFrameReference`][rerun.archetypes.VideoFrameReference] for each frame.
+    In order to display a video, you also need to log a [`archetypes.VideoFrameReference`][simplant_lab.archetypes.VideoFrameReference] for each frame.
 
     Examples
     --------
@@ -77,7 +77,7 @@ class AssetVideo(AssetVideoExt, Archetype):
     import sys
 
     import simplant_lab as rr
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
     if len(sys.argv) < 2:
         # TODO(#7354): Only mp4 is supported for now.

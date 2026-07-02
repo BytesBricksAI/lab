@@ -38,7 +38,7 @@ class Capsules3D(Capsules3DExt, Archetype, VisualizableArchetype):
     instances.
 
     If there's more instance poses than lengths & radii, the last capsule's orientation will be repeated for the remaining poses.
-    Orienting and placing capsules forms a separate transform that is applied prior to [`archetypes.InstancePoses3D`][rerun.archetypes.InstancePoses3D] and [`archetypes.Transform3D`][rerun.archetypes.Transform3D].
+    Orienting and placing capsules forms a separate transform that is applied prior to [`archetypes.InstancePoses3D`][simplant_lab.archetypes.InstancePoses3D] and [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D].
 
     Example
     -------

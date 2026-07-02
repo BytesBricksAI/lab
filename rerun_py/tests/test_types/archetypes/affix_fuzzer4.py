@@ -10,12 +10,12 @@ from typing import Any, ClassVar
 import numpy as np
 import pyarrow as pa
 from attrs import define, field
-from rerun._baseclasses import (
+from simplant_lab._baseclasses import (
     Archetype,
     ComponentColumnList,
     ComponentDescriptor,
 )
-from rerun.error_utils import catch_and_log_exceptions
+from simplant_lab.error_utils import catch_and_log_exceptions
 
 from .. import components, datatypes
 

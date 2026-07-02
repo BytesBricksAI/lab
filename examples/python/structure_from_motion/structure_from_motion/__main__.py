@@ -15,10 +15,10 @@ import cv2
 import numpy as np
 import numpy.typing as npt
 import requests
+import simplant_lab.blueprint as rrb
 from tqdm import tqdm
 
-import simplant_lab as rr  # pip install rerun-sdk
-import rerun.blueprint as rrb
+import simplant_lab as rr  # pip install simplant-lab-sdk
 
 from .read_write_model import Camera, read_model  # type: ignore[attr-defined]
 

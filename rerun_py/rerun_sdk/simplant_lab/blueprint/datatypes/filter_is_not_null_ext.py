@@ -15,7 +15,7 @@ class _NotAFilterByEventLike(BaseException):
 
 
 class FilterIsNotNullExt:
-    """Extension for [FilterIsNotNull][rerun.blueprint.datatypes.FilterIsNotNull]."""
+    """Extension for [FilterIsNotNull][simplant_lab.blueprint.datatypes.FilterIsNotNull]."""
 
     @staticmethod
     def native_to_pa_array_override(input_data: FilterIsNotNullArrayLike, data_type: pa.DataType) -> pa.Array:

@@ -4,13 +4,13 @@ import itertools
 from typing import TYPE_CHECKING, cast
 
 import numpy as np
-import rerun as rr
-import rerun.blueprint as rrb
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 from .common_arrays import none_empty_or_value
 
 if TYPE_CHECKING:
-    from rerun.blueprint.datatypes import TensorDimensionIndexSliderArrayLike
+    from simplant_lab.blueprint.datatypes import TensorDimensionIndexSliderArrayLike
 
 
 def test_tensor_slice_selection() -> None:

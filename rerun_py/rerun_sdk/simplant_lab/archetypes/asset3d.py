@@ -32,9 +32,9 @@ class Asset3D(Asset3DExt, Archetype, VisualizableArchetype):
     """
     **Archetype**: A prepacked 3D asset (`.gltf`, `.glb`, `.obj`, `.stl`, etc.).
 
-    See also [`archetypes.Mesh3D`][rerun.archetypes.Mesh3D].
+    See also [`archetypes.Mesh3D`][simplant_lab.archetypes.Mesh3D].
 
-    If there are multiple [`archetypes.InstancePoses3D`][rerun.archetypes.InstancePoses3D] instances logged to the same entity as a mesh,
+    If there are multiple [`archetypes.InstancePoses3D`][simplant_lab.archetypes.InstancePoses3D] instances logged to the same entity as a mesh,
     an instance of the mesh will be drawn for each transform.
 
     Example
@@ -120,7 +120,7 @@ class Asset3D(Asset3DExt, Archetype, VisualizableArchetype):
             A color multiplier applied to the whole asset.
 
             For mesh who already have `albedo_factor` in materials,
-            it will be overwritten by actual `albedo_factor` of [`archetypes.Asset3D`][rerun.archetypes.Asset3D] (if specified).
+            it will be overwritten by actual `albedo_factor` of [`archetypes.Asset3D`][simplant_lab.archetypes.Asset3D] (if specified).
 
         """
 
@@ -205,7 +205,7 @@ class Asset3D(Asset3DExt, Archetype, VisualizableArchetype):
             A color multiplier applied to the whole asset.
 
             For mesh who already have `albedo_factor` in materials,
-            it will be overwritten by actual `albedo_factor` of [`archetypes.Asset3D`][rerun.archetypes.Asset3D] (if specified).
+            it will be overwritten by actual `albedo_factor` of [`archetypes.Asset3D`][simplant_lab.archetypes.Asset3D] (if specified).
 
         """
 
@@ -290,7 +290,7 @@ class Asset3D(Asset3DExt, Archetype, VisualizableArchetype):
     # A color multiplier applied to the whole asset.
     #
     # For mesh who already have `albedo_factor` in materials,
-    # it will be overwritten by actual `albedo_factor` of [`archetypes.Asset3D`][rerun.archetypes.Asset3D] (if specified).
+    # it will be overwritten by actual `albedo_factor` of [`archetypes.Asset3D`][simplant_lab.archetypes.Asset3D] (if specified).
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 

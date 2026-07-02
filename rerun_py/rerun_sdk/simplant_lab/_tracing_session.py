@@ -1,12 +1,12 @@
 """
 Opt-in correlation handle that tags every outbound gRPC request with a session id.
 
-Use [`tracing_session`][rerun._tracing_session.tracing_session] when you want to
+Use [`tracing_session`][simplant_lab._tracing_session.tracing_session] when you want to
 attach a single, copy-pasteable identifier to a block of catalog calls so support
 can look them up in distributed tracing.
 
 ```python
-from rerun import tracing_session
+from simplant_lab import tracing_session
 
 with tracing_session():
     dataset.scan(...).read_all()
@@ -19,7 +19,7 @@ The Rust gRPC client reads the variable on every outbound request and merges
 records it as a span attribute, queryable in Tempo as
 `{ .rerun_session_id = "…" }`.
 
-This module is private — public re-export lives in `rerun.__init__`.
+This module is private — public re-export lives in `simplant_lab.__init__`.
 """
 
 from __future__ import annotations
@@ -59,7 +59,7 @@ def tracing_session() -> Iterator[str]:
     """
     Tag every gRPC request inside the `with` block with a fresh session id.
 
-    The id is logged to the `rerun` logger at INFO level the moment the scope is
+    The id is logged to the `simplant_lab` logger at INFO level the moment the scope is
     entered, so it stays visible even if the workflow crashes or hangs before
     completing. Send the logged id to support and they can query
     `{ .rerun_session_id = "<id>" }` in Tempo to surface every related request.
@@ -82,7 +82,7 @@ def tracing_session() -> Iterator[str]:
     --------
     ```python
     import simplant_lab as rr
-    from rerun import tracing_session
+    from simplant_lab import tracing_session
 
     client = rr.catalog.CatalogClient("rerun://…")
     with tracing_session():
@@ -132,7 +132,7 @@ def tracing_session() -> Iterator[str]:
             # Routed through the Rust `tracing` stack so it follows the same
             # `RUST_LOG` and fmt-layer pipeline as every other rerun log,
             # rather than the Python `logging` pipeline (which has no default
-            # handler attached to the `rerun` logger and would silently drop
+            # handler attached to the `simplant_lab` logger and would silently drop
             # INFO records in environments like ipython).
             _log_tracing_session_started(sid)
 

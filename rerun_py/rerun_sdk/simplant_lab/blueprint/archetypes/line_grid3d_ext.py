@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 
 class LineGrid3DExt:
-    """Extension for [LineGrid3D][rerun.blueprint.archetypes.LineGrid3D]."""
+    """Extension for [LineGrid3D][simplant_lab.blueprint.archetypes.LineGrid3D]."""
 
     def __init__(
         self: Any,
@@ -37,7 +37,7 @@ class LineGrid3DExt:
         plane:
             In what plane the grid is drawn.
 
-            Defaults to whatever plane is determined as the plane at zero units up/down as defined by [`components.ViewCoordinates`][rerun.components.ViewCoordinates] if present.
+            Defaults to whatever plane is determined as the plane at zero units up/down as defined by [`components.ViewCoordinates`][simplant_lab.components.ViewCoordinates] if present.
         stroke_width:
             How thick the lines should be in ui units.
 

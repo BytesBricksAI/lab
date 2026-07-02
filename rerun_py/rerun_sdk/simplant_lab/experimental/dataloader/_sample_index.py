@@ -58,7 +58,7 @@ class SampleIndex:
     segments
         Per-segment metadata (window-adjusted index range + sample count).
     ns_per_sample
-        For [`FixedRateSampling`][rerun.experimental.dataloader.FixedRateSampling]: nanoseconds between grid points.
+        For [`FixedRateSampling`][simplant_lab.experimental.dataloader.FixedRateSampling]: nanoseconds between grid points.
         `None` for integer indices.
     is_timestamp
         True when the index is a timestamp timeline. Exposed so callers
@@ -157,7 +157,7 @@ class SampleIndex:
         timeline_sampling: FixedRateSampling | None = None,
     ) -> SampleIndex:
         """
-        Build a [`SampleIndex`][rerun.experimental.dataloader.SampleIndex] from lightweight metadata queries.
+        Build a [`SampleIndex`][simplant_lab.experimental.dataloader.SampleIndex] from lightweight metadata queries.
 
         Parameters
         ----------
@@ -169,7 +169,7 @@ class SampleIndex:
             Field definitions, used for window-trim calculation.
         timeline_sampling
             Required for timestamp indices; ignored for integer indices.
-            Pass [`FixedRateSampling`][rerun.experimental.dataloader.FixedRateSampling] for a regular grid.
+            Pass [`FixedRateSampling`][simplant_lab.experimental.dataloader.FixedRateSampling] for a regular grid.
 
         """
         return _build(source, index, fields, timeline_sampling=timeline_sampling)

@@ -30,14 +30,14 @@ __all__ = ["SegmentationImage"]
 @define(str=False, repr=False, init=False)
 class SegmentationImage(SegmentationImageExt, Archetype, VisualizableArchetype):
     """
-    **Archetype**: An image made up of integer [`components.ClassId`][rerun.components.ClassId]s.
+    **Archetype**: An image made up of integer [`components.ClassId`][simplant_lab.components.ClassId]s.
 
-    Each pixel corresponds to a [`components.ClassId`][rerun.components.ClassId] that will be mapped to a color based on [`archetypes.AnnotationContext`][rerun.archetypes.AnnotationContext].
+    Each pixel corresponds to a [`components.ClassId`][simplant_lab.components.ClassId] that will be mapped to a color based on [`archetypes.AnnotationContext`][simplant_lab.archetypes.AnnotationContext].
 
     In the case of floating point images, the label will be looked up based on rounding to the nearest
     integer value.
 
-    Use [`archetypes.AnnotationContext`][rerun.archetypes.AnnotationContext] to associate each class with a color and a label.
+    Use [`archetypes.AnnotationContext`][simplant_lab.archetypes.AnnotationContext] to associate each class with a color and a label.
 
     Example
     -------

@@ -9,9 +9,9 @@ from __future__ import annotations
 
 import numpy as np
 import pyarrow as pa
+import rerun.blueprint as rrb
 
 import simplant_lab as rr
-import rerun.blueprint as rrb
 from simplant_lab.blueprint.datatypes import (
     ComponentSourceKind,
     VisualizerComponentMapping,

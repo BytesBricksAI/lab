@@ -8,7 +8,7 @@ import uuid
 from typing import TYPE_CHECKING
 
 import pytest
-import rerun as rr
+import simplant_lab as rr
 
 if TYPE_CHECKING:
     import syrupy
@@ -366,7 +366,7 @@ def test_save_roundtrip_compare(tmp_path: pathlib.Path) -> None:
 
     # Optimize the original so chunk boundaries match what ChunkStore produces
     process = subprocess.run(
-        ["rerun", "rrd", "optimize", str(original_rrd), "-o", str(optimized_rrd)],
+        ["simplant-lab", "rrd", "optimize", str(original_rrd), "-o", str(optimized_rrd)],
         check=False,
         capture_output=True,
     )
@@ -377,7 +377,7 @@ def test_save_roundtrip_compare(tmp_path: pathlib.Path) -> None:
 
     # Compare optimized vs roundtripped
     process = subprocess.run(
-        ["rerun", "rrd", "compare", "--unordered", str(optimized_rrd), str(roundtrip_rrd)],
+        ["simplant-lab", "rrd", "compare", "--unordered", str(optimized_rrd), str(roundtrip_rrd)],
         check=False,
         capture_output=True,
     )
@@ -405,7 +405,7 @@ def test_chunk_roundtrip_compare(tmp_path: pathlib.Path) -> None:
 
     # Optimize the original so chunk boundaries match what ChunkStore produces
     process = subprocess.run(
-        ["rerun", "rrd", "optimize", str(original_rrd), "-o", str(optimized_rrd)],
+        ["simplant-lab", "rrd", "optimize", str(original_rrd), "-o", str(optimized_rrd)],
         check=False,
         capture_output=True,
     )
@@ -422,7 +422,7 @@ def test_chunk_roundtrip_compare(tmp_path: pathlib.Path) -> None:
 
     # Compare optimized vs roundtripped
     process = subprocess.run(
-        ["rerun", "rrd", "compare", "--unordered", str(optimized_rrd), str(roundtrip_rrd)],
+        ["simplant-lab", "rrd", "compare", "--unordered", str(optimized_rrd), str(roundtrip_rrd)],
         check=False,
         capture_output=True,
     )

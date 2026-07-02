@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 
 
 class ImageFormatExt:
-    """Extension for [ImageFormat][rerun.datatypes.ImageFormat]."""
+    """Extension for [ImageFormat][simplant_lab.datatypes.ImageFormat]."""
 
     @staticmethod
     def pixel_format__field_converter_override(

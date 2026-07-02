@@ -23,7 +23,7 @@ if TYPE_CHECKING:
 
 class StateTimelineView(View):
     """
-    **View**: A view for displaying state transitions over time, for use with [`archetypes.StateChange`][rerun.archetypes.StateChange].
+    **View**: A view for displaying state transitions over time, for use with [`archetypes.StateChange`][simplant_lab.archetypes.StateChange].
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**
 
@@ -34,7 +34,7 @@ class StateTimelineView(View):
     # Use a blueprint to show a StateTimelineView.
 
     import simplant_lab as rr
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_state_timeline", spawn=True)
 
@@ -91,7 +91,7 @@ class StateTimelineView(View):
         contents:
             The contents of the view specified as a query expression.
             This is either a single expression, or a list of multiple expressions.
-            See [rerun.blueprint.archetypes.ViewContents][].
+            See [simplant_lab.blueprint.archetypes.ViewContents][].
         name:
             The display name of the view.
         visible:

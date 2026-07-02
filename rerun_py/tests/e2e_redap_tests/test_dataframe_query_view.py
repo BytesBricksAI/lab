@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 if TYPE_CHECKING:
-    from rerun.catalog import DatasetEntry
+    from simplant_lab.catalog import DatasetEntry
 
     from e2e_redap_tests.conftest import EntryFactory
 

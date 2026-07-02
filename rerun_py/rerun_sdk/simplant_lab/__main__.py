@@ -1,22 +1,20 @@
 """
-See `python3 -m rerun --help`.
+See `python3 -m simplant_lab --help`.
 
-This is a duplicate of `rerun_cli/__main__.py` to allow running `python3 -m rerun` directly.
-In general `rerun -m rerun_cli` should be preferred, as it carries less overhead related to
-importing the module.
+CLI entry point for the SimPlant-Lab viewer. Prefer `simplant-lab` on PATH when available.
 """
 
 from __future__ import annotations
 
 import sys
 
-from rerun_cli.__main__ import main as cli_main
+from simplant_lab_cli.__main__ import main as cli_main
 
-from rerun import unregister_shutdown
+from simplant_lab import unregister_shutdown
 
 
 def main() -> int:
-    # Importing of the rerun module registers a shutdown hook that we know we don't
+    # Importing simplant_lab registers a shutdown hook that we know we don't
     # need when running the CLI directly. We can safely unregister it.
     unregister_shutdown()
 

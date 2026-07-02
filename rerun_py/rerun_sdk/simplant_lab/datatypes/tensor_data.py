@@ -45,7 +45,7 @@ class TensorData(TensorDataExt):
     which stores a contiguous array of typed values.
 
     It's not currently possible to use `send_columns` with tensors since construction
-    of `rerun.components.TensorDataBatch` does not support more than a single element.
+    of `simplant_lab.components.TensorDataBatch` does not support more than a single element.
     This will be addressed as part of <https://github.com/rerun-io/rerun/issues/6832>.
     """
 
@@ -64,7 +64,7 @@ class TensorData(TensorDataExt):
     names: list[str] | None = field(default=None)
     # The names of the dimensions of the tensor (optional).
     #
-    # If set, should be the same length as [`datatypes.TensorData.shape`][rerun.datatypes.TensorData.shape].
+    # If set, should be the same length as [`datatypes.TensorData.shape`][simplant_lab.datatypes.TensorData.shape].
     # If it has a different length your names may show up improperly,
     # and some constructors may produce a warning or even an error.
     #

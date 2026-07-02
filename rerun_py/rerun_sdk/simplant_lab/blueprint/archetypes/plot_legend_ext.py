@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class PlotLegendExt:
-    """Extension for [PlotLegend][rerun.blueprint.archetypes.PlotLegend]."""
+    """Extension for [PlotLegend][simplant_lab.blueprint.archetypes.PlotLegend]."""
 
     def __init__(
         self: Any,

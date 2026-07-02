@@ -7,7 +7,7 @@ def serve_web_viewer(*, web_port: int | None = None, open_browser: bool = True, 
     """
     Host a web viewer over HTTP.
 
-    You can pass this function the URL returned from [`rerun.serve_grpc`][] and  [`rerun.RecordingStream.serve_grpc`][]
+    You can pass this function the URL returned from [`simplant_lab.serve_grpc`][] and  [`simplant_lab.RecordingStream.serve_grpc`][]
     so that the spawned web viewer connects to that server.
 
     Note that this is NOT a log sink, and this does NOT host a gRPC server.

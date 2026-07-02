@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class Boxes3DExt:
-    """Extension for [Boxes3D][rerun.archetypes.Boxes3D]."""
+    """Extension for [Boxes3D][simplant_lab.archetypes.Boxes3D]."""
 
     def __init__(
         self: Any,

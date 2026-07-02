@@ -51,7 +51,7 @@ def _to_numpy(tensor: ImageLike) -> npt.NDArray[Any]:
 
 
 class DepthImageExt:
-    """Extension for [DepthImage][rerun.archetypes.DepthImage]."""
+    """Extension for [DepthImage][simplant_lab.archetypes.DepthImage]."""
 
     def __init__(
         self: Any,

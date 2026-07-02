@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 
 class ViewCoordinatesExt:
-    """Extension for [ViewCoordinates][rerun.components.ViewCoordinates]."""
+    """Extension for [ViewCoordinates][simplant_lab.components.ViewCoordinates]."""
 
     class ViewDir(IntEnum):
         Up = 1

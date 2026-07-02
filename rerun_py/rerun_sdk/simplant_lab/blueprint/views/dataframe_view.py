@@ -39,7 +39,7 @@ class DataframeView(View):
     import math
 
     import simplant_lab as rr
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_dataframe", spawn=True)
 
@@ -110,7 +110,7 @@ class DataframeView(View):
         contents:
             The contents of the view specified as a query expression.
             This is either a single expression, or a list of multiple expressions.
-            See [rerun.blueprint.archetypes.ViewContents][].
+            See [simplant_lab.blueprint.archetypes.ViewContents][].
         name:
             The display name of the view.
         visible:

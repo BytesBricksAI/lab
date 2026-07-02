@@ -15,7 +15,7 @@ def next_offset(acc: int, arr: Sized) -> int:
 
 
 class BlobExt:
-    """Extension for [Blob][rerun.datatypes.Blob]."""
+    """Extension for [Blob][simplant_lab.datatypes.Blob]."""
 
     @staticmethod
     def native_to_pa_array_override(data: BlobArrayLike, data_type: pa.DataType) -> pa.Array:

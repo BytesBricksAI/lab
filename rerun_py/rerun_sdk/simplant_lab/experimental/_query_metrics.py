@@ -27,7 +27,7 @@ finishes). Mid-scope reads via `m.queries` or `m.last_query()` are
 non-destructive; on `__exit__` any remaining snapshots are drained into the
 collector and the scope is unbound.
 
-`query_metrics()` is part of `rerun.experimental` — once the upstream
+`query_metrics()` is part of `simplant_lab.experimental` — once the upstream
 DataFusion FFI fix lands, `df.explain(analyze=True)` starts working and this
 API may evolve (or be removed) without going through the standard
 deprecation cycle.
@@ -45,7 +45,7 @@ if TYPE_CHECKING:
     import datetime
     from collections.abc import Iterator
 
-logger = logging.getLogger("rerun")
+logger = logging.getLogger("simplant_lab")
 
 
 # Stack of currently-active `_MetricsCollectorHandle`s, scoped to the current
@@ -174,7 +174,7 @@ def _from_rust(m: object) -> QueryMetrics:
 
 class MetricsCollector:
     """
-    Accumulator yielded by [`query_metrics`][rerun.experimental.query_metrics] on `__enter__`.
+    Accumulator yielded by [`query_metrics`][simplant_lab.experimental.query_metrics] on `__enter__`.
 
     Use `last_query()` / `queries` to read snapshots accumulated so far; both
     are non-destructive. On context-manager exit any remaining snapshots are
@@ -224,7 +224,7 @@ def query_metrics() -> Iterator[MetricsCollector]:
     """
     Capture DataFusion query metrics for every query that runs inside the `with` block.
 
-    Yields a [`MetricsCollector`][rerun.experimental.MetricsCollector]; read `.last_query()` or
+    Yields a [`MetricsCollector`][simplant_lab.experimental.MetricsCollector]; read `.last_query()` or
     `.queries` mid-scope or after the scope exits.
 
     The scope is bound to the current `contextvars.Context`: every
@@ -263,7 +263,7 @@ def query_metrics() -> Iterator[MetricsCollector]:
         # bridge isn't available. Yield an inert collector so user code still
         # runs.
         logger.warning(
-            "rerun.experimental.query_metrics() is a no-op: the catalog "
+            "simplant_lab.experimental.query_metrics() is a no-op: the catalog "
             "bindings are not available in this build of rerun.",
         )
         yield MetricsCollector(handle=None)

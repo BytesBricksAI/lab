@@ -33,7 +33,7 @@ class BarChartView(View):
     ### Use a blueprint to create a BarChartView.:
     ```python
     import simplant_lab as rr
-    import rerun.blueprint as rrb
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_bar_chart", spawn=True)
     rr.log("bar_chart", rr.BarChart([8, 4, 0, 9, 1, 4, 1, 6, 9, 0]))
@@ -87,7 +87,7 @@ class BarChartView(View):
         contents:
             The contents of the view specified as a query expression.
             This is either a single expression, or a list of multiple expressions.
-            See [rerun.blueprint.archetypes.ViewContents][].
+            See [simplant_lab.blueprint.archetypes.ViewContents][].
         name:
             The display name of the view.
         visible:

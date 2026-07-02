@@ -16,7 +16,7 @@ __all__ = ["ShowLabels", "ShowLabelsBatch"]
 
 class ShowLabels(datatypes.Bool, ComponentMixin):
     """
-    **Component**: Whether the entity's [`components.Text`][rerun.components.Text] label is shown.
+    **Component**: Whether the entity's [`components.Text`][simplant_lab.components.Text] label is shown.
 
     The main purpose of this component existing separately from the labels themselves
     is to be overridden when desired, to allow hiding and showing from the viewer and

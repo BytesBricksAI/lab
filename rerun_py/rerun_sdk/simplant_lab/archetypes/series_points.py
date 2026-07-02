@@ -36,7 +36,7 @@ class SeriesPoints(SeriesPointsExt, Archetype, VisualizableArchetype):
     Changes over time are supported for most but not all its fields (see respective fields for details),
     it's generally recommended to log this type as static.
 
-    The underlying data needs to be logged to the same entity-path using [`archetypes.Scalars`][rerun.archetypes.Scalars].
+    The underlying data needs to be logged to the same entity-path using [`archetypes.Scalars`][simplant_lab.archetypes.Scalars].
     Dimensionality of the scalar arrays logged at each time point is assumed to be the same over time.
 
     Example

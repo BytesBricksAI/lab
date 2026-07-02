@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class PinholeExt:
-    """Extension for [Pinhole][rerun.archetypes.Pinhole]."""
+    """Extension for [Pinhole][simplant_lab.archetypes.Pinhole]."""
 
     def __init__(
         self: Any,
@@ -97,18 +97,18 @@ class PinholeExt:
             with the child frame `"robot_arm"` on any other entity than `"my_transforms"` unless one of them was logged with static time.
 
             If not specified, this is set to the implicit transform frame of the current entity path.
-            This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity/path`.
+            This means that if a [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity/path`.
 
-            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][simplant_lab.archetypes.CoordinateFrame].
 
             Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
         parent_frame:
             The parent frame this transform transforms into.
 
             If not specified, this is set to the implicit transform frame of the current entity path's parent.
-            This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity`.
+            This means that if a [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity`.
 
-            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][simplant_lab.archetypes.CoordinateFrame].
 
             Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
         image_plane_distance:

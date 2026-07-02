@@ -12,10 +12,10 @@ import numpy as np
 import numpy.typing as npt
 import pyarrow as pa
 from attrs import define, field
-from rerun._baseclasses import (
+from simplant_lab._baseclasses import (
     BaseBatch,
 )
-from rerun._numpy_compatibility import asarray
+from simplant_lab._numpy_compatibility import asarray
 
 __all__ = ["FlattenedScalar", "FlattenedScalarArrayLike", "FlattenedScalarBatch", "FlattenedScalarLike"]
 

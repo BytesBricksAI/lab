@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 
 class Asset3DExt:
-    """Extension for [Asset3D][rerun.archetypes.Asset3D]."""
+    """Extension for [Asset3D][simplant_lab.archetypes.Asset3D]."""
 
     def __init__(
         self: Any,

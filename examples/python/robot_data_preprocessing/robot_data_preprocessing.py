@@ -20,7 +20,15 @@ from pathlib import Path
 import pyarrow as pa
 
 import simplant_lab as rr
-from simplant_lab.experimental import Chunk, DeriveLens, LazyChunkStream, McapReader, MutateLens, OptimizationProfile, Selector
+from simplant_lab.experimental import (
+    Chunk,
+    DeriveLens,
+    LazyChunkStream,
+    McapReader,
+    MutateLens,
+    OptimizationProfile,
+    Selector,
+)
 from simplant_lab.urdf import UrdfTree
 
 PARENT_DIR = Path(__file__).parent

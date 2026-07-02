@@ -7,9 +7,9 @@ from typing import cast
 
 import numpy as np
 import pytest
-import rerun as rr
+import simplant_lab as rr
 import torch
-from rerun.datatypes import (
+from simplant_lab.datatypes import (
     Angle,
     Float64ArrayLike,
     Quaternion,

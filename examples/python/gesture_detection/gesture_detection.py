@@ -14,12 +14,12 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import requests
+import simplant_lab.blueprint as rrb
 import tqdm
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 
-import simplant_lab as rr  # pip install rerun-sdk
-import rerun.blueprint as rrb
+import simplant_lab as rr  # pip install simplant-lab-sdk
 
 if TYPE_CHECKING:
     from collections.abc import Iterable

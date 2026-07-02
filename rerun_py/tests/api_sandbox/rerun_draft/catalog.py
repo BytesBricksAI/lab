@@ -5,7 +5,7 @@ import tempfile
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
-from rerun import catalog as _catalog
+from simplant_lab import catalog as _catalog
 from typing_extensions import deprecated
 
 if TYPE_CHECKING:
@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
     import datafusion
     import pyarrow as pa
-    from rerun.catalog import RegistrationHandle
+    from simplant_lab.catalog import RegistrationHandle
 
     from rerun_bindings import IndexValuesLike  # noqa: TID251
 

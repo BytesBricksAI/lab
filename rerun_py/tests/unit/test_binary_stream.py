@@ -10,8 +10,8 @@ import threading
 import time
 from typing import TYPE_CHECKING, Any
 
-import rerun as rr
-import rerun.blueprint as rrb
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -66,7 +66,7 @@ def test_binary_stream() -> None:
                 f.write(data)
 
         process = subprocess.run(
-            ["rerun", "rrd", "compare", f"{tmpdir}/output_A.rrd", f"{tmpdir}/output_B.rrd"],
+            ["simplant-lab", "rrd", "compare", f"{tmpdir}/output_A.rrd", f"{tmpdir}/output_B.rrd"],
             check=False,
             capture_output=True,
         )

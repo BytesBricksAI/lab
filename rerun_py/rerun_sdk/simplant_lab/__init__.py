@@ -24,21 +24,20 @@ if sys.version_info < (3, 10):  # noqa: UP036
 import rerun_bindings as bindings
 
 # SimPlant domain submodules (registered on this package by rerun_bindings init).
-from . import acquisition as acquisition
-from . import asset_model as asset_model
-from . import kernel as kernel
-from . import ml_dataloop as ml_dataloop
-from . import recording as recording
-from . import simulation as simulation
-from . import stress_testing as stress_testing
-from . import types as types
-
 from . import (
+    acquisition as acquisition,
+    asset_model as asset_model,
     blueprint as blueprint,
     catalog as catalog,
     experimental as experimental,
+    kernel as kernel,
+    ml_dataloop as ml_dataloop,
+    recording as recording,
     rrd_recording as rrd_recording,
     server as server,
+    simulation as simulation,
+    stress_testing as stress_testing,
+    types as types,
     urdf as urdf,
 )
 from ._baseclasses import (
@@ -288,7 +287,7 @@ def init(
     You must call this function first in order to initialize a global recording.
     Without an active recording, all methods of the SDK will turn into no-ops.
 
-    For more advanced use cases, e.g. multiple recordings setups, see [`rerun.RecordingStream`][].
+    For more advanced use cases, e.g. multiple recordings setups, see [`simplant_lab.RecordingStream`][].
 
     To deal with accumulation of recording state when calling init() multiple times, this function will
     have the side-effect of flushing all existing recordings. After flushing, any recordings which
@@ -322,7 +321,7 @@ def init(
 
         For example, if you have one application doing object detection
         and another doing camera calibration, you could have
-        `rerun.init("object_detector")` and `rerun.init("calibrator")`.
+        `simplant_lab.init("object_detector")` and `simplant_lab.init("calibrator")`.
 
         Application ids starting with `rerun_example_` are reserved for Rerun examples,
         and will be treated specially by the Rerun Viewer.
@@ -358,7 +357,7 @@ def init(
         Optionally set a default blueprint to use for this application. If the application
         already has an active blueprint, the new blueprint won't become active until the user
         clicks the "reset blueprint" button. If you want to activate the new blueprint
-        immediately, instead use the [`rerun.send_blueprint`][] API.
+        immediately, instead use the [`simplant_lab.send_blueprint`][] API.
     send_properties
             Immediately send the recording properties to the viewer (default: True)
 
@@ -522,11 +521,11 @@ def notebook_show(
         A blueprint object to send to the viewer.
         It will be made active and set as the default blueprint in the recording.
 
-        Setting this is equivalent to calling [`rerun.send_blueprint`][] before initializing the viewer.
+        Setting this is equivalent to calling [`simplant_lab.send_blueprint`][] before initializing the viewer.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
 
     """
     try:

@@ -6,9 +6,9 @@ from __future__ import annotations
 import argparse
 
 import numpy as np
+import simplant_lab.blueprint as rrb
 
-import simplant_lab as rr  # pip install rerun-sdk
-import rerun.blueprint as rrb
+import simplant_lab as rr  # pip install simplant-lab-sdk
 
 
 def main() -> None:

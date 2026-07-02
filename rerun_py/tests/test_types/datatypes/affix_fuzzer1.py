@@ -10,10 +10,10 @@ from typing import TYPE_CHECKING, Any
 
 import pyarrow as pa
 from attrs import define, field
-from rerun._baseclasses import (
+from simplant_lab._baseclasses import (
     BaseBatch,
 )
-from rerun._converters import (
+from simplant_lab._converters import (
     bool_or_none,
     float_or_none,
     str_or_none,

@@ -51,7 +51,7 @@ class TableBlueprint(Archetype):
             Every row can at most preview a single segment.
 
             For the preview, the rest of the blueprint data is read it as it would be with regular recording blueprints,
-            meaning that the regular structure of [`archetypes.ViewportBlueprint`][rerun.blueprint.archetypes.ViewportBlueprint], and [`archetypes.ViewBlueprint`][rerun.blueprint.archetypes.ViewBlueprint] structure applies.
+            meaning that the regular structure of [`archetypes.ViewportBlueprint`][simplant_lab.blueprint.archetypes.ViewportBlueprint], and [`archetypes.ViewBlueprint`][simplant_lab.blueprint.archetypes.ViewBlueprint] structure applies.
             However, this mostly ignores layout container types as well as automatic spawning.
         flag_column:
             The name of the boolean column used for flag/annotation toggles.
@@ -124,7 +124,7 @@ class TableBlueprint(Archetype):
             Every row can at most preview a single segment.
 
             For the preview, the rest of the blueprint data is read it as it would be with regular recording blueprints,
-            meaning that the regular structure of [`archetypes.ViewportBlueprint`][rerun.blueprint.archetypes.ViewportBlueprint], and [`archetypes.ViewBlueprint`][rerun.blueprint.archetypes.ViewBlueprint] structure applies.
+            meaning that the regular structure of [`archetypes.ViewportBlueprint`][simplant_lab.blueprint.archetypes.ViewportBlueprint], and [`archetypes.ViewBlueprint`][simplant_lab.blueprint.archetypes.ViewBlueprint] structure applies.
             However, this mostly ignores layout container types as well as automatic spawning.
         flag_column:
             The name of the boolean column used for flag/annotation toggles.
@@ -212,7 +212,7 @@ class TableBlueprint(Archetype):
     # Every row can at most preview a single segment.
     #
     # For the preview, the rest of the blueprint data is read it as it would be with regular recording blueprints,
-    # meaning that the regular structure of [`archetypes.ViewportBlueprint`][rerun.blueprint.archetypes.ViewportBlueprint], and [`archetypes.ViewBlueprint`][rerun.blueprint.archetypes.ViewBlueprint] structure applies.
+    # meaning that the regular structure of [`archetypes.ViewportBlueprint`][simplant_lab.blueprint.archetypes.ViewportBlueprint], and [`archetypes.ViewBlueprint`][simplant_lab.blueprint.archetypes.ViewBlueprint] structure applies.
     # However, this mostly ignores layout container types as well as automatic spawning.
     #
     # (Docstring intentionally commented out to hide this field from the docs)

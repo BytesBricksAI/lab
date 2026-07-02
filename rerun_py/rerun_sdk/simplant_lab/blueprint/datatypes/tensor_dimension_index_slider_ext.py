@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 
 class TensorDimensionIndexSliderExt:
-    """Extension for [TensorDimensionIndexSlider][rerun.blueprint.datatypes.TensorDimensionIndexSlider]."""
+    """Extension for [TensorDimensionIndexSlider][simplant_lab.blueprint.datatypes.TensorDimensionIndexSlider]."""
 
     @staticmethod
     def native_to_pa_array_override(data: TensorDimensionIndexSliderArrayLike, data_type: pa.DataType) -> pa.Array:

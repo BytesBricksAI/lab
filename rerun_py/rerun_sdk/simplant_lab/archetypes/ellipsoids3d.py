@@ -34,10 +34,10 @@ class Ellipsoids3D(Ellipsoids3DExt, Archetype, VisualizableArchetype):
 
     This archetype is for ellipsoids or spheres whose size is a key part of the data
     (e.g. a bounding sphere).
-    For points whose radii are for the sake of visualization, use [`archetypes.Points3D`][rerun.archetypes.Points3D] instead.
+    For points whose radii are for the sake of visualization, use [`archetypes.Points3D`][simplant_lab.archetypes.Points3D] instead.
 
     If there's more instance poses than half sizes, the last ellipsoid/sphere's orientation will be repeated for the remaining poses.
-    Orienting and placing ellipsoids/spheres forms a separate transform that is applied prior to [`archetypes.InstancePoses3D`][rerun.archetypes.InstancePoses3D] and [`archetypes.Transform3D`][rerun.archetypes.Transform3D].
+    Orienting and placing ellipsoids/spheres forms a separate transform that is applied prior to [`archetypes.InstancePoses3D`][simplant_lab.archetypes.InstancePoses3D] and [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D].
 
     Example
     -------

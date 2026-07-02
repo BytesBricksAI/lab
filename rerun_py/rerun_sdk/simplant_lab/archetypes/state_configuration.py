@@ -42,7 +42,7 @@ class StateConfiguration(Archetype, VisualizableArchetype):
 
     It's generally recommended to log this type as static.
 
-    The underlying data needs to be logged to the same entity path using [`archetypes.StateChange`][rerun.archetypes.StateChange].
+    The underlying data needs to be logged to the same entity path using [`archetypes.StateChange`][simplant_lab.archetypes.StateChange].
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**
 

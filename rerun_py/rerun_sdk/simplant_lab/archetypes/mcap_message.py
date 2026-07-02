@@ -32,8 +32,8 @@ class McapMessage(Archetype):
     The binary payload represents sensor data, commands, or other information encoded according
     to the format specified by the associated channel.
 
-    See [`archetypes.McapChannel`][rerun.archetypes.McapChannel] for channel definitions that specify message encoding,
-    [`archetypes.McapSchema`][rerun.archetypes.McapSchema] for data structure definitions, and the
+    See [`archetypes.McapChannel`][simplant_lab.archetypes.McapChannel] for channel definitions that specify message encoding,
+    [`archetypes.McapSchema`][simplant_lab.archetypes.McapSchema] for data structure definitions, and the
     [MCAP specification](https://mcap.dev/) for complete format details.
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**

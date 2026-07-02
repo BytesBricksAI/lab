@@ -5,7 +5,7 @@ from typing import Any
 
 
 class AngleExt:
-    """Extension for [Angle][rerun.datatypes.Angle]."""
+    """Extension for [Angle][simplant_lab.datatypes.Angle]."""
 
     def __init__(self: Any, rad: float | None = None, deg: float | None = None) -> None:
         """

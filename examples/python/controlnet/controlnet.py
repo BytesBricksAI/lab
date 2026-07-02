@@ -15,6 +15,7 @@ import cv2
 import numpy as np
 import PIL.Image
 import requests
+import simplant_lab.blueprint as rrb
 import torch
 from diffusers import (
     AutoencoderKL,
@@ -23,7 +24,6 @@ from diffusers import (
 )
 
 import simplant_lab as rr
-import rerun.blueprint as rrb
 
 RERUN_LOGO_URL = "https://storage.googleapis.com/rerun-example-datasets/controlnet/rerun-icon-1000.png"
 

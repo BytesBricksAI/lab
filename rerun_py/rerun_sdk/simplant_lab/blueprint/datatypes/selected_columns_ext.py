@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 
 class SelectedColumnsExt:
-    """Extension for [SelectedColumns][rerun.blueprint.datatypes.SelectedColumns]."""
+    """Extension for [SelectedColumns][simplant_lab.blueprint.datatypes.SelectedColumns]."""
 
     def __init__(
         self: Any,

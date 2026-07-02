@@ -3,26 +3,26 @@ from __future__ import annotations
 import itertools
 from typing import TYPE_CHECKING, Any, cast
 
-from rerun.blueprint.archetypes.container_blueprint import ContainerBlueprint
-from rerun.blueprint.components.active_tab import ActiveTab, ActiveTabBatch
-from rerun.blueprint.components.column_share import ColumnShare, ColumnShareBatch
-from rerun.blueprint.components.container_kind import ContainerKind, ContainerKindBatch, ContainerKindLike
-from rerun.blueprint.components.grid_columns import GridColumns, GridColumnsBatch
-from rerun.blueprint.components.included_content import IncludedContentBatch
-from rerun.blueprint.components.row_share import RowShare, RowShareBatch
-from rerun.components.name import Name, NameBatch
-from rerun.components.visible import Visible, VisibleBatch
-from rerun.datatypes.entity_path import EntityPath, EntityPathArrayLike, EntityPathLike
+from simplant_lab.blueprint.archetypes.container_blueprint import ContainerBlueprint
+from simplant_lab.blueprint.components.active_tab import ActiveTab, ActiveTabBatch
+from simplant_lab.blueprint.components.column_share import ColumnShare, ColumnShareBatch
+from simplant_lab.blueprint.components.container_kind import ContainerKind, ContainerKindBatch, ContainerKindLike
+from simplant_lab.blueprint.components.grid_columns import GridColumns, GridColumnsBatch
+from simplant_lab.blueprint.components.included_content import IncludedContentBatch
+from simplant_lab.blueprint.components.row_share import RowShare, RowShareBatch
+from simplant_lab.components.name import Name, NameBatch
+from simplant_lab.components.visible import Visible, VisibleBatch
+from simplant_lab.datatypes.entity_path import EntityPath, EntityPathArrayLike, EntityPathLike
 
 from .common_arrays import none_empty_or_value
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
-    from rerun.datatypes.bool import BoolLike
-    from rerun.datatypes.float32 import Float32ArrayLike
-    from rerun.datatypes.uint32 import UInt32Like
-    from rerun.datatypes.utf8 import Utf8Like
+    from simplant_lab.datatypes.bool import BoolLike
+    from simplant_lab.datatypes.float32 import Float32ArrayLike
+    from simplant_lab.datatypes.uint32 import UInt32Like
+    from simplant_lab.datatypes.utf8 import Utf8Like
 
 
 def test_container_blueprint() -> None:

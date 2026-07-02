@@ -32,7 +32,7 @@ class DepthImage(DepthImageExt, Archetype, VisualizableArchetype):
     """
     **Archetype**: A depth image, i.e. as captured by a depth camera.
 
-    Each pixel corresponds to a depth value in units specified by [`components.DepthMeter`][rerun.components.DepthMeter].
+    Each pixel corresponds to a depth value in units specified by [`components.DepthMeter`][simplant_lab.components.DepthMeter].
 
     Example
     -------

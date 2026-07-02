@@ -19,12 +19,12 @@ class TransformFrameId(datatypes.Utf8, ComponentMixin):
     **Component**: A string identifier for a transform frame.
 
     Transform frames may be derived from entity paths to refer to Rerun's implicit
-    entity path driven hierarchy which is defined via [`archetypes.Transform3D`][rerun.archetypes.Transform3D], [`archetypes.Pinhole`][rerun.archetypes.Pinhole] etc..
+    entity path driven hierarchy which is defined via [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D], [`archetypes.Pinhole`][simplant_lab.archetypes.Pinhole] etc..
     These implicit transform frames look like `tf#path/to/entity`.
 
-    Note that any [`archetypes.Transform3D`][rerun.archetypes.Transform3D]s logged with both `parent_frame` and `child_frame` set
+    Note that any [`archetypes.Transform3D`][simplant_lab.archetypes.Transform3D]s logged with both `parent_frame` and `child_frame` set
     describes a relationship between these parent and child transform frames, **not** the transform frame
-    that the entity path may be using (defined by an [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame]).
+    that the entity path may be using (defined by an [`archetypes.CoordinateFrame`][simplant_lab.archetypes.CoordinateFrame]).
     """
 
     _BATCH_TYPE = None

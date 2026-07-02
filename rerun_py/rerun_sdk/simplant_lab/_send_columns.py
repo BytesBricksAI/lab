@@ -34,7 +34,7 @@ class TimeColumn(TimeColumnLike):
     """
     A column of index (time) values.
 
-    Columnar equivalent to [`rerun.set_time`][].
+    Columnar equivalent to [`simplant_lab.set_time`][].
     """
 
     # These overloads ensures that mypy can catch errors that would otherwise not be caught until runtime.
@@ -205,7 +205,7 @@ def send_columns(
     data that shares the same index across the different columns will act as a single logical row,
     equivalent to a single call to `rr.log()`.
 
-    Note that this API ignores any stateful time set on the log stream via [`rerun.set_time`][].
+    Note that this API ignores any stateful time set on the log stream via [`simplant_lab.set_time`][].
     Furthermore, this will _not_ inject the default timelines `log_tick` and `log_time` timeline columns.
 
     Parameters
@@ -216,20 +216,20 @@ def send_columns(
         See <https://www.rerun.io/docs/concepts/logging-and-ingestion/entity-path> for more on entity paths.
     indexes:
         The time values of this batch of data. Each `TimeColumnLike` object represents a single column
-        of timestamps. You usually want to use [`rerun.TimeColumn`][] for this.
+        of timestamps. You usually want to use [`simplant_lab.TimeColumn`][] for this.
     columns:
         The columns of components to log. Each object represents a single column of data.
 
-        In order to send multiple components per time value, explicitly create a [`ComponentColumn`][rerun.ComponentColumn]
+        In order to send multiple components per time value, explicitly create a [`ComponentColumn`][simplant_lab.ComponentColumn]
         either by constructing it directly, or by calling the `.columns()` method on an `Archetype` type.
     recording:
-        Specifies the [`rerun.RecordingStream`][] to use.
+        Specifies the [`simplant_lab.RecordingStream`][] to use.
         If left unspecified, defaults to the current active data recording, if there is one.
-        See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+        See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
     strict:
         If True, raise exceptions on non-loggable data.
         If False, warn on non-loggable data.
-        If None, use the global default from `rerun.strict_mode()`
+        If None, use the global default from `simplant_lab.strict_mode()`
 
     """
     timelines_args, columns_args = build_column_args(indexes, columns)

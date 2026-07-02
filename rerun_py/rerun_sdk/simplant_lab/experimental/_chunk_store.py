@@ -6,8 +6,8 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
     from pathlib import Path
 
-    from simplant_lab.catalog import Schema
     from rerun_bindings import ChunkStoreInternal
+    from simplant_lab.catalog import Schema
 
     from ._chunk import Chunk
     from ._lazy_chunk_stream import LazyChunkStream
@@ -18,10 +18,10 @@ class ChunkStore:
     A fully-materialized, in-memory chunk store.
 
     Build one from chunks via
-    [`ChunkStore.from_chunks`][rerun.experimental.ChunkStore.from_chunks], or
-    fully materialize an [`IndexedReader`][rerun.experimental.IndexedReader]
+    [`ChunkStore.from_chunks`][simplant_lab.experimental.ChunkStore.from_chunks], or
+    fully materialize an [`IndexedReader`][simplant_lab.experimental.IndexedReader]
     via `reader.stream().collect()`.
-    For lazy, on-demand chunk loading, see [`LazyStore`][rerun.experimental.LazyStore].
+    For lazy, on-demand chunk loading, see [`LazyStore`][simplant_lab.experimental.LazyStore].
 
     Use `stream()` to process chunks through the lazy pipeline, or
     `write_rrd()` to persist to disk.

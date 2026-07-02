@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 
 
 class TextLogLevelExt:
-    """Extension for [TextLogLevel][rerun.components.TextLogLevel]."""
+    """Extension for [TextLogLevel][simplant_lab.components.TextLogLevel]."""
 
     CRITICAL: TextLogLevel = None  # type: ignore[assignment]
     """ Designates catastrophic failures. """

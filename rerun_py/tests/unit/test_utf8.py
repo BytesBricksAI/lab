@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import numpy as np
-from rerun import datatypes
+from simplant_lab import datatypes
 
 
 def test_utf8_batch_single() -> None:

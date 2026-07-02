@@ -1,7 +1,8 @@
 """Use a blueprint to customize a map view."""
 
-import simplant_lab as rr
 import rerun.blueprint as rrb
+
+import simplant_lab as rr
 
 rr.init("rerun_example_map_view", spawn=True)
 

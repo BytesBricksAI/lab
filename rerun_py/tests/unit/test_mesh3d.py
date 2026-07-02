@@ -3,10 +3,10 @@ from __future__ import annotations
 import itertools
 from typing import Any, cast
 
-import rerun as rr
-from rerun.components import AlbedoFactorBatch, Position3DBatch, TriangleIndicesBatch, Vector3DBatch
-from rerun.components.texcoord2d import Texcoord2DBatch
-from rerun.datatypes import (
+import simplant_lab as rr
+from simplant_lab.components import AlbedoFactorBatch, Position3DBatch, TriangleIndicesBatch, Vector3DBatch
+from simplant_lab.components.texcoord2d import Texcoord2DBatch
+from simplant_lab.datatypes import (
     ClassIdArrayLike,
     Rgba32,
     Rgba32ArrayLike,

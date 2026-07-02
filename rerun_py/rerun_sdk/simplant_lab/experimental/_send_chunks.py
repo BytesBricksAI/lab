@@ -12,8 +12,8 @@ from ._lazy_store import LazyStore
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
-    from simplant_lab.recording_stream import RecordingStream
     from rerun_bindings import ChunkInternal
+    from simplant_lab.recording_stream import RecordingStream
 
 
 def _unwrap(c: object) -> ChunkInternal:
@@ -42,12 +42,12 @@ def send_chunks(
     chunks:
         One of:
 
-        - A single [`Chunk`][rerun.experimental.Chunk].
-        - A [`LazyChunkStream`][rerun.experimental.LazyChunkStream] — consume
+        - A single [`Chunk`][simplant_lab.experimental.Chunk].
+        - A [`LazyChunkStream`][simplant_lab.experimental.LazyChunkStream] — consume
           the stream and forward all chunks to the recording stream.
-        - A [`LazyStore`][rerun.experimental.LazyStore] — send all chunks to the
+        - A [`LazyStore`][simplant_lab.experimental.LazyStore] — send all chunks to the
           recording stream. This triggers loading all chunks from the source.
-        - A [`ChunkStore`][rerun.experimental.ChunkStore] — send all chunks to
+        - A [`ChunkStore`][simplant_lab.experimental.ChunkStore] — send all chunks to
           the recording stream (fast since all chunks are already loaded).
         - Any iterable of `Chunk` objects.
 

@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class Range1DExt:
-    """Extension for [Range1D][rerun.datatypes.Range1D]."""
+    """Extension for [Range1D][simplant_lab.datatypes.Range1D]."""
 
     @staticmethod
     def native_to_pa_array_override(data: Range1DArrayLike, data_type: pa.DataType) -> pa.Array:

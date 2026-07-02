@@ -31,11 +31,11 @@ The converter loads RRD files into the OSS server, infers data types from the re
 ### Installation
 
 This example has its own `uv` project, separate from the workspace `.venv`, because LeRobot pins an
-incompatible `rerun-sdk`. From the repo root:
+incompatible `simplant-lab-sdk`. From the repo root:
 
 ```bash
 cd examples/python/rerun_export
-uv sync                         # builds local rerun-sdk + installs lerobot into ./.venv
+uv sync                         # builds local simplant-lab-sdk + installs lerobot into ./.venv
 ```
 
 Then either `source .venv/bin/activate` or prefix subsequent commands with `uv run`.

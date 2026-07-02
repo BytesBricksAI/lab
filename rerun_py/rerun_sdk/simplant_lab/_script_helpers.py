@@ -96,7 +96,7 @@ def script_setup(
         Optionally set a default blueprint to use for this application. If the application
         already has an active blueprint, the new blueprint won't become active until the user
         clicks the "reset blueprint" button. If you want to activate the new blueprint
-        immediately, instead use the [`rerun.send_blueprint`][] API.
+        immediately, instead use the [`simplant_lab.send_blueprint`][] API.
 
     """
     rr.init(

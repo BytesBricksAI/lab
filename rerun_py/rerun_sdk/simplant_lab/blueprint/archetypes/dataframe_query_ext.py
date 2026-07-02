@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 
 class DataframeQueryExt:
-    """Extension for [DataframeQuery][rerun.blueprint.archetypes.DataframeQuery]."""
+    """Extension for [DataframeQuery][simplant_lab.blueprint.archetypes.DataframeQuery]."""
 
     def __init__(
         self: Any,

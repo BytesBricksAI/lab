@@ -13,7 +13,7 @@ NUMPY_VERSION = tuple(map(int, np.version.version.split(".")[:2]))
 
 
 class GeoPointsExt:
-    """Extension for [GeoPoints][rerun.archetypes.GeoPoints]."""
+    """Extension for [GeoPoints][simplant_lab.archetypes.GeoPoints]."""
 
     # TODO(ab): the purpose of this override is to rename the required parameter and make it keyword-only. Should be codegen-able?
     def __init__(
@@ -41,7 +41,7 @@ class GeoPointsExt:
         class_ids:
             Optional class Ids for the points.
 
-            The [`components.ClassId`][rerun.components.ClassId] provides colors if not specified explicitly.
+            The [`components.ClassId`][simplant_lab.components.ClassId] provides colors if not specified explicitly.
 
         """
 

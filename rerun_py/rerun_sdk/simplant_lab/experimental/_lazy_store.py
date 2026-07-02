@@ -5,8 +5,8 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from simplant_lab.catalog import Schema
     from rerun_bindings import LazyStoreInternal
+    from simplant_lab.catalog import Schema
 
     from ._lazy_chunk_stream import LazyChunkStream
 
@@ -24,7 +24,7 @@ class LazyStore:
 
     Use `stream()` to process chunks through the lazy pipeline, or `write_rrd()`
     to persist to disk. To fully materialize into a
-    [`ChunkStore`][rerun.experimental.ChunkStore], call `lazy.stream().collect()`.
+    [`ChunkStore`][simplant_lab.experimental.ChunkStore], call `lazy.stream().collect()`.
 
     """
 

@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 import pyarrow as pa
 import pytest
-import rerun as rr
+import simplant_lab as rr
 
 if TYPE_CHECKING:
     from pathlib import Path

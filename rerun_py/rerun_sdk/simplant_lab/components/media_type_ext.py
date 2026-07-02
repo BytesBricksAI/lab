@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 
 # TODO(#2388): constants in fbs
 class MediaTypeExt:
-    """Extension for [MediaType][rerun.components.MediaType]."""
+    """Extension for [MediaType][simplant_lab.components.MediaType]."""
 
     TEXT: MediaType = None  # type: ignore[assignment]
     """Plain text: `text/plain`."""

@@ -22,7 +22,7 @@ if TYPE_CHECKING:
     from .blueprint import BlueprintLike
 
 
-from rerun import bindings
+import rerun_bindings as bindings
 from simplant_lab.error_utils import RerunMissingDependencyError
 
 from ._event import (
@@ -142,7 +142,7 @@ class Viewer:
         Any data logged to the recording after initialization will be sent directly to the viewer.
 
         This widget can be displayed by returning it at the end of your cells execution, or immediately
-        by calling [`rerun.notebook.Viewer.display`][].
+        by calling [`simplant_lab.notebook.Viewer.display`][].
 
         Parameters
         ----------
@@ -157,14 +157,14 @@ class Viewer:
         url:
             Optional URL passed to the viewer for displaying its contents.
         recording:
-            Specifies the [`rerun.RecordingStream`][] to use.
+            Specifies the [`simplant_lab.RecordingStream`][] to use.
             If left unspecified, defaults to the current active data recording, if there is one.
-            See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+            See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
         blueprint:
             A blueprint object to send to the viewer.
             It will be made active and set as the default blueprint in the recording.
 
-            Setting this is equivalent to calling [`rerun.send_blueprint`][] before initializing the viewer.
+            Setting this is equivalent to calling [`simplant_lab.send_blueprint`][] before initializing the viewer.
         use_global_recording:
             If no explicit `recording` is provided, the Viewer uses the thread-local/global recording created by `rr.init`
             or set explicitly via `rr.set_thread_local_data_recording`/`rr.set_global_data_recording`.
@@ -253,14 +253,14 @@ class Viewer:
         Parameters
         ----------
         recording:
-            Specifies the [`rerun.RecordingStream`][] to use.
+            Specifies the [`simplant_lab.RecordingStream`][] to use.
             If left unspecified, defaults to the current active data recording, if there is one.
-            See also: [`rerun.init`][], [`rerun.set_global_data_recording`][].
+            See also: [`simplant_lab.init`][], [`simplant_lab.set_global_data_recording`][].
         blueprint:
             A blueprint object to send to the viewer.
             It will be made active and set as the default blueprint in the recording.
 
-            Setting this is equivalent to calling [`rerun.send_blueprint`][] before initializing the viewer.
+            Setting this is equivalent to calling [`simplant_lab.send_blueprint`][] before initializing the viewer.
 
         """
         recording = get_data_recording(recording)
@@ -552,15 +552,15 @@ class Viewer:
         """
         Register a callback to be called when a viewer event occurs.
 
-        The callback will receive a [`ViewerEvent`][rerun.notebook.ViewerEvent], which is one of:
-        [`PlayEvent`][rerun.notebook.PlayEvent], [`PauseEvent`][rerun.notebook.PauseEvent],
-        [`TimeUpdateEvent`][rerun.notebook.TimeUpdateEvent], [`TimelineChangeEvent`][rerun.notebook.TimelineChangeEvent],
-        [`SelectionChangeEvent`][rerun.notebook.SelectionChangeEvent], or [`RecordingOpenEvent`][rerun.notebook.RecordingOpenEvent].
+        The callback will receive a [`ViewerEvent`][simplant_lab.notebook.ViewerEvent], which is one of:
+        [`PlayEvent`][simplant_lab.notebook.PlayEvent], [`PauseEvent`][simplant_lab.notebook.PauseEvent],
+        [`TimeUpdateEvent`][simplant_lab.notebook.TimeUpdateEvent], [`TimelineChangeEvent`][simplant_lab.notebook.TimelineChangeEvent],
+        [`SelectionChangeEvent`][simplant_lab.notebook.SelectionChangeEvent], or [`RecordingOpenEvent`][simplant_lab.notebook.RecordingOpenEvent].
 
         Parameters
         ----------
         callback:
-            A function that takes a [`ViewerEvent`][rerun.notebook.ViewerEvent] as its only argument.
+            A function that takes a [`ViewerEvent`][simplant_lab.notebook.ViewerEvent] as its only argument.
 
         """
         self._event_callbacks.append(callback)

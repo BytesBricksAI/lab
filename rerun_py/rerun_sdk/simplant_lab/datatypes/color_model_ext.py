@@ -2,7 +2,7 @@ from __future__ import annotations
 
 
 class ColorModelExt:
-    """Extension for [ColorModel][rerun.datatypes.ColorModel]."""
+    """Extension for [ColorModel][simplant_lab.datatypes.ColorModel]."""
 
     def num_channels(self) -> int:
         from . import ColorModel
