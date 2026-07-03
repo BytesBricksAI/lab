@@ -1,0 +1,21 @@
+[package]
+name = "sp_pid_viewer"
+authors.workspace = true
+description = "SimPlant Lab P&ID viewer: embedded engineering symbols + interactive egui canvas."
+edition.workspace = true
+homepage.workspace = true
+include.workspace = true
+license.workspace = true
+publish = false
+readme = "README.md"
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+sp_asset_model = { path = "../sp_asset_model" }
+
+egui.workspace = true
+
+[lints]
+workspace = true
