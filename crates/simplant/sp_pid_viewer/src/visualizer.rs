@@ -71,7 +71,7 @@ pub struct PidCanvasResponse {
     pub symbol_responses: Vec<egui::Response>,
 
     /// The region of diagram coordinates visible after pan/zoom; together
-    /// with [`Self::response`]`.rect` it maps diagram → screen coordinates.
+    /// with [`Self::response`].rect it maps diagram → screen coordinates.
     pub scene_rect: egui::Rect,
 }
 
