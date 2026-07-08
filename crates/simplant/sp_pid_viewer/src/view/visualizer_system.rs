@@ -112,7 +112,7 @@ impl VisualizerSystem for PidSymbolVisualizer {
                 .component_mono::<components::HalfSize2D>(
                     PidSymbol::descriptor_half_size().component,
                 )
-                .map_or(egui::vec2(48.0, 48.0), |half| {
+                .map_or(egui::vec2(96.0, 96.0), |half| {
                     egui::vec2(half.x() * 2.0, half.y() * 2.0)
                 });
             let linked_tag = results
