@@ -65,6 +65,27 @@ pub struct PidCanvasResponse {
 
     /// The response covering the whole canvas area.
     pub response: egui::Response,
+
+    /// Per-symbol responses, same order as the input slice (for hosts that
+    /// wire selection/hover into their own state, e.g. the viewer).
+    pub symbol_responses: Vec<egui::Response>,
+
+    /// The region of diagram coordinates visible after pan/zoom; together
+    /// with [`Self::response`]`.rect` it maps diagram → screen coordinates.
+    pub scene_rect: egui::Rect,
+}
+
+impl PidCanvasResponse {
+    /// Maps a position in diagram coordinates to screen coordinates.
+    pub fn screen_from_diagram(&self, pos: egui::Pos2) -> egui::Pos2 {
+        let screen = self.response.rect;
+        let scene = self.scene_rect;
+        egui::pos2(
+            screen.min.x + (pos.x - scene.min.x) * screen.width() / scene.width().max(f32::EPSILON),
+            screen.min.y
+                + (pos.y - scene.min.y) * screen.height() / scene.height().max(f32::EPSILON),
+        )
+    }
 }
 
 /// P&ID canvas widget with pan + zoom (drag to pan, scroll to zoom,
@@ -104,6 +125,7 @@ impl<'a> PidCanvas<'a> {
         let symbol_color = ui.visuals().text_color();
         let mut clicked = None;
         let mut hovered = None;
+        let mut symbol_responses = Vec::with_capacity(self.placed.len());
 
         let response = egui::Scene::new()
             .show(ui, &mut scene_rect, |ui| {
@@ -115,6 +137,7 @@ impl<'a> PidCanvas<'a> {
                     if interaction.clicked() {
                         clicked = Some(index);
                     }
+                    symbol_responses.push(interaction);
                 }
             })
             .response;
@@ -129,6 +152,8 @@ impl<'a> PidCanvas<'a> {
             clicked,
             hovered,
             response,
+            symbol_responses,
+            scene_rect,
         }
     }
 }

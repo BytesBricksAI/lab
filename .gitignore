@@ -89,6 +89,8 @@ icd.json
 
 # Temporary RRD files. Don't blanket ignore them since we check in some for backwards compatibility tests.
 docs/snippets/**/*.rrd
+/*.rrd
+examples/simplant/**/*.rrd
 
 /meilisearch
 

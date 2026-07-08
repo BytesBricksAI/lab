@@ -14,6 +14,14 @@ version.workspace = true
 
 [dependencies]
 sp_asset_model = { path = "../sp_asset_model" }
+sp_types = { path = "../sp_types" }
+
+re_chunk_store.workspace = true
+re_log_types.workspace = true
+re_sdk_types.workspace = true
+re_ui.workspace = true
+re_view.workspace = true
+re_viewer_context.workspace = true
 
 egui.workspace = true
 

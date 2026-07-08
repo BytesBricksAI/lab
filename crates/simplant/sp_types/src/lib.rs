@@ -6,6 +6,7 @@
 
 mod api;
 pub mod namespace;
+mod pid_symbol;
 mod process_variable;
 mod quality;
 mod tag_metadata;

@@ -645,9 +645,75 @@ impl TextLogView {
     }
 }
 
+/// A view of a custom (non-builtin) view class, addressed by its class identifier.
+///
+/// Use this for view classes registered by the embedding application via
+/// `add_view_class`, e.g. the SimPlant Lab P&ID view (`"SimPlantPid"`).
+pub struct CustomView(pub(crate) View);
+
+impl CustomView {
+    /// Create a new view of the given view class.
+    pub fn new(class_identifier: impl Into<String>, name: impl Into<String>) -> Self {
+        Self(View {
+            class_identifier: class_identifier.into(),
+            name: Some(name.into()),
+            ..Default::default()
+        })
+    }
+
+    /// Set the origin entity path.
+    pub fn with_origin(mut self, origin: impl Into<EntityPath>) -> Self {
+        self.0.origin = origin.into();
+        self
+    }
+
+    /// Set the contents query expressions.
+    pub fn with_contents(mut self, queries: impl IntoIterator<Item = impl Into<String>>) -> Self {
+        self.0.contents = queries.into_iter().map(Into::into).collect();
+        self
+    }
+
+    /// Set visibility.
+    pub fn with_visible(mut self, visible: bool) -> Self {
+        self.0.visible = Some(visible);
+        self
+    }
+
+    /// Add a default archetype that applies to all entities in the view.
+    pub fn with_defaults(mut self, archetype: &dyn AsComponents) -> Self {
+        self.0.add_defaults(archetype);
+        self
+    }
+
+    /// Add a visualizer override for a specific entity.
+    pub fn with_override(
+        self,
+        entity_path: impl Into<EntityPath>,
+        visualizers: impl Into<Visualizer>,
+    ) -> Self {
+        self.with_overrides(entity_path, [visualizers])
+    }
+
+    /// Add visualizer overrides for a specific entity.
+    pub fn with_overrides(
+        mut self,
+        entity_path: impl Into<EntityPath>,
+        visualizers: impl IntoIterator<Item = impl Into<Visualizer>>,
+    ) -> Self {
+        self.0.add_overrides(entity_path, visualizers);
+        self
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn custom_view_uses_given_class() {
+        let view = CustomView::new("SimPlantPid", "P&ID");
+        assert_eq!(view.0.class_identifier, "SimPlantPid");
+    }
 
     #[test]
     fn dataframe_view_uses_dataframe_class() {

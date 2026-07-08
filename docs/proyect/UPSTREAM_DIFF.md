@@ -142,6 +142,20 @@ Integración mínima en la zona upstream del fork: el crate puente `sp_python` (
 **Razón:** exponer los crates `sp_*` de dominio a Python sin tocar los crates de dominio (ADR-0002);
 toda la frontera pyo3 vive en `sp_python` + estas dos líneas de wiring upstream.
 
+### 2.2.2 Vista P&ID (`sp_pid_viewer`)
+
+Integración mínima: la vista vive en `crates/simplant/sp_pid_viewer/` (fuera de este registro) y se
+registra vía el punto de extensión oficial `App::add_view_class`.
+
+| Archivo | Cambio |
+|---|---|
+| `crates/top/simplant-lab/Cargo.toml` | Dep opcional `sp_pid_viewer = { path = "../../simplant/sp_pid_viewer", optional = true }`; feature `native_viewer` agrega `"dep:sp_pid_viewer"` |
+| `crates/top/simplant-lab/src/commands/entrypoint.rs` | Tras construir la `App` (bloque `--memory-limit`): `app.add_view_class::<sp_pid_viewer::PidView>()` con log de error |
+| `clippy.toml` + `scripts/clippy_wasm/clippy.toml` | `doc-valid-idents` agrega `"SimPlant"` (evita falsos `clippy::doc_markdown` en docs de crates `sp_*`) |
+
+**Razón:** el archetype `simplant.archetypes.PidSymbol` vive en `sp_types` (ADR-0003) y la vista en
+`sp_pid_viewer`; el único wiring upstream son estas dos líneas del binario nativo.
+
 ### 2.3 Viewer — branding centralizado y strings de UI (36 archivos en `crates/`)
 
 **Nuevo módulo referenciado** (archivo untracked, ver §3): `crates/viewer/re_ui/src/branding.rs` con `PRODUCT_NAME`, `PRODUCT_NAME_LOWERCASE`, URLs.
@@ -240,6 +254,16 @@ toda la frontera pyo3 vive en `sp_python` + estas dos líneas de wiring upstream
 
 **Razón:** la API de blueprint de Rust upstream expone `TimeSeries`/`Spatial2D`/`Spatial3D`/`Map`/`Graph`/`TextDocument` pero **no** `Dataframe` (tabla) ni `TextLog` — en upstream esos views solo se construyen desde la API de Python. El demo `tanque_demo` los necesita para abrir con una tabla de variables de proceso indexada por `plant_time`. La extensión replica el patrón existente (`class_identifier` + builders `with_*`) y es **candidata a PR upstream**. No toca tipos wire ni el namespace FlatBuffers.
 
+### 2.11 API de blueprint en Rust — `CustomView` (vistas de clase arbitraria)
+
+| Archivo | Cambio |
+|---|---|
+| `crates/top/re_sdk/src/blueprint/view.rs` | Nuevo `CustomView`, con `class_identifier` provisto por el caller (en vez de hardcodeado) más `with_origin`/`with_contents`/`with_visible`/`with_defaults`/`with_override`/`with_overrides`, espejando el patrón de `TimeSeriesView`; test de construcción |
+| `crates/top/re_sdk/src/blueprint/mod.rs` | Exporta `CustomView` |
+| `crates/top/re_sdk/src/blueprint/container.rs` | `impl From<CustomView> for ContainerLike` |
+
+**Razón:** todos los views tipados de la API de blueprint (§2.10 incluida) hardcodean su `class_identifier`, así que ninguno puede dirigirse a una clase de vista registrada por la app embebedora vía `App::add_view_class` — como la vista P&ID del fork (`sp_pid_viewer::PidView`, identifier `"SimPlantPid"`). `CustomView` cierra ese hueco recibiendo el identifier como parámetro, sin tocar `api.rs` (el `class_identifier` ya fluía genérico hacia `ViewBlueprint::new(ViewClass(...))`). Usado por `examples/simplant/pid_canvas_demo` para componer un layout 50/50 (P&ID a la izquierda, tendencias a la derecha). Mismo patrón que §2.10, misma candidatura a PR upstream. No toca tipos wire ni el namespace FlatBuffers.
+
 ---
 
 ## 3. Archivos NUEVOS en zona upstream (untracked)
@@ -326,4 +350,4 @@ git diff upstream/main --stat -- ':!crates/simplant' ':!examples/simplant'
 
 ---
 
-*Última actualización: 2026-06-29 — agregado §2.2.1 (`sp_python::register` en `python_bridge.rs`); resto generado desde el working tree de `feat/simplant-domain-crates`.*
+*Última actualización: 2026-07-08 — agregado §2.11 (`CustomView` en la API de blueprint de Rust); resto generado desde el working tree de `feat/simplant-domain-crates`.*

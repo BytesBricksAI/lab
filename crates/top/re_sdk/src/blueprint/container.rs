@@ -394,3 +394,9 @@ impl From<crate::blueprint::TextLogView> for ContainerLike {
         Self::View(view.0)
     }
 }
+
+impl From<crate::blueprint::CustomView> for ContainerLike {
+    fn from(view: crate::blueprint::CustomView) -> Self {
+        Self::View(view.0)
+    }
+}
