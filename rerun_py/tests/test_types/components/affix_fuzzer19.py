@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from simplant_lab._baseclasses import (
+from rerun._baseclasses import (
     ComponentBatchMixin,
     ComponentMixin,
 )

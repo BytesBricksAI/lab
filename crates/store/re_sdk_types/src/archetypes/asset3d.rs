@@ -32,7 +32,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 /// ### Simple 3D asset
 /// ```ignore
-/// use rerun::external::anyhow;
+/// use simplant_lab::external::anyhow;
 ///
 /// fn main() -> anyhow::Result<()> {
 ///     let args = std::env::args().collect::<Vec<_>>();
@@ -41,10 +41,11 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     };
 ///
 ///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_asset3d").spawn()?;
+///         simplant_lab::RecordingStreamBuilder::new("rerun_example_asset3d")
+///             .spawn()?;
 ///
-///     rec.log_static("world", &rerun::ViewCoordinates::RIGHT_HAND_Z_UP())?; // Set an up-axis
-///     rec.log("world/asset", &rerun::Asset3D::from_file_path(path)?)?;
+///     rec.log_static("world", &simplant_lab::ViewCoordinates::RIGHT_HAND_Z_UP())?; // Set an up-axis
+///     rec.log("world/asset", &simplant_lab::Asset3D::from_file_path(path)?)?;
 ///
 ///     Ok(())
 /// }
@@ -268,7 +269,7 @@ impl Asset3D {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

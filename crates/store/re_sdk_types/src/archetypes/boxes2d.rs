@@ -28,12 +28,12 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Simple 2D boxes
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_box2d").spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new("rerun_example_box2d")
+///         .spawn()?;
 ///
 ///     rec.log(
 ///         "simple",
-///         &rerun::Boxes2D::from_mins_and_sizes([(-1., -1.)], [(2., 2.)]),
+///         &simplant_lab::Boxes2D::from_mins_and_sizes([(-1., -1.)], [(2., 2.)]),
 ///     )?;
 ///
 ///     Ok(())
@@ -401,7 +401,7 @@ impl Boxes2D {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

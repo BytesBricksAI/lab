@@ -12,14 +12,13 @@ import numpy as np
 import numpy.typing as npt
 import pyarrow as pa
 from attrs import define, field
-
-from simplant_lab._baseclasses import (
+from rerun._baseclasses import (
     BaseBatch,
 )
-from simplant_lab._converters import (
+from rerun._converters import (
     float_or_none,
 )
-from simplant_lab._numpy_compatibility import asarray
+from rerun._numpy_compatibility import asarray
 
 __all__ = ["AffixFuzzer2", "AffixFuzzer2ArrayLike", "AffixFuzzer2Batch", "AffixFuzzer2Like"]
 

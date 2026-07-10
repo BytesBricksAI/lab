@@ -12,13 +12,12 @@ import numpy as np
 import numpy.typing as npt
 import pyarrow as pa
 from attrs import define, field
-
-from simplant_lab._baseclasses import (
+from rerun._baseclasses import (
     BaseBatch,
     ComponentBatchMixin,
     ComponentMixin,
 )
-from simplant_lab._converters import (
+from rerun._converters import (
     str_or_none,
 )
 

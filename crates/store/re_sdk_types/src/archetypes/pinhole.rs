@@ -38,7 +38,8 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
 ///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_pinhole").spawn()?;
+///         simplant_lab::RecordingStreamBuilder::new("rerun_example_pinhole")
+///             .spawn()?;
 ///
 ///     let mut image = Array::<u8, _>::default((3, 3, 3).f());
 ///     let mut rng = rand::rngs::SmallRng::seed_from_u64(42);
@@ -46,12 +47,15 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 ///     rec.log(
 ///         "world/image",
-///         &rerun::Pinhole::from_focal_length_and_resolution([3., 3.], [3., 3.]),
+///         &simplant_lab::Pinhole::from_focal_length_and_resolution(
+///             [3., 3.],
+///             [3., 3.],
+///         ),
 ///     )?;
 ///     rec.log(
 ///         "world/image",
-///         &rerun::Image::from_color_model_and_tensor(
-///             rerun::ColorModel::RGB,
+///         &simplant_lab::Image::from_color_model_and_tensor(
+///             simplant_lab::ColorModel::RGB,
 ///             image,
 ///         )?,
 ///     )?;
@@ -72,24 +76,25 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Perspective pinhole camera
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_pinhole_perspective")
-///             .spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
+///         "rerun_example_pinhole_perspective",
+///     )
+///     .spawn()?;
 ///
 ///     let fov_y = std::f32::consts::FRAC_PI_4;
 ///     let aspect_ratio = 1.7777778;
 ///     rec.log(
 ///         "world/cam",
-///         &rerun::Pinhole::from_fov_and_aspect_ratio(fov_y, aspect_ratio)
-///             .with_camera_xyz(rerun::components::ViewCoordinates::RUB)
+///         &simplant_lab::Pinhole::from_fov_and_aspect_ratio(fov_y, aspect_ratio)
+///             .with_camera_xyz(simplant_lab::components::ViewCoordinates::RUB)
 ///             .with_image_plane_distance(0.1)
-///             .with_color(rerun::Color::from_rgb(255, 128, 0))
+///             .with_color(simplant_lab::Color::from_rgb(255, 128, 0))
 ///             .with_line_width(0.003),
 ///     )?;
 ///
 ///     rec.log(
 ///         "world/points",
-///         &rerun::Points3D::new([
+///         &simplant_lab::Points3D::new([
 ///             (0.0, 0.0, -0.5),
 ///             (0.1, 0.1, -0.5),
 ///             (-0.1, -0.1, -0.5),
@@ -519,7 +524,7 @@ impl Pinhole {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

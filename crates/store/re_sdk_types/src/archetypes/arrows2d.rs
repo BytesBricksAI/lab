@@ -29,15 +29,20 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
 ///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_arrow2d").spawn()?;
+///         simplant_lab::RecordingStreamBuilder::new("rerun_example_arrow2d")
+///             .spawn()?;
 ///
 ///     rec.log(
 ///         "arrows",
-///         &rerun::Arrows2D::from_vectors([[1.0, 0.0], [0.0, -1.0], [-0.7, 0.7]])
-///             .with_radii([0.025])
-///             .with_origins([[0.25, 0.0], [0.25, 0.0], [-0.1, -0.1]])
-///             .with_colors([[255, 0, 0], [0, 255, 0], [127, 0, 255]])
-///             .with_labels(["right", "up", "left-down"]),
+///         &simplant_lab::Arrows2D::from_vectors([
+///             [1.0, 0.0],
+///             [0.0, -1.0],
+///             [-0.7, 0.7],
+///         ])
+///         .with_radii([0.025])
+///         .with_origins([[0.25, 0.0], [0.25, 0.0], [-0.1, -0.1]])
+///         .with_colors([[255, 0, 0], [0, 255, 0], [127, 0, 255]])
+///         .with_labels(["right", "up", "left-down"]),
 ///     )?;
 ///
 ///     Ok(())
@@ -408,7 +413,7 @@ impl Arrows2D {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

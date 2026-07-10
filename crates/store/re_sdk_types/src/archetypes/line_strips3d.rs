@@ -28,9 +28,10 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Many strips
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_line_strip3d_batch")
-///             .spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
+///         "rerun_example_line_strip3d_batch",
+///     )
+///     .spawn()?;
 ///
 ///     let strip1 = [[0., 0., 2.], [1., 0., 2.], [1., 1., 2.], [0., 1., 2.]];
 ///     let strip2 = [
@@ -45,7 +46,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     ];
 ///     rec.log(
 ///         "strips",
-///         &rerun::LineStrips3D::new([strip1.to_vec(), strip2.to_vec()])
+///         &simplant_lab::LineStrips3D::new([strip1.to_vec(), strip2.to_vec()])
 ///             .with_colors([0xFF0000FF, 0x00FF00FF])
 ///             .with_radii([0.025, 0.005])
 ///             .with_labels(["one strip here", "and one strip there"]),
@@ -67,7 +68,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Lines with scene & UI radius each
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new(
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
 ///         "rerun_example_line_strip3d_ui_radius",
 ///     )
 ///     .spawn()?;
@@ -76,10 +77,10 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     let points = [[0., 0., 0.], [0., 0., 1.], [1., 0., 0.], [1., 0., 1.]];
 ///     rec.log(
 ///         "scene_unit_line",
-///         &rerun::LineStrips3D::new([points])
+///         &simplant_lab::LineStrips3D::new([points])
 ///             // By default, radii are interpreted as world-space units.
 ///             .with_radii([0.01])
-///             .with_colors([rerun::Color::from_rgb(0, 0, 255)]),
+///             .with_colors([simplant_lab::Color::from_rgb(0, 0, 255)]),
 ///     )?;
 ///
 ///     // A red line with a ui point radii of 5.
@@ -88,10 +89,10 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     let points = [[3., 0., 0.], [3., 0., 1.], [4., 0., 0.], [4., 0., 1.]];
 ///     rec.log(
 ///         "ui_points_line",
-///         &rerun::LineStrips3D::new([points])
-///             // rerun::Radius::new_ui_points produces a radius that the viewer interprets as given in ui points.
-///             .with_radii([rerun::Radius::new_ui_points(5.0)])
-///             .with_colors([rerun::Color::from_rgb(255, 0, 0)]),
+///         &simplant_lab::LineStrips3D::new([points])
+///             // simplant_lab::Radius::new_ui_points produces a radius that the viewer interprets as given in ui points.
+///             .with_radii([simplant_lab::Radius::new_ui_points(5.0)])
+///             .with_colors([simplant_lab::Color::from_rgb(255, 0, 0)]),
 ///     )?;
 ///
 ///     Ok(())
@@ -403,7 +404,7 @@ impl LineStrips3D {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

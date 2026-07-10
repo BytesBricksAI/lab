@@ -27,10 +27,10 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 /// ### `text_log_integration`:
 /// ```ignore
-/// use rerun::external::log;
+/// use simplant_lab::external::log;
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new(
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
 ///         "rerun_example_text_log_integration",
 ///     )
 ///     .spawn()?;
@@ -38,15 +38,15 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     // Log a text entry directly:
 ///     rec.log(
 ///         "logs",
-///         &rerun::TextLog::new("this entry has loglevel TRACE")
-///             .with_level(rerun::TextLogLevel::TRACE),
+///         &simplant_lab::TextLog::new("this entry has loglevel TRACE")
+///             .with_level(simplant_lab::TextLogLevel::TRACE),
 ///     )?;
 ///
 ///     // Or log via a logging handler:
-///     rerun::Logger::new(rec.clone()) // recording streams are ref-counted
+///     simplant_lab::Logger::new(rec.clone()) // recording streams are ref-counted
 ///         .with_path_prefix("logs/handler")
 ///         // You can also use the standard `RUST_LOG` environment variable!
-///         .with_filter(rerun::default_log_filter())
+///         .with_filter(simplant_lab::default_log_filter())
 ///         .init()?;
 ///     log::info!(
 ///         "This INFO log got added through the standard logging interface"
@@ -254,7 +254,7 @@ impl TextLog {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

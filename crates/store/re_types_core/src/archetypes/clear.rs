@@ -37,11 +37,11 @@ use crate::{DeserializationError, DeserializationResult};
 ///
 /// ### Flat
 /// ```ignore
-/// use rerun::external::glam;
+/// use simplant_lab::external::glam;
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_clear").spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new("rerun_example_clear")
+///         .spawn()?;
 ///
 ///     #[rustfmt::skip]
 ///     let (vectors, origins, colors) = (
@@ -56,9 +56,9 @@ use crate::{DeserializationError, DeserializationResult};
 ///     {
 ///         rec.log(
 ///             format!("arrows/{i}"),
-///             &rerun::Arrows3D::from_vectors([vector])
+///             &simplant_lab::Arrows3D::from_vectors([vector])
 ///                 .with_origins([origin])
-///                 .with_colors([rerun::Color::from_rgb(
+///                 .with_colors([simplant_lab::Color::from_rgb(
 ///                     color.0, color.1, color.2,
 ///                 )]),
 ///         )?;
@@ -66,7 +66,7 @@ use crate::{DeserializationError, DeserializationResult};
 ///
 ///     // Now clear them, one by one on each tick.
 ///     for i in 0..vectors.len() {
-///         rec.log(format!("arrows/{i}"), &rerun::Clear::flat())?;
+///         rec.log(format!("arrows/{i}"), &simplant_lab::Clear::flat())?;
 ///     }
 ///
 ///     Ok(())
@@ -208,7 +208,7 @@ impl Clear {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

@@ -10,13 +10,12 @@ from typing import Any, ClassVar
 import numpy as np
 import pyarrow as pa
 from attrs import define, field
-
-from simplant_lab._baseclasses import (
+from rerun._baseclasses import (
     Archetype,
     ComponentColumnList,
     ComponentDescriptor,
 )
-from simplant_lab.error_utils import catch_and_log_exceptions
+from rerun.error_utils import catch_and_log_exceptions
 
 from .. import components, datatypes
 
@@ -339,7 +338,7 @@ class AffixFuzzer4(Archetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

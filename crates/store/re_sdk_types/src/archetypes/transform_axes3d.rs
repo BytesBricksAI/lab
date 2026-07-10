@@ -27,20 +27,21 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 /// ### Visual representation of a transform as three arrows
 /// ```ignore
-/// use rerun::AsComponents;
+/// use simplant_lab::AsComponents;
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_transform3d_axes")
-///             .spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
+///         "rerun_example_transform3d_axes",
+///     )
+///     .spawn()?;
 ///
 ///     rec.set_time_sequence("step", 0);
 ///
 ///     rec.log(
 ///         "base",
 ///         &[
-///             &rerun::Transform3D::new() as &dyn AsComponents,
-///             &rerun::TransformAxes3D::new(1.0),
+///             &simplant_lab::Transform3D::new() as &dyn AsComponents,
+///             &simplant_lab::TransformAxes3D::new(1.0),
 ///         ],
 ///     )?;
 ///
@@ -49,21 +50,22 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///         rec.log(
 ///             "base/rotated",
 ///             &[
-///                 &rerun::Transform3D::new().with_rotation(
-///                     rerun::RotationAxisAngle::new(
+///                 &simplant_lab::Transform3D::new().with_rotation(
+///                     simplant_lab::RotationAxisAngle::new(
 ///                         [1.0, 1.0, 1.0],
-///                         rerun::Angle::from_degrees(deg as f32),
+///                         simplant_lab::Angle::from_degrees(deg as f32),
 ///                     ),
 ///                 ) as &dyn AsComponents,
-///                 &rerun::TransformAxes3D::new(0.5),
+///                 &simplant_lab::TransformAxes3D::new(0.5),
 ///             ],
 ///         )?;
 ///         rec.log(
 ///             "base/rotated/translated",
 ///             &[
-///                 &rerun::Transform3D::new().with_translation([2.0, 0.0, 0.0])
+///                 &simplant_lab::Transform3D::new()
+///                     .with_translation([2.0, 0.0, 0.0])
 ///                     as &dyn AsComponents,
-///                 &rerun::TransformAxes3D::new(0.5),
+///                 &simplant_lab::TransformAxes3D::new(0.5),
 ///             ],
 ///         )?;
 ///     }
@@ -252,7 +254,7 @@ impl TransformAxes3D {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

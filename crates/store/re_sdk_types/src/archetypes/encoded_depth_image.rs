@@ -31,7 +31,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 /// ### Encoded depth image
 /// ```ignore
-/// use rerun::external::anyhow;
+/// use simplant_lab::external::anyhow;
 ///
 /// fn main() -> anyhow::Result<()> {
 ///     let args = _args;
@@ -39,16 +39,17 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///         anyhow::bail!("Usage: {} <path_to_depth_image.[png|rvl]>", args[0]);
 ///     };
 ///
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_encoded_depth_image")
-///             .spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
+///         "rerun_example_encoded_depth_image",
+///     )
+///     .spawn()?;
 ///
 ///     let depth_blob = std::fs::read(path)?;
-///     let encoded_depth = rerun::EncodedDepthImage::new(depth_blob)
+///     let encoded_depth = simplant_lab::EncodedDepthImage::new(depth_blob)
 ///         .with_media_type(if path.ends_with(".png") {
-///             rerun::components::MediaType::PNG
+///             simplant_lab::components::MediaType::PNG
 ///         } else {
-///             rerun::components::MediaType::RVL
+///             simplant_lab::components::MediaType::RVL
 ///         })
 ///         .with_meter(0.001_f32);
 ///
@@ -429,7 +430,7 @@ impl EncodedDepthImage {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

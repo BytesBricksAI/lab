@@ -10,16 +10,15 @@ from typing import TYPE_CHECKING, Any
 
 import pyarrow as pa
 from attrs import define, field
-
-from simplant_lab._baseclasses import (
+from rerun._baseclasses import (
     BaseBatch,
     ComponentBatchMixin,
     ComponentMixin,
 )
-from simplant_lab._converters import (
+from rerun._converters import (
     to_np_float32,
 )
-from simplant_lab._numpy_compatibility import asarray
+from rerun._numpy_compatibility import asarray
 
 if TYPE_CHECKING:
     import numpy as np

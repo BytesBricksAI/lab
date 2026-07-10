@@ -31,7 +31,8 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
 ///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_grid_map").spawn()?;
+///         simplant_lab::RecordingStreamBuilder::new("rerun_example_grid_map")
+///             .spawn()?;
 ///
 ///     let width: usize = 64;
 ///     let height: usize = 64;
@@ -53,12 +54,12 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 ///     rec.log(
 ///         "world/map",
-///         &rerun::GridMap::new(
+///         &simplant_lab::GridMap::new(
 ///             grid,
-///             rerun::components::ImageFormat::from_color_model(
+///             simplant_lab::components::ImageFormat::from_color_model(
 ///                 [width as u32, height as u32],
-///                 rerun::ColorModel::L,
-///                 rerun::ChannelDatatype::U8,
+///                 simplant_lab::ColorModel::L,
+///                 simplant_lab::ChannelDatatype::U8,
 ///             ),
 ///             cell_size,
 ///         )
@@ -67,7 +68,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///             -(height as f32) * cell_size / 2.0,
 ///             0.0,
 ///         ])
-///         .with_colormap(rerun::components::Colormap::RvizMap),
+///         .with_colormap(simplant_lab::components::Colormap::RvizMap),
 ///     )?;
 ///
 ///     Ok(())
@@ -466,7 +467,7 @@ impl GridMap {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

@@ -37,9 +37,10 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// use rand::prelude::*;
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_ellipsoid_simple")
-///             .spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
+///         "rerun_example_ellipsoid_simple",
+///     )
+///     .spawn()?;
 ///
 ///     let sigmas: [f32; 3] = [5., 3., 1.];
 ///
@@ -48,7 +49,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 ///     rec.log(
 ///         "points",
-///         &rerun::Points3D::new((0..50_000).map(|_| {
+///         &simplant_lab::Points3D::new((0..50_000).map(|_| {
 ///             (
 ///                 sigmas[0] * normal.sample(&mut rng),
 ///                 sigmas[1] * normal.sample(&mut rng),
@@ -56,18 +57,18 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///             )
 ///         }))
 ///         .with_radii([0.02])
-///         .with_colors([rerun::Color::from_rgb(188, 77, 185)]),
+///         .with_colors([simplant_lab::Color::from_rgb(188, 77, 185)]),
 ///     )?;
 ///
 ///     rec.log(
 ///         "ellipsoid",
-///         &rerun::Ellipsoids3D::from_centers_and_half_sizes(
+///         &simplant_lab::Ellipsoids3D::from_centers_and_half_sizes(
 ///             [(0.0, 0.0, 0.0), (0.0, 0.0, 0.0)],
 ///             [sigmas, [sigmas[0] * 3., sigmas[1] * 3., sigmas[2] * 3.]],
 ///         )
 ///         .with_colors([
-///             rerun::Color::from_rgb(255, 255, 0),
-///             rerun::Color::from_rgb(64, 64, 0),
+///             simplant_lab::Color::from_rgb(255, 255, 0),
+///             simplant_lab::Color::from_rgb(64, 64, 0),
 ///         ]),
 ///     )?;
 ///
@@ -508,7 +509,7 @@ impl Ellipsoids3D {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

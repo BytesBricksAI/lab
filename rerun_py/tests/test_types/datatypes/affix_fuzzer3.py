@@ -9,8 +9,7 @@ from typing import TYPE_CHECKING, Any
 
 import pyarrow as pa
 from attrs import define, field
-
-from simplant_lab._baseclasses import (
+from rerun._baseclasses import (
     BaseBatch,
 )
 
