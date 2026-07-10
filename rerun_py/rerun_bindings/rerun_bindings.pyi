@@ -645,7 +645,7 @@ def binary_stream(recording: PyRecordingStream | None = None) -> PyBinarySinkSto
 
 class GrpcSink:
     """
-    Used in [`rerun.RecordingStream.set_sinks`][].
+    Used in [`simplant_lab.RecordingStream.set_sinks`][].
 
     Connect the recording stream to a remote Rerun Viewer on the given URL.
     """
@@ -668,7 +668,7 @@ class GrpcSink:
 
 class FileSink:
     """
-    Used in [`rerun.RecordingStream.set_sinks`][].
+    Used in [`simplant_lab.RecordingStream.set_sinks`][].
 
     Save the recording stream to a file.
     """

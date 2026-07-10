@@ -7,7 +7,6 @@ license = "MIT OR Apache-2.0"
 publish = false
 
 [dependencies]
-sp_kernel = { path = "../../../crates/simplant/sp_kernel" }
 sp_asset_model = { path = "../../../crates/simplant/sp_asset_model" }
 sp_acquisition = { path = "../../../crates/simplant/sp_acquisition" }
 sp_acquisition_replay = { path = "../../../crates/simplant/sp_acquisition_replay" }

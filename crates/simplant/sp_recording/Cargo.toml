@@ -21,7 +21,6 @@ sp_acquisition = { path = "../sp_acquisition" }
 sp_types = { path = "../sp_types" }
 re_sdk.workspace = true
 re_sdk_types.workspace = true
-thiserror.workspace = true
 
 [dev-dependencies]
 jiff = { workspace = true }

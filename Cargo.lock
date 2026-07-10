@@ -11827,7 +11827,6 @@ dependencies = [
  "jiff",
  "sp_acquisition",
  "sp_kernel",
- "thiserror 2.0.18",
  "tokio",
  "tokio-modbus",
 ]
@@ -11840,7 +11839,6 @@ dependencies = [
  "jiff",
  "sp_acquisition",
  "sp_kernel",
- "thiserror 2.0.18",
 ]
 
 [[package]]
@@ -11901,7 +11899,6 @@ dependencies = [
  "re_log_types",
  "re_sdk_types",
  "re_ui",
- "re_view",
  "re_viewer_context",
  "sp_asset_model",
  "sp_types",
@@ -11939,7 +11936,6 @@ dependencies = [
  "sp_asset_model",
  "sp_kernel",
  "sp_types",
- "thiserror 2.0.18",
 ]
 
 [[package]]
@@ -11954,7 +11950,6 @@ name = "sp_simulation"
 version = "0.33.0-alpha.1+dev"
 dependencies = [
  "serde",
- "sp_kernel",
  "thiserror 2.0.18",
  "toml",
 ]
@@ -11971,10 +11966,8 @@ dependencies = [
 name = "sp_types"
 version = "0.33.0-alpha.1+dev"
 dependencies = [
- "arrow",
  "re_sdk_types",
  "sp_kernel",
- "thiserror 2.0.18",
 ]
 
 [[package]]
@@ -12210,7 +12203,6 @@ dependencies = [
  "sp_acquisition",
  "sp_acquisition_replay",
  "sp_asset_model",
- "sp_kernel",
  "sp_recording",
 ]
 
