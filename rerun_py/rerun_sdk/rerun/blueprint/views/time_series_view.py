@@ -200,22 +200,22 @@ class TimeSeriesView(View):
         properties: dict[str, AsComponents] = {}
         if axis_x is not None:
             if not isinstance(axis_x, blueprint_archetypes.TimeAxis):
-                axis_x = blueprint_archetypes.TimeAxis(axis_x)
+                axis_x = blueprint_archetypes.TimeAxis(link=axis_x)
             properties["TimeAxis"] = axis_x
 
         if axis_y is not None:
             if not isinstance(axis_y, blueprint_archetypes.ScalarAxis):
-                axis_y = blueprint_archetypes.ScalarAxis(axis_y)
+                axis_y = blueprint_archetypes.ScalarAxis(range=axis_y)
             properties["ScalarAxis"] = axis_y
 
         if plot_legend is not None:
             if not isinstance(plot_legend, blueprint_archetypes.PlotLegend):
-                plot_legend = blueprint_archetypes.PlotLegend(plot_legend)
+                plot_legend = blueprint_archetypes.PlotLegend(corner=plot_legend)
             properties["PlotLegend"] = plot_legend
 
         if background is not None:
             if not isinstance(background, blueprint_archetypes.PlotBackground):
-                background = blueprint_archetypes.PlotBackground(background)
+                background = blueprint_archetypes.PlotBackground(color=background)
             properties["PlotBackground"] = background
 
         if time_ranges is not None:

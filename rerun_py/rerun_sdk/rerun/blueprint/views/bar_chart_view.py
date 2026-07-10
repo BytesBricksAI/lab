@@ -123,12 +123,12 @@ class BarChartView(View):
         properties: dict[str, AsComponents] = {}
         if plot_legend is not None:
             if not isinstance(plot_legend, blueprint_archetypes.PlotLegend):
-                plot_legend = blueprint_archetypes.PlotLegend(plot_legend)
+                plot_legend = blueprint_archetypes.PlotLegend(corner=plot_legend)
             properties["PlotLegend"] = plot_legend
 
         if background is not None:
             if not isinstance(background, blueprint_archetypes.PlotBackground):
-                background = blueprint_archetypes.PlotBackground(background)
+                background = blueprint_archetypes.PlotBackground(color=background)
             properties["PlotBackground"] = background
 
         super().__init__(

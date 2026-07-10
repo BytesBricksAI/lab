@@ -144,7 +144,7 @@ class DataframeView(View):
         properties: dict[str, AsComponents] = {}
         if query is not None:
             if not isinstance(query, blueprint_archetypes.DataframeQuery):
-                query = blueprint_archetypes.DataframeQuery(query)
+                query = blueprint_archetypes.DataframeQuery(timeline=query)
             properties["DataframeQuery"] = query
 
         super().__init__(

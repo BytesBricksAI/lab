@@ -185,7 +185,7 @@ class Spatial3DView(View):
 
         if line_grid is not None:
             if not isinstance(line_grid, blueprint_archetypes.LineGrid3D):
-                line_grid = blueprint_archetypes.LineGrid3D(line_grid)
+                line_grid = blueprint_archetypes.LineGrid3D(visible=line_grid)
             properties["LineGrid3D"] = line_grid
 
         if spatial_information is not None:
@@ -195,7 +195,7 @@ class Spatial3DView(View):
 
         if eye_controls is not None:
             if not isinstance(eye_controls, blueprint_archetypes.EyeControls3D):
-                eye_controls = blueprint_archetypes.EyeControls3D(eye_controls)
+                eye_controls = blueprint_archetypes.EyeControls3D(kind=eye_controls)
             properties["EyeControls3D"] = eye_controls
 
         if time_ranges is not None:

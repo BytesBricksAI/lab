@@ -152,7 +152,7 @@ class TextDocumentView(View):
         properties: dict[str, AsComponents] = {}
         if format_options is not None:
             if not isinstance(format_options, blueprint_archetypes.TextDocumentFormat):
-                format_options = blueprint_archetypes.TextDocumentFormat(format_options)
+                format_options = blueprint_archetypes.TextDocumentFormat(monospace=format_options)
             properties["TextDocumentFormat"] = format_options
 
         super().__init__(
