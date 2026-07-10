@@ -1,9 +1,9 @@
-# Tasks: Bindings pyo3 del dominio SimPlant (sp_*) hacia Python
+# Tasks: bindings pyo3 del dominio SimPlant (sp_*) hacia Python
 
 > Orden por dependencias del grafo `sp_*`: hojas (kernel/types) → modelos → orquestación →
 > adapters. Cada capacidad agrega su submódulo a `register()` y compila de forma independiente.
 
-## Phase 1: Andamiaje del crate puente
+## Phase 1: andamiaje del crate puente
 
 - [x] 1.1 Crear `crates/simplant/sp_python/Cargo.toml` con `crate-type = ["rlib"]`, dep
       `pyo3` (features mínimas, SIN `extension-module`) y deps `path` a los 12 crates `sp_*`,
@@ -16,7 +16,7 @@
       vacíos por ahora).
 - [x] 1.5 Verificar: `cargo build -p sp_python` compila con el `register` vacío.
 
-## Phase 2: Capacidades hoja (kernel, types)
+## Phase 2: capacidades hoja (kernel, types)
 
 - [x] 2.1 `src/kernel.rs`: `#[pyclass]` para `PyTagId`, `PyMeasurement`, `PyMeasurementBatch`,
       `PyTimeWindow`, `PyEngineeringRange`, `PyAlarmLimits` (newtype + getters) y enums
@@ -32,7 +32,7 @@
       `sp_python::register(py, m)?;` en `rerun_py/src/python_bridge.rs`; `maturin develop` y
       `python -c "import simplant_lab; simplant_lab.kernel.TagId('FT-101'); simplant_lab.types"`.
 
-## Phase 3: Modelos de dominio (asset_model, simulation, stress_testing, ml_dataloop)
+## Phase 3: modelos de dominio (asset_model, simulation, stress_testing, ml_dataloop)
 
 - [x] 3.1 `src/asset_model.rs`: IDs (`PyFacilityId`/`PyAreaId`/`PyUnitId`/`PyEquipmentId`),
       `PyAssetCatalog` (getters `facility/equipment/tags/tag/equipment_by_id/validate`
@@ -53,7 +53,7 @@
 - [x] 3.5 Cablear 3.1–3.4 en `lib.rs::register`; `cargo build -p rerun_py` + smoke import de
       cada submódulo.
 
-## Phase 4: Orquestación y adapters de adquisición (acquisition + replay + modbus)
+## Phase 4: orquestación y adapters de adquisición (acquisition + replay + modbus)
 
 - [x] 4.1 `src/acquisition.rs`: `PyTagBinding`, `PySamplingPolicy`, enum `SessionState`,
       `PyAcquisitionSession` (`create` staticmethod, `start`/`stop` `&mut self`, getters).
@@ -66,7 +66,7 @@
       aceptando adapters nativos. (specs/acquisition: orquestación run_session)
 - [x] 4.5 `acquisition::register` (con submódulos `replay`/`modbus`); cablear en `lib.rs`.
 
-## Phase 5: Adapters Rerun y motor (recording, dataframe_query, sim_engine)
+## Phase 5: adapters Rerun y motor (recording, dataframe_query, sim_engine)
 
 - [x] 5.1 `src/recording.rs`: `PyRerunRecorder` (`to_file` staticmethod, `new(stream)` opcional,
       `flush`), constantes `PLANT_TIME`/`EVENTS_PATH`, `tag_entity_path`. Pinear versión `re_sdk`
@@ -80,14 +80,14 @@
 - [x] 5.4 Cablear 5.1–5.3; `cargo build -p rerun_py` + `maturin develop`; verificar import de
       todos los submódulos (`recording`, `simulation.engine`, `ml_dataloop.dataframe_query`).
 
-## Phase 6: Type stubs y re-export del namespace
+## Phase 6: type stubs y re-export del namespace
 
 - [x] 6.1 Crear `rerun_py/rerun_sdk/simplant_lab/*.pyi` (uno por submódulo) con las firmas
       públicas de clases/funciones expuestas.
 - [x] 6.2 Asegurar que `simplant_lab` re-exporta los submódulos del namespace (acceso
       `simplant_lab.kernel`, `.asset_model`, …, `.types`).
 
-## Phase 7: Tests de comportamiento (verifican escenarios de las specs)
+## Phase 7: tests de comportamiento (verifican escenarios de las specs)
 
 - [x] 7.1 Tests unitarios Rust en `sp_python` (`#[cfg(test)]` con `Python::attach`): round-trip
       de `PyTagId`, `PyMeasurement`, rechazo de `TagId("")` y `TimeWindow` invertida.
@@ -103,7 +103,7 @@
 - [x] 7.5 Tests de error: `approve()` con DOF≠0, `SafetyFactor(0.0)`, `DataSplit` con
       solapamiento, `parse_modbus_address("bogus")` elevan excepción Python. (specs varias)
 
-## Phase 8: Verificación del invariante ADR-0002 y cierre
+## Phase 8: verificación del invariante ADR-0002 y cierre
 
 - [x] 8.1 Verificar que ningún crate `sp_*` de dominio ganó dependencia `re_*`/`pyo3`
       (`cargo tree`/grep en sus `Cargo.toml`); el binding vive solo en `sp_python`.

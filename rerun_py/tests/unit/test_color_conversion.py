@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import numpy as np
+
 from simplant_lab._color_conversion import linear_to_gamma_u8_pixel, linear_to_gamma_u8_value
 
 

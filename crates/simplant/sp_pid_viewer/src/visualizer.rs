@@ -216,14 +216,11 @@ fn draw_symbol(
 }
 
 /// Registers the themed SVG bytes under `uri` once per egui context.
-fn ensure_svg_registered(
-    ctx: &egui::Context,
-    uri: &str,
-    svg: &'static [u8],
-    color: egui::Color32,
-) {
+fn ensure_svg_registered(ctx: &egui::Context, uri: &str, svg: &'static [u8], color: egui::Color32) {
     let flag = egui::Id::new(uri);
-    let already = ctx.data(|data| data.get_temp::<bool>(flag)).unwrap_or(false);
+    let already = ctx
+        .data(|data| data.get_temp::<bool>(flag))
+        .unwrap_or(false);
     if !already {
         ctx.include_bytes(uri.to_owned(), themed_svg(svg, color));
         ctx.data_mut(|data| data.insert_temp(flag, true));
@@ -233,10 +230,7 @@ fn ensure_svg_registered(
 /// URI under which a symbol's SVG is registered; one per (symbol, color) so
 /// theme changes load a freshly tinted copy.
 fn symbol_uri(id: &str, color: egui::Color32) -> String {
-    format!(
-        "bytes://sp_pid_viewer/{}/{id}.svg",
-        color_hex(color)
-    )
+    format!("bytes://sp_pid_viewer/{}/{id}.svg", color_hex(color))
 }
 
 /// Replaces the Equinor fill color with the theme's text color so dark themes
@@ -283,8 +277,18 @@ mod tests {
     #[test]
     fn content_bounds_covers_all_symbols() {
         let placed = [
-            PlacedSymbol::new("PP007A", "P-101", egui::pos2(0.0, 0.0), egui::vec2(10.0, 10.0)),
-            PlacedSymbol::new("PT002A", "T-201", egui::pos2(100.0, 50.0), egui::vec2(20.0, 40.0)),
+            PlacedSymbol::new(
+                "PP007A",
+                "P-101",
+                egui::pos2(0.0, 0.0),
+                egui::vec2(10.0, 10.0),
+            ),
+            PlacedSymbol::new(
+                "PT002A",
+                "T-201",
+                egui::pos2(100.0, 50.0),
+                egui::vec2(20.0, 40.0),
+            ),
         ];
         let bounds = content_bounds(&placed).expect("non-empty input");
         assert_eq!(bounds.min, egui::pos2(-5.0, -5.0));

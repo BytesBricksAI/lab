@@ -64,12 +64,12 @@ pub(crate) fn run_dataset_export(
 fn load_catalog(path: &Path) -> anyhow::Result<AssetCatalog> {
     let catalog = TomlCatalogRepository::new(path)
         .load_catalog()
-        .map_err(|e| anyhow::anyhow!(e.to_string()))
+        .map_err(|err| anyhow::anyhow!(err.to_string()))
         .with_context(|| format!("loading catalog from {}", path.display()))?;
 
     catalog
         .validate()
-        .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     Ok(catalog)
 }
@@ -95,5 +95,5 @@ fn absolute_path(path: &Path) -> PathBuf {
 }
 
 fn map_err<T>(result: sp_ml_dataloop::Result<T>) -> anyhow::Result<T> {
-    result.map_err(|e| anyhow::anyhow!(e.to_string()))
+    result.map_err(|err| anyhow::anyhow!(err.to_string()))
 }

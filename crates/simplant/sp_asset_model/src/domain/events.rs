@@ -10,6 +10,7 @@ use sp_kernel::TagId;
 pub struct FacilityDefined {
     /// Facility identifier.
     pub facility: FacilityId,
+
     /// Human-readable facility name.
     pub name: String,
 }
@@ -19,6 +20,7 @@ pub struct FacilityDefined {
 pub struct AreaAdded {
     /// Parent facility identifier.
     pub facility: FacilityId,
+
     /// New area identifier.
     pub area: AreaId,
 }
@@ -28,6 +30,7 @@ pub struct AreaAdded {
 pub struct UnitAdded {
     /// Parent area identifier.
     pub area: AreaId,
+
     /// New process unit identifier.
     pub unit: UnitId,
 }
@@ -37,6 +40,7 @@ pub struct UnitAdded {
 pub struct EquipmentCommissioned {
     /// Commissioned equipment identifier.
     pub equipment: EquipmentId,
+
     /// Host process unit identifier.
     pub unit: UnitId,
 }
@@ -53,6 +57,7 @@ pub struct DesignSpecRevised {
 pub struct TagDefined {
     /// Tag identifier.
     pub tag: TagId,
+
     /// Host equipment identifier.
     pub equipment: EquipmentId,
 }
@@ -69,16 +74,22 @@ pub struct AlarmLimitsChanged {
 pub enum AssetEvent {
     /// Facility defined.
     FacilityDefined(FacilityDefined),
+
     /// Area added.
     AreaAdded(AreaAdded),
+
     /// Process unit added.
     UnitAdded(UnitAdded),
+
     /// Equipment commissioned.
     EquipmentCommissioned(EquipmentCommissioned),
+
     /// Design specification revised.
     DesignSpecRevised(DesignSpecRevised),
+
     /// Tag defined.
     TagDefined(TagDefined),
+
     /// Alarm limits changed.
     AlarmLimitsChanged(AlarmLimitsChanged),
 }

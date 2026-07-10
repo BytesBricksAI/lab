@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING
 
 import pyarrow as pa
 import pytest
+
 from simplant_lab.experimental import Chunk, McapReader, StreamingReader
 
 if TYPE_CHECKING:

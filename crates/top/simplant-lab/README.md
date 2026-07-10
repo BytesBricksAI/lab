@@ -12,7 +12,7 @@
   <a href="https://discord.gg/Gcm8BbTaAj">                              <img alt="Rerun Discord"  src="https://img.shields.io/discord/1062300748202921994?label=Rerun%20Discord"> </a>
 </h1>
 
-# SimPlant Lab Rust logging SDK
+# SimPlant lab Rust logging SDK
 SimPlant Lab is an SDK for logging computer vision and robotics data paired with a visualizer for exploring that data over time. It lets you debug and understand the internal state and data of your systems with minimal code.
 
 ```shell

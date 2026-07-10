@@ -16,10 +16,13 @@ const COMPOSITION_TOLERANCE: f64 = 1e-6;
 pub enum ThermoPackage {
     /// Peng-Robinson cubic equation of state.
     PengRobinson,
+
     /// Soave-Redlich-Kwong cubic equation of state.
     Srk,
+
     /// Perturbed-chain statistical associating fluid theory.
     PcSaft,
+
     /// Ideal-gas reference model.
     IdealGas,
 }
@@ -67,6 +70,7 @@ impl Specification {
 pub enum FlowsheetState {
     /// Under construction; structural edits allowed.
     Draft,
+
     /// Approved after degrees-of-freedom analysis passed.
     Approved,
 }

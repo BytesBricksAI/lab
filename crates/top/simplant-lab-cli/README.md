@@ -12,7 +12,7 @@
   <a href="https://discord.gg/Gcm8BbTaAj">                              <img alt="Rerun Discord"  src="https://img.shields.io/discord/1062300748202921994?label=Rerun%20Discord"> </a>
 </h1>
 
-## SimPlant Lab command-line tool
+## SimPlant lab command-line tool
 You can install the binary with `cargo install simplant-lab-cli --locked --features nasm`.
 
 **Note**: this requires the [`nasm`](https://github.com/netwide-assembler/nasm) CLI to be installed and available in your path.

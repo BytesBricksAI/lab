@@ -1,4 +1,4 @@
-# 0006 — Adaptadores de adquisición industrial
+# 0006 — adaptadores de adquisición industrial
 
 ## Status
 

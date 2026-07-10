@@ -1,4 +1,4 @@
-# Inc 2 — Panel de control en la GUI
+# Inc 2 — panel de control en la GUI
 
 - **Estado:** Diseño (se refina al llegar a su ciclo)
 - **Depende de:** [`01-streaming-en-vivo.md`](01-streaming-en-vivo.md) (reusa `SimulationRunner`, `SimSink`, `RerunSimSink`, blueprint)
@@ -17,7 +17,7 @@
 
 ## 2. Diseño
 
-### 2.1 Estructura de la app (patrón `extend_viewer_ui` / `custom_callback`)
+### 2.1 estructura de la app (patrón `extend_viewer_ui` / `custom_callback`)
 
 ```rust
 struct SimStudio {
@@ -39,12 +39,12 @@ Arranque (igual que `examples/rust/custom_callback/src/viewer.rs`):
 - `app.add_log_receiver(rx_log)` — el viewer consume el log-channel donde escribe la sim.
 - `eframe::run_native(title, options, |cc| SimStudio::new(app, tx_cmd))`.
 
-### 2.2 Hilo de simulación
+### 2.2 hilo de simulación
 
 ```
 thread:
   loop {
-    drenar rx_cmd → runner.apply(cmd)        // Start/Pause/SetSpeed/...
+    drenar rx_cmd → runner.apply(cmd)        // Start/Pause/SetSpeed/…
     if corriendo { runner.tick(engine, sink) }  // step + pacing + emit
     if Stop { break }
   }
@@ -54,7 +54,7 @@ thread:
 - `sink`: `RerunSimSink` sobre un `RecordingStream` cuyo destino es el **log-channel** que el viewer recibe (no `spawn`, porque el viewer es local; se usa un sink de canal in-process).
 - `Reset` reconstruye/`initialize` el engine y reinicia `sim_time`.
 
-### 2.3 Comunicación (un proceso, sin red)
+### 2.3 comunicación (un proceso, sin red)
 
 | Dirección | Mecanismo |
 |---|---|
@@ -63,7 +63,7 @@ thread:
 
 El viewer recibe datos de **cualquier `LogReceiver`** (`custom_callback/src/viewer.rs:31`), así que no hace falta gRPC.
 
-### 2.4 Panel (egui)
+### 2.4 panel (egui)
 
 - Botones: ▶ Start · ⏸ Pause/Resume · ⏹ Stop · ↺ Reset.
 - Slider de velocidad (`0.1×`–`50×`) → `SetSpeed`.

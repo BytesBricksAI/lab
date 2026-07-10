@@ -1,4 +1,4 @@
-# 0002 — Arquitectura hexagonal del dominio
+# 0002 — arquitectura hexagonal del dominio
 
 ## Status
 

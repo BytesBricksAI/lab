@@ -17,13 +17,13 @@ import numpy.typing as npt
 import polars
 import pyproj
 import requests
-import simplant_lab.blueprint as rrb
 from pyproj import CRS, Transformer
 from pyproj.aoi import AreaOfInterest
 from pyproj.database import query_utm_crs_info
 from tqdm import tqdm
 
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 if typing.TYPE_CHECKING:
     import shapely

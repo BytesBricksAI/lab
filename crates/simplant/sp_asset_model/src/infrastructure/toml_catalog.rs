@@ -29,18 +29,18 @@ impl TomlCatalogRepository {
 impl AssetCatalogPort for TomlCatalogRepository {
     fn load_catalog(&self) -> Result<AssetCatalog> {
         let contents = fs::read_to_string(&self.path)
-            .map_err(|e| AssetError::Io(format!("{}: {e}", self.path.display())))?;
+            .map_err(|err| AssetError::Io(format!("{}: {err}", self.path.display())))?;
         let dto: CatalogDto =
-            toml::from_str(&contents).map_err(|e| AssetError::Parse(e.to_string()))?;
+            toml::from_str(&contents).map_err(|err| AssetError::Parse(err.to_string()))?;
         dto_to_catalog(dto)
     }
 
     fn save_catalog(&self, catalog: &AssetCatalog) -> Result<()> {
         let dto = catalog_to_dto(catalog);
         let contents =
-            toml::to_string_pretty(&dto).map_err(|e| AssetError::Parse(e.to_string()))?;
+            toml::to_string_pretty(&dto).map_err(|err| AssetError::Parse(err.to_string()))?;
         fs::write(&self.path, contents)
-            .map_err(|e| AssetError::Io(format!("{}: {e}", self.path.display())))
+            .map_err(|err| AssetError::Io(format!("{}: {err}", self.path.display())))
     }
 }
 
@@ -396,7 +396,7 @@ alarm_hh = 90.0
         let err = repo.load_catalog().unwrap_err();
         assert!(
             matches!(err, AssetError::Kernel(_)),
-            "expected kernel alarm validation error, got {err:?}"
+            "expected kernel alarm validation error, got {err}"
         );
         assert!(fs::remove_file(path).is_ok());
     }

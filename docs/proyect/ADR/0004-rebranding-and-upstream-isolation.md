@@ -1,4 +1,4 @@
-# 0004 — Rebranding y aislamiento de zona upstream
+# 0004 — rebranding y aislamiento de zona upstream
 
 ## Status
 

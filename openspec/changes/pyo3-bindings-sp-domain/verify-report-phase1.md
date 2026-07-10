@@ -1,8 +1,8 @@
-# Verification Report — Phase 1
+# Verification report — phase 1
 
-**Change**: `pyo3-bindings-sp-domain`  
-**Scope**: Phase 1 only (tasks 1.1–1.5 — crate scaffolding)  
-**Verified at**: 2026-06-28  
+**Change**: `pyo3-bindings-sp-domain`
+**Scope**: Phase 1 only (tasks 1.1–1.5 — crate scaffolding)
+**Verified at**: 2026-06-28
 **Workspace**: `/home/m4s1t4/Work/Enprendimiento/Proyectos/SimPlant/SimPlant-v2/lab`
 
 ---
@@ -27,7 +27,7 @@ All Phase 1 tasks (1.1–1.5) are marked `[x]` in `tasks.md`.
 
 ---
 
-## Correctness vs Design
+## Correctness vs design
 
 ### Task 1.1 — `Cargo.toml`
 
@@ -57,7 +57,7 @@ Design also mentions `PyRuntimeError` in the File Changes table comment; Phase 1
 | Empty stub `register` per module | ✅ | Each file exports `pub fn register(...) -> Ok(())` with no pyo3 registrations yet |
 | `pub use error::map_err` | ✅ | Re-exported from `lib.rs` |
 
-### ADR-0002 — No domain crate changes
+### ADR-0002 — no domain crate changes
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
@@ -66,7 +66,7 @@ Design also mentions `PyRuntimeError` in the File Changes table comment; Phase 1
 
 ---
 
-## Build Verification
+## Build verification
 
 ### Initial failure (pre-fix)
 
@@ -84,7 +84,7 @@ cargo build -p sp_python
 error: could not find native static library `python3.11.a`, perhaps an -L flag is missing?
 
 error: could not compile `pyo3-ffi` (lib) due to 1 previous error
-warning: build failed, waiting for other jobs to finish...
+warning: build failed, waiting for other jobs to finish…
 ```
 
 **Exit code:** 101
@@ -112,8 +112,8 @@ version=3.10
 shared=true
 abi3=true
 lib_name=python3.11
-lib_dir=.../.pixi/envs/default/lib
-executable=.../.pixi/envs/default/bin/python3.11
+lib_dir=…/.pixi/envs/default/lib
+executable=…/.pixi/envs/default/bin/python3.11
 pointer_width=64
 build_flags=
 suppress_build_script_link_lines=false
@@ -134,7 +134,7 @@ suppress_build_script_link_lines=false
 
 ---
 
-## Domain Crate Change Audit
+## Domain crate change audit
 
 ```bash
 git status --short crates/simplant/sp_*
@@ -154,7 +154,7 @@ All other 11 domain crates show no modifications.
 
 ---
 
-## Coherence (Design Decisions — Phase 1 relevant)
+## Coherence (Design decisions — phase 1 relevant)
 
 | Decision | Followed? | Notes |
 |----------|-----------|-------|
@@ -177,21 +177,21 @@ Phase 1 has no test tasks. No `#[cfg(test)]` blocks exist in `sp_python` yet (ex
 
 ---
 
-## Issues Found
+## Issues found
 
-### CRITICAL (must fix before archive / Phase 2)
+### CRITICAL (must fix before archive / phase 2)
 
-1. **`sp_recording` domain crate modified (scope violation).**  
+1. **`sp_recording` domain crate modified (scope violation).**
    Uncommitted changes in `src/lib.rs` and `src/recorder.rs` are unrelated to Phase 1 scaffolding. Revert or move to a separate change to preserve ADR-0002 / proposal isolation.
 
 ### WARNING (should fix)
 
-1. **Task 1.2 implicit vs explicit membership.**  
+1. **Task 1.2 implicit vs explicit membership.**
    `sp_python` is included via workspace glob `crates/simplant/*`, not an explicit member entry. Functionally correct; consider documenting that the glob covers new simplant crates.
 
 ### FIXED (this session)
 
-1. **`cargo build -p sp_python` pyo3 link failure (task 1.5).**  
+1. **`cargo build -p sp_python` pyo3 link failure (task 1.5).**
    Fixed in `rerun_pixi_env/src/rerun_pixi_env/pyo3_config.py`: `_resolve_linkage()` probes `lib_dir` and selects shared linkage when conda Python reports static `.a` but only ships `.so`.
 
 ### SUGGESTION (nice to have)
@@ -208,7 +208,7 @@ Phase 1 scaffolding code (tasks 1.1–1.5) is structurally correct and aligned w
 
 ---
 
-## Structured Envelope
+## Structured envelope
 
 ```yaml
 status: completed

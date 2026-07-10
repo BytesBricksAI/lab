@@ -42,7 +42,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .with_time_panel(TimePanel::new().with_timeline(PLANT_TIME));
 
-    let rec = RecordingStreamBuilder::new("pid_canvas_demo")
+    let rec = RecordingStreamBuilder::new("rerun_example_pid_canvas_demo")
         .with_blueprint(blueprint)
         .save(&output)?;
 

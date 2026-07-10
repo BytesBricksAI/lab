@@ -11,40 +11,58 @@ const COMPOSITION_TOLERANCE: f64 = 1e-6;
 pub enum UnitOpError {
     /// Mass flow must be non-negative.
     NegativeMassFlow,
+
     /// Pressure must be strictly positive.
     NonPositivePressure,
+
     /// Temperature must be strictly positive.
     NonPositiveTemperature,
+
     /// Composition vector must not be empty.
     EmptyComposition,
+
     /// Composition fractions do not sum to one within tolerance.
     CompositionNotNormalized { sum: f64 },
+
     /// A composition fraction is negative.
     NegativeCompositionFraction,
+
     /// Mixer requires at least one inlet stream.
     EmptyInlets,
+
     /// Inlet streams have composition vectors of different lengths.
     InletCompositionArityMismatch { expected: usize, found: usize },
+
     /// Total mass flow through the mixer is zero.
     ZeroTotalMassFlow,
+
     /// Splitter requires at least one outlet fraction.
     EmptySplitFractions,
+
     /// A split fraction is negative.
     InvalidSplitFraction { index: usize, value: f64 },
+
     /// Split fractions do not sum to one within tolerance.
     SplitFractionsNotNormalized { sum: f64 },
+
     /// Valve outlet pressure exceeds inlet pressure.
     OutletPressureExceedsInlet { inlet: f64, outlet: f64 },
+
     /// Valve outlet pressure must be strictly positive.
     NonPositiveOutletPressure,
+
     /// Pump outlet pressure is below inlet pressure.
     OutletPressureBelowInlet { inlet: f64, outlet: f64 },
+
     /// Pump fluid density must be strictly positive.
     NonPositiveDensity,
+
     /// Pump efficiency must be in the interval (0, 1].
     InvalidEfficiency { value: f64 },
+
     /// Pipe pressure drop must be non-negative.
     NegativePressureDrop,
+
     /// Pipe outlet pressure would be non-positive.
     ResultingPressureNonPositive { inlet: f64, delta_p: f64 },
 }
@@ -129,10 +147,13 @@ fn validate_composition(composition: &[f64]) -> Result<()> {
 pub struct StreamState {
     /// Mass flow rate in kg/s (≥ 0).
     mass_flow: f64,
+
     /// Absolute pressure in Pa (> 0).
     pressure: f64,
+
     /// Absolute temperature in K (> 0).
     temperature: f64,
+
     /// Mole or mass fractions (≥ 0 each), normalized to sum 1 ± [`COMPOSITION_TOLERANCE`].
     composition: Vec<f64>,
 }

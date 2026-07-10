@@ -3,7 +3,11 @@ name = "dataloader"
 version = "0.1.0"
 readme = "README.md"
 requires-python = ">=3.10,<3.13"
-dependencies = ["simplant-lab-sdk[dataloader,dataplatform,tracing]", "huggingface-hub<1.0", "lerobot==0.4"]
+dependencies = [
+  "simplant-lab-sdk[dataloader,dataplatform,tracing]",
+  "huggingface-hub<1.0",
+  "lerobot==0.4",
+]
 
 [dependency-groups]
 # rerun-dev-fixup installs the .pth shim that makes `import simplant_lab` resolve to the

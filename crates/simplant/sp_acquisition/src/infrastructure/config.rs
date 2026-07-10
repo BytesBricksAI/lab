@@ -15,6 +15,7 @@ use crate::domain::sampling::SamplingPolicy;
 pub struct BindingConfig {
     /// Catalog tag identifier.
     pub tag: String,
+
     /// Physical address in the data source.
     pub address: String,
 }
@@ -24,12 +25,16 @@ pub struct BindingConfig {
 pub struct AcquisitionProfile {
     /// Session identifier.
     pub session_id: String,
+
     /// Path to the data file (CSV replay in F1).
     pub source_path: String,
+
     /// Tag bindings.
     pub bindings: Vec<BindingConfig>,
+
     /// Poll period in milliseconds.
     pub period_ms: u64,
+
     /// Optional deadband for significant-change filtering.
     pub deadband: Option<f64>,
 }
@@ -37,13 +42,13 @@ pub struct AcquisitionProfile {
 impl AcquisitionProfile {
     /// Parses a profile from a TOML string.
     pub fn from_toml_str(s: &str) -> Result<Self> {
-        toml::from_str(s).map_err(|e| AcquisitionError::Config(e.to_string()))
+        toml::from_str(s).map_err(|err| AcquisitionError::Config(err.to_string()))
     }
 
     /// Loads a profile from a file path.
     pub fn load(path: impl AsRef<Path>) -> Result<Self> {
         let contents = fs::read_to_string(path.as_ref())
-            .map_err(|e| AcquisitionError::Config(e.to_string()))?;
+            .map_err(|err| AcquisitionError::Config(err.to_string()))?;
         Self::from_toml_str(&contents)
     }
 
@@ -53,7 +58,7 @@ impl AcquisitionProfile {
             .iter()
             .map(|b| {
                 let tag =
-                    TagId::new(&b.tag).map_err(|e| AcquisitionError::Config(e.to_string()))?;
+                    TagId::new(&b.tag).map_err(|err| AcquisitionError::Config(err.to_string()))?;
                 TagBinding::new(tag, &b.address)
             })
             .collect()

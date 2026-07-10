@@ -10,6 +10,7 @@ from typing import Any, ClassVar
 import numpy as np
 import pyarrow as pa
 from attrs import define, field
+
 from simplant_lab._baseclasses import (
     Archetype,
     ComponentColumnList,

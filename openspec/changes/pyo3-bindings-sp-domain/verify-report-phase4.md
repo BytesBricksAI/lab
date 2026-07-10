@@ -1,8 +1,8 @@
-# Verification Report — Phase 4
+# Verification report — phase 4
 
-**Change**: `pyo3-bindings-sp-domain`  
-**Scope**: Phase 4 only (tasks 4.1–4.5 — acquisition, replay, modbus, run_session)  
-**Verified at**: 2026-06-28  
+**Change**: `pyo3-bindings-sp-domain`
+**Scope**: Phase 4 only (tasks 4.1–4.5 — acquisition, replay, modbus, run_session)
+**Verified at**: 2026-06-28
 **Workspace**: `/home/m4s1t4/Work/Enprendimiento/Proyectos/SimPlant/SimPlant-v2/lab`
 
 ---
@@ -26,7 +26,7 @@
 
 ---
 
-## Build Verification
+## Build verification
 
 ### Step 0 — pyo3 config
 
@@ -65,7 +65,7 @@ cargo build -p rerun_py
     Finished `dev` profile [optimized] target(s) in 0.44s
 ```
 
-### Step 3 — Runtime smoke (not in Phase 4 task list; noted for context)
+### Step 3 — runtime smoke (not in phase 4 task list; noted for context)
 
 Python import / maturin smoke was **not** executed in this Phase 4 verification pass. Prior phases report maturin blocked by missing `rerun` CLI artifact. `recording::register` remains a no-op stub (Phase 5), so `simplant_lab.recording.RerunRecorder` is not yet importable at runtime even if maturin succeeded.
 
@@ -117,9 +117,9 @@ Python import / maturin smoke was **not** executed in this Phase 4 verification 
 
 ---
 
-## Task-by-Task Verification (4.1–4.5)
+## Task-by-Task verification (4.1–4.5)
 
-### 4.1 — Session types and state machine
+### 4.1 — session types and state machine
 
 | Item | Spec / task | Implementation |
 |------|-------------|----------------|
@@ -130,14 +130,14 @@ Python import / maturin smoke was **not** executed in this Phase 4 verification 
 | `start` / `stop` | `&mut self` | Present; errors mapped |
 | Getters | id, bindings, policy, state | All present |
 
-### 4.2 — Replay adapter
+### 4.2 — replay adapter
 
 | Item | Implementation |
 |------|----------------|
 | Submodule `replay` | `replay::register` adds nested module |
 | `CsvReplaySource(path)` | `PyCsvReplaySource::new(path: String)` |
 
-### 4.3 — Modbus adapter
+### 4.3 — modbus adapter
 
 | Item | Implementation |
 |------|----------------|
@@ -156,7 +156,7 @@ Python import / maturin smoke was **not** executed in this Phase 4 verification 
 | Returns batch count | ✅ | `PyResult<u64>` |
 | Rejects non-native sources | ✅ | `PyTypeError` |
 
-### 4.5 — Registration
+### 4.5 — registration
 
 | Item | Implementation |
 |------|----------------|
@@ -176,7 +176,7 @@ Python import / maturin smoke was **not** executed in this Phase 4 verification 
 
 ---
 
-## Issues Found
+## Issues found
 
 **CRITICAL** (must fix before archive):
 
@@ -204,7 +204,7 @@ Phase 4 acquisition bindings (session types, replay/modbus adapters, `run_sessio
 
 ---
 
-## Structured Envelope (for orchestrator)
+## Structured envelope (for orchestrator)
 
 ```yaml
 status: pass_with_warnings

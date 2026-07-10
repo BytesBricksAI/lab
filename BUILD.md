@@ -1,4 +1,4 @@
-# Building SimPlant Lab
+# Building SimPlant lab
 This is a guide to how to build SimPlant Lab.
 
 ## See also
@@ -119,7 +119,7 @@ They will either connect to an already running SimPlant Lab viewer, or spawn a n
 In debug builds, it will spawn `target/debug/simplant-lab` if it exists, otherwise look for `simplant-lab` on `PATH`.
 
 
-## Building and installing the SimPlant Lab Python SDK
+## Building and installing the SimPlant lab Python SDK
 
 SimPlant Lab is available as a package on PyPi and can be installed with `pip install simplant-lab-sdk`.
 
@@ -180,7 +180,7 @@ pip install ./dist/CURRENT_ARCHITECTURE/*.whl
 
 **IMPORTANT**: unlike the official wheels, wheels produced by this method do _not_ contain the viewer, so they may only be used for logging purposes.
 
-## Building and installing the SimPlant Lab C++ SDK
+## Building and installing the SimPlant lab C++ SDK
 
 On Windows you have to have a system install of Visual Studio 2022 in order to compile the SDK and samples.
 

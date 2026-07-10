@@ -1,8 +1,8 @@
-# Verification Report — Phase 2
+# Verification report — phase 2
 
-**Change**: `pyo3-bindings-sp-domain`  
-**Scope**: Phase 2 only (tasks 2.1–2.5 — kernel & types leaf capabilities)  
-**Verified at**: 2026-06-28  
+**Change**: `pyo3-bindings-sp-domain`
+**Scope**: Phase 2 only (tasks 2.1–2.5 — kernel & types leaf capabilities)
+**Verified at**: 2026-06-28
 **Workspace**: `/home/m4s1t4/Work/Enprendimiento/Proyectos/SimPlant/SimPlant-v2/lab`
 
 ---
@@ -27,7 +27,7 @@ All Phase 2 tasks (2.1–2.5) are marked `[x]` in `tasks.md`.
 
 ---
 
-## Build Verification
+## Build verification
 
 ### Step 0 — pyo3 config
 
@@ -53,7 +53,7 @@ cargo build -p rerun_py
 
 **Result:** ✅ Exit 0 — `Finished dev profile [optimized] target(s) in 0.64s`
 
-### Step 3 — Task 2.5 runtime smoke (maturin + Python)
+### Step 3 — task 2.5 runtime smoke (maturin + python)
 
 ```bash
 cd rerun_py && pixi run maturin develop
@@ -62,7 +62,7 @@ cd rerun_py && pixi run maturin develop
 **Result:** ❌ Exit 1 — build script error:
 
 ```
-ERROR: Expected to find `rerun` at ".../rerun_py/rerun_sdk/rerun_cli/rerun"
+ERROR: Expected to find `rerun` at "…/rerun_py/rerun_sdk/rerun_cli/rerun"
 ```
 
 ```bash
@@ -77,7 +77,7 @@ pixi run python -c "import simplant_lab; simplant_lab.kernel.TagId('FT-101'); si
 
 ## Correctness (Specs)
 
-### specs/kernel — Requirements
+### Specs/kernel — requirements
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
@@ -105,7 +105,7 @@ pixi run python -c "import simplant_lab; simplant_lab.kernel.TagId('FT-101'); si
 | Rango rechaza low>=high | ⚠️ Partial | `EngineeringRange::new(...).map_err(map_err)` |
 | Round-trip timestamp epoch | ⚠️ Partial | `timestamp()` returns `f64` from domain; no round-trip test |
 
-### specs/types — Requirements
+### Specs/types — requirements
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
@@ -124,7 +124,7 @@ pixi run python -c "import simplant_lab; simplant_lab.kernel.TagId('FT-101'); si
 
 ---
 
-## Task-by-Task Verification
+## Task-by-Task verification
 
 ### Task 2.1 — `kernel.rs` pyclasses
 
@@ -139,7 +139,7 @@ pixi run python -c "import simplant_lab; simplant_lab.kernel.TagId('FT-101'); si
 | Enums `Quality`, `UnitOfMeasure`, `Dimension` | ✅ | Native `#[pyclass] enum` per design |
 | Constructors use `map_err` | ✅ | TagId, TimeWindow, EngineeringRange, AlarmLimits |
 
-### Task 2.2 — Timestamp exposure
+### Task 2.2 — timestamp exposure
 
 | Item | Expected | Found |
 |------|----------|-------|
@@ -166,7 +166,7 @@ pixi run python -c "import simplant_lab; simplant_lab.kernel.TagId('FT-101'); si
 | `field(...)` helper | ✅ | `py_field` → `sp_types::field` |
 | `types::register` wired | ✅ | `lib.rs:37` |
 
-### Task 2.5 — Integration
+### Task 2.5 — integration
 
 | Item | Expected | Found |
 |------|----------|-------|
@@ -209,7 +209,7 @@ Phase 2 has no dedicated test tasks (tests are Phase 7). No `#[cfg(test)]` block
 
 ---
 
-## Issues Found
+## Issues found
 
 ### CRITICAL (must fix before archive)
 
@@ -241,7 +241,7 @@ Phase 2 kernel and types bindings are fully implemented and align with specs/ker
 
 ---
 
-## Structured Envelope
+## Structured envelope
 
 ```yaml
 status: completed

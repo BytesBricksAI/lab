@@ -10,10 +10,10 @@ import laspy
 import numpy as np
 import numpy.typing as npt
 import requests
-import simplant_lab.blueprint as rrb
 from tqdm import tqdm
 
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 DATASET_DIR = Path(__file__).parent / "dataset"
 if not DATASET_DIR.exists():

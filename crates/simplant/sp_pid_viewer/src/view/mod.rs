@@ -10,6 +10,7 @@ pub use visualizer_system::{PidSymbolDatum, PidSymbolVisualizer, PidSymbolVisual
 use re_log_types::EntityPath;
 use re_sdk_types::ViewClassIdentifier;
 use re_ui::Help;
+use re_viewer_context::external::re_entity_db::InstancePath;
 use re_viewer_context::{
     DataResultInteractionAddress, IdentifiedViewSystem as _, IndicatedEntities, Item,
     MissingChunkReporter, PerVisualizerType, RecommendedVisualizers, SystemExecutionOutput,
@@ -17,7 +18,6 @@ use re_viewer_context::{
     ViewState, ViewSystemExecutionError, ViewSystemIdentifier, ViewSystemRegistrator,
     ViewerContext, VisualizableReason,
 };
-use re_viewer_context::external::re_entity_db::InstancePath;
 
 use crate::visualizer::{PidCanvas, PlacedSymbol};
 

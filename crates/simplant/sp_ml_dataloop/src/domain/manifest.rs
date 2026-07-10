@@ -69,12 +69,12 @@ impl DatasetManifest {
 
     /// Serializes the manifest to a TOML string.
     pub fn to_toml(&self) -> Result<String> {
-        toml::to_string_pretty(self).map_err(|e| DatasetError::Config(e.to_string()))
+        toml::to_string_pretty(self).map_err(|err| DatasetError::Config(err.to_string()))
     }
 
     /// Deserializes a manifest from a TOML string.
     pub fn from_toml_str(s: &str) -> Result<Self> {
-        toml::from_str(s).map_err(|e| DatasetError::Config(e.to_string()))
+        toml::from_str(s).map_err(|err| DatasetError::Config(err.to_string()))
     }
 }
 

@@ -15,9 +15,9 @@ import random
 from math import cos, sin, tau
 
 import numpy as np
-import simplant_lab.blueprint as rrb
 
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 DESCRIPTION = """
 # Plots

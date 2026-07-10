@@ -8,9 +8,9 @@ same entity, then a blueprint maps each color set to a separate 3D view.
 from __future__ import annotations
 
 import numpy as np
-import rerun.blueprint as rrb
 
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 from simplant_lab.blueprint.datatypes import (
     ComponentSourceKind,
     VisualizerComponentMapping,

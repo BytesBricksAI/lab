@@ -10,6 +10,7 @@ import numpy as np
 import pyarrow as pa
 import pytest
 from inline_snapshot import snapshot as inline_snapshot
+
 from simplant_lab.catalog import ContentFilter
 
 if TYPE_CHECKING:
@@ -17,10 +18,10 @@ if TYPE_CHECKING:
 
     import datafusion
     from pytest import LogCaptureFixture
-    from simplant_lab.catalog import DatasetEntry, IndexValuesLike
     from syrupy import SnapshotAssertion
 
     from e2e_redap_tests.conftest import EntryFactory
+    from simplant_lab.catalog import DatasetEntry, IndexValuesLike
 
 
 def test_dataset_view_filter_segments(readonly_test_dataset: DatasetEntry) -> None:

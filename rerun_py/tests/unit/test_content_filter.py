@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pytest
+
 from simplant_lab.catalog._content_filter import ContentFilter
 
 # -- ContentFilter builder -----------------------------------------------------

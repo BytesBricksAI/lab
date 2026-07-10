@@ -8,9 +8,9 @@ import itertools
 import random
 
 import numpy as np
-import simplant_lab.blueprint as rrb
 
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 from simplant_lab.blueprint.archetypes.force_collision_radius import ForceCollisionRadius
 from simplant_lab.blueprint.archetypes.force_link import ForceLink
 from simplant_lab.blueprint.archetypes.force_many_body import ForceManyBody

@@ -81,7 +81,7 @@ mod tests {
         use re_sdk::log::{Chunk, LogMsg};
         use std::str::FromStr as _;
 
-        let (stream, storage) = RecordingStreamBuilder::new("simplant_test")
+        let (stream, storage) = RecordingStreamBuilder::new("rerun_example_simplant_test")
             .memory()
             .expect("memory stream");
         let recorder = RerunRecorder::new(stream);

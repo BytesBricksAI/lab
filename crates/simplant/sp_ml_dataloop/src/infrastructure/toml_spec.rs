@@ -15,22 +15,24 @@ use crate::domain::split::DataSplit;
 /// Loads a dataset specification from a TOML file.
 pub fn load_dataset_spec(path: impl AsRef<Path>, catalog: &AssetCatalog) -> Result<DatasetSpec> {
     let contents = fs::read_to_string(path.as_ref())
-        .map_err(|e| DatasetError::Config(format!("{}: {e}", path.as_ref().display())))?;
+        .map_err(|err| DatasetError::Config(format!("{}: {err}", path.as_ref().display())))?;
     dataset_spec_from_str(&contents, catalog)
 }
 
 /// Parses a dataset specification from a TOML string.
 pub fn dataset_spec_from_str(s: &str, catalog: &AssetCatalog) -> Result<DatasetSpec> {
-    let dto: DatasetSpecDto = toml::from_str(s).map_err(|e| DatasetError::Config(e.to_string()))?;
+    let dto: DatasetSpecDto =
+        toml::from_str(s).map_err(|err| DatasetError::Config(err.to_string()))?;
     dto_to_spec(dto, catalog)
 }
 
 /// Saves a dataset specification to a TOML file.
 pub fn save_dataset_spec(path: impl AsRef<Path>, spec: &DatasetSpec) -> Result<()> {
     let dto = spec_to_dto(spec);
-    let contents = toml::to_string_pretty(&dto).map_err(|e| DatasetError::Config(e.to_string()))?;
+    let contents =
+        toml::to_string_pretty(&dto).map_err(|err| DatasetError::Config(err.to_string()))?;
     fs::write(path.as_ref(), contents)
-        .map_err(|e| DatasetError::Config(format!("{}: {e}", path.as_ref().display())))
+        .map_err(|err| DatasetError::Config(format!("{}: {err}", path.as_ref().display())))
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -65,7 +67,7 @@ struct SplitDto {
 }
 
 fn timestamp_from_epoch_secs(secs: i64) -> Result<jiff::Timestamp> {
-    jiff::Timestamp::from_second(secs).map_err(|e| DatasetError::Config(e.to_string()))
+    jiff::Timestamp::from_second(secs).map_err(|err| DatasetError::Config(err.to_string()))
 }
 
 fn time_window_from_epochs(start_secs: i64, end_secs: i64) -> Result<TimeWindow> {

@@ -4,8 +4,9 @@ from typing import Any
 
 import numpy as np
 import pytest
-import simplant_lab as rr
 import torch
+
+import simplant_lab as rr
 
 rng = np.random.default_rng(12345)
 RANDOM_IMAGE_SOURCE = rng.integers(0, 255, size=(10, 20))

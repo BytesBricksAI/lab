@@ -12,16 +12,22 @@ use crate::domain::ids::{EquipmentId, UnitId};
 pub enum EquipmentKind {
     /// Pressure vessel.
     Vessel,
+
     /// Storage tank.
     Tank,
+
     /// Rotating pump.
     Pump,
+
     /// Heat exchanger.
     HeatExchanger,
+
     /// Control or isolation valve.
     Valve,
+
     /// Piping segment.
     Pipe,
+
     /// Other equipment type.
     Other,
 }

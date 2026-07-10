@@ -2,9 +2,8 @@ from __future__ import annotations
 
 import argparse
 
-import rerun.blueprint as rrb
-
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 
 def main() -> None:

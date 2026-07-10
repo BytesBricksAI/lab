@@ -4,6 +4,7 @@ import itertools
 from typing import TYPE_CHECKING, cast
 
 import numpy as np
+
 import simplant_lab as rr
 from simplant_lab.components import Position3DBatch, Vector3DBatch
 

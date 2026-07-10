@@ -10,6 +10,7 @@ use crate::domain::manifest::DatasetManifest;
 pub struct TagSeries {
     /// Process tag identifier.
     pub tag: TagId,
+
     /// Measurements in the requested window.
     pub measurements: Vec<Measurement>,
 }

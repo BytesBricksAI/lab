@@ -1,9 +1,9 @@
 """Log a couple 2D line segments using 2D line strips."""
 
 import numpy as np
-import rerun.blueprint as rrb
 
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 rr.init("rerun_example_line_segments2d", spawn=True)
 

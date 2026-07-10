@@ -3,9 +3,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pyarrow as pa
-import simplant_lab as rr
 from datafusion import col
 from inline_snapshot import snapshot as inline_snapshot
+
+import simplant_lab as rr
 
 if TYPE_CHECKING:
     from pathlib import Path

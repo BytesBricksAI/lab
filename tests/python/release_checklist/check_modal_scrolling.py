@@ -4,9 +4,8 @@ import os
 from argparse import Namespace
 from uuid import uuid4
 
-import rerun.blueprint as rrb
-
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 README = """\
 # Modal scrolling

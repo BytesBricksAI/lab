@@ -16,3 +16,6 @@ sp_dataframe_query = { path = "../../../crates/simplant/sp_dataframe_query" }
 sp_ml_dataloop = { path = "../../../crates/simplant/sp_ml_dataloop" }
 anyhow = "1.0"
 jiff = { workspace = true }
+
+[lints]
+workspace = true

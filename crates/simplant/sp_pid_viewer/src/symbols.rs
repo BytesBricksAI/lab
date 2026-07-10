@@ -108,8 +108,7 @@ mod tests {
 
     #[test]
     fn every_asset_file_has_an_entry() {
-        let assets_dir =
-            std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("assets/symbols");
+        let assets_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("assets/symbols");
         let mut missing = Vec::new();
         for entry in std::fs::read_dir(assets_dir).expect("assets/symbols must exist") {
             let path = entry.expect("readable dir entry").path();

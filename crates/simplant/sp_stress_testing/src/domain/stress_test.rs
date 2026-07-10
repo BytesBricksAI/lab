@@ -13,6 +13,7 @@ use crate::domain::load_profile::{DesignLimit, LoadProfile, SafetyFactor};
 pub enum StressTestState {
     /// Planned and ready for execution.
     Planned,
+
     /// Evaluation completed (terminal).
     Completed,
 }

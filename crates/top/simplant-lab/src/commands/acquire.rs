@@ -43,7 +43,7 @@ pub(crate) fn run_acquire(
         .iter()
         .map(|tag| {
             TagBinding::new(tag.id().clone(), tag.id().as_str())
-                .map_err(|e| anyhow::anyhow!(e.to_string()))
+                .map_err(|err| anyhow::anyhow!(err.to_string()))
         })
         .collect::<anyhow::Result<Vec<_>>>()?;
 
@@ -53,7 +53,7 @@ pub(crate) fn run_acquire(
         SamplingPolicy::default(),
         &catalog,
     )
-    .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+    .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     if let Some(parent) = output_path.parent() {
         if !parent.as_os_str().is_empty() {
@@ -64,10 +64,10 @@ pub(crate) fn run_acquire(
 
     let source = CsvReplaySource::new(csv_path);
     let recorder = RerunRecorder::to_file("simplant_lab_acquire", output_path)
-        .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     let batches_recorded = run_session(&mut session, &catalog, &source, &recorder)
-        .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     recorder.flush();
 
@@ -77,12 +77,12 @@ pub(crate) fn run_acquire(
 fn load_catalog(path: &std::path::Path) -> anyhow::Result<AssetCatalog> {
     let catalog = TomlCatalogRepository::new(path)
         .load_catalog()
-        .map_err(|e| anyhow::anyhow!(e.to_string()))
+        .map_err(|err| anyhow::anyhow!(err.to_string()))
         .with_context(|| format!("loading catalog from {}", path.display()))?;
 
     catalog
         .validate()
-        .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     Ok(catalog)
 }

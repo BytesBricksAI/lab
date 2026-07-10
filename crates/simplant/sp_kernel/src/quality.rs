@@ -9,8 +9,10 @@ use serde::{Deserialize, Serialize};
 pub enum Quality {
     /// Value is known good.
     Good,
+
     /// Value is uncertain.
     Uncertain,
+
     /// Value is bad and should not be used for control decisions.
     Bad,
 }

@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-import rerun.experimental as rrx
-
 import simplant_lab as rr
+import simplant_lab.experimental as rrx
 
 rr.init("rerun_example_build_chunk")
 

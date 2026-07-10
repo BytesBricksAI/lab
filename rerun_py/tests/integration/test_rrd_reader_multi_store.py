@@ -6,8 +6,9 @@ import subprocess
 from typing import TYPE_CHECKING
 
 import pytest
-import simplant_lab as rr
 from inline_snapshot import snapshot as inline_snapshot
+
+import simplant_lab as rr
 from simplant_lab.experimental import RrdReader
 
 if TYPE_CHECKING:

@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 
 import pyarrow as pa
 import pytest
+
 import simplant_lab as rr
 
 if TYPE_CHECKING:

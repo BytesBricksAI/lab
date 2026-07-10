@@ -4,6 +4,7 @@ import itertools
 from typing import TYPE_CHECKING
 
 import numpy as np
+
 import simplant_lab as rr
 from simplant_lab.components import PinholeProjectionBatch, ResolutionBatch, ViewCoordinatesBatch
 

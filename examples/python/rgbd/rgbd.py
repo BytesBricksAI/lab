@@ -19,10 +19,10 @@ import cv2
 import numpy as np
 import numpy.typing as npt
 import requests
-import simplant_lab.blueprint as rrb
 from tqdm import tqdm
 
 import simplant_lab as rr  # pip install simplant-lab-sdk
+import simplant_lab.blueprint as rrb
 
 DESCRIPTION = """
 # RGBD

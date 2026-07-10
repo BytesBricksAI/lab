@@ -1,4 +1,4 @@
-# SimPlant Lab architecture
+# SimPlant lab architecture
 
 This document describes the technical architecture of SimPlant Lab.
 
@@ -22,13 +22,13 @@ The logging SDK:s encodes the data using Apache Arrow (see more below).
 
 The logging data can be written to disk as `.rrd` files, or transmitted over gRPC to either a SimPlant Lab Viewer or a SimPlant Lab Server.
 
-### SimPlant Lab Viewer
+### SimPlant lab Viewer
 
 The SimPlant Lab Viewer is where log data is visualized. It is usually run as a native app, but can also be compiled to WebAssembly (Wasm) and run in a browser.
 
 #### Native Viewer
 
-The easiest way to launch the Viewer is directly from the logging API with `spl.init("simplant_lab_example_app", spawn=True)`. However, the standalone Viewer can also be run from the command line, for example to view an `.rrd` file: `simplant-lab mydata.rrd`.
+The easiest way to launch the Viewer is directly from the logging API with `spl.init("simplant_lab_example_app", spawn=True)`. <!-- NOLINT --> However, the standalone Viewer can also be run from the command line, for example to view an `.rrd` file: `simplant-lab mydata.rrd`.
 
 #### Web viewer
 
@@ -265,6 +265,25 @@ Update instructions:
 | Crate    | Description                |
 | -------- | -------------------------- |
 | re_types | Old name of `re_sdk_types` |
+
+### SimPlant domain crates
+
+| Crate                  | Description                                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| sp_types               | `simplant.*` components and archetypes (anti-corruption layer over `re_types_core`)              |
+| sp_kernel              | Shared kernel: tag IDs, engineering units, quality flags, ranges, alarms, and measurements     |
+| sp_asset_model         | Plant hierarchy and process tags as DDD aggregates (`Facility`, `Equipment`, `Tag`)              |
+| sp_acquisition         | Acquisition capability: `AcquisitionSession` and ports (`DataSourcePort`, `RecorderPort`)        |
+| sp_acquisition_replay  | Replay adapter: CSV historian export implementing `DataSourcePort`                               |
+| sp_acquisition_modbus  | Modbus TCP acquisition adapter implementing `DataSourcePort` (read-only OT safety)             |
+| sp_recording           | Recording adapter: `RecorderPort` over `re_sdk::RecordingStream`                                 |
+| sp_dataframe_query     | Dataframe query adapter: `DataframeQueryPort` over `.rrd` recordings via `re_dataframe`        |
+| sp_ml_dataloop         | ML data loop: versioned dataset specs, leakage-free splits, and reproducible manifests          |
+| sp_simulation          | Process simulation core: flowsheets, DOF analysis, scenarios, and simulation runs              |
+| sp_sim_engine          | Native first-order simulation engine implementing `SimulatorPort`                                |
+| sp_stress_testing      | Stress testing core: load profiles, design limits, and acceptance criteria                     |
+| sp_pid_viewer          | P&ID viewer: Equinor engineering symbols and interactive egui canvas (`PidView`)               |
+| sp_python              | Python bindings: PyO3 bridge for `sp_*` domain crates                                            |
 
 ### Dependencies and docs
 

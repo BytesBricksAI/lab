@@ -106,3 +106,5 @@ justfile
 
 # Saved pytest-benchmark results
 /.benchmarks
+
+openspec/*

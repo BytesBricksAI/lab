@@ -64,7 +64,7 @@ fn main() -> anyhow::Result<()> {
     engine.initialize(&scenario).map_err(domain_err)?;
 
     let output_path = resolve_output_path();
-    let rec = RecordingStreamBuilder::new("simplant_lab_sim_demo")
+    let rec = RecordingStreamBuilder::new("rerun_example_simplant_lab_sim_demo")
         .save(&output_path)
         .map_err(domain_err)
         .with_context(|| format!("creating recording at {}", output_path.display()))?;

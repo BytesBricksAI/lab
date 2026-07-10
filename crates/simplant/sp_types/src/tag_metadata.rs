@@ -8,12 +8,16 @@ use crate::namespace::ARCHETYPE_TAG_METADATA;
 pub struct TagMetadata {
     /// Conventional unit symbol (e.g. `"bar"`, `"°C"`).
     pub unit_symbol: String,
+
     /// Lower end of the normal engineering range.
     pub range_low: f64,
+
     /// Upper end of the normal engineering range.
     pub range_high: f64,
+
     /// Optional low alarm limit.
     pub alarm_low: Option<f64>,
+
     /// Optional high alarm limit.
     pub alarm_high: Option<f64>,
 }

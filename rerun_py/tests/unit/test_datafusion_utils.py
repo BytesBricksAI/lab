@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 import pyarrow as pa
 import pytest
 from datafusion import SessionContext
+
 from simplant_lab.utilities.datafusion.collect import collect_to_string_list
 
 if TYPE_CHECKING:

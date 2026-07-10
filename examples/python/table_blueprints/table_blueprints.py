@@ -35,10 +35,10 @@ from pathlib import Path
 from typing import Any
 
 import pyarrow as pa
-import simplant_lab.blueprint as rrb
 
-import simplant_lab as rr
 import rerun_bindings as bindings
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 from simplant_lab.recording_stream import RecordingStream
 from simplant_lab.server import Server
 

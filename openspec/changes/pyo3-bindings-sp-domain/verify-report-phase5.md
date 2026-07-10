@@ -1,8 +1,8 @@
-# Verification Report — Phase 5
+# Verification report — phase 5
 
-**Change**: `pyo3-bindings-sp-domain`  
-**Scope**: Phase 5 only (tasks 5.1–5.4 — recording, simulation.engine, ml_dataloop.dataframe_query)  
-**Verified at**: 2026-06-28  
+**Change**: `pyo3-bindings-sp-domain`
+**Scope**: Phase 5 only (tasks 5.1–5.4 — recording, simulation.engine, ml_dataloop.dataframe_query)
+**Verified at**: 2026-06-28
 **Workspace**: `/home/m4s1t4/Work/Enprendimiento/Proyectos/SimPlant/SimPlant-v2/lab`
 
 ---
@@ -26,7 +26,7 @@
 
 ---
 
-## Build Verification
+## Build verification
 
 ### Step 0 — pyo3 config
 
@@ -181,7 +181,7 @@ ModuleNotFoundError: No module named 'simplant_lab'
 
 ---
 
-## Issues Found
+## Issues found
 
 **CRITICAL** (must fix before archive):
 - None for Phase 5 source implementation scope.

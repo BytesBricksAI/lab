@@ -6,8 +6,8 @@ use re_sorbet::{ComponentColumnDescriptor, ComponentColumnSelector};
 /// Component columns contain the data for a specific component of an entity.
 ///
 /// Column descriptors are used to describe the columns in a
-/// [`Schema`][rerun.catalog.Schema]. They are read-only. To select a component
-/// column, use [`ComponentColumnSelector`][rerun.catalog.ComponentColumnSelector].
+/// [`Schema`][simplant_lab.catalog.Schema]. They are read-only. To select a component
+/// column, use [`ComponentColumnSelector`][simplant_lab.catalog.ComponentColumnSelector].
 #[pyclass(
     frozen,
     hash,

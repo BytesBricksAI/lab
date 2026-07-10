@@ -11,3 +11,6 @@ sp_types = { path = "../../../crates/simplant/sp_types" }
 
 re_sdk = { workspace = true }
 re_sdk_types = { workspace = true }
+
+[lints]
+workspace = true

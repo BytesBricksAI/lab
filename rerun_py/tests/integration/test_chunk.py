@@ -6,8 +6,9 @@ from typing import TYPE_CHECKING
 
 import pyarrow as pa
 import pytest
-import simplant_lab as rr
 from inline_snapshot import snapshot as inline_snapshot
+
+import simplant_lab as rr
 from simplant_lab.experimental import Chunk, DeriveLens, LazyChunkStream, Lens, MutateLens, RrdReader, Selector
 
 if TYPE_CHECKING:

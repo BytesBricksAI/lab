@@ -29,7 +29,7 @@ use sp_acquisition::{DataSourcePort, MeasurementSource};
 let source = CsvReplaySource::new("historian_export.csv");
 let mut stream = source.subscribe(&bindings, &SamplingPolicy::default())?;
 while let Some(batch) = stream.next_batch()? {
-    // ...
+    // …
 }
 ```
 

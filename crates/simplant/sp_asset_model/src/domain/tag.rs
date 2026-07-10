@@ -12,14 +12,19 @@ use crate::domain::ids::EquipmentId;
 pub struct TagSpec {
     /// Tag identifier.
     pub id: TagId,
+
     /// Host equipment identifier.
     pub equipment: EquipmentId,
+
     /// Human-readable description.
     pub description: String,
+
     /// Engineering unit of measure.
     pub unit: UnitOfMeasure,
+
     /// Inclusive engineering range.
     pub range: EngineeringRange,
+
     /// Optional alarm limits.
     pub alarms: Option<AlarmLimits>,
 }

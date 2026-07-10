@@ -5,6 +5,7 @@ import os
 from typing import Any
 
 import pytest
+
 import simplant_lab as rr
 from simplant_lab.error_utils import RerunWarning, catch_and_log_exceptions
 

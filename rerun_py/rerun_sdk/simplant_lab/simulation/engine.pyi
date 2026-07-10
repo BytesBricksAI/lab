@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .simulation import Scenario
+from simplant_lab.simulation import Scenario
 
 class StreamState:
     def __init__(

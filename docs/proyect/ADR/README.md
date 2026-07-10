@@ -1,4 +1,4 @@
-# Architecture Decision Records — SimPlant Lab
+# Architecture decision records — SimPlant lab
 
 Registro de decisiones arquitectónicas ya tomadas en el fork de Rerun hacia SimPlant Lab. Cada ADR está **grounded** en artefactos del repositorio (`crates/simplant/*`, zona upstream, `docs/proyect/*`).
 

@@ -28,7 +28,7 @@ pip3 install simplant-lab-sdk[notebook]
 import simplant_lab as sl
 import numpy as np
 
-sl.init("simplant_example_app", spawn=True)
+sl.init("simplant_example_app", spawn=True)  <!-- NOLINT -->
 
 positions = np.vstack([xyz.ravel() for xyz in np.mgrid[3 * [slice(-5, 5, 10j)]]]).T
 colors = np.vstack([rgb.ravel() for rgb in np.mgrid[3 * [slice(0, 255, 10j)]]]).astype(np.uint8).T
@@ -81,7 +81,7 @@ pixi run py-build-wheel
 
 ## Editable installs from another project
 
-When consuming the SDK from an external project via `{ path = ".../rerun_py", editable = true }`, also add `rerun-dev-fixup` from `rerun_py/rerun_dev_fixup` so `import simplant_lab` resolves correctly.
+When consuming the SDK from an external project via `{ path = "…/rerun_py", editable = true }`, also add `rerun-dev-fixup` from `rerun_py/rerun_dev_fixup` so `import simplant_lab` resolves correctly.
 
 Build with:
 ```sh

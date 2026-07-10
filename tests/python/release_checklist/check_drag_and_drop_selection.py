@@ -5,9 +5,9 @@ from argparse import Namespace
 from uuid import uuid4
 
 import numpy as np
-import rerun.blueprint as rrb
 
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 README = """\
 # Drag-and-drop selection

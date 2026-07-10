@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import numpy as np
 import pytest
+
 from simplant_lab.experimental.dataloader._sample_index import SampleIndex, SegmentMetadata
 
 

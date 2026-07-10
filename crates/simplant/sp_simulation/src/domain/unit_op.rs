@@ -10,18 +10,25 @@ use crate::domain::ids::UnitOpId;
 pub enum UnitOpKind {
     /// Combines multiple inlet streams.
     Mixer,
+
     /// Splits one inlet into multiple outlets.
     Splitter,
+
     /// Adds heat to a stream.
     Heater,
+
     /// Removes heat from a stream.
     Cooler,
+
     /// Reduces pressure through a restriction.
     Valve,
+
     /// Raises pressure of a liquid stream.
     Pump,
+
     /// Vapor-liquid separator drum.
     FlashDrum,
+
     /// Connects unit operations with optional pressure drop.
     Pipe,
 }

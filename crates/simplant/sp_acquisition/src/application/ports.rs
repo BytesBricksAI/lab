@@ -29,8 +29,10 @@ pub trait MeasurementSource {
 pub trait RecorderPort {
     /// Record a batch of measurements (data plane).
     fn record_batch(&self, batch: &MeasurementBatch) -> Result<()>;
+
     /// Record a tag's static metadata (unit, range, alarms).
     fn record_tag_metadata(&self, tag: &Tag) -> Result<()>;
+
     /// Record a control-plane domain event.
     fn record_event(&self, event: &AcquisitionEvent) -> Result<()>;
 }

@@ -9,14 +9,19 @@ use serde::{Deserialize, Serialize};
 pub enum Dimension {
     /// Pressure.
     Pressure,
+
     /// Temperature.
     Temperature,
+
     /// Volumetric flow rate.
     VolumetricFlow,
+
     /// Mass flow rate.
     MassFlow,
+
     /// Length.
     Length,
+
     /// Dimensionless quantity.
     Dimensionless,
 }
@@ -26,26 +31,37 @@ pub enum Dimension {
 pub enum UnitOfMeasure {
     /// Kilopascal (kPa).
     Kilopascal,
+
     /// Bar.
     Bar,
+
     /// Pounds per square inch (psi).
     Psi,
+
     /// Megapascal (`MPa`).
     Megapascal,
+
     /// Degrees Celsius (°C).
     DegreeCelsius,
+
     /// Kelvin (K).
     Kelvin,
+
     /// Cubic meters per hour (m³/h).
     CubicMeterPerHour,
+
     /// Barrels per day (bbl/d).
     BarrelPerDay,
+
     /// Kilograms per hour (kg/h).
     KilogramPerHour,
+
     /// Meter (m).
     Meter,
+
     /// Percent (%).
     Percent,
+
     /// Unitless ratio.
     Ratio,
 }

@@ -1,8 +1,8 @@
-# Verification Report — Phase 3
+# Verification report — phase 3
 
-**Change**: `pyo3-bindings-sp-domain`  
-**Scope**: Phase 3 only (tasks 3.1–3.5 — asset_model, simulation, stress_testing, ml_dataloop)  
-**Verified at**: 2026-06-28  
+**Change**: `pyo3-bindings-sp-domain`
+**Scope**: Phase 3 only (tasks 3.1–3.5 — asset_model, simulation, stress_testing, ml_dataloop)
+**Verified at**: 2026-06-28
 **Workspace**: `/home/m4s1t4/Work/Enprendimiento/Proyectos/SimPlant/SimPlant-v2/lab`
 
 ---
@@ -28,7 +28,7 @@ All Phase 3 tasks (3.1–3.5) remain marked `[ ]` in `tasks.md`, but source insp
 
 ---
 
-## Build Verification
+## Build verification
 
 ### Step 0 — pyo3 config
 
@@ -67,7 +67,7 @@ cargo build -p rerun_py
     Finished `dev` profile [optimized] target(s) in 0.39s
 ```
 
-### Step 3 — Task 3.5 runtime smoke (maturin + Python import)
+### Step 3 — task 3.5 runtime smoke (maturin + Python import)
 
 ```bash
 cd rerun_py && pixi run maturin develop
@@ -87,7 +87,7 @@ Python smoke import of `simplant_lab.asset_model`, `simplant_lab.simulation`, `s
 
 > **Scope note:** Specs for `simulation.engine` / `FirstOrderEngine`, steady-state unit ops (`mix`, `split`, …), and `ml_dataloop.dataframe_query` / `RrdDataframeQuery` are explicitly deferred to Phase 5 (tasks 5.2–5.3). They are **not** evaluated as Phase 3 gaps.
 
-### specs/asset-model — Requirements
+### Specs/asset-model — requirements
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
@@ -111,7 +111,7 @@ Python smoke import of `simplant_lab.asset_model`, `simplant_lab.simulation`, `s
 
 **Extra (beyond task 3.1 minimum):** `Area`, `ProcessUnit`, `Equipment`, `Tag`, `EquipmentKind` also exposed — aligns with spec hierarchy mention and design file table.
 
-### specs/simulation — Requirements (Phase 3 scope)
+### Specs/simulation — requirements (Phase 3 scope)
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
@@ -137,7 +137,7 @@ Python smoke import of `simplant_lab.asset_model`, `simplant_lab.simulation`, `s
 | Rechazar aprobación con DOF≠0 | ⚠️ Partial | Domain error mapped |
 | Aprobar escenario válido | ⚠️ Partial | `Scenario.approve(...)` + `duration_secs()`/`is_approved()` |
 
-### specs/stress-testing — Requirements
+### Specs/stress-testing — requirements
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
@@ -160,7 +160,7 @@ Python smoke import of `simplant_lab.asset_model`, `simplant_lab.simulation`, `s
 | Evaluar resultados dentro de criterio | ⚠️ Partial | `evaluate()` returns `bool` |
 | Evaluar dos veces | ⚠️ Partial | Domain error mapped on re-evaluate |
 
-### specs/ml-dataloop — Requirements (Phase 3 scope)
+### Specs/ml-dataloop — requirements (Phase 3 scope)
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
@@ -182,7 +182,7 @@ Python smoke import of `simplant_lab.asset_model`, `simplant_lab.simulation`, `s
 
 ---
 
-## Task-by-Task Verification
+## Task-by-Task verification
 
 ### Task 3.1 — `asset_model.rs`
 
@@ -230,7 +230,7 @@ Python smoke import of `simplant_lab.asset_model`, `simplant_lab.simulation`, `s
 | No `dataframe_query` submodule | ✅ | Confirmed absent (Phase 5) |
 | `ml_dataloop::register` | ✅ | Lines 120–127 |
 
-### Task 3.5 — Wiring + build + smoke
+### Task 3.5 — wiring + build + smoke
 
 | Item | Expected | Found |
 |------|----------|-------|
@@ -276,7 +276,7 @@ Phase 3 has no dedicated test tasks (tests are Phase 7). No `#[cfg(test)]` block
 
 ---
 
-## Issues Found
+## Issues found
 
 ### CRITICAL (must fix before archive)
 
@@ -314,7 +314,7 @@ Phase 3 domain model bindings (asset_model, simulation, stress_testing, ml_datal
 
 ---
 
-## Structured Envelope
+## Structured envelope
 
 ```yaml
 status: completed

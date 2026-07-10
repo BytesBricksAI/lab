@@ -1,4 +1,4 @@
-# Attribution Notice
+# Attribution notice
 
 This repository contains **SimPlant Lab**, a fork of [Rerun](https://github.com/rerun-io/rerun).
 
@@ -47,7 +47,7 @@ Unless noted otherwise, the following areas are derived from Rerun and may conta
 
 These portions remain subject to the upstream `MIT OR Apache-2.0` licensing and the copyright notice above.
 
-### Original SimPlant Lab work
+### Original SimPlant lab work
 
 The following paths contain original SimPlant Lab code that is not part of the upstream Rerun tree:
 

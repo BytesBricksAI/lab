@@ -1,4 +1,4 @@
-# 0005 — Aislamiento de licencia DWSIM (GPLv3)
+# 0005 — aislamiento de licencia DWSIM (GPLv3)
 
 ## Status
 

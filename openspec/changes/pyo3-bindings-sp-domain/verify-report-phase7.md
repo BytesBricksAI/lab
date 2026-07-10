@@ -1,8 +1,8 @@
-# Verification Report — Phase 7
+# Verification report — phase 7
 
-**Change**: `pyo3-bindings-sp-domain`  
-**Scope**: Phase 7 only (tasks 7.1–7.5 — behavioral tests)  
-**Verified at**: 2026-06-29  
+**Change**: `pyo3-bindings-sp-domain`
+**Scope**: Phase 7 only (tasks 7.1–7.5 — behavioral tests)
+**Verified at**: 2026-06-29
 **Workspace**: `/home/m4s1t4/Work/Enprendimiento/Proyectos/SimPlant/SimPlant-v2/lab`
 
 ---
@@ -29,7 +29,7 @@
 
 ---
 
-## Test Execution
+## Test execution
 
 ### Step 0 — pyo3 config
 
@@ -49,9 +49,9 @@ LD_LIBRARY_PATH="/home/m4s1t4/Work/Enprendimiento/Proyectos/SimPlant/SimPlant-v2
 **Result:** ✅ Exit 0 — **3 passed**, 0 failed
 
 ```
-test kernel::tests::tag_id_round_trip_and_rejects_empty ... ok
-test kernel::tests::measurement_round_trip ... ok
-test kernel::tests::time_window_rejects_inverted_range ... ok
+test kernel::tests::tag_id_round_trip_and_rejects_empty … ok
+test kernel::tests::measurement_round_trip … ok
+test kernel::tests::time_window_rejects_inverted_range … ok
 ```
 
 **Env note:** `CONDA_PREFIX` was unset in the shell; `LD_LIBRARY_PATH=$CONDA_PREFIX/lib` alone fails with `libpython3.11.so.1.0: cannot open shared object file`. Pixi env lib path is required.
@@ -90,7 +90,7 @@ PYTHONPATH=rerun_py/rerun_sdk pixi run python -m pytest -vv \
 
 ---
 
-## Correctness (Specs vs Phase 7 Tasks)
+## Correctness (Specs vs phase 7 tasks)
 
 ### Task 7.1 — `specs/kernel`
 
@@ -154,7 +154,7 @@ Nested adapters (`acquisition.replay`, `simulation.engine`, `ml_dataloop.datafra
 
 ---
 
-## Scenarios Coverage Summary (Phase 7 test scope)
+## Scenarios coverage summary (Phase 7 test scope)
 
 | Scenario (from specs) | Status |
 |-----------------------|--------|
@@ -200,7 +200,7 @@ Phase 7 is test-only; no new binding code. Tests align with design decisions:
 
 ---
 
-## Issues Found
+## Issues found
 
 **CRITICAL** (must fix before archive):
 - None — all Phase 7 deliverables implemented and tests pass with documented environment.

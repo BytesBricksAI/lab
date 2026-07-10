@@ -1,4 +1,4 @@
-# 0001 — Forkear Rerun como plataforma base
+# 0001 — forkear Rerun como plataforma base
 
 ## Status
 

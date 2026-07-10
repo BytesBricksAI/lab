@@ -6,9 +6,9 @@ from __future__ import annotations
 import time
 
 import numpy as np
-import rerun.blueprint as rrb
 
 import simplant_lab as rr  # pip install rerun-sdk
+import simplant_lab.blueprint as rrb
 
 rr.init("rerun_example_fixed_window_plot", spawn=True)
 
