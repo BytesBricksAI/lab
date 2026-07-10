@@ -80,7 +80,7 @@ jobs:
   no-codegen-changes:
     name: Check if running codegen would produce any changes
     timeout-minutes: 60
-    runs-on: ubuntu-latest-16-cores
+    runs-on: ubuntu-latest # Fork contrib CI (e.g. BytesBricksAI) lacks larger runners.
     steps:
       # Note: We explicitly don't override `ref` here. We need to see if changes would be made
       # in a context where we have merged with main. Otherwise we might miss changes such as one
@@ -100,7 +100,7 @@ jobs:
   rs-lints:
     name: Rust lints (fmt, check, clippy, tests, doc)
     timeout-minutes: 60
-    runs-on: ubuntu-latest-16-cores
+    runs-on: ubuntu-latest # Fork contrib CI (e.g. BytesBricksAI) lacks larger runners.
     steps:
       - uses: actions/checkout@v4
         with:
@@ -231,7 +231,7 @@ jobs:
   cpp-tests:
     name: C++ tests
     timeout-minutes: 60
-    runs-on: ubuntu-latest-16-cores
+    runs-on: ubuntu-latest # Fork contrib CI (e.g. BytesBricksAI) lacks larger runners.
     steps:
       - uses: actions/checkout@v4
 

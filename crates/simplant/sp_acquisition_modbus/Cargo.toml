@@ -27,7 +27,6 @@ tokio = { workspace = true, features = [
   "time",
 ] }
 jiff = { workspace = true }
-thiserror.workspace = true
 
 [dev-dependencies]
 tokio = { workspace = true, features = ["rt", "rt-multi-thread", "net", "macros", "time"] }

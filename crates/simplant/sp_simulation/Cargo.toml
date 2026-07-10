@@ -15,7 +15,6 @@ version.workspace = true
 workspace = true
 
 [dependencies]
-sp_kernel = { path = "../sp_kernel" }
 thiserror.workspace = true
 serde = { workspace = true, features = ["derive"] }
 toml = { workspace = true, features = ["parse", "display", "serde"] }

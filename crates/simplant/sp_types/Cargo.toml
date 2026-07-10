@@ -17,5 +17,3 @@ workspace = true
 [dependencies]
 sp_kernel = { path = "../sp_kernel" }
 re_sdk_types.workspace = true
-arrow.workspace = true
-thiserror.workspace = true
