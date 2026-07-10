@@ -1,12 +1,12 @@
 use std::sync::Arc;
 
-use rerun::external::glam;
-use rerun::external::re_renderer::external::smallvec::smallvec;
-use rerun::external::re_renderer::external::wgpu;
-use rerun::external::re_renderer::{self};
+use simplant_lab::external::glam;
+use simplant_lab::external::re_renderer::external::smallvec::smallvec;
+use simplant_lab::external::re_renderer::external::wgpu;
+use simplant_lab::external::re_renderer::{self};
 
 mod gpu_data {
-    use rerun::external::re_renderer::{self, wgpu_buffer_types};
+    use simplant_lab::external::re_renderer::{self, wgpu_buffer_types};
 
     /// Keep in sync with `UniformBuffer` in `height_field.wgsl`.
     #[repr(C)]

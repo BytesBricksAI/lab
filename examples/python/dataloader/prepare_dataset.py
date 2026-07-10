@@ -16,7 +16,7 @@ from pathlib import Path
 
 from huggingface_hub import snapshot_download
 
-import rerun as rr
+import simplant_lab as rr
 
 DEFAULT_REPO_ID = "rerun/so101-pick-and-place"
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "data"

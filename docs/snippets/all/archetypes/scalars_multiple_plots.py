@@ -4,7 +4,7 @@ from math import cos, sin, tau
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_scalar_multiple_plots", spawn=True)
 lcg_state = np.int64(0)

@@ -1,16 +1,17 @@
 //! Log a batch of `Ellipsoids3D`.
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec =
-        rerun::RecordingStreamBuilder::new("rerun_example_ellipsoid_batch")
-            .spawn()?;
+    let rec = simplant_lab::RecordingStreamBuilder::new(
+        "rerun_example_ellipsoid_batch",
+    )
+    .spawn()?;
 
     // Let's build a snowman!
     let belly_z = 2.5;
     let head_z = 4.5;
     rec.log(
         "batch",
-        &rerun::Ellipsoids3D::from_centers_and_half_sizes(
+        &simplant_lab::Ellipsoids3D::from_centers_and_half_sizes(
             [
                 (0.0, 0.0, 0.0),
                 (0.0, 0.0, belly_z),
@@ -27,13 +28,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             ],
         )
         .with_colors([
-            rerun::Color::from_rgb(255, 255, 255),
-            rerun::Color::from_rgb(255, 255, 255),
-            rerun::Color::from_rgb(255, 255, 255),
-            rerun::Color::from_rgb(0, 0, 0),
-            rerun::Color::from_rgb(0, 0, 0),
+            simplant_lab::Color::from_rgb(255, 255, 255),
+            simplant_lab::Color::from_rgb(255, 255, 255),
+            simplant_lab::Color::from_rgb(255, 255, 255),
+            simplant_lab::Color::from_rgb(0, 0, 0),
+            simplant_lab::Color::from_rgb(0, 0, 0),
         ])
-        .with_fill_mode(rerun::FillMode::Solid),
+        .with_fill_mode(simplant_lab::FillMode::Solid),
     )?;
 
     Ok(())

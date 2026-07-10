@@ -18,8 +18,8 @@ from collections.abc import Callable
 
 import numpy as np
 
-import rerun as rr  # pip install rerun-sdk
-from rerun.components import Colormap
+import simplant_lab as rr  # pip install simplant-lab-sdk
+from simplant_lab.components import Colormap
 
 try:
     import cv_bridge

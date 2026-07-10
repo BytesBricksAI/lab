@@ -10,9 +10,9 @@ from typing import Any
 import numpy as np
 import pytest
 
-import rerun as rr
 import rerun_bindings as bindings
-from rerun._log import _log_components
+import simplant_lab as rr
+from simplant_lab._log import _log_components
 
 ARCHETYPE_CASES = [
     pytest.param(lambda: rr.Scalars(42.0), id="Scalars"),

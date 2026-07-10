@@ -2,8 +2,8 @@
 
 import pyarrow as pa
 
-import rerun as rr
-from rerun.experimental import (
+import simplant_lab as rr
+from simplant_lab.experimental import (
     Chunk,
     DeriveLens,
     LazyChunkStream,

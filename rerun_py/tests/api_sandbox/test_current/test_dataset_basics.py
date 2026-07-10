@@ -4,8 +4,9 @@ from typing import TYPE_CHECKING
 
 import pyarrow as pa
 import pytest
-import rerun as rr
 from inline_snapshot import snapshot as inline_snapshot
+
+import simplant_lab as rr
 
 if TYPE_CHECKING:
     from pathlib import Path

@@ -1,0 +1,28 @@
+[package]
+name = "sp_ml_dataloop"
+authors.workspace = true
+description = "SimPlant Lab ML data loop: versioned, reproducible dataset specs with leakage-free temporal splits."
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish = false
+readme = "README.md"
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+sp_kernel = { path = "../sp_kernel" }
+sp_asset_model = { path = "../sp_asset_model" }
+thiserror.workspace = true
+serde = { workspace = true, features = ["derive"] }
+toml = { workspace = true, features = ["parse", "display", "serde"] }
+jiff = { workspace = true }
+csv = "1.3"
+arrow.workspace = true
+parquet = { workspace = true, features = ["arrow"] }
+
+[dev-dependencies]

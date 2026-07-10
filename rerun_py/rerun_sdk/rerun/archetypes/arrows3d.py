@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .arrows3d_ext import Arrows3DExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["Arrows3D"]
 
 
 @define(str=False, repr=False, init=False)
-class Arrows3D(Arrows3DExt, Archetype, VisualizableArchetype):
+class Arrows3D(Archetype, VisualizableArchetype):
     """
     **Archetype**: 3D arrows with optional colors, radii, labels, etc.
 
@@ -40,7 +39,7 @@ class Arrows3D(Arrows3DExt, Archetype, VisualizableArchetype):
 
     import numpy as np
 
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_arrow3d", spawn=True)
 
@@ -70,7 +69,65 @@ class Arrows3D(Arrows3DExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.Arrows3D"
 
-    # __init__ can be found in arrows3d_ext.py
+    def __init__(
+        self: Any,
+        vectors: datatypes.Vec3DArrayLike,
+        *,
+        origins: datatypes.Vec3DArrayLike | None = None,
+        radii: datatypes.Float32ArrayLike | None = None,
+        colors: datatypes.Rgba32ArrayLike | None = None,
+        labels: datatypes.Utf8ArrayLike | None = None,
+        show_labels: datatypes.BoolLike | None = None,
+        class_ids: datatypes.ClassIdArrayLike | None = None,
+    ) -> None:
+        """
+        Create a new instance of the Arrows3D archetype.
+
+        Parameters
+        ----------
+        vectors:
+            All the vectors for each arrow in the batch.
+        origins:
+            All the origin (base) positions for each arrow in the batch.
+
+            If no origins are set, (0, 0, 0) is used as the origin for each arrow.
+        radii:
+            Optional radii for the arrows.
+
+            The shaft is rendered as a line with `radius = 0.5 * radius`.
+            The tip is rendered with `height = 2.0 * radius` and `radius = 1.0 * radius`.
+        colors:
+            Optional colors for the points.
+        labels:
+            Optional text labels for the arrows.
+
+            If there's a single label present, it will be placed at the center of the entity.
+            Otherwise, each instance will have its own label.
+        show_labels:
+            Whether the text labels should be shown.
+
+            If not set, labels will automatically appear when there is exactly one label for this entity
+            or the number of instances on this entity is under a certain threshold.
+        class_ids:
+            Optional class Ids for the points.
+
+            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+
+        """
+
+        # You can define your own __init__ function as a member of Arrows3DExt in arrows3d_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(
+                vectors=vectors,
+                origins=origins,
+                radii=radii,
+                colors=colors,
+                labels=labels,
+                show_labels=show_labels,
+                class_ids=class_ids,
+            )
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -238,7 +295,7 @@ class Arrows3D(Arrows3DExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

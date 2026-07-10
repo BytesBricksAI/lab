@@ -39,13 +39,9 @@ permissions:
 jobs:
   build-wheels:
     name: Build Wheels
-    runs-on: ubuntu-latest-16-cores
+    runs-on: ubuntu-latest # Fork contrib CI (e.g. BytesBricksAI) lacks larger runners.
     timeout-minutes: 60
-    container:
-      image: ghcr.io/rerun-io/ci_docker:0.17.0
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+    # No job container: ghcr.io/rerun-io/ci_docker is private to rerun-io; fork CI cannot pull it.
     steps:
       - uses: actions/checkout@v4
         with:

@@ -2,7 +2,7 @@
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 
 width, height = 64, 64
 cell_size = 0.1

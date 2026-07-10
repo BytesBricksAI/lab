@@ -30,17 +30,19 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Markdown text document
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new("rerun_example_text_document")
-///         .spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
+///         "rerun_example_text_document",
+///     )
+///     .spawn()?;
 ///
 ///     rec.log(
 ///         "text_document",
-///         &rerun::TextDocument::new("Hello, TextDocument!"),
+///         &simplant_lab::TextDocument::new("Hello, TextDocument!"),
 ///     )?;
 ///
 ///     rec.log(
 ///         "markdown",
-///         &rerun::TextDocument::from_markdown(
+///         &simplant_lab::TextDocument::from_markdown(
 ///             r#"
 /// # Hello Markdown!
 /// [Click here to see the raw text](recording://markdown:Text).
@@ -261,7 +263,7 @@ impl TextDocument {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

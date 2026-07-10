@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Self
 
-from rerun import server as _server
+from simplant_lab import server as _server
 
 from .catalog import CatalogClient
 

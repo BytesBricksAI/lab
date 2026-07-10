@@ -18,17 +18,21 @@ from .._baseclasses import (
     ComponentBatchMixin,
     ComponentMixin,
 )
-from .geo_line_string_ext import GeoLineStringExt
 
 __all__ = ["GeoLineString", "GeoLineStringArrayLike", "GeoLineStringBatch", "GeoLineStringLike"]
 
 
 @define(init=False)
-class GeoLineString(GeoLineStringExt, ComponentMixin):
+class GeoLineString(ComponentMixin):
     """**Component**: A geospatial line string expressed in [EPSG:4326](https://epsg.io/4326) latitude and longitude (North/East-positive degrees)."""
 
     _BATCH_TYPE = None
-    # __init__ can be found in geo_line_string_ext.py
+
+    def __init__(self: Any, lat_lon: GeoLineStringLike) -> None:
+        """Create a new instance of the GeoLineString component."""
+
+        # You can define your own __init__ function as a member of GeoLineStringExt in geo_line_string_ext.py
+        self.__attrs_init__(lat_lon=lat_lon)
 
     lat_lon: list[datatypes.DVec2D] = field()
 
@@ -62,7 +66,9 @@ class GeoLineStringBatch(BaseBatch[GeoLineStringArrayLike], ComponentBatchMixin)
 
     @staticmethod
     def _native_to_pa_array(data: GeoLineStringArrayLike, data_type: pa.DataType) -> pa.Array:
-        return GeoLineStringExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of GeoLineString not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in geo_line_string_ext.py
 
 
 # This is patched in late to avoid circular dependencies.

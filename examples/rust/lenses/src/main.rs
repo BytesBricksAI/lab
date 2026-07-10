@@ -4,10 +4,10 @@ use arrow::array::{
     ArrayBuilder, Float32Array, Float64Array, Int64Builder, ListBuilder, StringBuilder, StructArray,
 };
 use arrow::datatypes::{DataType, Field};
-use rerun::external::re_log;
-use rerun::lenses::{Lens, Lenses, LensesSink, OutputMode, Selector, op};
-use rerun::sink::GrpcSink;
-use rerun::{
+use simplant_lab::external::re_log;
+use simplant_lab::lenses::{Lens, Lenses, LensesSink, OutputMode, Selector, op};
+use simplant_lab::sink::GrpcSink;
+use simplant_lab::{
     ComponentDescriptor, DynamicArchetype, RecordingStream, Scalars, SerializedComponentColumn,
     TextDocument, TimeCell,
 };
@@ -35,7 +35,7 @@ fn main() -> anyhow::Result<()> {
     let time = Lens::derive("my_timestamp")
         .to_timeline(
             "my_timeline",
-            rerun::time::TimeType::Sequence,
+            simplant_lab::time::TimeType::Sequence,
             Selector::parse(".")?,
         )
         .to_component(ComponentDescriptor::partial("value"), Selector::parse(".")?)
@@ -49,7 +49,7 @@ fn main() -> anyhow::Result<()> {
 
     let lenses_sink = LensesSink::new(GrpcSink::default(), lenses);
 
-    let rec = rerun::RecordingStreamBuilder::new("rerun_example_lenses").spawn()?;
+    let rec = simplant_lab::RecordingStreamBuilder::new("rerun_example_lenses").spawn()?;
     rec.set_sink(Box::new(lenses_sink));
 
     log_instructions(&rec)?;
@@ -129,11 +129,11 @@ fn log_timestamps(rec: &RecordingStream) -> anyhow::Result<()> {
         [],
         [
             SerializedComponentColumn {
-                descriptor: rerun::ComponentDescriptor::partial("my_timestamp"),
+                descriptor: simplant_lab::ComponentDescriptor::partial("my_timestamp"),
                 list_array: timestamp_list_builder.finish(),
             },
             SerializedComponentColumn {
-                descriptor: rerun::ComponentDescriptor::partial("value"),
+                descriptor: simplant_lab::ComponentDescriptor::partial("value"),
                 list_array: string_list_builder.finish(),
             },
         ],

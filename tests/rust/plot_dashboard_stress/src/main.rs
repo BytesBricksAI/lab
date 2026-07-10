@@ -15,7 +15,7 @@
 #![expect(clippy::cast_possible_wrap)]
 #![expect(clippy::disallowed_methods)]
 
-use rerun::external::re_log;
+use simplant_lab::external::re_log;
 
 #[derive(Debug, clap::ValueEnum, Clone)]
 enum Order {
@@ -36,7 +36,7 @@ enum SeriesType {
 #[clap(author, version, about)]
 struct Args {
     #[command(flatten)]
-    rerun: rerun::clap::RerunArgs,
+    rerun: simplant_lab::clap::RerunArgs,
 
     /// How many different plots?
     #[clap(long, default_value = "1")]
@@ -77,7 +77,7 @@ fn main() -> anyhow::Result<()> {
     run(&rec, &args)
 }
 
-fn run(rec: &rerun::RecordingStream, args: &Args) -> anyhow::Result<()> {
+fn run(rec: &simplant_lab::RecordingStream, args: &Args) -> anyhow::Result<()> {
     let plot_paths: Vec<_> = (0..args.num_plots).map(|i| format!("plot_{i}")).collect();
     let series_paths: Vec<_> = (0..args.num_series_per_plot)
         .map(|i| format!("series_{i}"))
@@ -157,14 +157,14 @@ fn run(rec: &rerun::RecordingStream, args: &Args) -> anyhow::Result<()> {
                     let values = series_values.iter().skip(offset).take(temporal_batch_size);
                     rec.send_columns(
                         path,
-                        [rerun::TimeColumn::new_duration_secs(
+                        [simplant_lab::TimeColumn::new_duration_secs(
                             "sim_time",
                             seconds.copied(),
                         )],
-                        rerun::Scalars::new(values.copied()).columns_of_unit_batches()?,
+                        simplant_lab::Scalars::new(values.copied()).columns_of_unit_batches()?,
                     )?;
                 } else {
-                    rec.log(path, &rerun::Scalars::single(series_values[offset]))?;
+                    rec.log(path, &simplant_lab::Scalars::single(series_values[offset]))?;
                 }
             }
         }

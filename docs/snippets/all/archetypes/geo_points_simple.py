@@ -1,6 +1,6 @@
 """Log some very simple geospatial point."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_geo_points", spawn=True)
 

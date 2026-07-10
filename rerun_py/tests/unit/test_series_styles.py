@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from rerun.archetypes import SeriesLines, SeriesPoints
-from rerun.components import (
+from simplant_lab.archetypes import SeriesLines, SeriesPoints
+from simplant_lab.components import (
     Color,
     ColorBatch,
     MarkerShape,

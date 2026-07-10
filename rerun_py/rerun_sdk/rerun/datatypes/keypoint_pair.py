@@ -15,7 +15,6 @@ from .. import datatypes
 from .._baseclasses import (
     BaseBatch,
 )
-from .keypoint_pair_ext import KeypointPairExt
 
 __all__ = ["KeypointPair", "KeypointPairArrayLike", "KeypointPairBatch", "KeypointPairLike"]
 
@@ -35,7 +34,7 @@ def _keypoint_pair__keypoint1__special_field_converter_override(x: datatypes.Key
 
 
 @define(init=False)
-class KeypointPair(KeypointPairExt):
+class KeypointPair:
     """**Datatype**: A connection between two [`datatypes.KeypointId`][rerun.datatypes.KeypointId]s."""
 
     def __init__(self: Any, keypoint0: datatypes.KeypointIdLike, keypoint1: datatypes.KeypointIdLike) -> None:
@@ -83,4 +82,19 @@ class KeypointPairBatch(BaseBatch[KeypointPairArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: KeypointPairArrayLike, data_type: pa.DataType) -> pa.Array:
-        return KeypointPairExt.native_to_pa_array_override(data, data_type)
+        from rerun.datatypes import KeypointIdBatch
+
+        typed_data: Sequence[KeypointPair]
+
+        if isinstance(data, KeypointPair):
+            typed_data = [data]
+        else:
+            typed_data = data
+
+        return pa.StructArray.from_arrays(
+            [
+                KeypointIdBatch([x.keypoint0 for x in typed_data]).as_arrow_array(),  # type: ignore[misc, arg-type]
+                KeypointIdBatch([x.keypoint1 for x in typed_data]).as_arrow_array(),  # type: ignore[misc, arg-type]
+            ],
+            fields=list(data_type),
+        )

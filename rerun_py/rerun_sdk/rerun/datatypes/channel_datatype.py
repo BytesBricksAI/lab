@@ -13,7 +13,6 @@ import pyarrow as pa
 from .._baseclasses import (
     BaseBatch,
 )
-from .channel_datatype_ext import ChannelDatatypeExt
 
 __all__ = ["ChannelDatatype", "ChannelDatatypeArrayLike", "ChannelDatatypeBatch", "ChannelDatatypeLike"]
 
@@ -21,7 +20,7 @@ __all__ = ["ChannelDatatype", "ChannelDatatypeArrayLike", "ChannelDatatypeBatch"
 from enum import Enum
 
 
-class ChannelDatatype(ChannelDatatypeExt, Enum):
+class ChannelDatatype(Enum):
     """
     **Datatype**: The innermost datatype of an image.
 

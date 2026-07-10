@@ -1,6 +1,6 @@
 """Logs a simple transform hierarchy."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_transform3d_hierarchy_simple", spawn=True)
 

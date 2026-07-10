@@ -8,6 +8,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import TYPE_CHECKING, Any
 
+import numpy as np
 import pyarrow as pa
 from attrs import define, field
 
@@ -15,7 +16,6 @@ from .. import datatypes
 from .._baseclasses import (
     BaseBatch,
 )
-from .annotation_info_ext import AnnotationInfoExt
 
 __all__ = ["AnnotationInfo", "AnnotationInfoArrayLike", "AnnotationInfoBatch", "AnnotationInfoLike"]
 
@@ -41,7 +41,7 @@ def _annotation_info__color__special_field_converter_override(
 
 
 @define(init=False)
-class AnnotationInfo(AnnotationInfoExt):
+class AnnotationInfo:
     """
     **Datatype**: Annotation info annotating a class id or key-point id.
 
@@ -108,4 +108,20 @@ class AnnotationInfoBatch(BaseBatch[AnnotationInfoArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: AnnotationInfoArrayLike, data_type: pa.DataType) -> pa.Array:
-        return AnnotationInfoExt.native_to_pa_array_override(data, data_type)
+        from rerun.datatypes import Rgba32Batch, Utf8Batch
+
+        typed_data: Sequence[AnnotationInfo]
+
+        if isinstance(data, AnnotationInfo):
+            typed_data = [data]
+        else:
+            typed_data = data
+
+        return pa.StructArray.from_arrays(
+            [
+                pa.array(np.asarray([x.id for x in typed_data], dtype=np.uint16)),
+                Utf8Batch([x.label for x in typed_data]).as_arrow_array(),  # type: ignore[misc, arg-type]
+                Rgba32Batch([x.color for x in typed_data]).as_arrow_array(),  # type: ignore[misc, arg-type]
+            ],
+            fields=list(data_type),
+        )

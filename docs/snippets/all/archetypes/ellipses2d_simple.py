@@ -1,6 +1,6 @@
 """Log a simple 2D ellipse."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_ellipses2d", spawn=True)
 

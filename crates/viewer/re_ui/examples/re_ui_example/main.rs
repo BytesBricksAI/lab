@@ -577,7 +577,7 @@ impl egui_tiles::Behavior<Tab> for MyTileTreeBehavior {
 
                     ui.add(ComboItemHeader::new("Other values:"));
                     ComboItem::new("vertex_positions").ui(ui);
-                    ComboItem::new("Rerun default")
+                    ComboItem::new("SimPlant-Lab default")
                         .value(code.into_widget_text(ui.style()))
                         .ui(ui);
                 });

@@ -2,7 +2,7 @@
 
 from math import cos, sin, tau
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_series_line_style", spawn=True)
 

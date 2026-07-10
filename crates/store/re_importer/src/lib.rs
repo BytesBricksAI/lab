@@ -11,6 +11,7 @@ use re_log_types::{ArrowMsg, EntityPath, LogMsg, RecordingId, StoreId, TimePoint
 mod import_file;
 mod importer_archetype;
 mod importer_directory;
+mod importer_dxf;
 mod importer_rrd;
 mod importer_urdf;
 
@@ -32,6 +33,7 @@ pub mod importer_parquet;
 pub use self::import_file::{import_from_file_contents, prepare_store_info};
 pub use self::importer_archetype::ArchetypeImporter;
 pub use self::importer_directory::DirectoryImporter;
+pub use self::importer_dxf::DxfImporter;
 pub use self::importer_mcap::McapImporter;
 pub use self::importer_rrd::RrdImporter;
 pub use self::importer_urdf::{UrdfImporter, UrdfTree, joint_transform as urdf_joint_transform};
@@ -496,6 +498,7 @@ static BUILTIN_IMPORTERS: LazyLock<Vec<Arc<dyn Importer>>> = LazyLock::new(|| {
         #[cfg(not(target_arch = "wasm32"))]
         Arc::new(ExternalImporter),
         Arc::new(UrdfImporter),
+        Arc::new(DxfImporter),
     ]
 });
 
@@ -555,7 +558,7 @@ pub const SUPPORTED_POINT_CLOUD_EXTENSIONS: &[&str] = &["ply"];
 pub const SUPPORTED_RERUN_EXTENSIONS: &[&str] = &["rbl", "rrd"];
 
 /// 3rd party formats with built-in support.
-pub const SUPPORTED_THIRD_PARTY_FORMATS: &[&str] = &["mcap", "urdf"];
+pub const SUPPORTED_THIRD_PARTY_FORMATS: &[&str] = &["dxf", "mcap", "urdf"];
 
 pub const SUPPORTED_PARQUET_EXTENSIONS: &[&str] = &["parquet"];
 
@@ -623,6 +626,7 @@ fn test_supported_extensions() {
     assert!(is_supported_file_extension("mcap"));
     assert!(is_supported_file_extension("png"));
     assert!(is_supported_file_extension("urdf"));
+    assert!(is_supported_file_extension("dxf"));
 }
 
 #[test]

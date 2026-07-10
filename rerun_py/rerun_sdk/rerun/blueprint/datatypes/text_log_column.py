@@ -15,7 +15,6 @@ from ... import datatypes
 from ..._baseclasses import (
     BaseBatch,
 )
-from .text_log_column_ext import TextLogColumnExt
 
 __all__ = ["TextLogColumn", "TextLogColumnArrayLike", "TextLogColumnBatch", "TextLogColumnLike"]
 
@@ -28,14 +27,30 @@ def _text_log_column__visible__special_field_converter_override(x: datatypes.Boo
 
 
 @define(init=False)
-class TextLogColumn(TextLogColumnExt):
+class TextLogColumn:
     """
     **Datatype**: A text log column.
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**
     """
 
-    # __init__ can be found in text_log_column_ext.py
+    def __init__(self: Any, visible: datatypes.BoolLike, kind: blueprint_datatypes.TextLogColumnKindLike) -> None:
+        """
+        Create a new instance of the TextLogColumn datatype.
+
+        Parameters
+        ----------
+        visible:
+            Is this column visible?
+
+            Defaults to true.
+        kind:
+            What kind of column is this?
+
+        """
+
+        # You can define your own __init__ function as a member of TextLogColumnExt in text_log_column_ext.py
+        self.__attrs_init__(visible=visible, kind=kind)
 
     visible: datatypes.Bool = field(converter=_text_log_column__visible__special_field_converter_override)
     # Is this column visible?
@@ -78,7 +93,7 @@ class TextLogColumnBatch(BaseBatch[TextLogColumnArrayLike]):
         if isinstance(data, TextLogColumn):
             typed_data = [data]
         else:
-            typed_data = [x if isinstance(x, TextLogColumn) else TextLogColumn(x) for x in data]
+            typed_data = data
 
         return pa.StructArray.from_arrays(
             [

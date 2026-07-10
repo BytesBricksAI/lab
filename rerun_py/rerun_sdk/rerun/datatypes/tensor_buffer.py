@@ -13,13 +13,12 @@ from attrs import define, field
 from .._baseclasses import (
     BaseBatch,
 )
-from .tensor_buffer_ext import TensorBufferExt
 
 __all__ = ["TensorBuffer", "TensorBufferArrayLike", "TensorBufferBatch", "TensorBufferLike"]
 
 
 @define
-class TensorBuffer(TensorBufferExt):
+class TensorBuffer:
     """
     **Datatype**: The underlying storage for [`archetypes.Tensor`][rerun.archetypes.Tensor].
 
@@ -40,9 +39,7 @@ class TensorBuffer(TensorBufferExt):
         | npt.NDArray[np.uint32]
         | npt.NDArray[np.uint64]
         | npt.NDArray[np.uint8]
-    ) = field(
-        converter=TensorBufferExt.inner__field_converter_override  # type: ignore[misc]
-    )
+    ) = field()
     """
     Must be one of:
 

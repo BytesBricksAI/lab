@@ -5,17 +5,17 @@ import tempfile
 from typing import TYPE_CHECKING
 
 import pytest
-import rerun as rr
 from inline_snapshot import snapshot as inline_snapshot
-from rerun.catalog import AlreadyExistsError, OnDuplicateSegmentLayer, SegmentRegistrationResult
+
+import simplant_lab as rr
+from simplant_lab.catalog import AlreadyExistsError, OnDuplicateSegmentLayer, SegmentRegistrationResult
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterator, Sequence
     from pathlib import Path
 
-    from rerun.catalog import CatalogClient, DatasetEntry
-
     from e2e_redap_tests.conftest import EntryFactory
+    from simplant_lab.catalog import CatalogClient, DatasetEntry
 
 
 @pytest.fixture(scope="function")

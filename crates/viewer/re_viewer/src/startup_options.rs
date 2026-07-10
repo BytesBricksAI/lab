@@ -37,7 +37,7 @@ pub struct StartupOptions {
     /// A user has specifically requested the welcome screen be hidden.
     pub hide_welcome_screen: bool,
 
-    /// Detach Rerun Viewer process from the application process.
+    /// Detach SimPlant-Lab process from the application process.
     #[cfg(not(target_arch = "wasm32"))]
     pub detach_process: bool,
 

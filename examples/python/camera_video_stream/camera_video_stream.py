@@ -7,7 +7,7 @@ import subprocess
 
 import av
 
-import rerun as rr
+import simplant_lab as rr
 
 
 def setup_camera_input(video_device: str | None = None) -> av.container.InputContainer:

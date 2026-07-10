@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import rerun.blueprint as rrb
+import simplant_lab.blueprint as rrb
 
 blueprint = rrb.Blueprint(
     rrb.Spatial3DView(origin="/test1"),

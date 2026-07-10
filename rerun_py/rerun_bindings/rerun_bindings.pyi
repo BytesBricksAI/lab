@@ -30,8 +30,8 @@ class IndexColumnDescriptor:
     generally correspond to Rerun timelines.
 
     Column descriptors are used to describe the columns in a
-    [`Schema`][rerun.catalog.Schema]. They are read-only. To select an index
-    column, use [`IndexColumnSelector`][rerun.catalog.IndexColumnSelector].
+    [`Schema`][simplant_lab.catalog.Schema]. They are read-only. To select an index
+    column, use [`IndexColumnSelector`][simplant_lab.catalog.IndexColumnSelector].
     """
 
     @property
@@ -80,8 +80,8 @@ class ComponentColumnDescriptor:
     Component columns contain the data for a specific component of an entity.
 
     Column descriptors are used to describe the columns in a
-    [`Schema`][rerun.catalog.Schema]. They are read-only. To select a component
-    column, use [`ComponentColumnSelector`][rerun.catalog.ComponentColumnSelector].
+    [`Schema`][simplant_lab.catalog.Schema]. They are read-only. To select a component
+    column, use [`ComponentColumnSelector`][simplant_lab.catalog.ComponentColumnSelector].
     """
 
     @property
@@ -645,7 +645,7 @@ def binary_stream(recording: PyRecordingStream | None = None) -> PyBinarySinkSto
 
 class GrpcSink:
     """
-    Used in [`rerun.RecordingStream.set_sinks`][].
+    Used in [`simplant_lab.RecordingStream.set_sinks`][].
 
     Connect the recording stream to a remote Rerun Viewer on the given URL.
     """
@@ -668,7 +668,7 @@ class GrpcSink:
 
 class FileSink:
     """
-    Used in [`rerun.RecordingStream.set_sinks`][].
+    Used in [`simplant_lab.RecordingStream.set_sinks`][].
 
     Save the recording stream to a file.
     """

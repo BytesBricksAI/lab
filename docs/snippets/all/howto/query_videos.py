@@ -21,7 +21,7 @@ import numpy as np
 import pyarrow as pa
 from datafusion import col
 
-import rerun as rr
+import simplant_lab as rr
 
 sample_video_path = (
     Path(__file__).parents[4] / "tests" / "assets" / "rrd" / "video_sample"

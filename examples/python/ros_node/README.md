@@ -64,7 +64,7 @@ source rerun-ros-example/bin/activate
 
 Then install the latest Rerun SDK and the necessary libraries specified in the requirements file of this example:
 ```bash
-pip install --upgrade rerun-sdk
+pip install --upgrade simplant-lab-sdk
 pip install -r examples/python/ros_node/requirements.txt
 ```
 

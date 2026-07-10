@@ -1,13 +1,13 @@
 #![expect(clippy::disallowed_methods)] // It's just an example
 
-use rerun::external::egui;
-use rerun::external::re_data_ui::{DataUi, item_ui};
-use rerun::external::re_entity_db::InstancePath;
-use rerun::external::re_log_types::EntityPath;
-use rerun::external::re_sdk_types::ViewClassIdentifier;
-use rerun::external::re_ui::{self, Help};
-use rerun::external::re_view;
-use rerun::external::re_viewer_context::{
+use simplant_lab::external::egui;
+use simplant_lab::external::re_data_ui::{DataUi, item_ui};
+use simplant_lab::external::re_entity_db::InstancePath;
+use simplant_lab::external::re_log_types::EntityPath;
+use simplant_lab::external::re_sdk_types::ViewClassIdentifier;
+use simplant_lab::external::re_ui::{self, Help};
+use simplant_lab::external::re_view;
+use simplant_lab::external::re_viewer_context::{
     DataResultInteractionAddress, HoverHighlight, IdentifiedViewSystem as _, IndicatedEntities,
     Item, MissingChunkReporter, PerVisualizerType, RecommendedVisualizers, SelectionHighlight,
     SystemExecutionOutput, UiLayout, ViewClass, ViewClassExt as _, ViewClassLayoutPriority,
@@ -15,7 +15,7 @@ use rerun::external::re_viewer_context::{
     ViewSystemExecutionError, ViewSystemIdentifier, ViewSystemRegistrator, ViewerContext,
     VisualizableReason,
 };
-use rerun::external::re_viewport_blueprint::ViewProperty;
+use simplant_lab::external::re_viewport_blueprint::ViewProperty;
 
 use crate::color_coordinate_config::{ColorCoordinatesConfiguration, ColorCoordinatesMode};
 use crate::points3d_color_visualizer::{ColorWithInstance, Points3DColorVisualizer};

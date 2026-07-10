@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate API reference pages and a landing index for the rerun Python SDK.
+Generate API reference pages and a landing index for the SimPlant Lab Python SDK.
 
 The script emits two kinds of output (at the docs root):
 
@@ -16,7 +16,7 @@ The script emits two kinds of output (at the docs root):
    never gate coverage. Missing curation only affects the landing page.
 
 A pre-emission validator fails the build if any new subpackage/module
-appears under `rerun_sdk/rerun/` without being either documented or
+appears under `rerun_sdk/simplant_lab/` without being either documented or
 explicitly excluded, if a documented or excluded path no longer exists
 on disk, if a documented package's public surface is empty or fully
 excluded, or if a curated table references an unknown symbol.
@@ -42,59 +42,68 @@ import mkdocs_gen_files
 # To document a brand-new subpackage, add a row here. Iteration order
 # determines nav order in the rendered sidebar.
 DOCUMENTED_PACKAGES: Final[dict[str, tuple[str, ...]]] = {
-    "rerun": ("Core",),
-    "rerun.archetypes": ("Archetypes",),
-    "rerun.components": ("Components",),
-    "rerun.datatypes": ("Datatypes",),
-    "rerun.blueprint": ("Blueprint", "APIs"),
-    "rerun.blueprint.archetypes": ("Blueprint", "Archetypes"),
-    "rerun.blueprint.components": ("Blueprint", "Components"),
-    "rerun.blueprint.datatypes": ("Blueprint", "Datatypes"),
-    "rerun.blueprint.views": ("Blueprint", "Views"),
-    "rerun.catalog": ("Catalog",),
-    "rerun.experimental": ("Experimental",),
-    "rerun.experimental.dataloader": ("Experimental", "Dataloader"),
-    "rerun.recording": ("Recording",),
-    "rerun.server": ("Server",),
-    "rerun.urdf": ("URDF Support",),
-    "rerun.notebook": ("Notebook",),
-    "rerun.auth": ("Authentication",),
-    "rerun.utilities": ("Utilities",),
+    "simplant_lab": ("Core",),
+    "simplant_lab.archetypes": ("Archetypes",),
+    "simplant_lab.components": ("Components",),
+    "simplant_lab.datatypes": ("Datatypes",),
+    "simplant_lab.blueprint": ("Blueprint", "APIs"),
+    "simplant_lab.blueprint.archetypes": ("Blueprint", "Archetypes"),
+    "simplant_lab.blueprint.components": ("Blueprint", "Components"),
+    "simplant_lab.blueprint.datatypes": ("Blueprint", "Datatypes"),
+    "simplant_lab.blueprint.views": ("Blueprint", "Views"),
+    "simplant_lab.catalog": ("Catalog",),
+    "simplant_lab.experimental": ("Experimental",),
+    "simplant_lab.experimental.dataloader": ("Experimental", "Dataloader"),
+    "simplant_lab.rrd_recording": ("Recording",),
+    "simplant_lab.server": ("Server",),
+    "simplant_lab.urdf": ("URDF Support",),
+    "simplant_lab.notebook": ("Notebook",),
+    "simplant_lab.auth": ("Authentication",),
+    "simplant_lab.utilities": ("Utilities",),
 }
 
-# Subpackages/modules under `rerun.` that deliberately do NOT get a Track A
+# Subpackages/modules under `simplant_lab.` that deliberately do NOT get a Track A
 # page. Their public symbols surface elsewhere (typically re-exported flat
-# into top-level `rerun`). The freshness check (bottom of file) requires
-# every non-underscore subpackage/module under `rerun_sdk/rerun/` to appear
+# into top-level `simplant_lab`). The freshness check (bottom of file) requires
+# every non-underscore subpackage/module under `rerun_sdk/simplant_lab/` to appear
 # either here or in `DOCUMENTED_PACKAGES`, which makes it impossible to add
 # a new submodule and silently miss it.
 EXCLUDED_FROM_TRACK_A: Final[set[str]] = {
     # Single-file modules whose public symbols are re-exported flat into
-    # `rerun` and surface on the `rerun` page. Listing them as their own
+    # `simplant_lab` and surface on the `simplant_lab` page. Listing them as their own
     # Track A page would just duplicate already-documented content.
-    "rerun.any_batch_value",
-    "rerun.any_value",
-    "rerun.dynamic_archetype",
-    "rerun.error_utils",
-    "rerun.recording_stream",
-    "rerun.sinks",
-    "rerun.time",
-    "rerun.web",
+    "simplant_lab.any_batch_value",
+    "simplant_lab.any_value",
+    "simplant_lab.dynamic_archetype",
+    "simplant_lab.error_utils",
+    "simplant_lab.recording_stream",
+    "simplant_lab.sinks",
+    "simplant_lab.time",
+    "simplant_lab.web",
+    # SimPlant domain modules (Rust-backed stubs); exposed as `simplant_lab.<name>`.
+    "simplant_lab.acquisition",
+    "simplant_lab.asset_model",
+    "simplant_lab.kernel",
+    "simplant_lab.ml_dataloop",
+    "simplant_lab.recording",
+    "simplant_lab.simulation",
+    "simplant_lab.stress_testing",
+    "simplant_lab.types",
     # Internal organization for blueprint code; only exposes
     # `Visualizer`/`VisualizableArchetype` which are implementation contracts,
     # not user-facing API.
-    "rerun.blueprint.visualizers",
+    "simplant_lab.blueprint.visualizers",
     # Namespace-only packages with empty `__init__.py`; users import
-    # deeper symbols (e.g. `from rerun.utilities.datafusion.collect import ...`).
+    # deeper symbols (e.g. `from simplant_lab.utilities.datafusion.collect import ...`).
     # No aggregated surface to document at the namespace level.
-    "rerun.utilities.datafusion",
-    "rerun.utilities.datafusion.functions",
+    "simplant_lab.utilities.datafusion",
+    "simplant_lab.utilities.datafusion.functions",
 }
 
 # Per-package, per-symbol allow-list of public symbols that should NOT be
 # documented. Each entry must carry a comment explaining why.
 EXPLICIT_DOC_EXCLUDES: Final[dict[str, set[str]]] = {
-    "rerun": {
+    "simplant_lab": {
         # Internal arrow-IPC constants used by send_dataframe; not user-facing.
         "RECORDING_PROPERTIES_PATH",
         "RERUN_KIND",
@@ -124,7 +133,7 @@ class Group:
 
 # Curated overlay: themed tables shown on the landing `index.md`. These never
 # gate coverage — the auto-generated per-package pages are the source of
-# truth. Items are dotted relative paths into the `rerun` package
+# truth. Items are dotted relative paths into the `simplant_lab` package
 # (e.g., `init`, `archetypes.Points3D`, `experimental.send_chunk`).
 CURATED_GROUPS: Final[list[Group]] = [
     Group(
@@ -335,51 +344,57 @@ search_paths.insert(0, sdk_root.as_posix())
 extensions = griffe.load_extensions("griffe_public_redundant_aliases")
 loader = griffe.GriffeLoader(search_paths=search_paths, extensions=extensions)
 bindings_pkg = loader.load("rerun_bindings", find_stubs_package=True)
-rerun_pkg = loader.load("rerun")
+simplant_lab_pkg = loader.load("simplant_lab")
 
 
 def griffe_module_for(pkg: str) -> griffe.Module:
     """Return the griffe Module for a `DOCUMENTED_PACKAGES` entry."""
-    if pkg == "rerun":
-        return rerun_pkg
-    assert pkg.startswith("rerun.")
-    return rerun_pkg[pkg[len("rerun.") :]]
+    if pkg == "simplant_lab":
+        return simplant_lab_pkg
+    assert pkg.startswith("simplant_lab.")
+    return simplant_lab_pkg[pkg[len("simplant_lab.") :]]
+
+
+def _is_package_dir(entry: Path) -> bool:
+    """Return True when `entry` is a package directory (runtime or stub-only)."""
+    return entry.is_dir() and ((entry / "__init__.py").exists() or (entry / "__init__.pyi").exists())
 
 
 def discover_subpackages_and_modules() -> set[str]:
     """
-    Return the dotted paths of every public subpackage/top-level module in `rerun_sdk/rerun/`.
+    Return the dotted paths of every public subpackage/top-level module in `rerun_sdk/simplant_lab/`.
 
     Includes every non-underscore subpackage at any depth (a directory with
-    `__init__.py`), and every non-underscore single-file module at the top
-    level only (e.g., `rerun.notebook`, `rerun.server`).
+    `__init__.py` or stub-only `__init__.pyi`), and every non-underscore
+    single-file module at the top level only (e.g., `simplant_lab.notebook`,
+    `simplant_lab.server`).
 
-    Single-file `.py` modules nested *inside* subpackages are treated as
+    Single-file `.py` / `.pyi` modules nested *inside* subpackages are treated as
     implementation detail and skipped — these are typically codegen output
-    (e.g., `rerun.archetypes.points3d` backing `rerun.archetypes.Points3D`)
+    (e.g., `simplant_lab.archetypes.points3d` backing `simplant_lab.archetypes.Points3D`)
     that users are not expected to import directly.
     """
-    base = sdk_root.joinpath("rerun")
-    found = {"rerun"}
+    base = sdk_root.joinpath("simplant_lab")
+    found = {"simplant_lab"}
 
     for entry in base.iterdir():
         if entry.name.startswith("_") or entry.name.startswith("."):
             continue
-        if entry.is_dir() and (entry / "__init__.py").exists():
-            found.add(f"rerun.{entry.name}")
-            _walk_nested_subpackages(entry, f"rerun.{entry.name}", found)
-        elif entry.is_file() and entry.suffix == ".py" and entry.stem != "__init__":
-            found.add(f"rerun.{entry.stem}")
+        if _is_package_dir(entry):
+            found.add(f"simplant_lab.{entry.name}")
+            _walk_nested_subpackages(entry, f"simplant_lab.{entry.name}", found)
+        elif entry.is_file() and entry.suffix in {".py", ".pyi"} and entry.stem != "__init__":
+            found.add(f"simplant_lab.{entry.stem}")
 
     return found
 
 
 def _walk_nested_subpackages(pkg_dir: Path, dotted: str, found: set[str]) -> None:
-    """Recurse into `pkg_dir`, collecting nested subpackages (dirs with `__init__.py`)."""
+    """Recurse into `pkg_dir`, collecting nested subpackages (dirs with `__init__.py` or `__init__.pyi`)."""
     for entry in pkg_dir.iterdir():
         if entry.name.startswith("_") or entry.name.startswith("."):
             continue
-        if entry.is_dir() and (entry / "__init__.py").exists():
+        if _is_package_dir(entry):
             child = f"{dotted}.{entry.name}"
             found.add(child)
             _walk_nested_subpackages(entry, child, found)
@@ -414,14 +429,14 @@ def validate_config() -> None:
             f"{sorted(stale)}. Remove them from EXCLUDED_FROM_TRACK_A.",
         )
 
-    unaccounted = discovered - documented - EXCLUDED_FROM_TRACK_A - {"rerun"}
+    unaccounted = discovered - documented - EXCLUDED_FROM_TRACK_A - {"simplant_lab"}
     if unaccounted:
         raise SystemExit(
-            f"New subpackages/modules under `rerun.` are neither documented nor "
+            f"New subpackages/modules under `simplant_lab.` are neither documented nor "
             f"excluded: {sorted(unaccounted)}.\n"
             f"  - Add a row to DOCUMENTED_PACKAGES to give each its own Track A page, OR\n"
             f"  - Add to EXCLUDED_FROM_TRACK_A with an inline comment if its public\n"
-            f"    symbols are re-exported elsewhere (typically flat into `rerun`).",
+            f"    symbols are re-exported elsewhere (typically flat into `simplant_lab`).",
         )
 
     for pkg in DOCUMENTED_PACKAGES:
@@ -442,7 +457,7 @@ def validate_config() -> None:
     for group in CURATED_GROUPS:
         for item in group.items:
             try:
-                _ = rerun_pkg[item]
+                _ = simplant_lab_pkg[item]
             except KeyError:
                 raise SystemExit(
                     f"Curated table '{group.title}' references unknown symbol '{item}'.",
@@ -464,9 +479,9 @@ def slug_for(pkg: str) -> str:
     # `ref.rerun.io/docs/python/stable/<subpackage>` (e.g. `/archetypes`,
     # `/blueprint_views`) — i.e. without a leading `rerun_`. Match that here
     # so the autogenerated links in `docs/content/reference/types/**` resolve.
-    if pkg == "rerun":
-        return "rerun.md"
-    return pkg.removeprefix("rerun.").replace(".", "_") + ".md"
+    if pkg == "simplant_lab":
+        return "simplantLab.md"
+    return pkg.removeprefix("simplant_lab.").replace(".", "_") + ".md"
 
 
 for pkg, nav_path in DOCUMENTED_PACKAGES.items():
@@ -495,14 +510,14 @@ index_path = out_dir.joinpath("index.md")
 
 
 def docstring_first_line(item: str) -> str:
-    """Return the first line of `rerun.<item>`'s docstring, with bindings fallback."""
-    obj = rerun_pkg[item]
+    """Return the first line of `simplant_lab.<item>`'s docstring, with bindings fallback."""
+    obj = simplant_lab_pkg[item]
     if "rerun_bindings" in obj.canonical_path:
         # The class is defined in the maturin extension; griffe sees the stub.
         # Get the docstring from the bindings package instead.
         obj = bindings_pkg[obj.canonical_path[len("rerun_bindings.") :]]
     if obj.docstring is None:
-        raise SystemExit(f"No docstring for `rerun.{item}` (referenced from a curated table).")
+        raise SystemExit(f"No docstring for `simplant_lab.{item}` (referenced from a curated table).")
     return obj.docstring.lines[0]
 
 
@@ -511,14 +526,14 @@ def display_name(item: str) -> str:
     Compute the rendered name for a curated-table entry.
 
     Strip `archetypes.` / `components.` / `datatypes.` prefixes when the
-    symbol is also flat-re-exported into top-level `rerun`, so the table
-    shows `rerun.Points3D` rather than `rerun.archetypes.Points3D`.
+    symbol is also flat-re-exported into top-level `simplant_lab`, so the table
+    shows `simplant_lab.Points3D` rather than `simplant_lab.archetypes.Points3D`.
     """
     for prefix in ("archetypes.", "components.", "datatypes."):
         stripped = item.removeprefix(prefix)
-        if stripped != item and stripped in rerun_pkg.members:
-            return f"rerun.{stripped}"
-    return f"rerun.{item}"
+        if stripped != item and stripped in simplant_lab_pkg.members:
+            return f"simplant_lab.{stripped}"
+    return f"simplant_lab.{item}"
 
 
 with mkdocs_gen_files.open(index_path, "w") as index_file:
@@ -569,15 +584,15 @@ of Python, you can use the table below to make sure you choose the proper Rerun 
 
         # `is_function` follows alias chains, so this works for redundant
         # aliases as well as in-file definitions.
-        funcs = [item for item in group.items if rerun_pkg[item].is_function]
-        classes = [item for item in group.items if not rerun_pkg[item].is_function]
+        funcs = [item for item in group.items if simplant_lab_pkg[item].is_function]
+        classes = [item for item in group.items if not simplant_lab_pkg[item].is_function]
 
         if funcs:
             index_file.write("Function | Description\n")
             index_file.write("-------- | -----------\n")
             for item in funcs:
                 index_file.write(
-                    f"[`{display_name(item)}()`][rerun.{item}] | {docstring_first_line(item)}\n",
+                    f"[`{display_name(item)}()`][simplant_lab.{item}] | {docstring_first_line(item)}\n",
                 )
             index_file.write("\n")
 
@@ -586,7 +601,7 @@ of Python, you can use the table below to make sure you choose the proper Rerun 
             index_file.write("-------- | -----------\n")
             for item in classes:
                 index_file.write(
-                    f"[`{display_name(item)}`][rerun.{item}] | {docstring_first_line(item)}\n",
+                    f"[`{display_name(item)}`][simplant_lab.{item}] | {docstring_first_line(item)}\n",
                 )
             index_file.write("\n")
 

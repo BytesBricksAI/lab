@@ -1,0 +1,62 @@
+[facility]
+id = "FAC-DEMO"
+name = "Demo Storage Terminal"
+
+[[area]]
+id = "A-STORAGE"
+name = "Storage Area"
+
+[[unit]]
+id = "U-100"
+area = "A-STORAGE"
+name = "Tank Farm"
+
+[[equipment]]
+id = "T-101"
+unit = "U-100"
+name = "Storage Tank 101"
+kind = "Tank"
+max_pressure = 10.0
+max_pressure_unit = "Bar"
+max_temperature = 80.0
+max_temperature_unit = "DegreeCelsius"
+
+[[equipment]]
+id = "P-1101A"
+unit = "U-100"
+name = "Transfer Pump 1101A"
+kind = "Pump"
+
+[[tag]]
+id = "PT-101"
+equipment = "T-101"
+description = "Tank pressure"
+unit = "Bar"
+range_low = 0.0
+range_high = 10.0
+alarm_ll = 1.0
+alarm_l = 2.0
+alarm_h = 8.0
+alarm_hh = 9.0
+
+[[tag]]
+id = "LT-101"
+equipment = "T-101"
+description = "Tank level"
+unit = "Percent"
+range_low = 0.0
+range_high = 100.0
+alarm_ll = 10.0
+alarm_l = 20.0
+alarm_h = 85.0
+alarm_hh = 95.0
+
+[[tag]]
+id = "FT-101"
+equipment = "P-1101A"
+description = "Transfer pump flow"
+unit = "CubicMeterPerHour"
+range_low = 0.0
+range_high = 50.0
+alarm_h = 40.0
+alarm_hh = 45.0

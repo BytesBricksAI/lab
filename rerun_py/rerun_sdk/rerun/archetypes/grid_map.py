@@ -35,7 +35,7 @@ class GridMap(Archetype):
     ```python
     import numpy as np
 
-    import rerun as rr
+    import simplant_lab as rr
 
     width, height = 64, 64
     cell_size = 0.1
@@ -76,8 +76,8 @@ class GridMap(Archetype):
 
     from PIL import Image as PILImage
 
-    import rerun as rr
-    import rerun.blueprint as rrb
+    import simplant_lab as rr
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_grid_map_pose", spawn=True)
 
@@ -425,7 +425,7 @@ class GridMap(Archetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

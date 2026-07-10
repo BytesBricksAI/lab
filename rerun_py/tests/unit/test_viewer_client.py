@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import datafusion
 import pyarrow as pa
-from rerun._arrow import to_record_batch
+
+from simplant_lab._arrow import to_record_batch
 
 
 def test_to_record_batch_single_record_batch() -> None:

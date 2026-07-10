@@ -22,7 +22,7 @@ use std::io::Read as _;
 #[clap(author, version, about)]
 struct Args {
     #[command(flatten)]
-    rerun: rerun::clap::RerunArgs,
+    rerun: simplant_lab::clap::RerunArgs,
 }
 
 fn main() -> anyhow::Result<()> {
@@ -53,7 +53,7 @@ fn main() -> anyhow::Result<()> {
         println!("Sending message number {i}…");
         rec.log(
             "Text",
-            &rerun::TextDocument::new(format!("This is message number {i}")),
+            &simplant_lab::TextDocument::new(format!("This is message number {i}")),
         )?;
         println!("Press ENTER to send more data to the viewer");
 

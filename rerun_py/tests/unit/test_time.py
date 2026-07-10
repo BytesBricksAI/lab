@@ -6,8 +6,9 @@ from typing import Any
 import numpy as np
 import pyarrow as pa
 import pytest
-from rerun.time import to_nanos, to_nanos_since_epoch
 from typing_extensions import Self
+
+from simplant_lab.time import to_nanos, to_nanos_since_epoch
 
 VALID_TO_NANOS_CASES = [
     (0, 0),

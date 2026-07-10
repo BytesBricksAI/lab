@@ -6,7 +6,7 @@ import pyarrow as pa
 from datafusion import col, functions as f
 
 if TYPE_CHECKING:
-    from rerun.catalog import DatasetEntry
+    from simplant_lab.catalog import DatasetEntry
 
 
 def test_df_count(readonly_test_dataset: DatasetEntry) -> None:

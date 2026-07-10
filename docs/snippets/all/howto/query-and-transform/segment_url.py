@@ -9,8 +9,10 @@ from pathlib import Path
 import pyarrow as pa
 from datafusion import lit
 
-import rerun as rr
-from rerun.utilities.datafusion.functions.url_generation import segment_url
+import simplant_lab as rr
+from simplant_lab.utilities.datafusion.functions.url_generation import (
+    segment_url,
+)
 
 sample_5_path = (
     Path(__file__).parents[5] / "tests" / "assets" / "rrd" / "sample_5"

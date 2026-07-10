@@ -20,8 +20,8 @@ default = ["extension-module", "perf_telemetry"]
 ## Extra features that aren't ready to be included in release builds yet.
 extra = []
 
-## The features we turn on when building the `rerun-sdk` PyPi package
-## for <https://pypi.org/project/rerun-sdk/>.
+## The features we turn on when building the `simplant-lab-sdk` PyPi package
+## for <https://pypi.org/project/simplant-lab-sdk/>.
 pypi = ["extension-module", "nasm", "web_viewer", "server", "perf_telemetry"]
 
 ## We need to enable the `pyo3/extension-module` when building the SDK,
@@ -84,6 +84,7 @@ re_uri.workspace = true
 re_video.workspace = true
 re_web_viewer_server = { workspace = true, optional = true }
 re_server = { workspace = true, features = ["lance"] }
+sp_python = { path = "../crates/simplant/sp_python" }
 
 anyhow.workspace = true
 arrow = { workspace = true, features = ["pyarrow"] }

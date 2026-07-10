@@ -3,7 +3,7 @@
 //! See also the `transform3d_column_updates` example, which achieves the same thing in a single operation.
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new(
+    let rec = simplant_lab::RecordingStreamBuilder::new(
         "rerun_example_transform3d_row_updates",
     )
     .spawn()?;
@@ -12,10 +12,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     rec.log(
         "box",
         &[
-            &rerun::Boxes3D::from_half_sizes([(4.0, 2.0, 1.0)])
-                .with_fill_mode(rerun::FillMode::Solid)
-                as &dyn rerun::AsComponents,
-            &rerun::TransformAxes3D::new(10.0),
+            &simplant_lab::Boxes3D::from_half_sizes([(4.0, 2.0, 1.0)])
+                .with_fill_mode(simplant_lab::FillMode::Solid)
+                as &dyn simplant_lab::AsComponents,
+            &simplant_lab::TransformAxes3D::new(10.0),
         ],
     )?;
 
@@ -23,11 +23,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         rec.set_time_sequence("tick", t + 1);
         rec.log(
             "box",
-            &rerun::Transform3D::default()
+            &simplant_lab::Transform3D::default()
                 .with_translation([0.0, 0.0, t as f32 / 10.0])
-                .with_rotation(rerun::RotationAxisAngle::new(
+                .with_rotation(simplant_lab::RotationAxisAngle::new(
                     [0.0, 1.0, 0.0],
-                    rerun::Angle::from_radians(truncated_radians(
+                    simplant_lab::Angle::from_radians(truncated_radians(
                         (t * 4) as f32,
                     )),
                 )),

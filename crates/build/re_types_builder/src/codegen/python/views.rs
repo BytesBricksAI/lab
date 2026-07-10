@@ -48,6 +48,31 @@ from ..api import View, ViewContentsLike, VisualizerLike
     code
 }
 
+/// How to wrap a shorthand value into an archetype instance.
+///
+/// Archetypes with required fields accept the shorthand as a positional argument for the
+/// first required field. Archetypes with only optional fields use keyword-only `__init__`
+/// signatures and therefore need an explicit keyword argument.
+fn quote_property_conversion(
+    parameter_name: &str,
+    property_type: &Object,
+    property_type_name: &str,
+) -> String {
+    let has_required_field = property_type.fields.iter().any(|field| !field.is_nullable);
+
+    if has_required_field {
+        format!("{parameter_name} = {property_type_name}({parameter_name})")
+    } else {
+        let Some(first_field) = property_type.fields.first() else {
+            return format!("{parameter_name} = {property_type_name}({parameter_name})");
+        };
+        format!(
+            "{parameter_name} = {property_type_name}({}={parameter_name})",
+            first_field.name
+        )
+    }
+}
+
 fn init_method(reporter: &Reporter, objects: &Objects, obj: &Object) -> String {
     let mut code = r#"def __init__(
     self, *,
@@ -201,7 +226,7 @@ This will be addressed in <https://github.com/rerun-io/rerun/issues/6673>.
         );
         code.push_indented(
             3,
-            format!("{parameter_name} = {property_type_name}({parameter_name})"),
+            quote_property_conversion(parameter_name, property_type, &property_type_name),
             1,
         );
         code.push_indented(

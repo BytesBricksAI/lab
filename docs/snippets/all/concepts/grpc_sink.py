@@ -1,6 +1,6 @@
 """Create and set a GRPC sink."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_grpc_sink")
 

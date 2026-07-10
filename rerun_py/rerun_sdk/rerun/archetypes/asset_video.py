@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -18,13 +18,12 @@ from .._baseclasses import (
     ComponentDescriptor,
 )
 from ..error_utils import catch_and_log_exceptions
-from .asset_video_ext import AssetVideoExt
 
 __all__ = ["AssetVideo"]
 
 
 @define(str=False, repr=False, init=False)
-class AssetVideo(AssetVideoExt, Archetype):
+class AssetVideo(Archetype):
     """
     **Archetype**: A video binary.
 
@@ -40,7 +39,7 @@ class AssetVideo(AssetVideoExt, Archetype):
     ```python
     import sys
 
-    import rerun as rr
+    import simplant_lab as rr
 
     if len(sys.argv) < 2:
         # TODO(#7354): Only mp4 is supported for now.
@@ -76,8 +75,8 @@ class AssetVideo(AssetVideoExt, Archetype):
     ```python
     import sys
 
-    import rerun as rr
-    import rerun.blueprint as rrb
+    import simplant_lab as rr
+    import simplant_lab.blueprint as rrb
 
     if len(sys.argv) < 2:
         # TODO(#7354): Only mp4 is supported for now.
@@ -121,7 +120,30 @@ class AssetVideo(AssetVideoExt, Archetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.AssetVideo"
 
-    # __init__ can be found in asset_video_ext.py
+    def __init__(self: Any, blob: datatypes.BlobLike, *, media_type: datatypes.Utf8Like | None = None) -> None:
+        """
+        Create a new instance of the AssetVideo archetype.
+
+        Parameters
+        ----------
+        blob:
+            The asset's bytes.
+        media_type:
+            The Media Type of the asset.
+
+            Supported values:
+            * `video/mp4`
+
+            If omitted, the viewer will try to guess from the data blob.
+            If it cannot guess, it won't be able to render the asset.
+
+        """
+
+        # You can define your own __init__ function as a member of AssetVideoExt in asset_video_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(blob=blob, media_type=media_type)
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -212,7 +234,7 @@ class AssetVideo(AssetVideoExt, Archetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

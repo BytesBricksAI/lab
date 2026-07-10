@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import pytest
-import rerun as rr
-import rerun.blueprint as rrb
+
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 
 def test_background_construction() -> None:

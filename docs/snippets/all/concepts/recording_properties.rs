@@ -2,10 +2,10 @@
 
 use std::sync::Arc;
 
-use rerun::external::arrow;
+use simplant_lab::external::arrow;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new(
+    let rec = simplant_lab::RecordingStreamBuilder::new(
         "rerun_example_recording_properties",
     )
     .spawn()?;
@@ -19,10 +19,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Adds a user-defined property to the recording, using an existing Rerun type.
     rec.send_property(
         "camera_left",
-        &rerun::archetypes::Points3D::new([[1.0, 0.1, 1.0]]),
+        &simplant_lab::archetypes::Points3D::new([[1.0, 0.1, 1.0]]),
     )?;
 
-    let other = rerun::AnyValues::default()
+    let other = simplant_lab::AnyValues::default()
         .with_component_from_data(
             "confidences",
             Arc::new(arrow::array::Float64Array::from(vec![

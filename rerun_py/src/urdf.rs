@@ -473,7 +473,7 @@ impl PyUrdfLink {
     }
 }
 
-/// Register the `rerun.urdf` module.
+/// Register the `simplant_lab.urdf` module.
 pub fn register(_py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<PyUrdfTree>()?;
     m.add_class::<PyUrdfJoint>()?;

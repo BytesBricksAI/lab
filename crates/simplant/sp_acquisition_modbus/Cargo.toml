@@ -1,0 +1,32 @@
+[package]
+name = "sp_acquisition_modbus"
+authors.workspace = true
+description = "SimPlant Lab Modbus TCP acquisition adapter (read-only) implementing DataSourcePort."
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish = false
+readme = "README.md"
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+sp_kernel = { path = "../sp_kernel" }
+sp_acquisition = { path = "../sp_acquisition" }
+tokio-modbus = { version = "0.16", default-features = false, features = ["tcp"] }
+tokio = { workspace = true, features = [
+  "rt",
+  "rt-multi-thread",
+  "net",
+  "macros",
+  "io-util",
+  "time",
+] }
+jiff = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["rt", "rt-multi-thread", "net", "macros", "time"] }

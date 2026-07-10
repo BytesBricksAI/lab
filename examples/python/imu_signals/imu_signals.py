@@ -10,8 +10,8 @@ import pandas as pd
 import requests
 from tqdm.auto import tqdm
 
-import rerun as rr
-from rerun import blueprint as rrb
+import simplant_lab as rr
+from simplant_lab import blueprint as rrb
 
 DATA_DIR = Path(__file__).parent / "dataset"
 

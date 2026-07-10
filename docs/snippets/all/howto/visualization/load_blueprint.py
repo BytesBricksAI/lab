@@ -8,7 +8,7 @@ The blueprint is being loaded from an existing blueprint recording file.
 
 import sys
 
-import rerun as rr
+import simplant_lab as rr
 
 path_to_rrd = sys.argv[1]
 path_to_rbl = sys.argv[2]

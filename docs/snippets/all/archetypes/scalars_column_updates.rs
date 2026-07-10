@@ -2,10 +2,10 @@
 //!
 //! This is semantically equivalent to the `scalar_row_updates` example, albeit much faster.
 
-use rerun::TimeColumn;
+use simplant_lab::TimeColumn;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new(
+    let rec = simplant_lab::RecordingStreamBuilder::new(
         "rerun_example_scalar_column_updates",
     )
     .spawn()?;
@@ -16,7 +16,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     rec.send_columns(
         "scalars",
         [times],
-        rerun::Scalars::new(scalars).columns_of_unit_batches()?,
+        simplant_lab::Scalars::new(scalars).columns_of_unit_batches()?,
     )?;
 
     Ok(())

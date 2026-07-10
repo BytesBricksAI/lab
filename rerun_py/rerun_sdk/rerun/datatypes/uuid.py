@@ -20,13 +20,12 @@ from .._converters import (
     to_np_uint8,
 )
 from .._numpy_compatibility import asarray
-from .uuid_ext import UuidExt
 
 __all__ = ["Uuid", "UuidArrayLike", "UuidBatch", "UuidLike"]
 
 
 @define(init=False)
-class Uuid(UuidExt):
+class Uuid:
     """**Datatype**: A 16-byte UUID."""
 
     def __init__(self: Any, bytes: UuidLike) -> None:
@@ -80,4 +79,6 @@ class UuidBatch(BaseBatch[UuidArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: UuidArrayLike, data_type: pa.DataType) -> pa.Array:
-        return UuidExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of Uuid not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in uuid_ext.py

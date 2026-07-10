@@ -49,7 +49,7 @@ class VideoStream(Archetype, VisualizableArchetype):
     import numpy as np
     import numpy.typing as npt
 
-    import rerun as rr
+    import simplant_lab as rr
 
     fps = 30
     duration_seconds = 4
@@ -366,7 +366,7 @@ class VideoStream(Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

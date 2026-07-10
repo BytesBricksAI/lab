@@ -10,12 +10,11 @@ from ..._baseclasses import (
     ComponentBatchMixin,
     ComponentMixin,
 )
-from .visual_bounds2d_ext import VisualBounds2DExt
 
 __all__ = ["VisualBounds2D", "VisualBounds2DBatch"]
 
 
-class VisualBounds2D(VisualBounds2DExt, datatypes.Range2D, ComponentMixin):
+class VisualBounds2D(datatypes.Range2D, ComponentMixin):
     """
     **Component**: Visual bounds in 2D space used for `Spatial2DView`.
 
@@ -23,7 +22,7 @@ class VisualBounds2D(VisualBounds2DExt, datatypes.Range2D, ComponentMixin):
     """
 
     _BATCH_TYPE = None
-    # __init__ can be found in visual_bounds2d_ext.py
+    # You can define your own __init__ function as a member of VisualBounds2DExt in visual_bounds2d_ext.py
 
     # Note: there are no fields here because VisualBounds2D delegates to datatypes.Range2D
 

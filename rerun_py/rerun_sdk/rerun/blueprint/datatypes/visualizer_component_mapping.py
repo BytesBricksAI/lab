@@ -18,7 +18,6 @@ from ..._baseclasses import (
 from ..._converters import (
     str_or_none,
 )
-from .visualizer_component_mapping_ext import VisualizerComponentMappingExt
 
 if TYPE_CHECKING:
     from ...blueprint import datatypes as blueprint_datatypes
@@ -39,7 +38,7 @@ def _visualizer_component_mapping__target__special_field_converter_override(x: d
 
 
 @define(init=False)
-class VisualizerComponentMapping(VisualizerComponentMappingExt):
+class VisualizerComponentMapping:
     """
     **Datatype**: Associate components of an entity to components of a visualizer.
 
@@ -131,4 +130,6 @@ class VisualizerComponentMappingBatch(BaseBatch[VisualizerComponentMappingArrayL
 
     @staticmethod
     def _native_to_pa_array(data: VisualizerComponentMappingArrayLike, data_type: pa.DataType) -> pa.Array:
-        return VisualizerComponentMappingExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of VisualizerComponentMapping not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in visualizer_component_mapping_ext.py

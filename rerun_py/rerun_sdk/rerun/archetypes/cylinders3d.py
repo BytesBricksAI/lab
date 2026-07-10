@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .cylinders3d_ext import Cylinders3DExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["Cylinders3D"]
 
 
 @define(str=False, repr=False, init=False)
-class Cylinders3D(Cylinders3DExt, Archetype, VisualizableArchetype):
+class Cylinders3D(Archetype, VisualizableArchetype):
     """
     **Archetype**: 3D cylinders with flat caps.
 
@@ -41,7 +40,7 @@ class Cylinders3D(Cylinders3DExt, Archetype, VisualizableArchetype):
     -------
     ### Batch of cylinders:
     ```python
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_cylinders3d_batch", spawn=True)
 
@@ -88,7 +87,81 @@ class Cylinders3D(Cylinders3DExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.Cylinders3D"
 
-    # __init__ can be found in cylinders3d_ext.py
+    def __init__(
+        self: Any,
+        lengths: datatypes.Float32ArrayLike,
+        radii: datatypes.Float32ArrayLike,
+        *,
+        centers: datatypes.Vec3DArrayLike | None = None,
+        rotation_axis_angles: datatypes.RotationAxisAngleArrayLike | None = None,
+        quaternions: datatypes.QuaternionArrayLike | None = None,
+        colors: datatypes.Rgba32ArrayLike | None = None,
+        line_radii: datatypes.Float32ArrayLike | None = None,
+        fill_mode: components.FillModeLike | None = None,
+        labels: datatypes.Utf8ArrayLike | None = None,
+        show_labels: datatypes.BoolLike | None = None,
+        class_ids: datatypes.ClassIdArrayLike | None = None,
+    ) -> None:
+        """
+        Create a new instance of the Cylinders3D archetype.
+
+        Parameters
+        ----------
+        lengths:
+            The total axial length of the cylinder, measured as the straight-line distance between the centers of its two endcaps.
+        radii:
+            Radii of the cylinders.
+        centers:
+            Optional centers of the cylinders.
+
+            If not specified, each cylinder will be centered at (0, 0, 0).
+        rotation_axis_angles:
+            Rotations via axis + angle.
+
+            If no rotation is specified, the cylinders align with the +Z axis of the local coordinate system.
+        quaternions:
+            Rotations via quaternion.
+
+            If no rotation is specified, the cylinders align with the +Z axis of the local coordinate system.
+        colors:
+            Optional colors for the cylinders.
+
+            Alpha channel is used for transparency for solid fill-mode.
+        line_radii:
+            Optional radii for the lines used when the cylinder is rendered as a wireframe.
+        fill_mode:
+            Optionally choose whether the cylinders are drawn with lines or solid.
+        labels:
+            Optional text labels for the cylinders, which will be located at their centers.
+        show_labels:
+            Whether the text labels should be shown.
+
+            If not set, labels will automatically appear when there is exactly one label for this entity
+            or the number of instances on this entity is under a certain threshold.
+        class_ids:
+            Optional class ID for the ellipsoids.
+
+            The class ID provides colors and labels if not specified explicitly.
+
+        """
+
+        # You can define your own __init__ function as a member of Cylinders3DExt in cylinders3d_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(
+                lengths=lengths,
+                radii=radii,
+                centers=centers,
+                rotation_axis_angles=rotation_axis_angles,
+                quaternions=quaternions,
+                colors=colors,
+                line_radii=line_radii,
+                fill_mode=fill_mode,
+                labels=labels,
+                show_labels=show_labels,
+                class_ids=class_ids,
+            )
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -312,7 +385,7 @@ class Cylinders3D(Cylinders3DExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

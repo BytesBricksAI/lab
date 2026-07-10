@@ -3,7 +3,7 @@
 //! This is semantically equivalent to the `transform3d_row_updates` example, albeit much faster.
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new(
+    let rec = simplant_lab::RecordingStreamBuilder::new(
         "rerun_example_transform3d_column_updates",
     )
     .spawn()?;
@@ -12,10 +12,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     rec.log(
         "box",
         &[
-            &rerun::Boxes3D::from_half_sizes([(4.0, 2.0, 1.0)])
-                .with_fill_mode(rerun::FillMode::Solid)
-                as &dyn rerun::AsComponents,
-            &rerun::TransformAxes3D::new(10.0),
+            &simplant_lab::Boxes3D::from_half_sizes([(4.0, 2.0, 1.0)])
+                .with_fill_mode(simplant_lab::FillMode::Solid)
+                as &dyn simplant_lab::AsComponents,
+            &simplant_lab::TransformAxes3D::new(10.0),
         ],
     )?;
 
@@ -24,17 +24,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         (0..100)
             .map(|t| truncated_radians((t * 4) as f32))
             .map(|rad| {
-                rerun::RotationAxisAngle::new(
+                simplant_lab::RotationAxisAngle::new(
                     [0.0, 1.0, 0.0],
-                    rerun::Angle::from_radians(rad),
+                    simplant_lab::Angle::from_radians(rad),
                 )
             });
 
-    let ticks = rerun::TimeColumn::new_sequence("tick", 1..101);
+    let ticks = simplant_lab::TimeColumn::new_sequence("tick", 1..101);
     rec.send_columns(
         "box",
         [ticks],
-        rerun::Transform3D::default()
+        simplant_lab::Transform3D::default()
             .with_many_translation(translations)
             .with_many_rotation_axis_angle(rotations)
             .columns_of_unit_batches()?,

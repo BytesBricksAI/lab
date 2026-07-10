@@ -9,7 +9,7 @@ import pyarrow as pa
 from datafusion import col, lit
 from datafusion import functions as F
 
-import rerun as rr
+import simplant_lab as rr
 
 sample_5_path = (
     Path(__file__).parents[4] / "tests" / "assets" / "rrd" / "sample_5"

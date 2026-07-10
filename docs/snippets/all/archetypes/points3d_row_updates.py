@@ -7,7 +7,7 @@ thing in a single operation.
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_points3d_row_updates", spawn=True)
 

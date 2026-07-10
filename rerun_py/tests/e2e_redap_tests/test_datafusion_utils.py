@@ -5,10 +5,11 @@ from typing import TYPE_CHECKING
 import pyarrow as pa
 from datafusion import SessionContext, col, lit
 from inline_snapshot import snapshot as inline_snapshot
-from rerun.utilities.datafusion.functions.url_generation import segment_url
+
+from simplant_lab.utilities.datafusion.functions.url_generation import segment_url
 
 if TYPE_CHECKING:
-    from rerun.catalog import DatasetEntry
+    from simplant_lab.catalog import DatasetEntry
 
 
 def redact_segment_url(url: str, dataset: DatasetEntry) -> str:

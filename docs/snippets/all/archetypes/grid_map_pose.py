@@ -5,8 +5,8 @@ from pathlib import Path
 
 from PIL import Image as PILImage
 
-import rerun as rr
-import rerun.blueprint as rrb
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 rr.init("rerun_example_grid_map_pose", spawn=True)
 

@@ -20,13 +20,12 @@ from .._converters import (
     to_np_float32,
 )
 from .._numpy_compatibility import asarray
-from .mat3x3_ext import Mat3x3Ext
 
 __all__ = ["Mat3x3", "Mat3x3ArrayLike", "Mat3x3Batch", "Mat3x3Like"]
 
 
 @define(init=False)
-class Mat3x3(Mat3x3Ext):
+class Mat3x3:
     """
     **Datatype**: A 3x3 Matrix.
 
@@ -62,7 +61,19 @@ class Mat3x3(Mat3x3Ext):
     ```
     """
 
-    # __init__ can be found in mat3x3_ext.py
+    def __init__(self: Any, flat_columns: Mat3x3Like) -> None:
+        """
+        Create a new instance of the Mat3x3 datatype.
+
+        Parameters
+        ----------
+        flat_columns:
+            Flat list of matrix coefficients in column-major order.
+
+        """
+
+        # You can define your own __init__ function as a member of Mat3x3Ext in mat3x3_ext.py
+        self.__attrs_init__(flat_columns=flat_columns)
 
     flat_columns: npt.NDArray[np.float32] = field(converter=to_np_float32)
     # Flat list of matrix coefficients in column-major order.
@@ -93,4 +104,6 @@ class Mat3x3Batch(BaseBatch[Mat3x3ArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: Mat3x3ArrayLike, data_type: pa.DataType) -> pa.Array:
-        return Mat3x3Ext.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of Mat3x3 not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in mat3x3_ext.py

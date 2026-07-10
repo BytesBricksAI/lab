@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pyarrow as pa
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_send_dataframe")
 

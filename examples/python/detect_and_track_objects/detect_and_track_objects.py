@@ -17,7 +17,7 @@ import numpy.typing as npt
 import requests
 from PIL import Image
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install simplant-lab-sdk
 
 DESCRIPTION = """
 # Detect and track objects

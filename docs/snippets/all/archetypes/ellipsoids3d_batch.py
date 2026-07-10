@@ -1,6 +1,6 @@
 """Log a batch of ellipsoids."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_ellipsoid_batch", spawn=True)
 

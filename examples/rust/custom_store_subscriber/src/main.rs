@@ -12,24 +12,26 @@
 
 use std::collections::{BTreeMap, HashMap};
 
-use rerun::external::re_byte_size::{MemUsageTree, MemUsageTreeCapture};
-use rerun::external::re_log_types::{AbsoluteTimeRange, TimelineName};
-use rerun::external::{anyhow, re_build_info, re_chunk_store, re_log};
-use rerun::time::{TimeInt, TimeType};
-use rerun::{ChunkStoreEvent, ChunkStoreSubscriber, ComponentDescriptor, EntityPath, StoreId};
+use simplant_lab::external::re_byte_size::{MemUsageTree, MemUsageTreeCapture};
+use simplant_lab::external::re_log_types::{AbsoluteTimeRange, TimelineName};
+use simplant_lab::external::{anyhow, re_build_info, re_chunk_store, re_log};
+use simplant_lab::time::{TimeInt, TimeType};
+use simplant_lab::{
+    ChunkStoreEvent, ChunkStoreSubscriber, ComponentDescriptor, EntityPath, StoreId,
+};
 
 fn main() -> anyhow::Result<std::process::ExitCode> {
-    let main_thread_token = rerun::MainThreadToken::i_promise_i_am_on_the_main_thread();
+    let main_thread_token = simplant_lab::MainThreadToken::i_promise_i_am_on_the_main_thread();
     re_log::setup_logging();
 
     let _handle = re_chunk_store::ChunkStore::register_subscriber(Box::<Orchestrator>::default());
     // Could use the returned handle to get a reference to the view if needed.
 
     let build_info = re_build_info::build_info!();
-    rerun::run(
+    simplant_lab::run(
         main_thread_token,
         build_info,
-        rerun::CallSource::Cli,
+        simplant_lab::CallSource::Cli,
         std::env::args(),
     )
     .map(std::process::ExitCode::from)
@@ -79,7 +81,7 @@ impl ChunkStoreSubscriber for Orchestrator {
 // ---
 
 /// A [`ChunkStoreSubscriber`] that maintains a secondary index that keeps count of the number of occurrences
-/// of each component in each [`rerun::ChunkStore`].
+/// of each component in each [`simplant_lab::ChunkStore`].
 ///
 /// It also implements a trigger that prints to the console each time a component is first introduced
 /// and retired.
@@ -158,7 +160,7 @@ impl ChunkStoreSubscriber for ComponentsPerRecording {
 // ---
 
 /// A [`ChunkStoreSubscriber`] that maintains a secondary index of the time ranges covered by each entity,
-/// on every timeline, across all recordings (i.e. [`rerun::ChunkStore`]s).
+/// on every timeline, across all recordings (i.e. [`simplant_lab::ChunkStore`]s).
 ///
 /// For every [`ChunkStoreEvent`], it displays the state of the secondary index to the terminal.
 #[derive(Default, Debug, PartialEq, Eq)]

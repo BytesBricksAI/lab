@@ -20,13 +20,12 @@ from .._converters import (
     to_np_float32,
 )
 from .._numpy_compatibility import asarray
-from .plane3d_ext import Plane3DExt
 
 __all__ = ["Plane3D", "Plane3DArrayLike", "Plane3DBatch", "Plane3DLike"]
 
 
 @define(init=False)
-class Plane3D(Plane3DExt):
+class Plane3D:
     """
     **Datatype**: An infinite 3D plane represented by a unit normal vector and a distance.
 
@@ -39,7 +38,11 @@ class Plane3D(Plane3DExt):
     I.e. the plane with xyz = (2, 0, 0), d = 1 is equivalent to xyz = (1, 0, 0), d = 0.5
     """
 
-    # __init__ can be found in plane3d_ext.py
+    def __init__(self: Any, xyzd: Plane3DLike) -> None:
+        """Create a new instance of the Plane3D datatype."""
+
+        # You can define your own __init__ function as a member of Plane3DExt in plane3d_ext.py
+        self.__attrs_init__(xyzd=xyzd)
 
     xyzd: npt.NDArray[np.float32] = field(converter=to_np_float32)
 
@@ -64,7 +67,6 @@ class Plane3DBatch(BaseBatch[Plane3DArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: Plane3DArrayLike, data_type: pa.DataType) -> pa.Array:
-        return Plane3DExt.native_to_pa_array_override(data, data_type)
-
-
-Plane3DExt.deferred_patch_class(Plane3D)
+        raise NotImplementedError(
+            "Arrow serialization of Plane3D not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in plane3d_ext.py

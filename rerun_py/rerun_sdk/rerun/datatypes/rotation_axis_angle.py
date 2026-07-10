@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
+from typing import Any
 
 import pyarrow as pa
 from attrs import define, field
@@ -14,7 +15,6 @@ from .. import datatypes
 from .._baseclasses import (
     BaseBatch,
 )
-from .rotation_axis_angle_ext import RotationAxisAngleExt
 
 __all__ = ["RotationAxisAngle", "RotationAxisAngleArrayLike", "RotationAxisAngleBatch", "RotationAxisAngleLike"]
 
@@ -26,11 +26,37 @@ def _rotation_axis_angle__axis__special_field_converter_override(x: datatypes.Ve
         return datatypes.Vec3D(x)
 
 
+def _rotation_axis_angle__angle__special_field_converter_override(x: datatypes.AngleLike) -> datatypes.Angle:
+    if isinstance(x, datatypes.Angle):
+        return x
+    else:
+        return datatypes.Angle(x)
+
+
 @define(init=False)
-class RotationAxisAngle(RotationAxisAngleExt):
+class RotationAxisAngle:
     """**Datatype**: 3D rotation represented by a rotation around a given axis."""
 
-    # __init__ can be found in rotation_axis_angle_ext.py
+    def __init__(self: Any, axis: datatypes.Vec3DLike, angle: datatypes.AngleLike) -> None:
+        """
+        Create a new instance of the RotationAxisAngle datatype.
+
+        Parameters
+        ----------
+        axis:
+            Axis to rotate around.
+
+            This is not required to be normalized.
+            However, if normalization of the rotation axis fails (typically due to a zero vector)
+            the rotation is treated as an invalid transform, unless the angle is zero in which case
+            it is treated as an identity.
+        angle:
+            How much to rotate around the axis.
+
+        """
+
+        # You can define your own __init__ function as a member of RotationAxisAngleExt in rotation_axis_angle_ext.py
+        self.__attrs_init__(axis=axis, angle=angle)
 
     axis: datatypes.Vec3D = field(converter=_rotation_axis_angle__axis__special_field_converter_override)
     # Axis to rotate around.
@@ -42,9 +68,7 @@ class RotationAxisAngle(RotationAxisAngleExt):
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 
-    angle: datatypes.Angle = field(
-        converter=RotationAxisAngleExt.angle__field_converter_override,  # type: ignore[misc]
-    )
+    angle: datatypes.Angle = field(converter=_rotation_axis_angle__angle__special_field_converter_override)
     # How much to rotate around the axis.
     #
     # (Docstring intentionally commented out to hide this field from the docs)

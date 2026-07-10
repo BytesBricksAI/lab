@@ -3,7 +3,7 @@
 import sys
 from pathlib import Path
 
-import rerun as rr
+import simplant_lab as rr
 
 if len(sys.argv) < 2:
     print(

@@ -81,7 +81,7 @@ fn settings_screen_ui_impl(ui: &mut egui::Ui, app_options: &mut AppOptions, keep
         warn_e2e_latency: _, // not yet exposed
         show_metrics,
         show_notification_toasts,
-        include_rerun_examples_button_in_recordings_panel,
+        include_simplant_lab_examples_button_in_recordings_panel,
         show_picking_debug_overlay: _, // not yet exposed
         inspect_blueprint_timeline: _, // not yet exposed
         blueprint_gc: _,               // not yet exposed
@@ -122,8 +122,8 @@ fn settings_screen_ui_impl(ui: &mut egui::Ui, app_options: &mut AppOptions, keep
     ui.add_space(8.0);
 
     ui.re_checkbox(
-        include_rerun_examples_button_in_recordings_panel,
-        "Show 'Rerun examples' button",
+        include_simplant_lab_examples_button_in_recordings_panel,
+        "Show 'SimPlant-Lab examples' button",
     );
 
     ui.re_checkbox(show_metrics, "Show performance metrics")

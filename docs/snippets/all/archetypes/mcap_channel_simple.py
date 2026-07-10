@@ -1,6 +1,6 @@
 """Log a simple MCAP channel definition."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_mcap_channel", spawn=True)
 

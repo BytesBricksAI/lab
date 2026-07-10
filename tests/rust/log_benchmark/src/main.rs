@@ -98,7 +98,7 @@ struct Args {
 }
 
 fn main() -> anyhow::Result<()> {
-    rerun::external::re_log::setup_logging();
+    simplant_lab::external::re_log::setup_logging();
 
     #[cfg(debug_assertions)]
     println!("WARNING: Debug build, timings will be inaccurate!");
@@ -117,11 +117,12 @@ fn main() -> anyhow::Result<()> {
     }
 
     let (rec, storage) = if connect {
-        let rec = rerun::RecordingStreamBuilder::new("rerun_example_benchmark").connect_grpc()?;
+        let rec =
+            simplant_lab::RecordingStreamBuilder::new("rerun_example_benchmark").connect_grpc()?;
         (rec, None)
     } else {
         let (rec, storage) =
-            rerun::RecordingStreamBuilder::new("rerun_example_benchmark").memory()?;
+            simplant_lab::RecordingStreamBuilder::new("rerun_example_benchmark").memory()?;
         (rec, Some(storage))
     };
 
@@ -142,15 +143,15 @@ fn main() -> anyhow::Result<()> {
     // Being able to log fast isn't particularly useful if the data happens to be corrupt at the
     // other end, so make sure we can encode/decode everything that was logged.
     if check && let Some(storage) = storage {
-        use rerun::external::re_log_encoding;
-        use rerun::external::re_log_encoding::ToTransport as _;
+        use simplant_lab::external::re_log_encoding;
+        use simplant_lab::external::re_log_encoding::ToTransport as _;
         let msgs: anyhow::Result<Vec<_>> = storage
             .take()
             .into_iter()
             .map(|msg| Ok(msg.to_transport(re_log_encoding::rrd::Compression::LZ4)?))
             .collect();
 
-        use rerun::external::re_log_encoding::ToApplication as _;
+        use simplant_lab::external::re_log_encoding::ToApplication as _;
         let mut app_id_injector = re_log_encoding::DummyApplicationIdInjector::new("dummy");
         let msgs: anyhow::Result<Vec<_>> = msgs?
             .into_iter()

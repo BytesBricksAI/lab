@@ -4,8 +4,9 @@ import itertools
 from typing import TYPE_CHECKING, cast
 
 import numpy as np
-import rerun as rr
-from rerun.components import Position3DBatch, Vector3DBatch
+
+import simplant_lab as rr
+from simplant_lab.components import Position3DBatch, Vector3DBatch
 
 from .common_arrays import (
     class_ids_arrays,
@@ -21,7 +22,7 @@ from .common_arrays import (
 )
 
 if TYPE_CHECKING:
-    from rerun.datatypes import (
+    from simplant_lab.datatypes import (
         ClassIdArrayLike,
         Float32ArrayLike,
         Float64ArrayLike,

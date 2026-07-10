@@ -2,7 +2,7 @@
 
 import os
 
-import rerun as rr
+import simplant_lab as rr
 
 rec = rr.RecordingStream("rerun_example_explicit_recording")
 

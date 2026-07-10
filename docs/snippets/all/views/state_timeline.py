@@ -1,7 +1,7 @@
 # Use a blueprint to show a StateTimelineView.
 
-import rerun as rr
-import rerun.blueprint as rrb
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 rr.init("rerun_example_state_timeline", spawn=True)
 

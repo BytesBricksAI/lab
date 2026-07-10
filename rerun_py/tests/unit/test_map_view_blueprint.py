@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import rerun.blueprint as rrb
+import simplant_lab.blueprint as rrb
 
 from .blueprint_utils import assert_blueprint_contents_are_equal
 

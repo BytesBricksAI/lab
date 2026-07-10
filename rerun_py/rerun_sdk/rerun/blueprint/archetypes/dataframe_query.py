@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 from attrs import define, field
 
@@ -15,7 +15,6 @@ from ..._baseclasses import (
 )
 from ...blueprint import components as blueprint_components, datatypes as blueprint_datatypes
 from ...error_utils import catch_and_log_exceptions
-from .dataframe_query_ext import DataframeQueryExt
 
 if TYPE_CHECKING:
     from ... import datatypes
@@ -24,7 +23,7 @@ __all__ = ["DataframeQuery"]
 
 
 @define(str=False, repr=False, init=False)
-class DataframeQuery(DataframeQueryExt, Archetype):
+class DataframeQuery(Archetype):
     """
     **Archetype**: The query for the dataframe view.
 
@@ -33,7 +32,64 @@ class DataframeQuery(DataframeQueryExt, Archetype):
 
     NAME: ClassVar[str] = "rerun.blueprint.archetypes.DataframeQuery"
 
-    # __init__ can be found in dataframe_query_ext.py
+    def __init__(
+        self: Any,
+        *,
+        timeline: datatypes.Utf8Like | None = None,
+        filter_by_range: blueprint_datatypes.FilterByRangeLike | None = None,
+        filter_is_not_null: blueprint_datatypes.FilterIsNotNullLike | None = None,
+        apply_latest_at: datatypes.BoolLike | None = None,
+        select: blueprint_datatypes.SelectedColumnsLike | None = None,
+        entity_order: blueprint_components.ColumnOrderLike | None = None,
+        auto_scroll: datatypes.BoolLike | None = None,
+    ) -> None:
+        """
+        Create a new instance of the DataframeQuery archetype.
+
+        Parameters
+        ----------
+        timeline:
+            The timeline for this query.
+
+            If unset, the timeline currently active on the time panel is used.
+        filter_by_range:
+            If provided, only rows whose timestamp is within this range will be shown.
+
+            Note: will be unset as soon as `timeline` is changed.
+        filter_is_not_null:
+            If provided, only show rows which contains a logged event for the specified component.
+        apply_latest_at:
+            Should empty cells be filled with latest-at queries?
+        select:
+            Selected columns. If unset, only the active timeline and all component columns are selected.
+        entity_order:
+            The order of entity path column groups. If unset, the default order is used.
+
+            This affects the order of component columns, which are always grouped by entity path. Timeline columns always
+            come first. Entities not listed here are appended at the end in default order.
+
+            If `entity_order` contains any entity path that is not included in the view, they are ignored.
+        auto_scroll:
+            Whether to auto-scroll to track the time cursor.
+
+            When enabled and the view's timeline matches the time panel's active timeline,
+            the view will scroll to keep the row at or before the current time cursor visible.
+
+        """
+
+        # You can define your own __init__ function as a member of DataframeQueryExt in dataframe_query_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(
+                timeline=timeline,
+                filter_by_range=filter_by_range,
+                filter_is_not_null=filter_is_not_null,
+                apply_latest_at=apply_latest_at,
+                select=select,
+                entity_order=entity_order,
+                auto_scroll=auto_scroll,
+            )
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""

@@ -1,4 +1,4 @@
-//! Most analytics events collected by the Rerun Viewer are defined in this file.
+//! Most analytics events collected by the SimPlant-Lab are defined in this file.
 //!
 //! All events are defined in the `re_analytics` crate: <https://github.com/rerun-io/rerun/blob/main/crates/utils/re_analytics/src/event.rs>
 //!

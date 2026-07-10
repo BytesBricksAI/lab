@@ -22,8 +22,8 @@ from diffusers import (
     StableDiffusionXLControlNetPipeline,
 )
 
-import rerun as rr
-import rerun.blueprint as rrb
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 RERUN_LOGO_URL = "https://storage.googleapis.com/rerun-example-datasets/controlnet/rerun-icon-1000.png"
 

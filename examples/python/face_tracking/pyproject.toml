@@ -9,7 +9,7 @@ dependencies = [
   "numpy",
   "opencv-python>4.6",
   "requests",
-  "rerun-sdk",
+  "simplant-lab-sdk",
   "tqdm",
 ]
 

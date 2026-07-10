@@ -6,7 +6,7 @@ Check out <https://rerun.io/docs/reference/sdk/micro-batching> for more info.
 
 from datetime import timedelta
 
-import rerun as rr
+import simplant_lab as rr
 
 # Equivalent to configuring the following environment:
 # * RERUN_FLUSH_NUM_BYTES=<+inf>

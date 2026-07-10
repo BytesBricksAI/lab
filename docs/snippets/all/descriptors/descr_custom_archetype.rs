@@ -1,10 +1,10 @@
-use rerun::{
+use simplant_lab::{
     ChunkStore, ChunkStoreConfig, ComponentBatch as _, ComponentDescriptor,
 };
 
 struct CustomPoints3D {
-    positions: Vec<rerun::components::Position3D>,
-    colors: Option<Vec<rerun::components::Color>>,
+    positions: Vec<simplant_lab::components::Position3D>,
+    colors: Option<Vec<simplant_lab::components::Color>>,
 }
 
 impl CustomPoints3D {
@@ -20,13 +20,15 @@ impl CustomPoints3D {
         ComponentDescriptor::partial("user.CustomPoints3D:colors")
             .or_with_archetype(|| "user.CustomPoints3D".into())
             .or_with_component_type(
-                <rerun::components::Color as rerun::Component>::name,
+                <simplant_lab::components::Color as simplant_lab::Component>::name,
             )
     }
 }
 
-impl rerun::AsComponents for CustomPoints3D {
-    fn as_serialized_batches(&self) -> Vec<rerun::SerializedComponentBatch> {
+impl simplant_lab::AsComponents for CustomPoints3D {
+    fn as_serialized_batches(
+        &self,
+    ) -> Vec<simplant_lab::SerializedComponentBatch> {
         [
             self.positions
                 .serialized(Self::overridden_position_descriptor()),
@@ -41,10 +43,10 @@ impl rerun::AsComponents for CustomPoints3D {
 }
 
 fn example(
-    rec: &rerun::RecordingStream,
+    rec: &simplant_lab::RecordingStream,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let positions = rerun::components::Position3D::new(1.0, 2.0, 3.0);
-    let colors = rerun::components::Color::new(0xFF00FFFF);
+    let positions = simplant_lab::components::Position3D::new(1.0, 2.0, 3.0);
+    let colors = simplant_lab::components::Color::new(0xFF00FFFF);
 
     let points = CustomPoints3D {
         positions: vec![positions],
@@ -62,7 +64,7 @@ fn example(
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     const APP_ID: &str = "rerun_example_descriptors_custom_archetype";
-    let rec = rerun::RecordingStreamBuilder::new(APP_ID).spawn()?;
+    let rec = simplant_lab::RecordingStreamBuilder::new(APP_ID).spawn()?;
 
     example(&rec)?;
 
@@ -72,7 +74,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 #[expect(clippy::unwrap_used)]
-fn check_tags(rec: &rerun::RecordingStream) {
+fn check_tags(rec: &simplant_lab::RecordingStream) {
     // When this snippet runs through the snippet comparison machinery, this environment variable
     // will point to the output RRD.
     // We can thus load this RRD to check that the proper tags were indeed forwarded.

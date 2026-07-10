@@ -6,9 +6,10 @@ from typing import TYPE_CHECKING, cast
 import numpy as np
 import numpy.typing as npt
 import pytest
-import rerun as rr
 import torch
-from rerun.components import (
+
+import simplant_lab as rr
+from simplant_lab.components import (
     HalfSize2DBatch,
     Position2DBatch,
 )
@@ -31,7 +32,13 @@ from .common_arrays import (
 )
 
 if TYPE_CHECKING:
-    from rerun.datatypes import ClassIdArrayLike, Float32ArrayLike, Rgba32ArrayLike, Utf8ArrayLike, Vec2DArrayLike
+    from simplant_lab.datatypes import (
+        ClassIdArrayLike,
+        Float32ArrayLike,
+        Rgba32ArrayLike,
+        Utf8ArrayLike,
+        Vec2DArrayLike,
+    )
 
 
 def test_boxes2d() -> None:

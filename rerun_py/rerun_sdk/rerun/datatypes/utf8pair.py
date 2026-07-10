@@ -17,7 +17,6 @@ from .. import datatypes
 from .._baseclasses import (
     BaseBatch,
 )
-from .utf8pair_ext import Utf8PairExt
 
 __all__ = ["Utf8Pair", "Utf8PairArrayLike", "Utf8PairBatch", "Utf8PairLike"]
 
@@ -37,7 +36,7 @@ def _utf8pair__second__special_field_converter_override(x: datatypes.Utf8Like) -
 
 
 @define(init=False)
-class Utf8Pair(Utf8PairExt):
+class Utf8Pair:
     """**Datatype**: Stores a tuple of UTF-8 strings."""
 
     def __init__(self: Any, first: datatypes.Utf8Like, second: datatypes.Utf8Like) -> None:
@@ -85,4 +84,19 @@ class Utf8PairBatch(BaseBatch[Utf8PairArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: Utf8PairArrayLike, data_type: pa.DataType) -> pa.Array:
-        return Utf8PairExt.native_to_pa_array_override(data, data_type)
+        from rerun.datatypes import Utf8Batch
+
+        typed_data: Sequence[Utf8Pair]
+
+        if isinstance(data, Utf8Pair):
+            typed_data = [data]
+        else:
+            typed_data = data
+
+        return pa.StructArray.from_arrays(
+            [
+                Utf8Batch([x.first for x in typed_data]).as_arrow_array(),  # type: ignore[misc, arg-type]
+                Utf8Batch([x.second for x in typed_data]).as_arrow_array(),  # type: ignore[misc, arg-type]
+            ],
+            fields=list(data_type),
+        )

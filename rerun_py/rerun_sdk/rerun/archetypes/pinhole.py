@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .pinhole_ext import PinholeExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["Pinhole"]
 
 
 @define(str=False, repr=False, init=False)
-class Pinhole(PinholeExt, Archetype, VisualizableArchetype):
+class Pinhole(Archetype, VisualizableArchetype):
     """
     **Archetype**: Camera perspective projection (a.k.a. intrinsics).
 
@@ -44,7 +43,7 @@ class Pinhole(PinholeExt, Archetype, VisualizableArchetype):
     ```python
     import numpy as np
 
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_pinhole", spawn=True)
     rng = np.random.default_rng(12345)
@@ -65,7 +64,7 @@ class Pinhole(PinholeExt, Archetype, VisualizableArchetype):
 
     ### Perspective pinhole camera:
     ```python
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_pinhole_perspective", spawn=True)
 
@@ -102,7 +101,113 @@ class Pinhole(PinholeExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.Pinhole"
 
-    # __init__ can be found in pinhole_ext.py
+    def __init__(
+        self: Any,
+        image_from_camera: datatypes.Mat3x3Like,
+        *,
+        resolution: datatypes.Vec2DLike | None = None,
+        camera_xyz: datatypes.ViewCoordinatesLike | None = None,
+        child_frame: datatypes.Utf8Like | None = None,
+        parent_frame: datatypes.Utf8Like | None = None,
+        image_plane_distance: datatypes.Float32Like | None = None,
+        color: datatypes.Rgba32Like | None = None,
+        line_width: datatypes.Float32Like | None = None,
+    ) -> None:
+        """
+        Create a new instance of the Pinhole archetype.
+
+        Parameters
+        ----------
+        image_from_camera:
+            Camera projection, from image coordinates to view coordinates.
+
+            Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
+        resolution:
+            Pixel resolution (usually integers) of child image space. Width and height.
+
+            Example:
+            ```text
+            [1920.0, 1440.0]
+            ```
+
+            `image_from_camera` project onto the space spanned by `(0,0)` and `resolution - 1`.
+
+            Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
+        camera_xyz:
+            Sets the view coordinates for the camera.
+
+            All common values are available as constants on the [`components.ViewCoordinates`][rerun.components.ViewCoordinates] class.
+
+            The default is `ViewCoordinates::RDF`, i.e. X=Right, Y=Down, Z=Forward, and this is also the recommended setting.
+            This means that the camera frustum will point along the positive Z axis of the parent space,
+            and the cameras "up" direction will be along the negative Y axis of the parent space.
+
+            The camera frustum will point whichever axis is set to `F` (or the opposite of `B`).
+            When logging a depth image under this entity, this is the direction the point cloud will be projected.
+            With `RDF`, the default forward is +Z.
+
+            The frustum's "up" direction will be whichever axis is set to `U` (or the opposite of `D`).
+            This will match the negative Y direction of pixel space (all images are assumed to have xyz=RDF).
+            With `RDF`, the default is up is -Y.
+
+            The frustum's "right" direction will be whichever axis is set to `R` (or the opposite of `L`).
+            This will match the positive X direction of pixel space (all images are assumed to have xyz=RDF).
+            With `RDF`, the default right is +x.
+
+            Other common formats are `RUB` (X=Right, Y=Up, Z=Back) and `FLU` (X=Forward, Y=Left, Z=Up).
+
+            NOTE: setting this to something else than `RDF` (the default) will change the orientation of the camera frustum,
+            and make the pinhole matrix not match up with the coordinate system of the pinhole entity.
+
+            The pinhole matrix (the `image_from_camera` argument) always project along the third (Z) axis,
+            but will be re-oriented to project along the forward axis of the `camera_xyz` argument.
+        child_frame:
+            The child frame this transform transforms from.
+
+            The entity at which the transform relationship of any given child frame is specified mustn't change over time, but is allowed to be different for static time.
+            E.g. if you specified the child frame `"robot_arm"` on an entity named `"my_transforms"`, you may not log transforms
+            with the child frame `"robot_arm"` on any other entity than `"my_transforms"` unless one of them was logged with static time.
+
+            If not specified, this is set to the implicit transform frame of the current entity path.
+            This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity/path`.
+
+            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+
+            Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
+        parent_frame:
+            The parent frame this transform transforms into.
+
+            If not specified, this is set to the implicit transform frame of the current entity path's parent.
+            This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity`.
+
+            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+
+            Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
+        image_plane_distance:
+            The distance from the camera origin to the image plane when the projection is shown in a 3D viewer.
+
+            This is only used for visualization purposes, and does not affect the projection itself.
+        color:
+            Color of the camera wireframe.
+        line_width:
+            Width of the camera wireframe lines.
+
+        """
+
+        # You can define your own __init__ function as a member of PinholeExt in pinhole_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(
+                image_from_camera=image_from_camera,
+                resolution=resolution,
+                camera_xyz=camera_xyz,
+                child_frame=child_frame,
+                parent_frame=parent_frame,
+                image_plane_distance=image_plane_distance,
+                color=color,
+                line_width=line_width,
+            )
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -328,7 +433,7 @@ class Pinhole(PinholeExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

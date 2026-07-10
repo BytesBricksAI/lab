@@ -14,20 +14,37 @@ from attrs import define, field
 from ..._baseclasses import (
     BaseBatch,
 )
-from .selected_columns_ext import SelectedColumnsExt
 
 __all__ = ["SelectedColumns", "SelectedColumnsArrayLike", "SelectedColumnsBatch", "SelectedColumnsLike"]
 
 
 @define(init=False)
-class SelectedColumns(SelectedColumnsExt):
+class SelectedColumns:
     """
     **Datatype**: List of selected columns in a dataframe.
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**
     """
 
-    # __init__ can be found in selected_columns_ext.py
+    def __init__(
+        self: Any,
+        time_columns: datatypes.Utf8ArrayLike,
+        component_columns: blueprint_datatypes.ComponentColumnSelectorArrayLike,
+    ) -> None:
+        """
+        Create a new instance of the SelectedColumns datatype.
+
+        Parameters
+        ----------
+        time_columns:
+            The time columns to include
+        component_columns:
+            The component columns to include
+
+        """
+
+        # You can define your own __init__ function as a member of SelectedColumnsExt in selected_columns_ext.py
+        self.__attrs_init__(time_columns=time_columns, component_columns=component_columns)
 
     time_columns: list[datatypes.Utf8] = field()
     # The time columns to include
@@ -83,4 +100,6 @@ class SelectedColumnsBatch(BaseBatch[SelectedColumnsArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: SelectedColumnsArrayLike, data_type: pa.DataType) -> pa.Array:
-        return SelectedColumnsExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of SelectedColumns not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in selected_columns_ext.py

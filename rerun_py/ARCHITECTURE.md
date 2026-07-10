@@ -177,11 +177,11 @@ Experience shows that the pattern of using a pure-Python wrapper around pyo3-bas
 - keeping the "accept anything" magic on the Python side;
 - having simple, canonically typed methods for rust-based objects (making it more likely to benefit from pyo3 magic type conversions).
 
-See `rerun.catalog.CatalogClient` for an example of this pattern.
+See `simplant_lab.catalog.CatalogClient` for an example of this pattern.
 
 To use this pattern:
 
 - Create a Rust object named `PyMyObjectInternal` in `src`. Expose it with pyo3 as `MyObjectInternal`.
 - Crate type stubs for that object in `rerun_bindings`. These stubs should have no/minimal docstrings, since the rust-side docstrings are the reference. They should have precise type annotations, though.
 - For internal objects, prefer simple signatures, ideally with a single type per argument.
-- Create a wrapping public class `MyObject` in `rerun_sdk/rerun`. It should have a single data member called `_internal`, holding the internal object instance.
+- Create a wrapping public class `MyObject` in `rerun_sdk/simplant_lab`. It should have a single data member called `_internal`, holding the internal object instance.

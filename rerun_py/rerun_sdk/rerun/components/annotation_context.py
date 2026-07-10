@@ -16,13 +16,12 @@ from .._baseclasses import (
     ComponentBatchMixin,
     ComponentMixin,
 )
-from .annotation_context_ext import AnnotationContextExt
 
 __all__ = ["AnnotationContext", "AnnotationContextArrayLike", "AnnotationContextBatch", "AnnotationContextLike"]
 
 
 @define(init=False)
-class AnnotationContext(AnnotationContextExt, ComponentMixin):
+class AnnotationContext(ComponentMixin):
     """
     **Component**: The annotation context provides additional information on how to display entities.
 
@@ -51,9 +50,7 @@ class AnnotationContext(AnnotationContextExt, ComponentMixin):
         # You can define your own __init__ function as a member of AnnotationContextExt in annotation_context_ext.py
         self.__attrs_init__(class_map=class_map)
 
-    class_map: list[datatypes.ClassDescriptionMapElem] = field(
-        converter=AnnotationContextExt.class_map__field_converter_override,  # type: ignore[misc]
-    )
+    class_map: list[datatypes.ClassDescriptionMapElem] = field()
     # List of class descriptions, mapping class indices to class names, colors etc.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
@@ -142,7 +139,9 @@ class AnnotationContextBatch(BaseBatch[AnnotationContextArrayLike], ComponentBat
 
     @staticmethod
     def _native_to_pa_array(data: AnnotationContextArrayLike, data_type: pa.DataType) -> pa.Array:
-        return AnnotationContextExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of AnnotationContext not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in annotation_context_ext.py
 
 
 # This is patched in late to avoid circular dependencies.

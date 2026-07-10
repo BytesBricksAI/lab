@@ -1,8 +1,8 @@
-use rerun::external::egui;
-use rerun::external::re_log_types::{EntityPath, Instance};
-use rerun::external::re_sdk_types::blueprint::components::VisualizerInstructionId;
-use rerun::external::re_view::{DataResultQuery, VisualizerInstructionQueryResults};
-use rerun::external::re_viewer_context::{
+use simplant_lab::external::egui;
+use simplant_lab::external::re_log_types::{EntityPath, Instance};
+use simplant_lab::external::re_sdk_types::blueprint::components::VisualizerInstructionId;
+use simplant_lab::external::re_view::{DataResultQuery, VisualizerInstructionQueryResults};
+use simplant_lab::external::re_viewer_context::{
     AppOptions, IdentifiedViewSystem, SingleRequiredComponentConstraint, ViewContext,
     ViewContextCollection, ViewQuery, ViewSystemExecutionError, ViewSystemIdentifier,
     VisualizerExecutionOutput, VisualizerQueryInfo, VisualizerSystem,
@@ -30,11 +30,11 @@ impl VisualizerSystem for Points3DColorVisualizer {
         // Instead, our custom query here is solely interested in Points3D's colors.
         VisualizerQueryInfo {
             relevant_archetype: None,
-            constraints: SingleRequiredComponentConstraint::new::<rerun::Color>(
-                &rerun::Points3D::descriptor_colors(),
+            constraints: SingleRequiredComponentConstraint::new::<simplant_lab::Color>(
+                &simplant_lab::Points3D::descriptor_colors(),
             )
             .into(),
-            queried: std::iter::once(rerun::Points3D::descriptor_colors()).collect(),
+            queried: std::iter::once(simplant_lab::Points3D::descriptor_colors()).collect(),
         }
     }
 
@@ -56,7 +56,7 @@ impl VisualizerSystem for Points3DColorVisualizer {
             let results = data_result.query_components_with_history(
                 ctx,
                 query,
-                [rerun::Points3D::descriptor_colors().component],
+                [simplant_lab::Points3D::descriptor_colors().component],
                 instruction,
             );
             let results = VisualizerInstructionQueryResults::new(instruction, &results, &output);
@@ -65,14 +65,14 @@ impl VisualizerSystem for Points3DColorVisualizer {
             // For latest-at queries should be only a single slice`,
             // but if visible history is enabled, there might be several!
             let colors_per_time =
-                results.iter_optional(rerun::Points3D::descriptor_colors().component);
+                results.iter_optional(simplant_lab::Points3D::descriptor_colors().component);
             let color_slices_per_time = colors_per_time.slice::<u32>();
 
             // Collect all different kinds of colors that are returned from the cache.
             let mut colors_for_entity = Vec::new();
             for ((_time, _row_id), colors_slice) in color_slices_per_time {
                 for (instance, color) in (0..).zip(colors_slice) {
-                    let [r, g, b, _] = rerun::Color::from_u32(*color).to_array();
+                    let [r, g, b, _] = simplant_lab::Color::from_u32(*color).to_array();
                     colors_for_entity.push(ColorWithInstance {
                         #[expect(clippy::disallowed_methods)] // This is not a hard-coded color.
                         color: egui::Color32::from_rgb(r, g, b),

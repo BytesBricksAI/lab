@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -18,13 +18,12 @@ from .._baseclasses import (
     ComponentDescriptor,
 )
 from ..error_utils import catch_and_log_exceptions
-from .transform3d_ext import Transform3DExt
 
 __all__ = ["Transform3D"]
 
 
 @define(str=False, repr=False, init=False)
-class Transform3D(Transform3DExt, Archetype):
+class Transform3D(Archetype):
     """
     **Archetype**: A transform between two 3D spaces, i.e. a pose.
 
@@ -46,8 +45,8 @@ class Transform3D(Transform3DExt, Archetype):
     ```python
     from math import pi
 
-    import rerun as rr
-    from rerun.datatypes import Angle, RotationAxisAngle
+    import simplant_lab as rr
+    from simplant_lab.datatypes import Angle, RotationAxisAngle
 
     rr.init("rerun_example_transform3d", spawn=True)
 
@@ -81,7 +80,7 @@ class Transform3D(Transform3DExt, Archetype):
     ```python
     import math
 
-    import rerun as rr
+    import simplant_lab as rr
 
 
     def truncated_radians(deg: float) -> float:
@@ -125,7 +124,7 @@ class Transform3D(Transform3DExt, Archetype):
     ```python
     import math
 
-    import rerun as rr
+    import simplant_lab as rr
 
 
     def truncated_radians(deg: float) -> float:
@@ -171,7 +170,7 @@ class Transform3D(Transform3DExt, Archetype):
     ```python
     import math
 
-    import rerun as rr
+    import simplant_lab as rr
 
 
     def truncated_radians(deg: float) -> float:
@@ -239,7 +238,86 @@ class Transform3D(Transform3DExt, Archetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.Transform3D"
 
-    # __init__ can be found in transform3d_ext.py
+    def __init__(
+        self: Any,
+        *,
+        translation: datatypes.Vec3DLike | None = None,
+        rotation_axis_angle: datatypes.RotationAxisAngleLike | None = None,
+        quaternion: datatypes.QuaternionLike | None = None,
+        scale: datatypes.Vec3DLike | None = None,
+        mat3x3: datatypes.Mat3x3Like | None = None,
+        relation: components.TransformRelationLike | None = None,
+        child_frame: datatypes.Utf8Like | None = None,
+        parent_frame: datatypes.Utf8Like | None = None,
+    ) -> None:
+        """
+        Create a new instance of the Transform3D archetype.
+
+        Parameters
+        ----------
+        translation:
+            Translation vector.
+
+            Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
+        rotation_axis_angle:
+            Rotation via axis + angle.
+
+            Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
+        quaternion:
+            Rotation via quaternion.
+
+            Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
+        scale:
+            Scaling factor.
+
+            Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
+        mat3x3:
+            3x3 transformation matrix.
+
+            Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
+        relation:
+            Specifies the relation this transform establishes between this entity and its parent.
+
+            Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
+        child_frame:
+            The child frame this transform transforms from.
+
+            The entity at which the transform relationship of any given child frame is specified mustn't change over time, but is allowed to be different for static time.
+            E.g. if you specified the child frame `"robot_arm"` on an entity named `"my_transforms"`, you may not log transforms
+            with the child frame `"robot_arm"` on any other entity than `"my_transforms"` unless one of them was logged with static time.
+
+            If not specified, this is set to the implicit transform frame of the current entity path.
+            This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity/path`.
+
+            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+
+            Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
+        parent_frame:
+            The parent frame this transform transforms into.
+
+            If not specified, this is set to the implicit transform frame of the current entity path's parent.
+            This means that if a [`archetypes.Transform3D`][rerun.archetypes.Transform3D] is set on an entity called `/my/entity/path` then this will default to `tf#/my/entity`.
+
+            To set the frame an entity is part of see [`archetypes.CoordinateFrame`][rerun.archetypes.CoordinateFrame].
+
+            Any update to this field will reset all other transform properties that aren't changed in the same log call or `send_columns` row.
+
+        """
+
+        # You can define your own __init__ function as a member of Transform3DExt in transform3d_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(
+                translation=translation,
+                rotation_axis_angle=rotation_axis_angle,
+                quaternion=quaternion,
+                scale=scale,
+                mat3x3=mat3x3,
+                relation=relation,
+                child_frame=child_frame,
+                parent_frame=parent_frame,
+            )
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -438,7 +516,7 @@ class Transform3D(Transform3DExt, Archetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

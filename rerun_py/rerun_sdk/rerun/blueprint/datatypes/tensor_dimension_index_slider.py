@@ -8,6 +8,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import TYPE_CHECKING, Any
 
+import numpy as np
 import numpy.typing as npt
 import pyarrow as pa
 from attrs import define, field
@@ -16,7 +17,6 @@ from ..._baseclasses import (
     BaseBatch,
 )
 from ..._numpy_compatibility import asarray
-from .tensor_dimension_index_slider_ext import TensorDimensionIndexSliderExt
 
 __all__ = [
     "TensorDimensionIndexSlider",
@@ -27,7 +27,7 @@ __all__ = [
 
 
 @define(init=False)
-class TensorDimensionIndexSlider(TensorDimensionIndexSliderExt):
+class TensorDimensionIndexSlider:
     """
     **Datatype**: Defines a slider for the index of some dimension.
 
@@ -81,4 +81,17 @@ class TensorDimensionIndexSliderBatch(BaseBatch[TensorDimensionIndexSliderArrayL
 
     @staticmethod
     def _native_to_pa_array(data: TensorDimensionIndexSliderArrayLike, data_type: pa.DataType) -> pa.Array:
-        return TensorDimensionIndexSliderExt.native_to_pa_array_override(data, data_type)
+
+        typed_data: Sequence[TensorDimensionIndexSlider]
+
+        if isinstance(data, TensorDimensionIndexSlider):
+            typed_data = [data]
+        else:
+            typed_data = data
+
+        return pa.StructArray.from_arrays(
+            [
+                pa.array(np.asarray([x.dimension for x in typed_data], dtype=np.uint32)),
+            ],
+            fields=list(data_type),
+        )

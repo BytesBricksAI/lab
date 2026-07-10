@@ -3,18 +3,18 @@ from __future__ import annotations
 import itertools
 from typing import TYPE_CHECKING, cast
 
-from rerun.blueprint.archetypes.view_blueprint import ViewBlueprint
-from rerun.blueprint.components.view_class import ViewClass, ViewClassBatch
-from rerun.blueprint.components.view_origin import ViewOrigin, ViewOriginBatch
-from rerun.components.name import Name, NameBatch
-from rerun.components.visible import Visible, VisibleBatch
+from simplant_lab.blueprint.archetypes.view_blueprint import ViewBlueprint
+from simplant_lab.blueprint.components.view_class import ViewClass, ViewClassBatch
+from simplant_lab.blueprint.components.view_origin import ViewOrigin, ViewOriginBatch
+from simplant_lab.components.name import Name, NameBatch
+from simplant_lab.components.visible import Visible, VisibleBatch
 
 from .common_arrays import none_empty_or_value
 
 if TYPE_CHECKING:
-    from rerun.datatypes.bool import BoolLike
-    from rerun.datatypes.entity_path import EntityPathLike
-    from rerun.datatypes.utf8 import Utf8Like
+    from simplant_lab.datatypes.bool import BoolLike
+    from simplant_lab.datatypes.entity_path import EntityPathLike
+    from simplant_lab.datatypes.utf8 import Utf8Like
 
 
 def test_view_blueprint() -> None:

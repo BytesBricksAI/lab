@@ -33,7 +33,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 /// ### Video with automatically determined frames
 /// ```ignore
-/// use rerun::external::anyhow;
+/// use simplant_lab::external::anyhow;
 ///
 /// fn main() -> anyhow::Result<()> {
 ///     let args = _args;
@@ -42,13 +42,13 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///         anyhow::bail!("Usage: {} <path_to_video.[mp4]>", args[0]);
 ///     };
 ///
-///     let rec = rerun::RecordingStreamBuilder::new(
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
 ///         "rerun_example_asset_video_auto_frames",
 ///     )
 ///     .spawn()?;
 ///
 ///     // Log video asset which is referred to by frame references.
-///     let video_asset = rerun::AssetVideo::from_file_path(path)?;
+///     let video_asset = simplant_lab::AssetVideo::from_file_path(path)?;
 ///     rec.log_static("video", &video_asset)?;
 ///
 ///     // Send automatically determined video frame timestamps.
@@ -56,9 +56,9 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     let video_timestamps_nanos = frame_timestamps_nanos
 ///         .iter()
 ///         .copied()
-///         .map(rerun::components::VideoTimestamp::from_nanos)
+///         .map(simplant_lab::components::VideoTimestamp::from_nanos)
 ///         .collect::<Vec<_>>();
-///     let time_column = rerun::TimeColumn::new_duration_nanos(
+///     let time_column = simplant_lab::TimeColumn::new_duration_nanos(
 ///         "video_time",
 ///         // Note timeline values don't have to be the same as the video timestamps.
 ///         frame_timestamps_nanos,
@@ -67,7 +67,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     rec.send_columns(
 ///         "video",
 ///         [time_column],
-///         rerun::VideoFrameReference::update_fields()
+///         simplant_lab::VideoFrameReference::update_fields()
 ///             .with_many_timestamp(video_timestamps_nanos)
 ///             .columns_of_unit_batches()?,
 ///     )?;
@@ -87,7 +87,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 /// ### Demonstrates manual use of video frame references
 /// ```ignore
-/// use rerun::external::anyhow;
+/// use simplant_lab::external::anyhow;
 ///
 /// fn main() -> anyhow::Result<()> {
 ///     let args = _args;
@@ -96,26 +96,29 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///         anyhow::bail!("Usage: {} <path_to_video.[mp4]>", args[0]);
 ///     };
 ///
-///     let rec = rerun::RecordingStreamBuilder::new(
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
 ///         "rerun_example_asset_video_manual_frames",
 ///     )
 ///     .spawn()?;
 ///
 ///     // Log video asset which is referred to by frame references.
-///     rec.log_static("video_asset", &rerun::AssetVideo::from_file_path(path)?)?;
+///     rec.log_static(
+///         "video_asset",
+///         &simplant_lab::AssetVideo::from_file_path(path)?,
+///     )?;
 ///
 ///     // Create two entities, showing the same video frozen at different times.
 ///     rec.log(
 ///         "frame_1s",
-///         &rerun::VideoFrameReference::new(
-///             rerun::components::VideoTimestamp::from_secs(1.0),
+///         &simplant_lab::VideoFrameReference::new(
+///             simplant_lab::components::VideoTimestamp::from_secs(1.0),
 ///         )
 ///         .with_video_reference("video_asset"),
 ///     )?;
 ///     rec.log(
 ///         "frame_2s",
-///         &rerun::VideoFrameReference::new(
-///             rerun::components::VideoTimestamp::from_secs(2.0),
+///         &simplant_lab::VideoFrameReference::new(
+///             simplant_lab::components::VideoTimestamp::from_secs(2.0),
 ///         )
 ///         .with_video_reference("video_asset"),
 ///     )?;
@@ -296,7 +299,7 @@ impl AssetVideo {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

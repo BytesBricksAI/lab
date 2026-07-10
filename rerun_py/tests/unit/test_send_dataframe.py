@@ -9,7 +9,7 @@ from __future__ import annotations
 import uuid
 from typing import TYPE_CHECKING
 
-import rerun as rr
+import simplant_lab as rr
 
 if TYPE_CHECKING:
     from pathlib import Path

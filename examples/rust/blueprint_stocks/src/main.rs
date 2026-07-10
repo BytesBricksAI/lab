@@ -1,14 +1,14 @@
 use anyhow::Result;
 use chrono::NaiveDate;
 use clap::Parser;
-use rerun::{
+use serde::Deserialize;
+use simplant_lab::{
     blueprint::{
         Blueprint, ContainerLike, Horizontal, SelectionPanel, TextDocumentView, TimePanel,
         TimeSeriesView, Vertical,
     },
     external::re_sdk_types::blueprint::components::PanelState,
 };
-use serde::Deserialize;
 use std::collections::{BTreeSet, HashMap};
 use strum::{EnumIter, IntoEnumIterator};
 
@@ -62,7 +62,7 @@ enum BlueprintMode {
 #[command(author, version, about)]
 struct Args {
     #[command(flatten)]
-    rerun: rerun::clap::RerunArgs,
+    rerun: simplant_lab::clap::RerunArgs,
 
     /// Select the blueprint to use
     #[arg(long, value_enum, default_value = "grid")]
@@ -144,18 +144,18 @@ fn brand_color(ticker: Ticker) -> u32 {
     }
 }
 
-fn style_plot(ticker: Ticker) -> rerun::SeriesLines {
-    rerun::SeriesLines::new()
+fn style_plot(ticker: Ticker) -> simplant_lab::SeriesLines {
+    simplant_lab::SeriesLines::new()
         .with_colors([brand_color(ticker)])
         .with_names([ticker.as_str()])
 }
 
-fn style_peak(ticker: Ticker) -> rerun::SeriesPoints {
+fn style_peak(ticker: Ticker) -> simplant_lab::SeriesPoints {
     let ticker_str = ticker.as_str();
-    rerun::SeriesPoints::new()
+    simplant_lab::SeriesPoints::new()
         .with_colors([0xFF0000FF])
         .with_names([format!("{ticker_str} (peak)")])
-        .with_markers([rerun::components::MarkerShape::Up])
+        .with_markers([simplant_lab::components::MarkerShape::Up])
 }
 
 /// A blueprint enabling auto views, which matches the application default.
@@ -365,7 +365,8 @@ fn main() -> Result<()> {
         rec.set_time_sequence("stable_time", 0);
         rec.log_static(
             format!("stocks/{ticker_str}/info"),
-            &rerun::TextDocument::new(info_md).with_media_type(rerun::MediaType::MARKDOWN),
+            &simplant_lab::TextDocument::new(info_md)
+                .with_media_type(simplant_lab::MediaType::MARKDOWN),
         )?;
 
         // Log quote data
@@ -396,14 +397,14 @@ fn main() -> Result<()> {
                         rec.set_time_sequence("time", i as i64);
                         rec.log(
                             format!("stocks/{ticker_str}/{date_str}"),
-                            &rerun::Scalars::new([quote.high]),
+                            &simplant_lab::Scalars::new([quote.high]),
                         )?;
 
                         // Log peak
                         if Some(i) == peak_idx {
                             rec.log(
                                 format!("stocks/{ticker_str}/peaks/{date_str}"),
-                                &rerun::Scalars::new([quote.high]),
+                                &simplant_lab::Scalars::new([quote.high]),
                             )?;
                         }
                     }

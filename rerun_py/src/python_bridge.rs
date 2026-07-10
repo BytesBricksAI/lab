@@ -203,7 +203,7 @@ fn rerun_bindings(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     // Safety: anything touching the env is unsafe, tis what it is.
     #[expect(unsafe_code)]
     unsafe {
-        std::env::set_var("OTEL_SERVICE_NAME", "rerun-py");
+        std::env::set_var("OTEL_SERVICE_NAME", "simplant-lab-py");
     }
 
     #[cfg(all(not(target_arch = "wasm32"), feature = "perf_telemetry"))]
@@ -380,6 +380,21 @@ fn rerun_bindings(py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
 
     // lenses
     crate::lenses::register(m)?;
+
+    sp_python::register_recording_stream_extractor(Box::new(|obj| {
+        if let Ok(recording) = obj.extract::<PyRef<'_, PyRecordingStream>>() {
+            return Ok(recording.0.clone());
+        }
+        if let Ok(inner) = obj.getattr("inner") {
+            if let Ok(recording) = inner.extract::<PyRef<'_, PyRecordingStream>>() {
+                return Ok(recording.0.clone());
+            }
+        }
+        Err(pyo3::exceptions::PyTypeError::new_err(
+            "expected rerun RecordingStream or PyRecordingStream",
+        ))
+    }));
+    sp_python::register(py, m)?;
 
     Ok(())
 }
@@ -1034,7 +1049,7 @@ fn send_mem_sink_as_default_blueprint(
     server_memory_limit = "1GiB".to_owned(),
     hide_welcome_screen = false,
     detach_process = true,
-    executable_name = "rerun".to_owned(),
+    executable_name = "simplant-lab".to_owned(),
     executable_path = None,
     extra_args = vec![],
     extra_env = vec![],

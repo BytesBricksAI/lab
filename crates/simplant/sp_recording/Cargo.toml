@@ -1,0 +1,26 @@
+[package]
+name = "sp_recording"
+authors.workspace = true
+description = "SimPlant Lab recording adapter: implements RecorderPort over re_sdk::RecordingStream."
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish = false
+readme = "README.md"
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+sp_kernel = { path = "../sp_kernel" }
+sp_asset_model = { path = "../sp_asset_model" }
+sp_acquisition = { path = "../sp_acquisition" }
+sp_types = { path = "../sp_types" }
+re_sdk.workspace = true
+re_sdk_types.workspace = true
+
+[dev-dependencies]
+jiff = { workspace = true }

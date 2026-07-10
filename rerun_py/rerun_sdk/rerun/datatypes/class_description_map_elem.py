@@ -15,7 +15,6 @@ from .. import datatypes
 from .._baseclasses import (
     BaseBatch,
 )
-from .class_description_map_elem_ext import ClassDescriptionMapElemExt
 
 __all__ = [
     "ClassDescriptionMapElem",
@@ -35,7 +34,7 @@ def _class_description_map_elem__class_id__special_field_converter_override(
 
 
 @define(init=False)
-class ClassDescriptionMapElem(ClassDescriptionMapElemExt):
+class ClassDescriptionMapElem:
     """
     **Datatype**: A helper type for mapping [`datatypes.ClassId`][rerun.datatypes.ClassId]s to class descriptions.
 
@@ -140,4 +139,19 @@ class ClassDescriptionMapElemBatch(BaseBatch[ClassDescriptionMapElemArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: ClassDescriptionMapElemArrayLike, data_type: pa.DataType) -> pa.Array:
-        return ClassDescriptionMapElemExt.native_to_pa_array_override(data, data_type)
+        from rerun.datatypes import ClassDescriptionBatch, ClassIdBatch
+
+        typed_data: Sequence[ClassDescriptionMapElem]
+
+        if isinstance(data, ClassDescriptionMapElem):
+            typed_data = [data]
+        else:
+            typed_data = data
+
+        return pa.StructArray.from_arrays(
+            [
+                ClassIdBatch([x.class_id for x in typed_data]).as_arrow_array(),  # type: ignore[misc, arg-type]
+                ClassDescriptionBatch([x.class_description for x in typed_data]).as_arrow_array(),  # type: ignore[misc, arg-type]
+            ],
+            fields=list(data_type),
+        )

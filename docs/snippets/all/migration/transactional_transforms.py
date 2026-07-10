@@ -1,4 +1,4 @@
-import rerun as rr
+import simplant_lab as rr
 
 rr.log("simple", rr.Transform3D(translation=[1.0, 2.0, 3.0]))
 

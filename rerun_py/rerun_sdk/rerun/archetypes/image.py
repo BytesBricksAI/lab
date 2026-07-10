@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .image_ext import ImageExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["Image"]
 
 
 @define(str=False, repr=False, init=False)
-class Image(ImageExt, Archetype, VisualizableArchetype):
+class Image(Archetype, VisualizableArchetype):
     """
     **Archetype**: A monochrome or color image.
 
@@ -51,7 +50,7 @@ class Image(ImageExt, Archetype, VisualizableArchetype):
     ```python
     import numpy as np
 
-    import rerun as rr
+    import simplant_lab as rr
 
     # Create an image with numpy
     image = np.zeros((200, 300, 3), dtype=np.uint8)
@@ -76,7 +75,7 @@ class Image(ImageExt, Archetype, VisualizableArchetype):
     ```python
     import numpy as np
 
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_image_formats", spawn=True)
 
@@ -121,7 +120,49 @@ class Image(ImageExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.Image"
 
-    # __init__ can be found in image_ext.py
+    def __init__(
+        self: Any,
+        buffer: datatypes.BlobLike,
+        format: datatypes.ImageFormatLike,
+        *,
+        opacity: datatypes.Float32Like | None = None,
+        draw_order: datatypes.Float32Like | None = None,
+        magnification_filter: components.MagnificationFilterLike | None = None,
+    ) -> None:
+        """
+        Create a new instance of the Image archetype.
+
+        Parameters
+        ----------
+        buffer:
+            The raw image data.
+        format:
+            The format of the image.
+        opacity:
+            Opacity of the image, useful for layering several media.
+
+            Defaults to 1.0 (fully opaque).
+        draw_order:
+            An optional floating point value that specifies the 2D drawing order.
+
+            Objects with higher values are drawn on top of those with lower values.
+            Defaults to `-10.0`.
+        magnification_filter:
+            Optional filter used when a texel is magnified (displayed larger than a screen pixel).
+
+        """
+
+        # You can define your own __init__ function as a member of ImageExt in image_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(
+                buffer=buffer,
+                format=format,
+                opacity=opacity,
+                draw_order=draw_order,
+                magnification_filter=magnification_filter,
+            )
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -253,7 +294,7 @@ class Image(ImageExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.
@@ -399,5 +440,3 @@ class Image(ImageExt, Archetype, VisualizableArchetype):
 
         """
         return Visualizer("Image", overrides=self.as_component_batches(), mappings=mappings)
-
-    # __array__ can be found in image_ext.py

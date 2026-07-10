@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .mesh3d_ext import Mesh3DExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["Mesh3D"]
 
 
 @define(str=False, repr=False, init=False)
-class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
+class Mesh3D(Archetype, VisualizableArchetype):
     """
     **Archetype**: A 3D triangle mesh as specified by its per-mesh and per-vertex properties.
 
@@ -45,7 +44,7 @@ class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
     --------
     ### Simple indexed 3D mesh:
     ```python
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_mesh3d_indexed", spawn=True)
 
@@ -71,7 +70,7 @@ class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
 
     ### 3D mesh with instancing:
     ```python
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_mesh3d_instancing", spawn=True)
     rr.set_time("frame", sequence=0)
@@ -116,7 +115,81 @@ class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.Mesh3D"
 
-    # __init__ can be found in mesh3d_ext.py
+    def __init__(
+        self: Any,
+        vertex_positions: datatypes.Vec3DArrayLike,
+        *,
+        triangle_indices: datatypes.UVec3DArrayLike | None = None,
+        vertex_normals: datatypes.Vec3DArrayLike | None = None,
+        vertex_colors: datatypes.Rgba32ArrayLike | None = None,
+        vertex_texcoords: datatypes.Vec2DArrayLike | None = None,
+        albedo_factor: datatypes.Rgba32Like | None = None,
+        face_rendering: components.MeshFaceRenderingLike | None = None,
+        albedo_texture_buffer: datatypes.BlobLike | None = None,
+        albedo_texture_format: datatypes.ImageFormatLike | None = None,
+        class_ids: datatypes.ClassIdArrayLike | None = None,
+    ) -> None:
+        """
+        Create a new instance of the Mesh3D archetype.
+
+        Parameters
+        ----------
+        vertex_positions:
+            The positions of each vertex.
+
+            If no `triangle_indices` are specified, then each triplet of positions is interpreted as a triangle.
+        triangle_indices:
+            Optional indices for the triangles that make up the mesh.
+        vertex_normals:
+            An optional normal for each vertex.
+        vertex_colors:
+            An optional color for each vertex.
+
+            The alpha channel is ignored.
+        vertex_texcoords:
+            An optional uv texture coordinate for each vertex.
+        albedo_factor:
+            A color multiplier applied to the whole mesh.
+
+            Alpha channel governs the overall mesh transparency.
+        face_rendering:
+            Determines which faces of the mesh are rendered.
+
+            The default is [`components.MeshFaceRendering.DoubleSided`][rerun.components.MeshFaceRendering.DoubleSided], meaning both front and back faces are shown.
+        albedo_texture_buffer:
+            Optional albedo texture.
+
+            Used with the [`components.Texcoord2D`][rerun.components.Texcoord2D] of the mesh.
+
+            Currently supports only sRGB(A) textures, ignoring alpha.
+            (meaning that the tensor must have 3 or 4 channels and use the `u8` format)
+
+            The alpha channel is ignored.
+        albedo_texture_format:
+            The format of the `albedo_texture_buffer`, if any.
+        class_ids:
+            Optional class Ids for the vertices.
+
+            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+
+        """
+
+        # You can define your own __init__ function as a member of Mesh3DExt in mesh3d_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(
+                vertex_positions=vertex_positions,
+                triangle_indices=triangle_indices,
+                vertex_normals=vertex_normals,
+                vertex_colors=vertex_colors,
+                vertex_texcoords=vertex_texcoords,
+                albedo_factor=albedo_factor,
+                face_rendering=face_rendering,
+                albedo_texture_buffer=albedo_texture_buffer,
+                albedo_texture_format=albedo_texture_format,
+                class_ids=class_ids,
+            )
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -330,7 +403,7 @@ class Mesh3D(Mesh3DExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

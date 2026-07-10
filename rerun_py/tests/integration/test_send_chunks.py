@@ -1,18 +1,19 @@
-"""Tests for rerun.experimental.send_chunks."""
+"""Tests for simplant_lab.experimental.send_chunks."""
 
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Protocol
 
 import pytest
-import rerun as rr
-from rerun.experimental import Chunk, RrdReader
+
+import simplant_lab as rr
+from simplant_lab.experimental import Chunk, RrdReader
 
 if TYPE_CHECKING:
     from collections.abc import Iterable, Iterator
     from pathlib import Path
 
-    from rerun.experimental import ChunkStore, LazyChunkStream, LazyStore
+    from simplant_lab.experimental import ChunkStore, LazyChunkStream, LazyStore
 
 
 class SendChunksAndRead(Protocol):

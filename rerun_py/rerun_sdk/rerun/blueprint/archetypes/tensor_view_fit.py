@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import Any, ClassVar
 
 from attrs import define, field
 
@@ -15,13 +15,12 @@ from ..._baseclasses import (
 )
 from ...blueprint import components as blueprint_components
 from ...error_utils import catch_and_log_exceptions
-from .tensor_view_fit_ext import TensorViewFitExt
 
 __all__ = ["TensorViewFit"]
 
 
 @define(str=False, repr=False, init=False)
-class TensorViewFit(TensorViewFitExt, Archetype):
+class TensorViewFit(Archetype):
     """
     **Archetype**: Configures how a selected tensor slice is shown on screen.
 
@@ -30,7 +29,22 @@ class TensorViewFit(TensorViewFitExt, Archetype):
 
     NAME: ClassVar[str] = "rerun.blueprint.archetypes.TensorViewFit"
 
-    # __init__ can be found in tensor_view_fit_ext.py
+    def __init__(self: Any, *, scaling: blueprint_components.ViewFitLike | None = None) -> None:
+        """
+        Create a new instance of the TensorViewFit archetype.
+
+        Parameters
+        ----------
+        scaling:
+            How the image is scaled to fit the view.
+
+        """
+
+        # You can define your own __init__ function as a member of TensorViewFitExt in tensor_view_fit_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(scaling=scaling)
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""

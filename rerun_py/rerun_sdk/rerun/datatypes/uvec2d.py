@@ -20,13 +20,12 @@ from .._converters import (
     to_np_uint32,
 )
 from .._numpy_compatibility import asarray
-from .uvec2d_ext import UVec2DExt
 
 __all__ = ["UVec2D", "UVec2DArrayLike", "UVec2DBatch", "UVec2DLike"]
 
 
 @define(init=False)
-class UVec2D(UVec2DExt):
+class UVec2D:
     """**Datatype**: A uint32 vector in 2D space."""
 
     def __init__(self: Any, xy: UVec2DLike) -> None:
@@ -63,4 +62,6 @@ class UVec2DBatch(BaseBatch[UVec2DArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: UVec2DArrayLike, data_type: pa.DataType) -> pa.Array:
-        return UVec2DExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of UVec2D not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in uvec2d_ext.py

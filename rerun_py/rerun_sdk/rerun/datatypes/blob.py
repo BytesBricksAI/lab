@@ -20,13 +20,12 @@ from .._converters import (
     to_np_uint8,
 )
 from .._numpy_compatibility import asarray
-from .blob_ext import BlobExt
 
 __all__ = ["Blob", "BlobArrayLike", "BlobBatch", "BlobLike"]
 
 
 @define(init=False)
-class Blob(BlobExt):
+class Blob:
     """**Datatype**: A binary blob of data."""
 
     def __init__(self: Any, data: BlobLike) -> None:
@@ -61,4 +60,6 @@ class BlobBatch(BaseBatch[BlobArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: BlobArrayLike, data_type: pa.DataType) -> pa.Array:
-        return BlobExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of Blob not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in blob_ext.py

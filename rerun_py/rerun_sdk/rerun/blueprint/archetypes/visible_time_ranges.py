@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 from attrs import define, field
 
@@ -15,7 +15,6 @@ from ..._baseclasses import (
 )
 from ...blueprint import components as blueprint_components
 from ...error_utils import catch_and_log_exceptions
-from .visible_time_ranges_ext import VisibleTimeRangesExt
 
 if TYPE_CHECKING:
     from ... import datatypes
@@ -24,7 +23,7 @@ __all__ = ["VisibleTimeRanges"]
 
 
 @define(str=False, repr=False, init=False)
-class VisibleTimeRanges(VisibleTimeRangesExt, Archetype):
+class VisibleTimeRanges(Archetype):
     """
     **Archetype**: Configures what range of each timeline is shown on a view.
 
@@ -41,7 +40,24 @@ class VisibleTimeRanges(VisibleTimeRangesExt, Archetype):
 
     NAME: ClassVar[str] = "rerun.blueprint.archetypes.VisibleTimeRanges"
 
-    # __init__ can be found in visible_time_ranges_ext.py
+    def __init__(self: Any, ranges: datatypes.VisibleTimeRangeArrayLike) -> None:
+        """
+        Create a new instance of the VisibleTimeRanges archetype.
+
+        Parameters
+        ----------
+        ranges:
+            The time ranges to show for each timeline unless specified otherwise on a per-entity basis.
+
+            If a timeline is specified more than once, the first entry will be used.
+
+        """
+
+        # You can define your own __init__ function as a member of VisibleTimeRangesExt in visible_time_ranges_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(ranges=ranges)
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""

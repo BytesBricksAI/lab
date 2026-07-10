@@ -25,8 +25,9 @@ import tempfile
 from pathlib import Path
 
 import pytest
-import rerun as rr
-from rerun.server import Server
+
+import simplant_lab as rr
+from simplant_lab.server import Server
 
 # In debug builds, re_server injects this fixed trace-id into every response.
 DUMMY_TRACE_ID = "abba000000000000000000000000abba"

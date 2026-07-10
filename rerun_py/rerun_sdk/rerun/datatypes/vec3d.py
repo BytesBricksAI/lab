@@ -20,13 +20,12 @@ from .._converters import (
     to_np_float32,
 )
 from .._numpy_compatibility import asarray
-from .vec3d_ext import Vec3DExt
 
 __all__ = ["Vec3D", "Vec3DArrayLike", "Vec3DBatch", "Vec3DLike"]
 
 
 @define(init=False)
-class Vec3D(Vec3DExt):
+class Vec3D:
     """**Datatype**: A vector in 3D space."""
 
     def __init__(self: Any, xyz: Vec3DLike) -> None:
@@ -63,4 +62,6 @@ class Vec3DBatch(BaseBatch[Vec3DArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: Vec3DArrayLike, data_type: pa.DataType) -> pa.Array:
-        return Vec3DExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of Vec3D not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in vec3d_ext.py

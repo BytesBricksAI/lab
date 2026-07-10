@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .encoded_image_ext import EncodedImageExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["EncodedImage"]
 
 
 @define(str=False, repr=False, init=False)
-class EncodedImage(EncodedImageExt, Archetype, VisualizableArchetype):
+class EncodedImage(Archetype, VisualizableArchetype):
     """
     **Archetype**: An image encoded as e.g. a JPEG or PNG.
 
@@ -43,7 +42,7 @@ class EncodedImage(EncodedImageExt, Archetype, VisualizableArchetype):
     ```python
     from pathlib import Path
 
-    import rerun as rr
+    import simplant_lab as rr
 
     image_file_path = Path(__file__).parent / "ferris.png"
 
@@ -65,7 +64,55 @@ class EncodedImage(EncodedImageExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.EncodedImage"
 
-    # __init__ can be found in encoded_image_ext.py
+    def __init__(
+        self: Any,
+        blob: datatypes.BlobLike,
+        *,
+        media_type: datatypes.Utf8Like | None = None,
+        opacity: datatypes.Float32Like | None = None,
+        draw_order: datatypes.Float32Like | None = None,
+        magnification_filter: components.MagnificationFilterLike | None = None,
+    ) -> None:
+        """
+        Create a new instance of the EncodedImage archetype.
+
+        Parameters
+        ----------
+        blob:
+            The encoded content of some image file, e.g. a PNG or JPEG.
+        media_type:
+            The Media Type of the asset.
+
+            Supported values:
+            * `image/jpeg`
+            * `image/png`
+
+            If omitted, the viewer will try to guess from the data blob.
+            If it cannot guess, it won't be able to render the asset.
+        opacity:
+            Opacity of the image, useful for layering several media.
+
+            Defaults to 1.0 (fully opaque).
+        draw_order:
+            An optional floating point value that specifies the 2D drawing order.
+
+            Objects with higher values are drawn on top of those with lower values.
+        magnification_filter:
+            Optional filter used when a texel is magnified (displayed larger than a screen pixel).
+
+        """
+
+        # You can define your own __init__ function as a member of EncodedImageExt in encoded_image_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(
+                blob=blob,
+                media_type=media_type,
+                opacity=opacity,
+                draw_order=draw_order,
+                magnification_filter=magnification_filter,
+            )
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -203,7 +250,7 @@ class EncodedImage(EncodedImageExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

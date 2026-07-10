@@ -20,13 +20,12 @@ from .._converters import (
     to_np_float64,
 )
 from .._numpy_compatibility import asarray
-from .dvec2d_ext import DVec2DExt
 
 __all__ = ["DVec2D", "DVec2DArrayLike", "DVec2DBatch", "DVec2DLike"]
 
 
 @define(init=False)
-class DVec2D(DVec2DExt):
+class DVec2D:
     """**Datatype**: A double-precision vector in 2D space."""
 
     def __init__(self: Any, xy: DVec2DLike) -> None:
@@ -63,4 +62,6 @@ class DVec2DBatch(BaseBatch[DVec2DArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: DVec2DArrayLike, data_type: pa.DataType) -> pa.Array:
-        return DVec2DExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of DVec2D not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in dvec2d_ext.py

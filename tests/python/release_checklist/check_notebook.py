@@ -4,8 +4,8 @@ import os
 from argparse import Namespace
 from uuid import uuid4
 
-import rerun as rr
-import rerun.blueprint as rrb
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 README = """\
 # Notebook

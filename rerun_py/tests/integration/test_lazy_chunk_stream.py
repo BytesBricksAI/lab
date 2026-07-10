@@ -1,4 +1,4 @@
-"""Tests for rerun.experimental.LazyChunkStream and RrdReader."""
+"""Tests for simplant_lab.experimental.LazyChunkStream and RrdReader."""
 
 from __future__ import annotations
 
@@ -7,9 +7,10 @@ from typing import TYPE_CHECKING
 
 import pyarrow.compute as pc
 import pytest
-import rerun as rr
 from inline_snapshot import snapshot as inline_snapshot
-from rerun.experimental import Chunk, DeriveLens, LazyChunkStream, MutateLens, RrdReader, Selector
+
+import simplant_lab as rr
+from simplant_lab.experimental import Chunk, DeriveLens, LazyChunkStream, MutateLens, RrdReader, Selector
 
 from .conftest import TEST_APP_ID as APP_ID, TEST_RECORDING_ID as RECORDING_ID
 
@@ -92,7 +93,7 @@ def test_identity_roundtrip(test_rrd_path: Path, tmp_path: Path) -> None:
 
     # Strong check: `rerun rrd compare` verifies semantic equality of the data.
     process = subprocess.run(
-        ["rerun", "rrd", "compare", "--unordered", str(test_rrd_path), str(out)],
+        ["simplant-lab", "rrd", "compare", "--unordered", str(test_rrd_path), str(out)],
         check=False,
         capture_output=True,
     )

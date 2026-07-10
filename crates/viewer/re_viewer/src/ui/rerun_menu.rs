@@ -22,7 +22,7 @@ impl App {
         ui: &mut egui::Ui,
     ) {
         let icon_tint = ui.tokens().strong_fg_color;
-        let image = re_ui::icons::RERUN_WORDMARK
+        let image = re_ui::icons::PRODUCT_WORDMARK
             .as_image()
             .max_height(12.0)
             .tint(icon_tint)

@@ -1,6 +1,6 @@
 """Log a simple directed graph."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_graph_directed", spawn=True)
 

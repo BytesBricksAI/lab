@@ -1,7 +1,7 @@
 """Use a blueprint to show a bar chart."""
 
-import rerun as rr
-import rerun.blueprint as rrb
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 rr.init("rerun_example_bar_chart", spawn=True)
 rr.log("bar_chart", rr.BarChart([8, 4, 0, 9, 1, 4, 1, 6, 9, 0]))

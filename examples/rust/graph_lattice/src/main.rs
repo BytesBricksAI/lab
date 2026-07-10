@@ -6,14 +6,14 @@
 //! ```
 
 use itertools::Itertools as _;
-use rerun::external::re_log;
-use rerun::{Color, GraphEdges, GraphNodes};
+use simplant_lab::external::re_log;
+use simplant_lab::{Color, GraphEdges, GraphNodes};
 
 #[derive(Debug, clap::Parser)]
 #[clap(author, version, about)]
 pub struct Args {
     #[command(flatten)]
-    rerun: rerun::clap::RerunArgs,
+    rerun: simplant_lab::clap::RerunArgs,
 }
 
 const NUM_NODES: usize = 10;

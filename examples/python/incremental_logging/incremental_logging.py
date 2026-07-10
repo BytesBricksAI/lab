@@ -7,7 +7,7 @@ import argparse
 
 from numpy.random import default_rng
 
-import rerun as rr
+import simplant_lab as rr
 
 parser = argparse.ArgumentParser(description="Showcases how to incrementally log data belonging to the same archetype.")
 rr.script_add_args(parser)

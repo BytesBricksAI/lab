@@ -10,12 +10,11 @@ from .._baseclasses import (
     ComponentBatchMixin,
     ComponentMixin,
 )
-from .view_coordinates_ext import ViewCoordinatesExt
 
 __all__ = ["ViewCoordinates", "ViewCoordinatesBatch"]
 
 
-class ViewCoordinates(ViewCoordinatesExt, datatypes.ViewCoordinates, ComponentMixin):
+class ViewCoordinates(datatypes.ViewCoordinates, ComponentMixin):
     """
     **Component**: How we interpret the coordinate system of an entity/space.
 
@@ -51,5 +50,3 @@ class ViewCoordinatesBatch(datatypes.ViewCoordinatesBatch, ComponentBatchMixin):
 
 # This is patched in late to avoid circular dependencies.
 ViewCoordinates._BATCH_TYPE = ViewCoordinatesBatch  # type: ignore[assignment]
-
-ViewCoordinatesExt.deferred_patch_class(ViewCoordinates)

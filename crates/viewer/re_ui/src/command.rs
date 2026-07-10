@@ -199,16 +199,16 @@ impl UICommand {
             Self::Redo => ("Redo", "Redo the last undone thing"),
 
             #[cfg(not(target_arch = "wasm32"))]
-            Self::Quit => ("Quit", "Close the Rerun Viewer"),
+            Self::Quit => ("Quit", "Close the SimPlant-Lab"),
 
-            Self::OpenWebsite => ("rerun.io", "Visit our homepage"),
+            Self::OpenWebsite => ("SimPlant-Lab", "Visit the SimPlant-Lab homepage"),
             Self::OpenWebHelp => (
                 "Docs",
                 "Visit the docs on our website, with troubleshooting tips and more",
             ),
             Self::OpenRerunDiscord => (
-                "Rerun Discord",
-                "Visit the Rerun Discord server, where you can ask questions and get help",
+                "Community",
+                "Visit the SimPlant-Lab community (not configured)",
             ),
 
             Self::ResetViewer => (
@@ -240,7 +240,7 @@ impl UICommand {
 
             Self::ToggleMemoryPanel => (
                 "Toggle memory panel",
-                "View and track current RAM usage inside Rerun Viewer",
+                "View and track current RAM usage inside SimPlant-Lab",
             ),
 
             Self::TogglePanelStateOverrides => (

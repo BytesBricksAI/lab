@@ -4,7 +4,7 @@ import platform
 import tempfile
 from typing import TYPE_CHECKING
 
-import rerun as rr
+import simplant_lab as rr
 
 if TYPE_CHECKING:
     from pathlib import Path

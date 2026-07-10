@@ -4,9 +4,10 @@ from typing import Any
 
 import numpy as np
 import pytest
-import rerun as rr
-from rerun.components import TensorData, TensorDataBatch
-from rerun.datatypes import TensorBuffer, TensorDataLike
+
+import simplant_lab as rr
+from simplant_lab.components import TensorData, TensorDataBatch
+from simplant_lab.datatypes import TensorBuffer, TensorDataLike
 
 rng = np.random.default_rng(12345)
 RANDOM_TENSOR_SOURCE = rng.uniform(0.0, 1.0, (8, 6, 3, 5))
@@ -60,7 +61,7 @@ def test_tensor() -> None:
 
 
 def test_bad_tensors() -> None:
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.set_strict_mode(True)
 

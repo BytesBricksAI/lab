@@ -31,14 +31,14 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// use rand::prelude::*;
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_tensor").spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new("rerun_example_tensor")
+///         .spawn()?;
 ///
 ///     let mut data = Array::<u8, _>::default((8, 6, 3, 5).f());
 ///     let mut rng = rand::rngs::SmallRng::seed_from_u64(42);
 ///     data.map_inplace(|x| *x = rng.random());
 ///
-///     let tensor = rerun::Tensor::try_from(data)?
+///     let tensor = simplant_lab::Tensor::try_from(data)?
 ///         .with_dim_names(["width", "height", "channel", "batch"]);
 ///     rec.log("tensor", &tensor)?;
 ///
@@ -223,7 +223,7 @@ impl Tensor {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

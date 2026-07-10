@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .boxes3d_ext import Boxes3DExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["Boxes3D"]
 
 
 @define(str=False, repr=False, init=False)
-class Boxes3D(Boxes3DExt, Archetype, VisualizableArchetype):
+class Boxes3D(Archetype, VisualizableArchetype):
     """
     **Archetype**: 3D boxes with half-extents and optional center, rotations, colors etc.
 
@@ -39,7 +38,7 @@ class Boxes3D(Boxes3DExt, Archetype, VisualizableArchetype):
     -------
     ### Batch of 3D boxes:
     ```python
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_box3d_batch", spawn=True)
 
@@ -75,7 +74,80 @@ class Boxes3D(Boxes3DExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.Boxes3D"
 
-    # __init__ can be found in boxes3d_ext.py
+    def __init__(
+        self: Any,
+        half_sizes: datatypes.Vec3DArrayLike,
+        *,
+        centers: datatypes.Vec3DArrayLike | None = None,
+        rotation_axis_angles: datatypes.RotationAxisAngleArrayLike | None = None,
+        quaternions: datatypes.QuaternionArrayLike | None = None,
+        colors: datatypes.Rgba32ArrayLike | None = None,
+        radii: datatypes.Float32ArrayLike | None = None,
+        fill_mode: components.FillModeLike | None = None,
+        labels: datatypes.Utf8ArrayLike | None = None,
+        show_labels: datatypes.BoolLike | None = None,
+        class_ids: datatypes.ClassIdArrayLike | None = None,
+    ) -> None:
+        """
+        Create a new instance of the Boxes3D archetype.
+
+        Parameters
+        ----------
+        half_sizes:
+            All half-extents that make up the batch of boxes.
+        centers:
+            Optional center positions of the boxes.
+
+            If not specified, the centers will be at (0, 0, 0).
+        rotation_axis_angles:
+            Rotations via axis + angle.
+
+            If no rotation is specified, the axes of the boxes align with the axes of the local coordinate system.
+        quaternions:
+            Rotations via quaternion.
+
+            If no rotation is specified, the axes of the boxes align with the axes of the local coordinate system.
+        colors:
+            Optional colors for the boxes.
+
+            Alpha channel is used for transparency for solid fill-mode.
+        radii:
+            Optional radii for the lines that make up the boxes.
+        fill_mode:
+            Optionally choose whether the boxes are drawn with lines or solid.
+        labels:
+            Optional text labels for the boxes.
+
+            If there's a single label present, it will be placed at the center of the entity.
+            Otherwise, each instance will have its own label.
+        show_labels:
+            Whether the text labels should be shown.
+
+            If not set, labels will automatically appear when there is exactly one label for this entity
+            or the number of instances on this entity is under a certain threshold.
+        class_ids:
+            Optional [`components.ClassId`][rerun.components.ClassId]s for the boxes.
+
+            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+
+        """
+
+        # You can define your own __init__ function as a member of Boxes3DExt in boxes3d_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(
+                half_sizes=half_sizes,
+                centers=centers,
+                rotation_axis_angles=rotation_axis_angles,
+                quaternions=quaternions,
+                colors=colors,
+                radii=radii,
+                fill_mode=fill_mode,
+                labels=labels,
+                show_labels=show_labels,
+                class_ids=class_ids,
+            )
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -288,7 +360,7 @@ class Boxes3D(Boxes3DExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

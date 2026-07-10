@@ -43,12 +43,12 @@ impl IntroItem {
             Self::DocItem {
                 title: "Send data in",
                 url: "https://rerun.io/docs/getting-started/data-in",
-                body: "Send data to Rerun from your running applications or existing files.",
+                body: "Send data to SimPlant-Lab from your running applications or existing files.",
             },
             Self::DocItem {
                 title: "Explore data",
                 url: "https://rerun.io/docs/getting-started/configure-the-viewer",
-                body: "Familiarize yourself with the basics of using the Rerun Viewer.",
+                body: "Familiarize yourself with the basics of using the SimPlant-Lab.",
             },
             Self::DocItem {
                 title: "Query data out",
@@ -120,7 +120,7 @@ impl IntroItem {
                 };
                 ui.set_style(ui.style_of(opposite_theme));
 
-                ui.heading(RichText::new("Rerun Hub").strong());
+                ui.heading(RichText::new("SimPlant-Lab Hub").strong());
 
                 ui.horizontal_wrapped(|ui| {
                     ui.spacing_mut().item_spacing.x = 0.0;

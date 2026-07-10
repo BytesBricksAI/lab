@@ -1,17 +1,19 @@
 //! Log a `TextDocument`
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new("rerun_example_text_document")
-        .spawn()?;
+    let rec = simplant_lab::RecordingStreamBuilder::new(
+        "rerun_example_text_document",
+    )
+    .spawn()?;
 
     rec.log(
         "text_document",
-        &rerun::TextDocument::new("Hello, TextDocument!"),
+        &simplant_lab::TextDocument::new("Hello, TextDocument!"),
     )?;
 
     rec.log(
         "markdown",
-        &rerun::TextDocument::from_markdown(
+        &simplant_lab::TextDocument::from_markdown(
             r#"
 # Hello Markdown!
 [Click here to see the raw text](recording://markdown:Text).

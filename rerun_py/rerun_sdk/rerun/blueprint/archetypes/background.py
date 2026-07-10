@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import Any, ClassVar
 
 from attrs import define, field
 
@@ -16,13 +16,12 @@ from ..._baseclasses import (
 )
 from ...blueprint import components as blueprint_components
 from ...error_utils import catch_and_log_exceptions
-from .background_ext import BackgroundExt
 
 __all__ = ["Background"]
 
 
 @define(str=False, repr=False, init=False)
-class Background(BackgroundExt, Archetype):
+class Background(Archetype):
     """
     **Archetype**: Configuration for the background of a spatial view.
 
@@ -31,7 +30,26 @@ class Background(BackgroundExt, Archetype):
 
     NAME: ClassVar[str] = "rerun.blueprint.archetypes.Background"
 
-    # __init__ can be found in background_ext.py
+    def __init__(
+        self: Any, kind: blueprint_components.BackgroundKindLike, *, color: datatypes.Rgba32Like | None = None
+    ) -> None:
+        """
+        Create a new instance of the Background archetype.
+
+        Parameters
+        ----------
+        kind:
+            The type of the background.
+        color:
+            Color used for the solid background type.
+
+        """
+
+        # You can define your own __init__ function as a member of BackgroundExt in background_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(kind=kind, color=color)
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""

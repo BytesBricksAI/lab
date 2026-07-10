@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .tensor_ext import TensorExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["Tensor"]
 
 
 @define(str=False, repr=False, init=False)
-class Tensor(TensorExt, Archetype, VisualizableArchetype):
+class Tensor(Archetype, VisualizableArchetype):
     """
     **Archetype**: An N-dimensional array of numbers.
 
@@ -42,7 +41,7 @@ class Tensor(TensorExt, Archetype, VisualizableArchetype):
     ```python
     import numpy as np
 
-    import rerun as rr
+    import simplant_lab as rr
 
     tensor = np.random.randint(
         0, 256, (8, 6, 3, 5), dtype=np.uint8
@@ -70,7 +69,36 @@ class Tensor(TensorExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.Tensor"
 
-    # __init__ can be found in tensor_ext.py
+    def __init__(
+        self: Any, data: datatypes.TensorDataLike, *, value_range: datatypes.Range1DLike | None = None
+    ) -> None:
+        """
+        Create a new instance of the Tensor archetype.
+
+        Parameters
+        ----------
+        data:
+            The tensor data
+        value_range:
+            The expected range of values.
+
+            This is typically the expected range of valid values.
+            Everything outside of the range is clamped to the range for the purpose of colormpaping.
+            Any colormap applied for display, will map this range.
+
+            If not specified, the range will be automatically estimated from the data.
+            Note that the Viewer may try to guess a wider range than the minimum/maximum of values
+            in the contents of the tensor.
+            E.g. if all values are positive, some bigger than 1.0 and all smaller than 255.0,
+            the Viewer will guess that the data likely came from an 8bit image, thus assuming a range of 0-255.
+
+        """
+
+        # You can define your own __init__ function as a member of TensorExt in tensor_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(data=data, value_range=value_range)
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -165,7 +193,7 @@ class Tensor(TensorExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

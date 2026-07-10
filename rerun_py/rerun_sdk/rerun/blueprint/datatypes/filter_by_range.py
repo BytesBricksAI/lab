@@ -6,24 +6,35 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
-from typing import TYPE_CHECKING, Any
+from typing import Any
 
 import pyarrow as pa
 from attrs import define, field
 
+from ... import datatypes
 from ..._baseclasses import (
     BaseBatch,
 )
-from .filter_by_range_ext import FilterByRangeExt
-
-if TYPE_CHECKING:
-    from ... import datatypes
 
 __all__ = ["FilterByRange", "FilterByRangeArrayLike", "FilterByRangeBatch", "FilterByRangeLike"]
 
 
+def _filter_by_range__start__special_field_converter_override(x: datatypes.TimeIntLike) -> datatypes.TimeInt:
+    if isinstance(x, datatypes.TimeInt):
+        return x
+    else:
+        return datatypes.TimeInt(x)
+
+
+def _filter_by_range__end__special_field_converter_override(x: datatypes.TimeIntLike) -> datatypes.TimeInt:
+    if isinstance(x, datatypes.TimeInt):
+        return x
+    else:
+        return datatypes.TimeInt(x)
+
+
 @define(init=False)
-class FilterByRange(FilterByRangeExt):
+class FilterByRange:
     """
     **Datatype**: Configuration for the filter-by-range feature of the dataframe view.
 
@@ -46,16 +57,12 @@ class FilterByRange(FilterByRangeExt):
         # You can define your own __init__ function as a member of FilterByRangeExt in filter_by_range_ext.py
         self.__attrs_init__(start=start, end=end)
 
-    start: datatypes.TimeInt = field(
-        converter=FilterByRangeExt.start__field_converter_override,  # type: ignore[misc]
-    )
+    start: datatypes.TimeInt = field(converter=_filter_by_range__start__special_field_converter_override)
     # Beginning of the time range.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 
-    end: datatypes.TimeInt = field(
-        converter=FilterByRangeExt.end__field_converter_override,  # type: ignore[misc]
-    )
+    end: datatypes.TimeInt = field(converter=_filter_by_range__end__special_field_converter_override)
     # End of the time range (inclusive).
     #
     # (Docstring intentionally commented out to hide this field from the docs)

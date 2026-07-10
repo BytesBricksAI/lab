@@ -117,7 +117,7 @@ impl MemoryPanel {
                 memory_tree_ui(ui, mem_usage_tree, &mut self.include_rss_in_flamegraph);
             }
             MemoryViewTab::TimeGraph => {
-                ui.label("🗠 Rerun Viewer memory use over time");
+                ui.label("🗠 SimPlant-Lab memory use over time");
                 self.plot(ui, limit);
             }
             MemoryViewTab::Stores => {

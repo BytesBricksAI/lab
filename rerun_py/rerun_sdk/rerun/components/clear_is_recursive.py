@@ -10,16 +10,15 @@ from .._baseclasses import (
     ComponentBatchMixin,
     ComponentMixin,
 )
-from .clear_is_recursive_ext import ClearIsRecursiveExt
 
 __all__ = ["ClearIsRecursive", "ClearIsRecursiveBatch"]
 
 
-class ClearIsRecursive(ClearIsRecursiveExt, datatypes.Bool, ComponentMixin):
+class ClearIsRecursive(datatypes.Bool, ComponentMixin):
     """**Component**: Configures how a clear operation should behave - recursive or not."""
 
     _BATCH_TYPE = None
-    # __init__ can be found in clear_is_recursive_ext.py
+    # You can define your own __init__ function as a member of ClearIsRecursiveExt in clear_is_recursive_ext.py
 
     # Note: there are no fields here because ClearIsRecursive delegates to datatypes.Bool
 

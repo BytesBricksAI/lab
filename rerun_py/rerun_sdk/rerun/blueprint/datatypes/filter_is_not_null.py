@@ -15,7 +15,6 @@ from ... import datatypes
 from ..._baseclasses import (
     BaseBatch,
 )
-from .filter_is_not_null_ext import FilterIsNotNullExt
 
 __all__ = ["FilterIsNotNull", "FilterIsNotNullArrayLike", "FilterIsNotNullBatch", "FilterIsNotNullLike"]
 
@@ -28,7 +27,7 @@ def _filter_is_not_null__active__special_field_converter_override(x: datatypes.B
 
 
 @define(init=False)
-class FilterIsNotNull(FilterIsNotNullExt):
+class FilterIsNotNull:
     """
     **Datatype**: Configuration for the filter is not null feature of the dataframe view.
 
@@ -92,4 +91,20 @@ class FilterIsNotNullBatch(BaseBatch[FilterIsNotNullArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: FilterIsNotNullArrayLike, data_type: pa.DataType) -> pa.Array:
-        return FilterIsNotNullExt.native_to_pa_array_override(data, data_type)
+        from rerun.blueprint.datatypes import ComponentColumnSelectorBatch
+        from rerun.datatypes import BoolBatch
+
+        typed_data: Sequence[FilterIsNotNull]
+
+        if isinstance(data, FilterIsNotNull):
+            typed_data = [data]
+        else:
+            typed_data = data
+
+        return pa.StructArray.from_arrays(
+            [
+                BoolBatch([x.active for x in typed_data]).as_arrow_array(),  # type: ignore[misc, arg-type]
+                ComponentColumnSelectorBatch([x.column for x in typed_data]).as_arrow_array(),  # type: ignore[misc, arg-type]
+            ],
+            fields=list(data_type),
+        )

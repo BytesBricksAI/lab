@@ -1,6 +1,6 @@
 """Log different transforms with visualized coordinates axes."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_transform3d_axes", spawn=True)
 

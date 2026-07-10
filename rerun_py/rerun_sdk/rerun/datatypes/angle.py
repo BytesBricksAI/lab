@@ -17,16 +17,27 @@ from .._baseclasses import (
     BaseBatch,
 )
 from .._numpy_compatibility import asarray
-from .angle_ext import AngleExt
 
 __all__ = ["Angle", "AngleArrayLike", "AngleBatch", "AngleLike"]
 
 
 @define(init=False)
-class Angle(AngleExt):
+class Angle:
     """**Datatype**: Angle in radians."""
 
-    # __init__ can be found in angle_ext.py
+    def __init__(self: Any, radians: AngleLike) -> None:
+        """
+        Create a new instance of the Angle datatype.
+
+        Parameters
+        ----------
+        radians:
+            Angle in radians. One turn is equal to 2π (or τ) radians.
+
+        """
+
+        # You can define your own __init__ function as a member of AngleExt in angle_ext.py
+        self.__attrs_init__(radians=radians)
 
     radians: float = field(converter=float)
     # Angle in radians. One turn is equal to 2π (or τ) radians.

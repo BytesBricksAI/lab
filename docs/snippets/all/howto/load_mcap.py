@@ -2,7 +2,7 @@
 
 import sys
 
-import rerun as rr
+import simplant_lab as rr
 
 path_to_mcap = sys.argv[1]
 

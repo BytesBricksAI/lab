@@ -37,13 +37,14 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Simple indexed 3D mesh
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_mesh3d_indexed")
-///             .spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
+///         "rerun_example_mesh3d_indexed",
+///     )
+///     .spawn()?;
 ///
 ///     rec.log(
 ///         "triangle",
-///         &rerun::Mesh3D::new([
+///         &simplant_lab::Mesh3D::new([
 ///             [0.0, 1.0, 0.0],
 ///             [1.0, 0.0, 0.0],
 ///             [0.0, 0.0, 0.0],
@@ -69,14 +70,15 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### 3D mesh with instancing
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_mesh3d_instancing")
-///             .spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
+///         "rerun_example_mesh3d_instancing",
+///     )
+///     .spawn()?;
 ///
 ///     rec.set_time_sequence("frame", 0);
 ///     rec.log(
 ///         "shape",
-///         &rerun::Mesh3D::new([
+///         &simplant_lab::Mesh3D::new([
 ///             [1.0, 1.0, 1.0],
 ///             [-1.0, -1.0, 1.0],
 ///             [-1.0, 1.0, -1.0],
@@ -93,24 +95,26 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     // This box will not be affected by its parent's instance poses!
 ///     rec.log(
 ///         "shape/box",
-///         &rerun::Boxes3D::from_half_sizes([[5.0, 5.0, 5.0]]),
+///         &simplant_lab::Boxes3D::from_half_sizes([[5.0, 5.0, 5.0]]),
 ///     )?;
 ///
 ///     for i in 0..100 {
 ///         rec.set_time_sequence("frame", i);
 ///         rec.log(
 ///             "shape",
-///             &rerun::InstancePoses3D::new()
+///             &simplant_lab::InstancePoses3D::new()
 ///                 .with_translations([
 ///                     [2.0, 0.0, 0.0],
 ///                     [0.0, 2.0, 0.0],
 ///                     [0.0, -2.0, 0.0],
 ///                     [-2.0, 0.0, 0.0],
 ///                 ])
-///                 .with_rotation_axis_angles([rerun::RotationAxisAngle::new(
-///                     [0.0, 0.0, 1.0],
-///                     rerun::Angle::from_degrees(i as f32 * 2.0),
-///                 )]),
+///                 .with_rotation_axis_angles([
+///                     simplant_lab::RotationAxisAngle::new(
+///                         [0.0, 0.0, 1.0],
+///                         simplant_lab::Angle::from_degrees(i as f32 * 2.0),
+///                     ),
+///                 ]),
 ///         )?;
 ///     }
 ///
@@ -565,7 +569,7 @@ impl Mesh3D {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

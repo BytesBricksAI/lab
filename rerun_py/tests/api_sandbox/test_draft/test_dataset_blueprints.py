@@ -3,8 +3,9 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pytest
-import rerun.blueprint as rrb
 import rerun_draft as rr
+
+import simplant_lab.blueprint as rrb
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Generator

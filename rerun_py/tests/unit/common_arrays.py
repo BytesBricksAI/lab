@@ -4,7 +4,8 @@ from typing import Any, TypeVar, overload
 
 import numpy as np
 import torch
-from rerun.components import (
+
+from simplant_lab.components import (
     ClassId,
     ClassIdBatch,
     Color,
@@ -17,7 +18,7 @@ from rerun.components import (
     RadiusBatch,
     TextBatch,
 )
-from rerun.datatypes import (
+from simplant_lab.datatypes import (
     Angle,
     DVec2D,
     DVec2DArrayLike,

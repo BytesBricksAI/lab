@@ -9,7 +9,7 @@ import numpy as np
 import numpy.typing as npt
 import pyarrow as pa
 
-import rerun as rr
+import simplant_lab as rr
 
 
 class ConfidenceBatch(rr.ComponentBatchMixin):  # type: ignore[misc]

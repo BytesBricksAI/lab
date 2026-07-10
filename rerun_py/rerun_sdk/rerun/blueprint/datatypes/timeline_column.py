@@ -15,7 +15,6 @@ from ... import datatypes
 from ..._baseclasses import (
     BaseBatch,
 )
-from .timeline_column_ext import TimelineColumnExt
 
 __all__ = ["TimelineColumn", "TimelineColumnArrayLike", "TimelineColumnBatch", "TimelineColumnLike"]
 
@@ -35,14 +34,30 @@ def _timeline_column__timeline__special_field_converter_override(x: datatypes.Ut
 
 
 @define(init=False)
-class TimelineColumn(TimelineColumnExt):
+class TimelineColumn:
     """
     **Datatype**: A timeline column in a table.
 
     ⚠️ **This type is _unstable_ and may change significantly in a way that the data won't be backwards compatible.**
     """
 
-    # __init__ can be found in timeline_column_ext.py
+    def __init__(self: Any, visible: datatypes.BoolLike, timeline: datatypes.Utf8Like) -> None:
+        """
+        Create a new instance of the TimelineColumn datatype.
+
+        Parameters
+        ----------
+        visible:
+            Is this column visible?
+
+            Defaults to true.
+        timeline:
+            Which timeline is this?
+
+        """
+
+        # You can define your own __init__ function as a member of TimelineColumnExt in timeline_column_ext.py
+        self.__attrs_init__(visible=visible, timeline=timeline)
 
     visible: datatypes.Bool = field(converter=_timeline_column__visible__special_field_converter_override)
     # Is this column visible?
@@ -82,7 +97,7 @@ class TimelineColumnBatch(BaseBatch[TimelineColumnArrayLike]):
         if isinstance(data, TimelineColumn):
             typed_data = [data]
         else:
-            typed_data = [x if isinstance(x, TimelineColumn) else TimelineColumn(x) for x in data]
+            typed_data = data
 
         return pa.StructArray.from_arrays(
             [

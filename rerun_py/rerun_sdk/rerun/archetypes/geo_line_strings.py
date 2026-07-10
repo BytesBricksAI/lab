@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .geo_line_strings_ext import GeoLineStringsExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["GeoLineStrings"]
 
 
 @define(str=False, repr=False, init=False)
-class GeoLineStrings(GeoLineStringsExt, Archetype, VisualizableArchetype):
+class GeoLineStrings(Archetype, VisualizableArchetype):
     """
     **Archetype**: Geospatial line strings with positions expressed in [EPSG:4326](https://epsg.io/4326) latitude and longitude (North/East-positive degrees), and optional colors and radii.
 
@@ -38,7 +37,7 @@ class GeoLineStrings(GeoLineStringsExt, Archetype, VisualizableArchetype):
     -------
     ### Log a geospatial line string:
     ```python
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_geo_line_strings", spawn=True)
 
@@ -71,7 +70,38 @@ class GeoLineStrings(GeoLineStringsExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.GeoLineStrings"
 
-    # __init__ can be found in geo_line_strings_ext.py
+    def __init__(
+        self: Any,
+        line_strings: components.GeoLineStringArrayLike,
+        *,
+        radii: datatypes.Float32ArrayLike | None = None,
+        colors: datatypes.Rgba32ArrayLike | None = None,
+    ) -> None:
+        """
+        Create a new instance of the GeoLineStrings archetype.
+
+        Parameters
+        ----------
+        line_strings:
+            The line strings, expressed in [EPSG:4326](https://epsg.io/4326) coordinates (North/East-positive degrees).
+        radii:
+            Optional radii for the line strings.
+
+            *Note*: scene units radiii are interpreted as meters. Currently, the display scale only considers the latitude of
+            the first vertex of each line string (see [this issue](https://github.com/rerun-io/rerun/issues/8013)).
+        colors:
+            Optional colors for the line strings.
+
+            The colors are interpreted as RGB or RGBA in sRGB gamma-space,
+            As either 0-1 floats or 0-255 integers, with separate alpha.
+
+        """
+
+        # You can define your own __init__ function as a member of GeoLineStringsExt in geo_line_strings_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(line_strings=line_strings, radii=radii, colors=colors)
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -176,7 +206,7 @@ class GeoLineStrings(GeoLineStringsExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

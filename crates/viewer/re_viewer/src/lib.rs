@@ -1,6 +1,6 @@
-//! Rerun Viewer GUI.
+//! SimPlant-Lab GUI.
 //!
-//! This crate contains all the GUI code for the Rerun Viewer,
+//! This crate contains all the GUI code for the SimPlant-Lab,
 //! including all 2D and 3D visualization code.
 //!
 //! # Failure handling overview

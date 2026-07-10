@@ -7,11 +7,11 @@ For an explanation of the dataloader API and how the example fits together, see 
 ### 1. Install dependencies
 
 This example has its own `uv` project, separate from the workspace `.venv`, because LeRobot pins an
-incompatible `rerun-sdk`. From the repo root:
+incompatible `simplant-lab-sdk`. From the repo root:
 
 ```bash
 cd examples/python/dataloader
-RERUN_ALLOW_MISSING_BIN=1 uv sync  # builds local rerun-sdk + installs lerobot into ./.venv
+RERUN_ALLOW_MISSING_BIN=1 uv sync  # builds local simplant-lab-sdk + installs lerobot into ./.venv
 ```
 
 Then either `source .venv/bin/activate` or prefix subsequent commands with `uv run`.

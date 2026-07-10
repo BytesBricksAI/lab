@@ -6,7 +6,7 @@ import glob
 import importlib
 from os.path import basename, dirname, isfile, join
 
-import rerun as rr
+import simplant_lab as rr
 
 
 def log_checks(args: argparse.Namespace) -> None:

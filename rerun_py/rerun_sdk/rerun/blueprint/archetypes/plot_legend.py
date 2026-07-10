@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import Any, ClassVar
 
 from attrs import define, field
 
@@ -16,13 +16,12 @@ from ..._baseclasses import (
 )
 from ...blueprint import components as blueprint_components
 from ...error_utils import catch_and_log_exceptions
-from .plot_legend_ext import PlotLegendExt
 
 __all__ = ["PlotLegend"]
 
 
 @define(str=False, repr=False, init=False)
-class PlotLegend(PlotLegendExt, Archetype):
+class PlotLegend(Archetype):
     """
     **Archetype**: Configuration for the legend of a plot.
 
@@ -31,7 +30,30 @@ class PlotLegend(PlotLegendExt, Archetype):
 
     NAME: ClassVar[str] = "rerun.blueprint.archetypes.PlotLegend"
 
-    # __init__ can be found in plot_legend_ext.py
+    def __init__(
+        self: Any, *, corner: blueprint_components.Corner2DLike | None = None, visible: datatypes.BoolLike | None = None
+    ) -> None:
+        """
+        Create a new instance of the PlotLegend archetype.
+
+        Parameters
+        ----------
+        corner:
+            To what corner the legend is aligned.
+
+            Defaults to the right bottom corner.
+        visible:
+            Whether the legend is shown at all.
+
+            True by default.
+
+        """
+
+        # You can define your own __init__ function as a member of PlotLegendExt in plot_legend_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(corner=corner, visible=visible)
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""

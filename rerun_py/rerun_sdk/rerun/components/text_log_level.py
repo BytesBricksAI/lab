@@ -10,12 +10,11 @@ from .._baseclasses import (
     ComponentBatchMixin,
     ComponentMixin,
 )
-from .text_log_level_ext import TextLogLevelExt
 
 __all__ = ["TextLogLevel", "TextLogLevelBatch"]
 
 
-class TextLogLevel(TextLogLevelExt, datatypes.Utf8, ComponentMixin):
+class TextLogLevel(datatypes.Utf8, ComponentMixin):
     """
     **Component**: The severity level of a text log message.
 
@@ -40,5 +39,3 @@ class TextLogLevelBatch(datatypes.Utf8Batch, ComponentBatchMixin):
 
 # This is patched in late to avoid circular dependencies.
 TextLogLevel._BATCH_TYPE = TextLogLevelBatch  # type: ignore[assignment]
-
-TextLogLevelExt.deferred_patch_class(TextLogLevel)

@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 from attrs import define, field
 
@@ -15,7 +15,6 @@ from ..._baseclasses import (
 )
 from ...blueprint import components as blueprint_components
 from ...error_utils import catch_and_log_exceptions
-from .visual_bounds2d_ext import VisualBounds2DExt
 
 if TYPE_CHECKING:
     from ... import datatypes
@@ -24,7 +23,7 @@ __all__ = ["VisualBounds2D"]
 
 
 @define(str=False, repr=False, init=False)
-class VisualBounds2D(VisualBounds2DExt, Archetype):
+class VisualBounds2D(Archetype):
     """
     **Archetype**: Controls the visual bounds of a 2D view.
 
@@ -39,7 +38,24 @@ class VisualBounds2D(VisualBounds2DExt, Archetype):
 
     NAME: ClassVar[str] = "rerun.blueprint.archetypes.VisualBounds2D"
 
-    # __init__ can be found in visual_bounds2d_ext.py
+    def __init__(self: Any, range: datatypes.Range2DLike) -> None:
+        """
+        Create a new instance of the VisualBounds2D archetype.
+
+        Parameters
+        ----------
+        range:
+            Controls the visible range of a 2D view.
+
+            Use this to control pan & zoom of the view.
+
+        """
+
+        # You can define your own __init__ function as a member of VisualBounds2DExt in visual_bounds2d_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(range=range)
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""

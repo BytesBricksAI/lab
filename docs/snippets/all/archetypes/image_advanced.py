@@ -7,7 +7,7 @@ import numpy as np
 from PIL import Image as PILImage
 from PIL import ImageDraw
 
-import rerun as rr
+import simplant_lab as rr
 
 # Save a transparent PNG to a temporary file.
 _, file_path = tempfile.mkstemp(suffix=".png")

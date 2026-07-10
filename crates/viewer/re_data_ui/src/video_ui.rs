@@ -113,8 +113,8 @@ fn video_data_ui(
                         // TODO(#7594): HDR videos
                         ui.warning_label("HDR").on_hover_ui(|ui| {
                             ui.label(format!(
-                                "High-dynamic-range {stream_kind}s not yet supported by Rerun"
-                            ));
+                            "High-dynamic-range {stream_kind}s not yet supported by SimPlant-Lab"
+                        ));
                             ui.hyperlink("https://github.com/rerun-io/rerun/issues/7594");
                         });
                     }

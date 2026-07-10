@@ -1,0 +1,19 @@
+[package]
+name = "sp_types"
+authors.workspace = true
+description = "SimPlant Lab store types: simplant.* components and archetypes (anti-corruption layer over re_types_core)."
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish = false
+readme = "README.md"
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+sp_kernel = { path = "../sp_kernel" }
+re_sdk_types.workspace = true

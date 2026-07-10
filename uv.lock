@@ -49,13 +49,13 @@ members = [
     "plots",
     "raw-mesh",
     "rerun-notebook",
-    "rerun-sdk",
     "rerun-workspace",
     "rgbd",
     "rrt-star",
     "segment-anything-model",
     "server-tables",
     "shared-recording",
+    "simplant-lab-sdk",
     "stdio",
     "structure-from-motion",
     "table-blueprints",
@@ -96,8 +96,8 @@ dependencies = [
     { name = "pyproj", version = "3.7.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "pyproj", version = "3.7.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "requests" },
-    { name = "rerun-sdk" },
     { name = "shapely" },
+    { name = "simplant-lab-sdk" },
     { name = "tqdm" },
 ]
 
@@ -108,8 +108,8 @@ requires-dist = [
     { name = "polars" },
     { name = "pyproj" },
     { name = "requests" },
-    { name = "rerun-sdk", editable = "rerun_py" },
     { name = "shapely" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "tqdm" },
 ]
 
@@ -118,11 +118,11 @@ name = "animated-urdf"
 version = "0.1.0"
 source = { editable = "examples/python/animated_urdf" }
 dependencies = [
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "simplant-lab-sdk", editable = "rerun_py" }]
 
 [[package]]
 name = "annotated-types"
@@ -140,7 +140,7 @@ source = { editable = "examples/python/any_scalar" }
 dependencies = [
     { name = "psutil" },
     { name = "pyarrow" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
     { name = "yfinance" },
 ]
 
@@ -148,7 +148,7 @@ dependencies = [
 requires-dist = [
     { name = "psutil" },
     { name = "pyarrow" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "yfinance" },
 ]
 
@@ -246,9 +246,9 @@ dependencies = [
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "opencv-python" },
     { name = "pandas" },
-    { name = "rerun-sdk" },
     { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "scipy", version = "1.16.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "simplant-lab-sdk" },
     { name = "tqdm" },
     { name = "trimesh" },
 ]
@@ -259,8 +259,8 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python" },
     { name = "pandas" },
-    { name = "rerun-sdk", editable = "rerun_py" },
     { name = "scipy" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "tqdm" },
     { name = "trimesh" },
 ]
@@ -498,13 +498,13 @@ source = { editable = "examples/python/blueprint" }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -513,14 +513,14 @@ version = "0.1.0"
 source = { editable = "examples/python/blueprint_stocks" }
 dependencies = [
     { name = "humanize" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
     { name = "yfinance" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "humanize" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "yfinance" },
 ]
 
@@ -539,13 +539,13 @@ version = "0.1.0"
 source = { editable = "examples/python/camera_video_stream" }
 dependencies = [
     { name = "av" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "av", specifier = ">=14.2.0" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -653,13 +653,13 @@ source = { editable = "examples/python/clock" }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -767,7 +767,7 @@ dependencies = [
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "opencv-python" },
     { name = "pillow" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
     { name = "torch" },
     { name = "transformers" },
 ]
@@ -779,7 +779,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python" },
     { name = "pillow" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "torch" },
     { name = "transformers" },
 ]
@@ -943,11 +943,11 @@ name = "dataframe-query"
 version = "0.1.0"
 source = { editable = "examples/python/dataframe_query" }
 dependencies = [
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "simplant-lab-sdk", editable = "rerun_py" }]
 
 [[package]]
 name = "datafusion"
@@ -1047,7 +1047,7 @@ dependencies = [
     { name = "opencv-python" },
     { name = "pillow" },
     { name = "requests" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
     { name = "timm" },
     { name = "torch" },
     { name = "transformers" },
@@ -1059,7 +1059,7 @@ requires-dist = [
     { name = "opencv-python", specifier = ">4.9" },
     { name = "pillow" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "timm", specifier = "==1.0.19" },
     { name = "torch" },
     { name = "transformers", specifier = ">=4.55.0" },
@@ -1075,7 +1075,7 @@ dependencies = [
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "pydicom" },
     { name = "requests" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
     { name = "types-requests" },
 ]
 
@@ -1085,7 +1085,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "pydicom", specifier = "==2.4.5" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "types-requests", specifier = ">=2.31,<3" },
 ]
 
@@ -1140,16 +1140,16 @@ source = { editable = "examples/python/dna" }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "rerun-sdk" },
     { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "scipy", version = "1.16.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
     { name = "scipy" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -1161,7 +1161,7 @@ dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "requests" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
     { name = "tqdm" },
 ]
 
@@ -1170,7 +1170,7 @@ requires-dist = [
     { name = "laspy" },
     { name = "numpy" },
     { name = "requests" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "tqdm" },
 ]
 
@@ -1486,22 +1486,22 @@ name = "graph-lattice"
 version = "0.1.0"
 source = { editable = "examples/python/graph_lattice" }
 dependencies = [
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "simplant-lab-sdk", editable = "rerun_py" }]
 
 [[package]]
 name = "graphs"
 version = "0.1.0"
 source = { editable = "examples/python/graphs" }
 dependencies = [
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "simplant-lab-sdk", editable = "rerun_py" }]
 
 [[package]]
 name = "griffe"
@@ -1794,7 +1794,7 @@ dependencies = [
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "pandas" },
     { name = "requests" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
     { name = "tqdm" },
 ]
 
@@ -1803,7 +1803,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "pandas" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "tqdm" },
 ]
 
@@ -1814,13 +1814,13 @@ source = { editable = "examples/python/incremental_logging" }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -2495,7 +2495,7 @@ dependencies = [
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "nuscenes-devkit" },
     { name = "requests" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
@@ -2504,7 +2504,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "nuscenes-devkit" },
     { name = "requests" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -2513,13 +2513,13 @@ version = "0.1.0"
 source = { editable = "examples/python/live_camera_edge_detection" }
 dependencies = [
     { name = "opencv-python" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "opencv-python" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -2529,13 +2529,13 @@ source = { editable = "examples/python/live_scrolling_plot" }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -2543,7 +2543,7 @@ name = "llm-embedding-ner"
 version = "0.1.0"
 source = { editable = "examples/python/llm_embedding_ner" }
 dependencies = [
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
     { name = "torch" },
     { name = "transformers" },
     { name = "umap-learn" },
@@ -2551,7 +2551,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "torch" },
     { name = "transformers" },
     { name = "umap-learn" },
@@ -2578,11 +2578,11 @@ name = "log-file"
 version = "0.1.0"
 source = { editable = "examples/python/log_file" }
 dependencies = [
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "simplant-lab-sdk", editable = "rerun_py" }]
 
 [[package]]
 name = "lz4"
@@ -2798,13 +2798,13 @@ source = { editable = "examples/python/minimal" }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -2814,13 +2814,13 @@ source = { editable = "examples/python/minimal_options" }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -3058,11 +3058,11 @@ name = "multiprocess-logging"
 version = "0.1.0"
 source = { editable = "examples/python/multiprocess_logging" }
 dependencies = [
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "simplant-lab-sdk", editable = "rerun_py" }]
 
 [[package]]
 name = "multitasking"
@@ -3077,13 +3077,13 @@ source = { editable = "examples/python/multithreading" }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -3362,7 +3362,7 @@ dependencies = [
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "nuscenes-devkit" },
     { name = "requests" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
@@ -3371,7 +3371,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "nuscenes-devkit" },
     { name = "requests" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -3409,14 +3409,14 @@ dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "opencv-python" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
     { name = "opencv-python" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -3578,9 +3578,9 @@ dependencies = [
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "opencv-python" },
     { name = "requests" },
-    { name = "rerun-sdk" },
     { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "scipy", version = "1.16.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
@@ -3589,8 +3589,8 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python", specifier = ">4.6" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
     { name = "scipy" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -3603,7 +3603,7 @@ dependencies = [
     { name = "pillow" },
     { name = "pyopf" },
     { name = "requests" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
     { name = "tqdm" },
 ]
 
@@ -3613,7 +3613,7 @@ requires-dist = [
     { name = "pillow" },
     { name = "pyopf" },
     { name = "requests" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "tqdm" },
 ]
 
@@ -3641,13 +3641,13 @@ version = "0.1.0"
 source = { editable = "examples/python/openstreetmap_data" }
 dependencies = [
     { name = "requests" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "requests" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -3900,13 +3900,13 @@ source = { editable = "examples/python/plots" }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -4681,7 +4681,7 @@ dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "requests" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
     { name = "trimesh" },
 ]
 
@@ -4689,7 +4689,7 @@ dependencies = [
 requires-dist = [
     { name = "numpy" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "trimesh" },
 ]
 
@@ -4801,100 +4801,6 @@ requires-dist = [
     { name = "watchfiles", marker = "extra == 'dev'" },
 ]
 provides-extras = ["dev", "test"]
-
-[[package]]
-name = "rerun-sdk"
-source = { editable = "rerun_py" }
-dependencies = [
-    { name = "attrs" },
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "pillow" },
-    { name = "psutil" },
-    { name = "pyarrow" },
-    { name = "typing-extensions" },
-]
-
-[package.optional-dependencies]
-all = [
-    { name = "datafusion" },
-    { name = "pandas" },
-    { name = "rerun-notebook" },
-]
-datafusion = [
-    { name = "datafusion" },
-    { name = "pandas" },
-]
-dataloader = [
-    { name = "av" },
-    { name = "pillow" },
-    { name = "torch" },
-    { name = "torchvision" },
-]
-dataplatform = [
-    { name = "datafusion" },
-    { name = "pandas" },
-]
-notebook = [
-    { name = "rerun-notebook" },
-]
-tests = [
-    { name = "av" },
-    { name = "datafusion" },
-    { name = "inline-snapshot" },
-    { name = "opencv-python" },
-    { name = "pandas" },
-    { name = "polars" },
-    { name = "pytest" },
-    { name = "semver" },
-    { name = "syrupy" },
-    { name = "tomli" },
-    { name = "torch" },
-    { name = "torchvision" },
-]
-tracing = [
-    { name = "opentelemetry-api" },
-    { name = "opentelemetry-exporter-otlp-proto-grpc" },
-    { name = "opentelemetry-sdk" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "attrs", specifier = ">=23.1.0" },
-    { name = "av", marker = "extra == 'dataloader'" },
-    { name = "av", marker = "extra == 'tests'", specifier = ">=14.2.0" },
-    { name = "datafusion", marker = "extra == 'all'", specifier = "==52.3.0" },
-    { name = "datafusion", marker = "extra == 'datafusion'", specifier = "==52.3.0" },
-    { name = "datafusion", marker = "extra == 'dataplatform'", specifier = "==52.3.0" },
-    { name = "datafusion", marker = "extra == 'tests'", specifier = "==52.3.0" },
-    { name = "inline-snapshot", marker = "extra == 'tests'", specifier = "==0.31.1" },
-    { name = "numpy", specifier = ">=2" },
-    { name = "opencv-python", marker = "extra == 'tests'", specifier = ">4.6" },
-    { name = "opentelemetry-api", marker = "extra == 'tracing'" },
-    { name = "opentelemetry-exporter-otlp-proto-grpc", marker = "extra == 'tracing'" },
-    { name = "opentelemetry-sdk", marker = "extra == 'tracing'" },
-    { name = "pandas", marker = "extra == 'all'", specifier = ">=2" },
-    { name = "pandas", marker = "extra == 'datafusion'", specifier = ">=2" },
-    { name = "pandas", marker = "extra == 'dataplatform'", specifier = ">=2" },
-    { name = "pandas", marker = "extra == 'tests'", specifier = ">=2" },
-    { name = "pillow", specifier = ">=8.0.0" },
-    { name = "pillow", marker = "extra == 'dataloader'", specifier = ">=8.0.0" },
-    { name = "polars", marker = "extra == 'tests'", specifier = "==1.36.1" },
-    { name = "psutil", specifier = ">=7.0" },
-    { name = "pyarrow", specifier = ">=18.0.0" },
-    { name = "pytest", marker = "extra == 'tests'", specifier = "==9.0.3" },
-    { name = "rerun-notebook", marker = "extra == 'all'", editable = "rerun_notebook" },
-    { name = "rerun-notebook", marker = "extra == 'notebook'", editable = "rerun_notebook" },
-    { name = "semver", marker = "extra == 'tests'", specifier = ">=3.0,<3.1" },
-    { name = "syrupy", marker = "extra == 'tests'", specifier = "==5.0.0" },
-    { name = "tomli", marker = "extra == 'tests'", specifier = "==2.0.1" },
-    { name = "torch", marker = "extra == 'dataloader'", specifier = ">=2.5" },
-    { name = "torch", marker = "extra == 'tests'", specifier = ">=2.5" },
-    { name = "torchvision", marker = "extra == 'dataloader'" },
-    { name = "torchvision", marker = "extra == 'tests'" },
-    { name = "typing-extensions", specifier = ">=4.5" },
-]
-provides-extras = ["all", "datafusion", "dataloader", "dataplatform", "notebook", "tests", "tracing"]
 
 [[package]]
 name = "rerun-workspace"
@@ -5017,7 +4923,7 @@ snippets = [
     { name = "av" },
     { name = "mcap-protobuf-support" },
     { name = "pandas" },
-    { name = "rerun-sdk", extra = ["dataloader"] },
+    { name = "simplant-lab-sdk", extra = ["dataloader"] },
 ]
 
 [package.metadata]
@@ -5138,7 +5044,7 @@ snippets = [
     { name = "av" },
     { name = "mcap-protobuf-support" },
     { name = "pandas" },
-    { name = "rerun-sdk", extras = ["dataloader"], editable = "rerun_py" },
+    { name = "simplant-lab-sdk", extras = ["dataloader"], editable = "rerun_py" },
 ]
 
 [[package]]
@@ -5183,7 +5089,7 @@ dependencies = [
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "opencv-python" },
     { name = "requests" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
     { name = "tqdm" },
 ]
 
@@ -5192,7 +5098,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python", specifier = ">4.6" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "tqdm" },
 ]
 
@@ -5265,13 +5171,13 @@ source = { editable = "examples/python/rrt_star" }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "numpy" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -5482,8 +5388,8 @@ dependencies = [
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "opencv-python" },
     { name = "requests" },
-    { name = "rerun-sdk" },
     { name = "segment-anything" },
+    { name = "simplant-lab-sdk" },
     { name = "torch" },
     { name = "torchvision" },
     { name = "tqdm" },
@@ -5494,8 +5400,8 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
     { name = "segment-anything", git = "https://github.com/facebookresearch/segment-anything.git" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "torch" },
     { name = "torchvision" },
     { name = "tqdm" },
@@ -5525,13 +5431,13 @@ version = "0.1.1"
 source = { editable = "examples/python/server_tables" }
 dependencies = [
     { name = "datafusion" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "datafusion", specifier = "==52.3.0" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -5576,11 +5482,11 @@ name = "shared-recording"
 version = "0.1.0"
 source = { editable = "examples/python/shared_recording" }
 dependencies = [
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "simplant-lab-sdk", editable = "rerun_py" }]
 
 [[package]]
 name = "shellingham"
@@ -5590,6 +5496,100 @@ sdist = { url = "https://files.pythonhosted.org/packages/58/15/8b3609fd3830ef7b2
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e0/f9/0595336914c5619e5f28a1fb793285925a8cd4b432c9da0a987836c7f822/shellingham-1.5.4-py2.py3-none-any.whl", hash = "sha256:7ecfff8f2fd72616f7481040475a65b2bf8af90a56c89140852d1120324e8686", size = 9755, upload-time = "2023-10-24T04:13:38.866Z" },
 ]
+
+[[package]]
+name = "simplant-lab-sdk"
+source = { editable = "rerun_py" }
+dependencies = [
+    { name = "attrs" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "pillow" },
+    { name = "psutil" },
+    { name = "pyarrow" },
+    { name = "typing-extensions" },
+]
+
+[package.optional-dependencies]
+all = [
+    { name = "datafusion" },
+    { name = "pandas" },
+    { name = "rerun-notebook" },
+]
+datafusion = [
+    { name = "datafusion" },
+    { name = "pandas" },
+]
+dataloader = [
+    { name = "av" },
+    { name = "pillow" },
+    { name = "torch" },
+    { name = "torchvision" },
+]
+dataplatform = [
+    { name = "datafusion" },
+    { name = "pandas" },
+]
+notebook = [
+    { name = "rerun-notebook" },
+]
+tests = [
+    { name = "av" },
+    { name = "datafusion" },
+    { name = "inline-snapshot" },
+    { name = "opencv-python" },
+    { name = "pandas" },
+    { name = "polars" },
+    { name = "pytest" },
+    { name = "semver" },
+    { name = "syrupy" },
+    { name = "tomli" },
+    { name = "torch" },
+    { name = "torchvision" },
+]
+tracing = [
+    { name = "opentelemetry-api" },
+    { name = "opentelemetry-exporter-otlp-proto-grpc" },
+    { name = "opentelemetry-sdk" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "attrs", specifier = ">=23.1.0" },
+    { name = "av", marker = "extra == 'dataloader'" },
+    { name = "av", marker = "extra == 'tests'", specifier = ">=14.2.0" },
+    { name = "datafusion", marker = "extra == 'all'", specifier = "==52.3.0" },
+    { name = "datafusion", marker = "extra == 'datafusion'", specifier = "==52.3.0" },
+    { name = "datafusion", marker = "extra == 'dataplatform'", specifier = "==52.3.0" },
+    { name = "datafusion", marker = "extra == 'tests'", specifier = "==52.3.0" },
+    { name = "inline-snapshot", marker = "extra == 'tests'", specifier = "==0.31.1" },
+    { name = "numpy", specifier = ">=2" },
+    { name = "opencv-python", marker = "extra == 'tests'", specifier = ">4.6" },
+    { name = "opentelemetry-api", marker = "extra == 'tracing'" },
+    { name = "opentelemetry-exporter-otlp-proto-grpc", marker = "extra == 'tracing'" },
+    { name = "opentelemetry-sdk", marker = "extra == 'tracing'" },
+    { name = "pandas", marker = "extra == 'all'", specifier = ">=2" },
+    { name = "pandas", marker = "extra == 'datafusion'", specifier = ">=2" },
+    { name = "pandas", marker = "extra == 'dataplatform'", specifier = ">=2" },
+    { name = "pandas", marker = "extra == 'tests'", specifier = ">=2" },
+    { name = "pillow", specifier = ">=8.0.0" },
+    { name = "pillow", marker = "extra == 'dataloader'", specifier = ">=8.0.0" },
+    { name = "polars", marker = "extra == 'tests'", specifier = "==1.36.1" },
+    { name = "psutil", specifier = ">=7.0" },
+    { name = "pyarrow", specifier = ">=18.0.0" },
+    { name = "pytest", marker = "extra == 'tests'", specifier = "==9.0.3" },
+    { name = "rerun-notebook", marker = "extra == 'all'", editable = "rerun_notebook" },
+    { name = "rerun-notebook", marker = "extra == 'notebook'", editable = "rerun_notebook" },
+    { name = "semver", marker = "extra == 'tests'", specifier = ">=3.0,<3.1" },
+    { name = "syrupy", marker = "extra == 'tests'", specifier = "==5.0.0" },
+    { name = "tomli", marker = "extra == 'tests'", specifier = "==2.0.1" },
+    { name = "torch", marker = "extra == 'dataloader'", specifier = ">=2.5" },
+    { name = "torch", marker = "extra == 'tests'", specifier = ">=2.5" },
+    { name = "torchvision", marker = "extra == 'dataloader'" },
+    { name = "torchvision", marker = "extra == 'tests'" },
+    { name = "typing-extensions", specifier = ">=4.5" },
+]
+provides-extras = ["all", "datafusion", "dataloader", "dataplatform", "notebook", "tests", "tracing"]
 
 [[package]]
 name = "sitecustomize-entrypoints"
@@ -5660,11 +5660,11 @@ name = "stdio"
 version = "0.1.0"
 source = { editable = "examples/python/stdio" }
 dependencies = [
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "simplant-lab-sdk", editable = "rerun_py" }]
 
 [[package]]
 name = "stringcase"
@@ -5681,7 +5681,7 @@ dependencies = [
     { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "opencv-python" },
     { name = "requests" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
     { name = "tqdm" },
 ]
 
@@ -5690,7 +5690,7 @@ requires-dist = [
     { name = "numpy" },
     { name = "opencv-python", specifier = ">4.6" },
     { name = "requests", specifier = ">=2.31,<3" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
     { name = "tqdm" },
 ]
 
@@ -5724,13 +5724,13 @@ version = "0.1.0"
 source = { editable = "examples/python/table_blueprints" }
 dependencies = [
     { name = "pyarrow" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "pyarrow" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -5739,13 +5739,13 @@ version = "0.1.0"
 source = { editable = "examples/python/table_grid_with_flags" }
 dependencies = [
     { name = "pyarrow" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "pyarrow" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -5756,7 +5756,7 @@ dependencies = [
     { name = "lancedb" },
     { name = "platformdirs" },
     { name = "pyarrow" },
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
@@ -5764,7 +5764,7 @@ requires-dist = [
     { name = "lancedb" },
     { name = "platformdirs" },
     { name = "pyarrow" },
-    { name = "rerun-sdk", editable = "rerun_py" },
+    { name = "simplant-lab-sdk", editable = "rerun_py" },
 ]
 
 [[package]]
@@ -5781,11 +5781,11 @@ name = "template"
 version = "0.1.0"
 source = { editable = "examples/python/template" }
 dependencies = [
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "simplant-lab-sdk", editable = "rerun_py" }]
 
 [[package]]
 name = "termcolor"
@@ -6254,11 +6254,11 @@ name = "using-index-values"
 version = "0.1.0"
 source = { editable = "examples/python/using_index_values" }
 dependencies = [
-    { name = "rerun-sdk" },
+    { name = "simplant-lab-sdk" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "rerun-sdk", editable = "rerun_py" }]
+requires-dist = [{ name = "simplant-lab-sdk", editable = "rerun_py" }]
 
 [[package]]
 name = "uv"

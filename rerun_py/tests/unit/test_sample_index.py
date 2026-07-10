@@ -1,10 +1,11 @@
-"""Tests for `SampleIndex.global_to_local` in `rerun.experimental.dataloader._sample_index`."""
+"""Tests for `SampleIndex.global_to_local` in `simplant_lab.experimental.dataloader._sample_index`."""
 
 from __future__ import annotations
 
 import numpy as np
 import pytest
-from rerun.experimental.dataloader._sample_index import SampleIndex, SegmentMetadata
+
+from simplant_lab.experimental.dataloader._sample_index import SampleIndex, SegmentMetadata
 
 
 def _integer_segment(segment_id: str, index_start: int, index_end: int) -> SegmentMetadata:

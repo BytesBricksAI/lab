@@ -1,1 +1,1 @@
-rerun::RecordingStreamBuilder::new("rerun_example_shared_recording")
+simplant_lab::RecordingStreamBuilder::new("rerun_example_shared_recording")

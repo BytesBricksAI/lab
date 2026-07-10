@@ -79,7 +79,7 @@ namespace rerun::blueprint::archetypes {
         /// Specifically, this transforms the existing `ComponentBatch` data into `ComponentColumn`s
         /// instead, via `ComponentBatch::partitioned`.
         ///
-        /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+        /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
         ///
         /// The specified `lengths` must sum to the total length of the component batch.
         Collection<ComponentColumn> columns(const Collection<uint32_t>& lengths_);

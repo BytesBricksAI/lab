@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .bar_chart_ext import BarChartExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["BarChart"]
 
 
 @define(str=False, repr=False, init=False)
-class BarChart(BarChartExt, Archetype, VisualizableArchetype):
+class BarChart(Archetype, VisualizableArchetype):
     """
     **Archetype**: A bar chart.
 
@@ -38,7 +37,7 @@ class BarChart(BarChartExt, Archetype, VisualizableArchetype):
     -------
     ### Simple bar chart:
     ```python
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_bar_chart", spawn=True)
     rr.log("bar_chart", rr.BarChart([8, 4, 0, 9, 1, 4, 1, 6, 9, 0]))
@@ -210,7 +209,7 @@ class BarChart(BarChartExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.
@@ -283,7 +282,7 @@ class BarChart(BarChartExt, Archetype, VisualizableArchetype):
     values: components.TensorDataBatch | None = field(
         metadata={"component": True},
         default=None,
-        converter=BarChartExt.values__field_converter_override,  # type: ignore[misc]
+        converter=components.TensorDataBatch._converter,  # type: ignore[misc]
     )
     # The values. Should always be a 1-dimensional tensor (i.e. a vector).
     #

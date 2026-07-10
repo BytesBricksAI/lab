@@ -20,7 +20,6 @@ from .._baseclasses import (
 from .._converters import (
     to_np_uint64,
 )
-from .tensor_data_ext import TensorDataExt
 
 __all__ = ["TensorData", "TensorDataArrayLike", "TensorDataBatch", "TensorDataLike"]
 
@@ -33,7 +32,7 @@ def _tensor_data__buffer__special_field_converter_override(x: datatypes.TensorBu
 
 
 @define(init=False)
-class TensorData(TensorDataExt):
+class TensorData:
     """
     **Datatype**: An N-dimensional array of numbers.
 
@@ -49,7 +48,31 @@ class TensorData(TensorDataExt):
     This will be addressed as part of <https://github.com/rerun-io/rerun/issues/6832>.
     """
 
-    # __init__ can be found in tensor_data_ext.py
+    def __init__(
+        self: Any, shape: npt.ArrayLike, buffer: datatypes.TensorBufferLike, *, names: list[str] | None = None
+    ) -> None:
+        """
+        Create a new instance of the TensorData datatype.
+
+        Parameters
+        ----------
+        shape:
+            The shape of the tensor, i.e. the length of each dimension.
+        names:
+            The names of the dimensions of the tensor (optional).
+
+            If set, should be the same length as [`datatypes.TensorData.shape`][rerun.datatypes.TensorData.shape].
+            If it has a different length your names may show up improperly,
+            and some constructors may produce a warning or even an error.
+
+            Example: `["height", "width", "channel", "batch"]`.
+        buffer:
+            The content/data.
+
+        """
+
+        # You can define your own __init__ function as a member of TensorDataExt in tensor_data_ext.py
+        self.__attrs_init__(shape=shape, names=names, buffer=buffer)
 
     shape: npt.NDArray[np.uint64] = field(converter=to_np_uint64)
     # The shape of the tensor, i.e. the length of each dimension.
@@ -169,4 +192,6 @@ class TensorDataBatch(BaseBatch[TensorDataArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: TensorDataArrayLike, data_type: pa.DataType) -> pa.Array:
-        return TensorDataExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of TensorData not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in tensor_data_ext.py

@@ -17,13 +17,12 @@ from .._baseclasses import (
     BaseBatch,
 )
 from .._numpy_compatibility import asarray
-from .rgba32_ext import Rgba32Ext
 
 __all__ = ["Rgba32", "Rgba32ArrayLike", "Rgba32Batch", "Rgba32Like"]
 
 
 @define(init=False)
-class Rgba32(Rgba32Ext):
+class Rgba32:
     """
     **Datatype**: An RGBA color with unmultiplied/separate alpha, in sRGB gamma space with linear alpha.
 
@@ -41,9 +40,7 @@ class Rgba32(Rgba32Ext):
         # You can define your own __init__ function as a member of Rgba32Ext in rgba32_ext.py
         self.__attrs_init__(rgba=rgba)
 
-    rgba: int = field(
-        converter=Rgba32Ext.rgba__field_converter_override,  # type: ignore[misc]
-    )
+    rgba: int = field(converter=int)
 
     def __array__(self, dtype: npt.DTypeLike = None, copy: bool | None = None) -> npt.NDArray[Any]:
         # You can define your own __array__ function as a member of Rgba32Ext in rgba32_ext.py
@@ -71,4 +68,5 @@ class Rgba32Batch(BaseBatch[Rgba32ArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: Rgba32ArrayLike, data_type: pa.DataType) -> pa.Array:
-        return Rgba32Ext.native_to_pa_array_override(data, data_type)
+        array = np.asarray(data, dtype=np.uint32).flatten()
+        return pa.array(array, type=data_type)

@@ -5,8 +5,9 @@ from typing import TYPE_CHECKING, cast
 
 import numpy as np
 import pytest
-import rerun as rr
-from rerun.components import (
+
+import simplant_lab as rr
+from simplant_lab.components import (
     Color,
     ColorBatch,
     Position2DBatch,
@@ -30,7 +31,7 @@ from .common_arrays import (
 )
 
 if TYPE_CHECKING:
-    from rerun.datatypes import (
+    from simplant_lab.datatypes import (
         ClassIdArrayLike,
         Float32ArrayLike,
         KeypointIdArrayLike,

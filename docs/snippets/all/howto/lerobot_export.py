@@ -21,7 +21,7 @@ from rerun_export.lerobot.converter import convert_dataframe_to_episode
 from rerun_export.lerobot.feature_inference import infer_features
 from rerun_export.lerobot.types import LeRobotConversionConfig, VideoSpec
 
-import rerun as rr
+import simplant_lab as rr
 
 # Start a server with RRD recordings
 # In practice, you would point this to your directory of RRD files

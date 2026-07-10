@@ -8,9 +8,9 @@ from math import tau
 
 import numpy as np
 
-import rerun as rr  # pip install rerun-sdk
-from rerun import blueprint as rrb
-from rerun.utilities import bounce_lerp, build_color_spiral
+import simplant_lab as rr  # pip install simplant-lab-sdk
+from simplant_lab import blueprint as rrb
+from simplant_lab.utilities import bounce_lerp, build_color_spiral
 
 DESCRIPTION = """
 # DNA

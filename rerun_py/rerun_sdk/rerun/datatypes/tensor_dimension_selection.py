@@ -8,6 +8,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import TYPE_CHECKING, Any
 
+import numpy as np
 import numpy.typing as npt
 import pyarrow as pa
 from attrs import define, field
@@ -15,7 +16,6 @@ from attrs import define, field
 from .._baseclasses import (
     BaseBatch,
 )
-from .tensor_dimension_selection_ext import TensorDimensionSelectionExt
 
 __all__ = [
     "TensorDimensionSelection",
@@ -26,10 +26,24 @@ __all__ = [
 
 
 @define(init=False)
-class TensorDimensionSelection(TensorDimensionSelectionExt):
+class TensorDimensionSelection:
     """**Datatype**: Selection of a single tensor dimension."""
 
-    # __init__ can be found in tensor_dimension_selection_ext.py
+    def __init__(self: Any, dimension: int, invert: bool) -> None:
+        """
+        Create a new instance of the TensorDimensionSelection datatype.
+
+        Parameters
+        ----------
+        dimension:
+            The dimension number to select.
+        invert:
+            Invert the direction of the dimension.
+
+        """
+
+        # You can define your own __init__ function as a member of TensorDimensionSelectionExt in tensor_dimension_selection_ext.py
+        self.__attrs_init__(dimension=dimension, invert=invert)
 
     dimension: int = field(converter=int)
     # The dimension number to select.
@@ -60,4 +74,18 @@ class TensorDimensionSelectionBatch(BaseBatch[TensorDimensionSelectionArrayLike]
 
     @staticmethod
     def _native_to_pa_array(data: TensorDimensionSelectionArrayLike, data_type: pa.DataType) -> pa.Array:
-        return TensorDimensionSelectionExt.native_to_pa_array_override(data, data_type)
+
+        typed_data: Sequence[TensorDimensionSelection]
+
+        if isinstance(data, TensorDimensionSelection):
+            typed_data = [data]
+        else:
+            typed_data = data
+
+        return pa.StructArray.from_arrays(
+            [
+                pa.array(np.asarray([x.dimension for x in typed_data], dtype=np.uint32)),
+                pa.array(np.asarray([x.invert for x in typed_data], dtype=np.bool_)),
+            ],
+            fields=list(data_type),
+        )

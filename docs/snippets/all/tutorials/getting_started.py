@@ -7,7 +7,7 @@ Logging SDK and is therefore available in Python, Rust, and C++.
 import math
 from pathlib import Path
 
-import rerun as rr
+import simplant_lab as rr
 
 # Materialize the .rrd that the catalog regions below register against.
 # Same code as the Log step's three-language snippet, repeated here so this

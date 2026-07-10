@@ -18,13 +18,12 @@ from .._baseclasses import (
     ComponentDescriptor,
 )
 from ..error_utils import catch_and_log_exceptions
-from .view_coordinates_ext import ViewCoordinatesExt
 
 __all__ = ["ViewCoordinates"]
 
 
 @define(str=False, repr=False, init=False)
-class ViewCoordinates(ViewCoordinatesExt, Archetype):
+class ViewCoordinates(Archetype):
     """
     **Archetype**: How we interpret the coordinate system of an entity/space.
 
@@ -45,7 +44,7 @@ class ViewCoordinates(ViewCoordinatesExt, Archetype):
     -------
     ### View coordinates for adjusting the eye camera:
     ```python
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_view_coordinates", spawn=True)
 
@@ -160,7 +159,7 @@ class ViewCoordinates(ViewCoordinatesExt, Archetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.
@@ -227,6 +226,3 @@ class ViewCoordinates(ViewCoordinatesExt, Archetype):
 
     __str__ = Archetype.__str__
     __repr__ = Archetype.__repr__  # type: ignore[assignment]
-
-
-ViewCoordinatesExt.deferred_patch_class(ViewCoordinates)

@@ -2,7 +2,7 @@
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 
 # Create an image with numpy
 image = np.zeros((200, 300, 3), dtype=np.uint8)

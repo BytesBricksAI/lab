@@ -10,7 +10,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-import rerun as rr  # pip install rerun-sdk
+import simplant_lab as rr  # pip install simplant-lab-sdk
 
 
 def main() -> None:

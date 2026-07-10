@@ -3,12 +3,12 @@ from __future__ import annotations
 import itertools
 from typing import TYPE_CHECKING, cast
 
-from rerun.blueprint.archetypes.viewport_blueprint import ViewportBlueprint
-from rerun.blueprint.components.auto_layout import AutoLayoutBatch
-from rerun.blueprint.components.auto_views import AutoViewsBatch
-from rerun.blueprint.components.root_container import RootContainerBatch
-from rerun.blueprint.components.view_maximized import ViewMaximizedBatch
-from rerun.blueprint.components.viewer_recommendation_hash import (
+from simplant_lab.blueprint.archetypes.viewport_blueprint import ViewportBlueprint
+from simplant_lab.blueprint.components.auto_layout import AutoLayoutBatch
+from simplant_lab.blueprint.components.auto_views import AutoViewsBatch
+from simplant_lab.blueprint.components.root_container import RootContainerBatch
+from simplant_lab.blueprint.components.view_maximized import ViewMaximizedBatch
+from simplant_lab.blueprint.components.viewer_recommendation_hash import (
     ViewerRecommendationHash,
     ViewerRecommendationHashBatch,
 )
@@ -16,9 +16,9 @@ from rerun.blueprint.components.viewer_recommendation_hash import (
 from .common_arrays import none_empty_or_value, uuid_bytes0, uuid_bytes1
 
 if TYPE_CHECKING:
-    from rerun.datatypes.bool import BoolLike
-    from rerun.datatypes.uint64 import UInt64ArrayLike
-    from rerun.datatypes.uuid import UuidLike
+    from simplant_lab.datatypes.bool import BoolLike
+    from simplant_lab.datatypes.uint64 import UInt64ArrayLike
+    from simplant_lab.datatypes.uuid import UuidLike
 
 
 def test_viewport_blueprint() -> None:

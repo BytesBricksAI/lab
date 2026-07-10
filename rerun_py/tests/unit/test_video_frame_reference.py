@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import pytest
-import rerun as rr
+
+import simplant_lab as rr
 
 
 def test_video_frame_reference() -> None:

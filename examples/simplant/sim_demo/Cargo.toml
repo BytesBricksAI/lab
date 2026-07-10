@@ -1,0 +1,17 @@
+[package]
+name = "sim_demo"
+version = "0.33.0-alpha.1+dev"
+edition = "2024"
+rust-version = "1.92"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[dependencies]
+sp_simulation = { path = "../../../crates/simplant/sp_simulation" }
+sp_sim_engine = { path = "../../../crates/simplant/sp_sim_engine" }
+re_sdk = { path = "../../../crates/top/re_sdk" }
+re_sdk_types = { path = "../../../crates/store/re_sdk_types" }
+anyhow = "1.0"
+
+[lints]
+workspace = true

@@ -10,16 +10,15 @@ from .._baseclasses import (
     ComponentBatchMixin,
     ComponentMixin,
 )
-from .video_timestamp_ext import VideoTimestampExt
 
 __all__ = ["VideoTimestamp", "VideoTimestampBatch"]
 
 
-class VideoTimestamp(VideoTimestampExt, datatypes.VideoTimestamp, ComponentMixin):
+class VideoTimestamp(datatypes.VideoTimestamp, ComponentMixin):
     """**Component**: Timestamp inside a [`archetypes.AssetVideo`][rerun.archetypes.AssetVideo]."""
 
     _BATCH_TYPE = None
-    # __init__ can be found in video_timestamp_ext.py
+    # You can define your own __init__ function as a member of VideoTimestampExt in video_timestamp_ext.py
 
     # Note: there are no fields here because VideoTimestamp delegates to datatypes.VideoTimestamp
 

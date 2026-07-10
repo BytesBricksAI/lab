@@ -5,9 +5,10 @@ from pathlib import Path
 
 import pyarrow as pa
 import pytest
-import rerun as rr
-import rerun.urdf as rru
-from rerun.experimental import Chunk, DeriveLens, LazyChunkStream, RrdReader, Selector, StreamingReader
+
+import simplant_lab as rr
+import simplant_lab.urdf as rru
+from simplant_lab.experimental import Chunk, DeriveLens, LazyChunkStream, RrdReader, Selector, StreamingReader
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 URDF_PATH = REPO_ROOT / "examples" / "rust" / "animated_urdf" / "data" / "so100.urdf"
@@ -110,7 +111,7 @@ def test_urdf_tree_frame_prefix() -> None:
 
     # compute_transform_columns should also produce prefixed frame IDs.
     columns = joint.compute_transform_columns([0.0, 0.5], clamp=True)
-    from rerun._baseclasses import ComponentColumnList
+    from simplant_lab._baseclasses import ComponentColumnList
 
     assert isinstance(columns, ComponentColumnList)
 
@@ -190,7 +191,7 @@ def test_urdf_compute_transform_columns() -> None:
     values = [0.0, 0.5, 1.0]
     columns = joint.compute_transform_columns(values, clamp=True)
 
-    from rerun._baseclasses import ComponentColumnList
+    from simplant_lab._baseclasses import ComponentColumnList
 
     assert isinstance(columns, ComponentColumnList)
     assert len(columns) > 0

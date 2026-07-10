@@ -2,7 +2,7 @@
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 
 # Initialize the SDK and give our recording a unique name
 rr.init("rerun_example_quick_start_connect")

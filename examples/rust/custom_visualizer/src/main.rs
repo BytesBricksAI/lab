@@ -5,8 +5,8 @@
 //! generates a 3D triangle mesh from the heightfield data each frame, with
 //! GPU-side colormap application.
 
-use rerun::external::re_sdk_types::{self, View as _};
-use rerun::external::{
+use simplant_lab::external::re_sdk_types::{self, View as _};
+use simplant_lab::external::{
     glam, re_crash_handler, re_grpc_server, re_log, re_log_channel, re_memory, re_viewer, tokio,
 };
 
@@ -97,19 +97,21 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-fn builtin_recording() -> Result<re_log_channel::LogReceiver, rerun::RecordingStreamError> {
+fn builtin_recording() -> Result<re_log_channel::LogReceiver, simplant_lab::RecordingStreamError> {
     let (rec, memory_sink) =
-        rerun::RecordingStreamBuilder::new("rerun_example_custom_visualizer").memory()?;
+        simplant_lab::RecordingStreamBuilder::new("rerun_example_custom_visualizer").memory()?;
 
     // Generate animated 512x512 heightfield spanning 10x10 metres with rippling terrain.
     let cols = 512u32;
     let rows = 512u32;
     let num_terrain_frames = 60;
-    let format = rerun::components::ImageFormat(rerun::datatypes::ImageFormat::from_color_model(
-        [cols, rows],
-        rerun::datatypes::ColorModel::L,
-        rerun::datatypes::ChannelDatatype::F32,
-    ));
+    let format = simplant_lab::components::ImageFormat(
+        simplant_lab::datatypes::ImageFormat::from_color_model(
+            [cols, rows],
+            simplant_lab::datatypes::ColorModel::L,
+            simplant_lab::datatypes::ChannelDatatype::F32,
+        ),
+    );
 
     for frame in 0..num_terrain_frames {
         let t = frame as f32 / num_terrain_frames as f32 * std::f32::consts::TAU;
@@ -143,7 +145,7 @@ fn builtin_recording() -> Result<re_log_channel::LogReceiver, rerun::RecordingSt
         }
 
         let height_bytes: &[u8] = bytemuck::cast_slice(&heights);
-        let buffer = rerun::components::ImageBuffer(height_bytes.to_vec().into());
+        let buffer = simplant_lab::components::ImageBuffer(height_bytes.to_vec().into());
         rec.log(
             "terrain",
             &height_field_archetype::HeightField::new(buffer, format),
@@ -153,17 +155,19 @@ fn builtin_recording() -> Result<re_log_channel::LogReceiver, rerun::RecordingSt
     // Log a solid box that orbits the terrain for reference.
     rec.log_static(
         "box",
-        &rerun::Boxes3D::from_half_sizes([[0.1, 0.3, 0.1]])
-            .with_fill_mode(rerun::FillMode::Solid)
-            .with_colors([rerun::Color::from_rgb(255, 100, 50)]),
+        &simplant_lab::Boxes3D::from_half_sizes([[0.1, 0.3, 0.1]])
+            .with_fill_mode(simplant_lab::FillMode::Solid)
+            .with_colors([simplant_lab::Color::from_rgb(255, 100, 50)]),
     )?;
 
     for i in 0..(std::f32::consts::TAU * 100.0) as i32 {
         rec.set_duration_secs("time", i as f32 / 100.0);
         rec.log(
             "box",
-            &rerun::Transform3D::from_rotation(glam::Quat::from_rotation_z(i as f32 / 100.0))
-                .with_translation([5.0, 5.0, 1.0]),
+            &simplant_lab::Transform3D::from_rotation(glam::Quat::from_rotation_z(
+                i as f32 / 100.0,
+            ))
+            .with_translation([5.0, 5.0, 1.0]),
         )?;
     }
 

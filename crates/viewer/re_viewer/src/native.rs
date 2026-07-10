@@ -1,12 +1,12 @@
 /// Used by `eframe` to decide where to store the app state.
-pub const APP_ID: &str = "rerun";
+pub const APP_ID: &str = re_ui::branding::PRODUCT_NAME_LOWERCASE;
 
 type DynError = Box<dyn std::error::Error + Send + Sync>;
 
 type AppCreator =
     Box<dyn FnOnce(&eframe::CreationContext<'_>) -> Result<Box<dyn eframe::App>, DynError>>;
 
-// NOTE: the name of this function is hard-coded in `crates/top/rerun/src/crash_handler.rs`!
+// NOTE: the name of this function is hard-coded in `crates/top/simplant-lab/src/crash_handler.rs`!
 pub fn run_native_app(
     // `eframe::run_native` may only be called on the main thread.
     _: crate::MainThreadToken,
@@ -15,13 +15,13 @@ pub fn run_native_app(
 ) -> eframe::Result {
     if crate::docker_detection::is_docker() {
         re_log::warn_once!(
-            "It looks like you are running the Rerun Viewer inside a Docker container. This is not officially supported, and may lead to performance issues and bugs. See https://github.com/rerun-io/rerun/issues/6835 for more.",
+            "It looks like you are running SimPlant-Lab inside a Docker container. This is not officially supported, and may lead to performance issues and bugs.",
         );
     }
 
     let native_options = eframe_options(force_wgpu_backend);
 
-    let window_title = "Rerun Viewer";
+    let window_title = re_ui::branding::PRODUCT_NAME;
     eframe::run_native(
         window_title,
         native_options,

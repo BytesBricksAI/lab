@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .points3d_ext import Points3DExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["Points3D"]
 
 
 @define(str=False, repr=False, init=False)
-class Points3D(Points3DExt, Archetype, VisualizableArchetype):
+class Points3D(Archetype, VisualizableArchetype):
     """
     **Archetype**: A 3D point cloud with positions and optional colors, radii, labels, etc.
 
@@ -38,7 +37,7 @@ class Points3D(Points3DExt, Archetype, VisualizableArchetype):
     --------
     ### Simple 3D points:
     ```python
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_points3d", spawn=True)
 
@@ -58,7 +57,7 @@ class Points3D(Points3DExt, Archetype, VisualizableArchetype):
     ```python
     import numpy as np
 
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_points3d_row_updates", spawn=True)
 
@@ -102,7 +101,7 @@ class Points3D(Points3DExt, Archetype, VisualizableArchetype):
 
     import numpy as np
 
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_points3d_column_updates", spawn=True)
 
@@ -147,7 +146,7 @@ class Points3D(Points3DExt, Archetype, VisualizableArchetype):
 
     ### Update specific properties of a point cloud over time:
     ```python
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_points3d_partial_updates", spawn=True)
 
@@ -185,7 +184,70 @@ class Points3D(Points3DExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.Points3D"
 
-    # __init__ can be found in points3d_ext.py
+    def __init__(
+        self: Any,
+        positions: datatypes.Vec3DArrayLike,
+        *,
+        radii: datatypes.Float32ArrayLike | None = None,
+        colors: datatypes.Rgba32ArrayLike | None = None,
+        labels: datatypes.Utf8ArrayLike | None = None,
+        show_labels: datatypes.BoolLike | None = None,
+        class_ids: datatypes.ClassIdArrayLike | None = None,
+        keypoint_ids: datatypes.KeypointIdArrayLike | None = None,
+    ) -> None:
+        """
+        Create a new instance of the Points3D archetype.
+
+        Parameters
+        ----------
+        positions:
+            All the 3D positions at which the point cloud shows points.
+        radii:
+            Optional radii for the points, effectively turning them into circles.
+        colors:
+            Optional colors for the points.
+
+            The colors are interpreted as RGB or RGBA in sRGB gamma-space,
+            As either 0-1 floats or 0-255 integers, with separate alpha.
+        labels:
+            Optional text labels for the points.
+
+            If there's a single label present, it will be placed at the center of the entity.
+            Otherwise, each instance will have its own label.
+        show_labels:
+            Whether the text labels should be shown.
+
+            If not set, labels will automatically appear when there is exactly one label for this entity
+            or the number of instances on this entity is under a certain threshold.
+        class_ids:
+            Optional class Ids for the points.
+
+            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+        keypoint_ids:
+            Optional keypoint IDs for the points, identifying them within a class.
+
+            If keypoint IDs are passed in but no [`components.ClassId`][rerun.components.ClassId]s were specified, the [`components.ClassId`][rerun.components.ClassId] will
+            default to 0.
+            This is useful to identify points within a single classification (which is identified
+            with `class_id`).
+            E.g. the classification might be 'Person' and the keypoints refer to joints on a
+            detected skeleton.
+
+        """
+
+        # You can define your own __init__ function as a member of Points3DExt in points3d_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(
+                positions=positions,
+                radii=radii,
+                colors=colors,
+                labels=labels,
+                show_labels=show_labels,
+                class_ids=class_ids,
+                keypoint_ids=keypoint_ids,
+            )
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -358,7 +420,7 @@ class Points3D(Points3DExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

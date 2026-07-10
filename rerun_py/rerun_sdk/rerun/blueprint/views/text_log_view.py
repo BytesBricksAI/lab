@@ -32,8 +32,8 @@ class TextLogView(View):
     -------
     ### Use a blueprint to show a TextLogView.:
     ```python
-    import rerun as rr
-    import rerun.blueprint as rrb
+    import simplant_lab as rr
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_text_log", spawn=True)
 
@@ -145,17 +145,17 @@ class TextLogView(View):
         properties: dict[str, AsComponents] = {}
         if columns is not None:
             if not isinstance(columns, blueprint_archetypes.TextLogColumns):
-                columns = blueprint_archetypes.TextLogColumns(columns)
+                columns = blueprint_archetypes.TextLogColumns(timeline_columns=columns)
             properties["TextLogColumns"] = columns
 
         if rows is not None:
             if not isinstance(rows, blueprint_archetypes.TextLogRows):
-                rows = blueprint_archetypes.TextLogRows(rows)
+                rows = blueprint_archetypes.TextLogRows(filter_by_log_level=rows)
             properties["TextLogRows"] = rows
 
         if format_options is not None:
             if not isinstance(format_options, blueprint_archetypes.TextLogFormat):
-                format_options = blueprint_archetypes.TextLogFormat(format_options)
+                format_options = blueprint_archetypes.TextLogFormat(monospace_body=format_options)
             properties["TextLogFormat"] = format_options
 
         super().__init__(

@@ -1,5 +1,5 @@
-# Contributing to Rerun
-This guide is for anyone who wants to contribute to the Rerun repository.
+# Contributing to SimPlant lab
+This guide is for anyone who wants to contribute to the SimPlant Lab repository (fork of [Rerun](https://github.com/rerun-io/rerun)).
 
 
 ## See also
@@ -26,7 +26,7 @@ You can discuss these changes by:
 
 * Commenting on an existing issue,
 * Creating a new issue, or
-* Pinging one of the Rerun maintainers on our [Discord](https://discord.gg/PXtCgFBSmH)
+* Pinging one of the SimPlant Lab maintainers on our [Discord](https://discord.gg/PXtCgFBSmH)
 
 > [!NOTE]
 > PRs containing large undiscussed changes may be closed without comment.
@@ -134,7 +134,7 @@ cargo doc --no-deps --open
 To learn about the viewer, run:
 
 ```
-cargo run -p rerun -- --help
+cargo run -p simplant-lab -- --help
 ```
 
 ## Tests
@@ -175,7 +175,7 @@ Each test run produces new images (typically at `<your-test.rs>/snapshots`).
 On failure, a `diff.png` is added highlighting all differences.
 To update references, run with `UPDATE_SNAPSHOTS=1`.
 
-Use `pixi run snapshots` to compare results of all failed tests visually in Rerun.
+Use `pixi run snapshots` to compare results of all failed tests visually in SimPlant Lab.
 You can also update from a failed CI run using `./scripts/update_snapshots_from_ci.sh`.
 Inspect PR diffs (including failed comparisons) via https://rerun-io.github.io/kitdiff/?url=<link to GitHub PR>.
 
@@ -244,7 +244,7 @@ We recommend [`cargo nextest`](https://nexte.st/) for running Rust tests — it'
 Before pushing, always run `pixi run fast-lint`. It takes seconds on repeated runs and catches trivial issues before wasting CI time.
 
 ### Hooks
-We recommend installing the Rerun pre-push hook, which runs `pixi run fast-lint` for you.
+We recommend installing the SimPlant Lab pre-push hook, which runs `pixi run fast-lint` for you.
 
 Copy it into your local `.git/hooks`:
 ```
@@ -262,4 +262,4 @@ git config core.hooksPath hooks
 
 ### Other
 View higher log levels with `export RUST_LOG=trace`.
-Debug logging is automatically enabled for the viewer when running inside the `rerun` checkout.
+Debug logging is automatically enabled for the viewer when running inside the SimPlant Lab checkout.

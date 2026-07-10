@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .video_frame_reference_ext import VideoFrameReferenceExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["VideoFrameReference"]
 
 
 @define(str=False, repr=False, init=False)
-class VideoFrameReference(VideoFrameReferenceExt, Archetype, VisualizableArchetype):
+class VideoFrameReference(Archetype, VisualizableArchetype):
     """
     **Archetype**: References a single video frame.
 
@@ -45,7 +44,7 @@ class VideoFrameReference(VideoFrameReferenceExt, Archetype, VisualizableArchety
     ```python
     import sys
 
-    import rerun as rr
+    import simplant_lab as rr
 
     if len(sys.argv) < 2:
         # TODO(#7354): Only mp4 is supported for now.
@@ -81,8 +80,8 @@ class VideoFrameReference(VideoFrameReferenceExt, Archetype, VisualizableArchety
     ```python
     import sys
 
-    import rerun as rr
-    import rerun.blueprint as rrb
+    import simplant_lab as rr
+    import simplant_lab.blueprint as rrb
 
     if len(sys.argv) < 2:
         # TODO(#7354): Only mp4 is supported for now.
@@ -126,7 +125,57 @@ class VideoFrameReference(VideoFrameReferenceExt, Archetype, VisualizableArchety
 
     NAME: ClassVar[str] = "rerun.archetypes.VideoFrameReference"
 
-    # __init__ can be found in video_frame_reference_ext.py
+    def __init__(
+        self: Any,
+        timestamp: datatypes.VideoTimestampLike,
+        *,
+        video_reference: datatypes.EntityPathLike | None = None,
+        opacity: datatypes.Float32Like | None = None,
+        draw_order: datatypes.Float32Like | None = None,
+    ) -> None:
+        """
+        Create a new instance of the VideoFrameReference archetype.
+
+        Parameters
+        ----------
+        timestamp:
+            References the closest video frame to this timestamp.
+
+            Note that this uses the closest video frame instead of the latest at this timestamp
+            in order to be more forgiving of rounding errors for inprecise timestamp types.
+
+            Timestamps are relative to the start of the video, i.e. a timestamp of 0 always corresponds to the first frame.
+            This is oftentimes equivalent to presentation timestamps (known as PTS), but in the presence of B-frames
+            (bidirectionally predicted frames) there may be an offset on the first presentation timestamp in the video.
+        video_reference:
+            Optional reference to an entity with a [`archetypes.AssetVideo`][rerun.archetypes.AssetVideo].
+
+            If none is specified, the video is assumed to be at the same entity.
+            Note that blueprint overrides on the referenced video will be ignored regardless,
+            as this is always interpreted as a reference to the data store.
+
+            For a series of video frame references, it is recommended to specify this path only once
+            at the beginning of the series and then rely on latest-at query semantics to
+            keep the video reference active.
+        opacity:
+            Opacity of the video, useful for layering several media.
+
+            Defaults to 1.0 (fully opaque).
+        draw_order:
+            An optional floating point value that specifies the 2D drawing order.
+
+            Objects with higher values are drawn on top of those with lower values.
+            Defaults to `-15.0`.
+
+        """
+
+        # You can define your own __init__ function as a member of VideoFrameReferenceExt in video_frame_reference_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(
+                timestamp=timestamp, video_reference=video_reference, opacity=opacity, draw_order=draw_order
+            )
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -259,7 +308,7 @@ class VideoFrameReference(VideoFrameReferenceExt, Archetype, VisualizableArchety
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

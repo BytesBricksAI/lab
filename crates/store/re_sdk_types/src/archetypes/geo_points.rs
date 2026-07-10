@@ -28,14 +28,15 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Log a geospatial point
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new("rerun_example_geo_points")
-///         .spawn()?;
+///     let rec =
+///         simplant_lab::RecordingStreamBuilder::new("rerun_example_geo_points")
+///             .spawn()?;
 ///
 ///     rec.log(
 ///         "rerun_hq",
-///         &rerun::GeoPoints::from_lat_lon([(59.319221, 18.075631)])
-///             .with_radii([rerun::Radius::new_ui_points(10.0)])
-///             .with_colors([rerun::Color::from_rgb(255, 0, 0)]),
+///         &simplant_lab::GeoPoints::from_lat_lon([(59.319221, 18.075631)])
+///             .with_radii([simplant_lab::Radius::new_ui_points(10.0)])
+///             .with_colors([simplant_lab::Color::from_rgb(255, 0, 0)]),
 ///     )?;
 ///
 ///     Ok(())
@@ -285,7 +286,7 @@ impl GeoPoints {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

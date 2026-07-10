@@ -14,13 +14,12 @@ from .. import datatypes
 from .._baseclasses import (
     BaseBatch,
 )
-from .time_range_boundary_ext import TimeRangeBoundaryExt
 
 __all__ = ["TimeRangeBoundary", "TimeRangeBoundaryArrayLike", "TimeRangeBoundaryBatch", "TimeRangeBoundaryLike"]
 
 
 @define
-class TimeRangeBoundary(TimeRangeBoundaryExt):
+class TimeRangeBoundary:
     """**Datatype**: Left or right boundary of a time range."""
 
     # You can define your own __init__ function as a member of TimeRangeBoundaryExt in time_range_boundary_ext.py

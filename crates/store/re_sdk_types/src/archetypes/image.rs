@@ -43,8 +43,8 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// use ndarray::{Array, ShapeBuilder as _, s};
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_image").spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new("rerun_example_image")
+///         .spawn()?;
 ///
 ///     let mut image = Array::<u8, _>::zeros((200, 300, 3).f());
 ///     image.slice_mut(s![.., .., 0]).fill(255);
@@ -53,8 +53,8 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 ///     rec.log(
 ///         "image",
-///         &rerun::Image::from_color_model_and_tensor(
-///             rerun::ColorModel::RGB,
+///         &simplant_lab::Image::from_color_model_and_tensor(
+///             simplant_lab::ColorModel::RGB,
 ///             image,
 ///         )?,
 ///     )?;
@@ -74,11 +74,13 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 /// ### Logging images with various formats
 /// ```ignore
-/// use rerun::external::ndarray;
+/// use simplant_lab::external::ndarray;
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new("rerun_example_image_formats")
-///         .spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
+///         "rerun_example_image_formats",
+///     )
+///     .spawn()?;
 ///
 ///     // Simple gradient image
 ///     let image =
@@ -92,8 +94,8 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     // RGB image
 ///     rec.log(
 ///         "image_rgb",
-///         &rerun::Image::from_color_model_and_tensor(
-///             rerun::ColorModel::RGB,
+///         &simplant_lab::Image::from_color_model_and_tensor(
+///             simplant_lab::ColorModel::RGB,
 ///             image.clone(),
 ///         )?,
 ///     )?;
@@ -101,8 +103,8 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     // Green channel only (Luminance)
 ///     rec.log(
 ///         "image_green_only",
-///         &rerun::Image::from_color_model_and_tensor(
-///             rerun::ColorModel::L,
+///         &simplant_lab::Image::from_color_model_and_tensor(
+///             simplant_lab::ColorModel::L,
 ///             image.slice(ndarray::s![.., .., 1]).to_owned(),
 ///         )?,
 ///     )?;
@@ -110,8 +112,8 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     // BGR image
 ///     rec.log(
 ///         "image_bgr",
-///         &rerun::Image::from_color_model_and_tensor(
-///             rerun::ColorModel::BGR,
+///         &simplant_lab::Image::from_color_model_and_tensor(
+///             simplant_lab::ColorModel::BGR,
 ///             image.slice(ndarray::s![.., .., ..;-1]).to_owned(),
 ///         )?,
 ///     )?;
@@ -123,9 +125,9 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     yuv_bytes.extend((0..256).flat_map(|y| std::iter::repeat_n(y as u8, 128))); // Gradient for V.
 ///     rec.log(
 ///         "image_yuv422",
-///         &rerun::Image::from_pixel_format(
+///         &simplant_lab::Image::from_pixel_format(
 ///             [256, 256],
-///             rerun::PixelFormat::Y_U_V16_FullRange,
+///             simplant_lab::PixelFormat::Y_U_V16_FullRange,
 ///             yuv_bytes,
 ///         ),
 ///     )?;
@@ -409,7 +411,7 @@ impl Image {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

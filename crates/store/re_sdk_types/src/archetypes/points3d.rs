@@ -31,11 +31,12 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
 ///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_points3d").spawn()?;
+///         simplant_lab::RecordingStreamBuilder::new("rerun_example_points3d")
+///             .spawn()?;
 ///
 ///     rec.log(
 ///         "points",
-///         &rerun::Points3D::new([(0.0, 0.0, 0.0), (1.0, 1.0, 1.0)]),
+///         &simplant_lab::Points3D::new([(0.0, 0.0, 0.0), (1.0, 1.0, 1.0)]),
 ///     )?;
 ///
 ///     Ok(())
@@ -54,7 +55,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Update a point cloud over time
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new(
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
 ///         "rerun_example_points3d_row_updates",
 ///     )
 ///     .spawn()?;
@@ -78,7 +79,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     {
 ///         rec.set_duration_secs("time", time);
 ///
-///         let point_cloud = rerun::Points3D::new(positions)
+///         let point_cloud = simplant_lab::Points3D::new(positions)
 ///             .with_colors([color])
 ///             .with_radii([radius]);
 ///
@@ -101,12 +102,12 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Update a point cloud over time, in a single operation
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new(
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
 ///         "rerun_example_points3d_column_updates",
 ///     )
 ///     .spawn()?;
 ///
-///     let times = rerun::TimeColumn::new_duration_secs("time", 10..15);
+///     let times = simplant_lab::TimeColumn::new_duration_secs("time", 10..15);
 ///
 ///     // Prepare a point cloud that evolves over 5 timesteps, changing the number of points in the process.
 ///     #[rustfmt::skip]
@@ -123,10 +124,10 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     let radii = [0.05, 0.01, 0.2, 0.1, 0.3];
 ///
 ///     // Partition our data as expected across the 5 timesteps.
-///     let position = rerun::Points3D::update_fields()
+///     let position = simplant_lab::Points3D::update_fields()
 ///         .with_positions(positions)
 ///         .columns([2, 4, 4, 3, 4])?;
-///     let color_and_radius = rerun::Points3D::update_fields()
+///     let color_and_radius = simplant_lab::Points3D::update_fields()
 ///         .with_colors(colors)
 ///         .with_radii(radii)
 ///         .columns_of_unit_batches()?;
@@ -149,7 +150,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Update specific properties of a point cloud over time
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new(
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
 ///         "rerun_example_points3d_partial_updates",
 ///     )
 ///     .spawn()?;
@@ -157,14 +158,14 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     let positions = || (0..10).map(|i| (i as f32, 0.0, 0.0));
 ///
 ///     rec.set_time_sequence("frame", 0);
-///     rec.log("points", &rerun::Points3D::new(positions()))?;
+///     rec.log("points", &simplant_lab::Points3D::new(positions()))?;
 ///
 ///     for i in 0..10 {
 ///         let colors = (0..10).map(|n| {
 ///             if n < i {
-///                 rerun::Color::from_rgb(20, 200, 20)
+///                 simplant_lab::Color::from_rgb(20, 200, 20)
 ///             } else {
-///                 rerun::Color::from_rgb(200, 20, 20)
+///                 simplant_lab::Color::from_rgb(200, 20, 20)
 ///             }
 ///         });
 ///         let radii = (0..10).map(|n| if n < i { 0.6 } else { 0.2 });
@@ -173,7 +174,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///         rec.set_time_sequence("frame", i);
 ///         rec.log(
 ///             "points",
-///             &rerun::Points3D::update_fields()
+///             &simplant_lab::Points3D::update_fields()
 ///                 .with_radii(radii)
 ///                 .with_colors(colors),
 ///         )?;
@@ -183,7 +184,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     rec.set_time_sequence("frame", 20);
 ///     rec.log(
 ///         "points",
-///         &rerun::Points3D::clear_fields()
+///         &simplant_lab::Points3D::clear_fields()
 ///             .with_positions(positions())
 ///             .with_radii([0.3]),
 ///     )?;
@@ -530,7 +531,7 @@ impl Points3D {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

@@ -2,8 +2,8 @@
 
 import sys
 
-import rerun as rr
-import rerun.blueprint as rrb
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 if len(sys.argv) < 2:
     # TODO(#7354): Only mp4 is supported for now.

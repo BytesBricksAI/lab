@@ -10,12 +10,11 @@ from .._baseclasses import (
     ComponentBatchMixin,
     ComponentMixin,
 )
-from .media_type_ext import MediaTypeExt
 
 __all__ = ["MediaType", "MediaTypeBatch"]
 
 
-class MediaType(MediaTypeExt, datatypes.Utf8, ComponentMixin):
+class MediaType(datatypes.Utf8, ComponentMixin):
     """
     **Component**: A standardized media type (RFC2046, formerly known as MIME types), encoded as a string.
 
@@ -35,5 +34,3 @@ class MediaTypeBatch(datatypes.Utf8Batch, ComponentBatchMixin):
 
 # This is patched in late to avoid circular dependencies.
 MediaType._BATCH_TYPE = MediaTypeBatch  # type: ignore[assignment]
-
-MediaTypeExt.deferred_patch_class(MediaType)

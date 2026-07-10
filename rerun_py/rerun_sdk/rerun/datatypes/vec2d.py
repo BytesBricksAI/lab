@@ -20,13 +20,12 @@ from .._converters import (
     to_np_float32,
 )
 from .._numpy_compatibility import asarray
-from .vec2d_ext import Vec2DExt
 
 __all__ = ["Vec2D", "Vec2DArrayLike", "Vec2DBatch", "Vec2DLike"]
 
 
 @define(init=False)
-class Vec2D(Vec2DExt):
+class Vec2D:
     """**Datatype**: A vector in 2D space."""
 
     def __init__(self: Any, xy: Vec2DLike) -> None:
@@ -63,4 +62,6 @@ class Vec2DBatch(BaseBatch[Vec2DArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: Vec2DArrayLike, data_type: pa.DataType) -> pa.Array:
-        return Vec2DExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of Vec2D not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in vec2d_ext.py

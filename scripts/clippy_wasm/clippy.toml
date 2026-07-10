@@ -154,6 +154,7 @@ doc-valid-idents = [
   "OpenGL",
   "OpenID",
   "PyPI",
+  "SimPlant",
   "sRGB",
   "sRGBA",
   "WebCodec",

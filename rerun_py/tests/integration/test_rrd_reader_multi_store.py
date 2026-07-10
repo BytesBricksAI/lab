@@ -6,9 +6,10 @@ import subprocess
 from typing import TYPE_CHECKING
 
 import pytest
-import rerun as rr
 from inline_snapshot import snapshot as inline_snapshot
-from rerun.experimental import RrdReader
+
+import simplant_lab as rr
+from simplant_lab.experimental import RrdReader
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -60,7 +61,7 @@ def multi_store_rrd_path(tmp_path_factory: pytest.TempPathFactory) -> Path:
     rr.blueprint.Blueprint(rr.blueprint.Spatial3DView(origin="/entity_a")).save(MULTI_APP_ID, bp_path)
 
     subprocess.run(
-        ["rerun", "rrd", "merge", str(rec1_path), str(rec2_path), str(bp_path), "-o", str(out_path)],
+        ["simplant-lab", "rrd", "merge", str(rec1_path), str(rec2_path), str(bp_path), "-o", str(out_path)],
         check=True,
         capture_output=True,
     )

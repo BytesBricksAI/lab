@@ -1,6 +1,6 @@
 //! Rerun Data Ui
 //!
-//! This crate provides ui elements for Rerun component data for the Rerun Viewer.
+//! This crate provides ui elements for Rerun component data for the SimPlant-Lab.
 
 #![warn(clippy::iter_over_hash_type)] //  TODO(#6198): enable everywhere
 

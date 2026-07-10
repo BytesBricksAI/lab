@@ -8,7 +8,7 @@ dependencies = [
   "opencv-python>4.9",
   "pillow",
   "requests>=2.31,<3",
-  "rerun-sdk",
+  "simplant-lab-sdk",
   "timm==1.0.19",
   "torch", # this will use the version defined in the uv workspace
   "transformers>=4.55.0",

@@ -2,7 +2,7 @@
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 
 # Create a segmentation image
 image = np.zeros((8, 12), dtype=np.uint8)

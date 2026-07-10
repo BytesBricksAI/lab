@@ -5,7 +5,7 @@ import tempfile
 import time
 from datetime import timedelta
 
-import rerun as rr
+import simplant_lab as rr
 
 
 def log_and_get_size(rec: rr.RecordingStream, path: str) -> int:

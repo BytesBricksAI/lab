@@ -18,13 +18,12 @@ from .._baseclasses import (
     ComponentBatchMixin,
     ComponentMixin,
 )
-from .line_strip2d_ext import LineStrip2DExt
 
 __all__ = ["LineStrip2D", "LineStrip2DArrayLike", "LineStrip2DBatch", "LineStrip2DLike"]
 
 
 @define(init=False)
-class LineStrip2D(LineStrip2DExt, ComponentMixin):
+class LineStrip2D(ComponentMixin):
     r"""
     **Component**: A line strip in 2D space.
 
@@ -80,7 +79,9 @@ class LineStrip2DBatch(BaseBatch[LineStrip2DArrayLike], ComponentBatchMixin):
 
     @staticmethod
     def _native_to_pa_array(data: LineStrip2DArrayLike, data_type: pa.DataType) -> pa.Array:
-        return LineStrip2DExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of LineStrip2D not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in line_strip2d_ext.py
 
 
 # This is patched in late to avoid circular dependencies.

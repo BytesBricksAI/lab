@@ -2,7 +2,7 @@
 
 import time
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_serve_web_viewer")
 # Start a gRPC server and use it as log sink.

@@ -7,7 +7,7 @@ import pyarrow as pa
 from datafusion import col
 from datafusion import functions as F
 
-import rerun as rr
+import simplant_lab as rr
 
 TMP_FILE = tempfile.NamedTemporaryFile(suffix=".rrd")
 RRD_PATH = TMP_FILE.name

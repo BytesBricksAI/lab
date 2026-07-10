@@ -37,15 +37,16 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Update a scalar over time
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_scalar_row_updates")
-///             .spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
+///         "rerun_example_scalar_row_updates",
+///     )
+///     .spawn()?;
 ///
 ///     for step in 0..64 {
 ///         rec.set_time_sequence("step", step);
 ///         rec.log(
 ///             "scalars",
-///             &rerun::Scalars::single((step as f64 / 10.0).sin()),
+///             &simplant_lab::Scalars::single((step as f64 / 10.0).sin()),
 ///         )?;
 ///     }
 ///
@@ -64,10 +65,10 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 /// ### Update a scalar over time, in a single operation
 /// ```ignore
-/// use rerun::TimeColumn;
+/// use simplant_lab::TimeColumn;
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new(
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
 ///         "rerun_example_scalar_column_updates",
 ///     )
 ///     .spawn()?;
@@ -78,7 +79,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     rec.send_columns(
 ///         "scalars",
 ///         [times],
-///         rerun::Scalars::new(scalars).columns_of_unit_batches()?,
+///         simplant_lab::Scalars::new(scalars).columns_of_unit_batches()?,
 ///     )?;
 ///
 ///     Ok(())
@@ -217,7 +218,7 @@ impl Scalars {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

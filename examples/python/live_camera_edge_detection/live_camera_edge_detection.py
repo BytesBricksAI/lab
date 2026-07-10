@@ -11,8 +11,8 @@ import argparse
 
 import cv2
 
-import rerun as rr  # pip install rerun-sdk
-import rerun.blueprint as rrb
+import simplant_lab as rr  # pip install simplant-lab-sdk
+import simplant_lab.blueprint as rrb
 
 
 def run_canny(num_frames: int | None) -> None:

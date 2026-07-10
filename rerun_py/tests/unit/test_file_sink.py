@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import rerun as rr
+import simplant_lab as rr
 
 if TYPE_CHECKING:
     import pathlib

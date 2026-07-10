@@ -1,6 +1,8 @@
 //! This example shows how to add custom Views to the Rerun Viewer.
 
-use rerun::external::{re_crash_handler, re_grpc_server, re_log, re_memory, re_viewer, tokio};
+use simplant_lab::external::{
+    re_crash_handler, re_grpc_server, re_log, re_memory, re_viewer, tokio,
+};
 
 mod color_coordinate_config;
 mod points3d_color_view;
@@ -15,7 +17,7 @@ static GLOBAL: re_memory::AccountingAllocator<mimalloc::MiMalloc> =
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let main_thread_token = rerun::MainThreadToken::i_promise_i_am_on_the_main_thread();
+    let main_thread_token = simplant_lab::MainThreadToken::i_promise_i_am_on_the_main_thread();
 
     // Direct calls using the `log` crate to stderr. Control with `RUST_LOG=debug` etc.
     re_log::setup_logging();
@@ -62,7 +64,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             // Register reflection + component UI for our hand-written blueprint property.
             let color_coordinates_archetype =
-                <color_coordinate_config::ColorCoordinatesConfiguration as rerun::Archetype>::name(
+                <color_coordinate_config::ColorCoordinatesConfiguration as simplant_lab::Archetype>::name(
                 );
             app.add_archetype_reflection(
                 color_coordinates_archetype,

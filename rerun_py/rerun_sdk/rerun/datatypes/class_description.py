@@ -14,13 +14,12 @@ from attrs import define, field
 from .._baseclasses import (
     BaseBatch,
 )
-from .class_description_ext import ClassDescriptionExt
 
 __all__ = ["ClassDescription", "ClassDescriptionArrayLike", "ClassDescriptionBatch", "ClassDescriptionLike"]
 
 
 @define(init=False)
-class ClassDescription(ClassDescriptionExt):
+class ClassDescription:
     """
     **Datatype**: The description of a semantic Class.
 
@@ -42,25 +41,43 @@ class ClassDescription(ClassDescriptionExt):
     a single `ClassDescription`.
     """
 
-    # __init__ can be found in class_description_ext.py
+    def __init__(
+        self: Any,
+        *,
+        info: datatypes.AnnotationInfoLike,
+        keypoint_annotations: datatypes.AnnotationInfoArrayLike,
+        keypoint_connections: datatypes.KeypointPairArrayLike,
+    ) -> None:
+        """
+        Create a new instance of the ClassDescription datatype.
 
-    info: datatypes.AnnotationInfo = field(
-        converter=ClassDescriptionExt.info__field_converter_override,  # type: ignore[misc]
-    )
+        Parameters
+        ----------
+        info:
+            The [`datatypes.AnnotationInfo`][rerun.datatypes.AnnotationInfo] for the class.
+        keypoint_annotations:
+            The [`datatypes.AnnotationInfo`][rerun.datatypes.AnnotationInfo] for all of the keypoints.
+        keypoint_connections:
+            The connections between keypoints.
+
+        """
+
+        # You can define your own __init__ function as a member of ClassDescriptionExt in class_description_ext.py
+        self.__attrs_init__(
+            info=info, keypoint_annotations=keypoint_annotations, keypoint_connections=keypoint_connections
+        )
+
+    info: datatypes.AnnotationInfo = field()
     # The [`datatypes.AnnotationInfo`][rerun.datatypes.AnnotationInfo] for the class.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 
-    keypoint_annotations: list[datatypes.AnnotationInfo] = field(
-        converter=ClassDescriptionExt.keypoint_annotations__field_converter_override,  # type: ignore[misc]
-    )
+    keypoint_annotations: list[datatypes.AnnotationInfo] = field()
     # The [`datatypes.AnnotationInfo`][rerun.datatypes.AnnotationInfo] for all of the keypoints.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
 
-    keypoint_connections: list[datatypes.KeypointPair] = field(
-        converter=ClassDescriptionExt.keypoint_connections__field_converter_override,  # type: ignore[misc]
-    )
+    keypoint_connections: list[datatypes.KeypointPair] = field()
     # The connections between keypoints.
     #
     # (Docstring intentionally commented out to hide this field from the docs)
@@ -127,4 +144,6 @@ class ClassDescriptionBatch(BaseBatch[ClassDescriptionArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: ClassDescriptionArrayLike, data_type: pa.DataType) -> pa.Array:
-        return ClassDescriptionExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of ClassDescription not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in class_description_ext.py

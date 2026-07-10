@@ -5,7 +5,8 @@ import urllib.parse
 from typing import TYPE_CHECKING
 
 import pytest
-from rerun.catalog import CatalogClient
+
+from simplant_lab.catalog import CatalogClient
 
 if TYPE_CHECKING:
     import types

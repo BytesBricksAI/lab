@@ -3,15 +3,15 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pytest
-from rerun.catalog import NotFoundError
-from rerun.experimental import LazyStore, RrdReader
+
+from simplant_lab.catalog import NotFoundError
+from simplant_lab.experimental import LazyStore, RrdReader
 
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from rerun.catalog import DatasetEntry
-
     from e2e_redap_tests.conftest import EntryFactory
+    from simplant_lab.catalog import DatasetEntry
 
 
 @pytest.fixture(scope="module")

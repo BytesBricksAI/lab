@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import pytest
-from rerun.catalog._content_filter import ContentFilter
+
+from simplant_lab.catalog._content_filter import ContentFilter
 
 # -- ContentFilter builder -----------------------------------------------------
 

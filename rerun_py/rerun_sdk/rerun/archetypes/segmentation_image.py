@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .segmentation_image_ext import SegmentationImageExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["SegmentationImage"]
 
 
 @define(str=False, repr=False, init=False)
-class SegmentationImage(SegmentationImageExt, Archetype, VisualizableArchetype):
+class SegmentationImage(Archetype, VisualizableArchetype):
     """
     **Archetype**: An image made up of integer [`components.ClassId`][rerun.components.ClassId]s.
 
@@ -45,7 +44,7 @@ class SegmentationImage(SegmentationImageExt, Archetype, VisualizableArchetype):
     ```python
     import numpy as np
 
-    import rerun as rr
+    import simplant_lab as rr
 
     # Create a segmentation image
     image = np.zeros((8, 12), dtype=np.uint8)
@@ -77,7 +76,40 @@ class SegmentationImage(SegmentationImageExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.SegmentationImage"
 
-    # __init__ can be found in segmentation_image_ext.py
+    def __init__(
+        self: Any,
+        buffer: datatypes.BlobLike,
+        format: datatypes.ImageFormatLike,
+        *,
+        opacity: datatypes.Float32Like | None = None,
+        draw_order: datatypes.Float32Like | None = None,
+    ) -> None:
+        """
+        Create a new instance of the SegmentationImage archetype.
+
+        Parameters
+        ----------
+        buffer:
+            The raw image data.
+        format:
+            The format of the image.
+        opacity:
+            Opacity of the image, useful for layering the segmentation image on top of another image.
+
+            Defaults to 0.5 if there's any other images in the scene, otherwise 1.0.
+        draw_order:
+            An optional floating point value that specifies the 2D drawing order.
+
+            Objects with higher values are drawn on top of those with lower values.
+            Defaults to `0.0`.
+
+        """
+
+        # You can define your own __init__ function as a member of SegmentationImageExt in segmentation_image_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(buffer=buffer, format=format, opacity=opacity, draw_order=draw_order)
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -195,7 +227,7 @@ class SegmentationImage(SegmentationImageExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

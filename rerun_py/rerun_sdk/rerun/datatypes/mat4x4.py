@@ -18,7 +18,6 @@ from .._converters import (
     to_np_float32,
 )
 from .._numpy_compatibility import asarray
-from .mat4x4_ext import Mat4x4Ext
 
 if TYPE_CHECKING:
     import numpy as np
@@ -28,7 +27,7 @@ __all__ = ["Mat4x4", "Mat4x4ArrayLike", "Mat4x4Batch", "Mat4x4Like"]
 
 
 @define(init=False)
-class Mat4x4(Mat4x4Ext):
+class Mat4x4:
     """
     **Datatype**: A 4x4 Matrix.
 
@@ -66,7 +65,19 @@ class Mat4x4(Mat4x4Ext):
     ```
     """
 
-    # __init__ can be found in mat4x4_ext.py
+    def __init__(self: Any, flat_columns: Mat4x4Like) -> None:
+        """
+        Create a new instance of the Mat4x4 datatype.
+
+        Parameters
+        ----------
+        flat_columns:
+            Flat list of matrix coefficients in column-major order.
+
+        """
+
+        # You can define your own __init__ function as a member of Mat4x4Ext in mat4x4_ext.py
+        self.__attrs_init__(flat_columns=flat_columns)
 
     flat_columns: npt.NDArray[np.float32] = field(converter=to_np_float32)
     # Flat list of matrix coefficients in column-major order.
@@ -97,4 +108,6 @@ class Mat4x4Batch(BaseBatch[Mat4x4ArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: Mat4x4ArrayLike, data_type: pa.DataType) -> pa.Array:
-        return Mat4x4Ext.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of Mat4x4 not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in mat4x4_ext.py

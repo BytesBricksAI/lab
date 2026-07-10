@@ -1,7 +1,7 @@
 //! Demonstrates the experimental state timeline view: logging state changes and customizing display.
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new(
+    let rec = simplant_lab::RecordingStreamBuilder::new(
         "rerun_example_howto_state_timeline",
     )
     .spawn()?;
@@ -11,7 +11,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Log as static so the configuration applies for the entire recording.
     rec.log_static(
         "door",
-        &rerun::StateConfiguration::new()
+        &simplant_lab::StateConfiguration::new()
             .with_values(["open", "closed"])
             .with_labels(["Open", "Closed"])
             .with_colors([0x4CAF50FFu32, 0xEF5350FFu32]),
@@ -23,17 +23,26 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // the previous state implicitly ends. The `/door` lane uses the `StateConfiguration`
     // above, while `/window` gets default styling (raw value as label, hashed color).
     rec.set_time_sequence("step", 0);
-    rec.log("door", &rerun::StateChange::new().with_state("open"))?;
-    rec.log("window", &rerun::StateChange::new().with_state("closed"))?;
+    rec.log("door", &simplant_lab::StateChange::new().with_state("open"))?;
+    rec.log(
+        "window",
+        &simplant_lab::StateChange::new().with_state("closed"),
+    )?;
 
     rec.set_time_sequence("step", 1);
-    rec.log("door", &rerun::StateChange::new().with_state("closed"))?;
+    rec.log(
+        "door",
+        &simplant_lab::StateChange::new().with_state("closed"),
+    )?;
 
     rec.set_time_sequence("step", 3);
-    rec.log("window", &rerun::StateChange::new().with_state("open"))?;
+    rec.log(
+        "window",
+        &simplant_lab::StateChange::new().with_state("open"),
+    )?;
 
     rec.set_time_sequence("step", 4);
-    rec.log("door", &rerun::StateChange::new().with_state("open"))?;
+    rec.log("door", &simplant_lab::StateChange::new().with_state("open"))?;
     // endregion: log_changes
 
     Ok(())

@@ -15,10 +15,10 @@ workspace = true
 ##
 ## This adds quite a bit of build time to the snippets test while being used only by
 ## very few snippets (as of writing only by `howto/serve_web_viewer`) which is why we don't enable it by default.
-web_viewer = ["rerun/web_viewer"]
+web_viewer = ["simplant-lab/web_viewer"]
 
 [dependencies]
-rerun = { path = "../../crates/top/rerun" }
+simplant-lab = { path = "../../crates/top/simplant-lab" }
 
 crossbeam.workspace = true
 itertools.workspace = true

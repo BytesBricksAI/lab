@@ -1,4 +1,4 @@
-from rerun.experimental import McapReader
+from simplant_lab.experimental import McapReader
 
 McapReader("input.mcap").stream().write_rrd(
     "run-1.rrd",

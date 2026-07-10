@@ -8,7 +8,7 @@ from fractions import Fraction
 import av
 from pyarrow import ChunkedArray
 
-import rerun as rr
+import simplant_lab as rr
 
 
 def read_h264_samples_from_rrd(

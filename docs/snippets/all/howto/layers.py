@@ -14,7 +14,7 @@ atexit.register(lambda: shutil.rmtree(TMP_DIR) if TMP_DIR.exists() else None)
 # region: setup
 from pathlib import Path
 
-import rerun as rr
+import simplant_lab as rr
 
 sample_5_path = (
     Path(__file__).parents[4] / "tests" / "assets" / "rrd" / "sample_5"

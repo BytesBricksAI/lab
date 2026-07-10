@@ -2,7 +2,7 @@
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 
 depth_image = 65535 * np.ones((200, 300), dtype=np.uint16)
 depth_image[50:150, 50:150] = 20000

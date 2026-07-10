@@ -20,13 +20,12 @@ from .._converters import (
     to_np_float32,
 )
 from .._numpy_compatibility import asarray
-from .quaternion_ext import QuaternionExt
 
 __all__ = ["Quaternion", "QuaternionArrayLike", "QuaternionBatch", "QuaternionLike"]
 
 
 @define(init=False)
-class Quaternion(QuaternionExt):
+class Quaternion:
     """
     **Datatype**: A Quaternion represented by 4 real numbers.
 
@@ -34,7 +33,11 @@ class Quaternion(QuaternionExt):
     datastore as provided, when used in the Viewer Quaternions will always be normalized.
     """
 
-    # __init__ can be found in quaternion_ext.py
+    def __init__(self: Any, xyzw: QuaternionLike) -> None:
+        """Create a new instance of the Quaternion datatype."""
+
+        # You can define your own __init__ function as a member of QuaternionExt in quaternion_ext.py
+        self.__attrs_init__(xyzw=xyzw)
 
     xyzw: npt.NDArray[np.float32] = field(converter=to_np_float32)
 
@@ -61,4 +64,6 @@ class QuaternionBatch(BaseBatch[QuaternionArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: QuaternionArrayLike, data_type: pa.DataType) -> pa.Array:
-        return QuaternionExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of Quaternion not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in quaternion_ext.py

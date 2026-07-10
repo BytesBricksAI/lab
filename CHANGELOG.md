@@ -1,4 +1,10 @@
-# Rerun changelog
+# Changelog
+
+> **SimPlant Lab** es un fork de [Rerun](https://github.com/rerun-io/rerun). El historial de
+> versiones que sigue corresponde a los releases del proyecto **Rerun** upstream sobre el que se
+> construye SimPlant Lab; se conserva intacto como registro de la base heredada. Los cambios
+> propios de SimPlant Lab se documentan en [`docs/proyect/IMPLEMENTATION_STATUS.md`](docs/proyect/IMPLEMENTATION_STATUS.md)
+> y [`docs/proyect/UPSTREAM_DIFF.md`](docs/proyect/UPSTREAM_DIFF.md).
 
 ## [0.32.1](https://github.com/rerun-io/rerun/compare/0.32.0...0.32.1) - 2026-05-15
 

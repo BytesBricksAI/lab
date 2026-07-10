@@ -163,7 +163,7 @@ pub enum SystemCommand {
         email: String,
     },
 
-    /// Logout from Rerun Hub
+    /// Logout from SimPlant-Lab Hub
     Logout,
 
     /// Save a screenshot to a file.

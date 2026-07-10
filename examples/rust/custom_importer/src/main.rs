@@ -6,21 +6,21 @@
 //! $ cargo r -p custom_importer -- path/to/some/file
 //! ```
 
-use rerun::external::{anyhow, re_build_info, re_importer, re_log};
-use rerun::log::{Chunk, RowId};
-use rerun::{EntityPath, ImportedData, Importer as _, TimePoint};
+use simplant_lab::external::{anyhow, re_build_info, re_importer, re_log};
+use simplant_lab::log::{Chunk, RowId};
+use simplant_lab::{EntityPath, ImportedData, Importer as _, TimePoint};
 
 fn main() -> anyhow::Result<std::process::ExitCode> {
-    let main_thread_token = rerun::MainThreadToken::i_promise_i_am_on_the_main_thread();
+    let main_thread_token = simplant_lab::MainThreadToken::i_promise_i_am_on_the_main_thread();
     re_log::setup_logging();
 
     re_importer::register_custom_importer(HashLoader);
 
     let build_info = re_build_info::build_info!();
-    rerun::run(
+    simplant_lab::run(
         main_thread_token,
         build_info,
-        rerun::CallSource::Cli,
+        simplant_lab::CallSource::Cli,
         std::env::args(),
     )
     .map(std::process::ExitCode::from)
@@ -28,7 +28,7 @@ fn main() -> anyhow::Result<std::process::ExitCode> {
 
 // ---
 
-/// A custom [`re_importer::Importer`] that logs the hash of file as a [`rerun::TextDocument`].
+/// A custom [`re_importer::Importer`] that logs the hash of file as a [`simplant_lab::TextDocument`].
 struct HashLoader;
 
 impl re_importer::Importer for HashLoader {
@@ -38,7 +38,7 @@ impl re_importer::Importer for HashLoader {
 
     fn import_from_path(
         &self,
-        settings: &rerun::external::re_importer::ImporterSettings,
+        settings: &simplant_lab::external::re_importer::ImporterSettings,
         path: std::path::PathBuf,
         tx: crossbeam::channel::Sender<re_importer::ImportedData>,
     ) -> Result<(), re_importer::ImporterError> {
@@ -51,7 +51,7 @@ impl re_importer::Importer for HashLoader {
 
     fn import_from_file_contents(
         &self,
-        settings: &rerun::external::re_importer::ImporterSettings,
+        settings: &simplant_lab::external::re_importer::ImporterSettings,
         filepath: std::path::PathBuf,
         contents: std::borrow::Cow<'_, [u8]>,
         tx: crossbeam::channel::Sender<re_importer::ImportedData>,
@@ -61,7 +61,7 @@ impl re_importer::Importer for HashLoader {
 }
 
 fn hash_and_log(
-    settings: &rerun::external::re_importer::ImporterSettings,
+    settings: &simplant_lab::external::re_importer::ImporterSettings,
     tx: &crossbeam::channel::Sender<re_importer::ImportedData>,
     filepath: &std::path::Path,
     contents: &[u8],
@@ -72,8 +72,8 @@ fn hash_and_log(
     let mut h = DefaultHasher::new();
     contents.hash(&mut h);
 
-    let doc = rerun::TextDocument::new(format!("{:08X}", h.finish()))
-        .with_media_type(rerun::MediaType::TEXT);
+    let doc = simplant_lab::TextDocument::new(format!("{:08X}", h.finish()))
+        .with_media_type(simplant_lab::MediaType::TEXT);
 
     let entity_path = EntityPath::from_file_path(filepath);
     let entity_path = format!("{entity_path}/hashed");

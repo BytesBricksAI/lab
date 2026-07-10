@@ -116,7 +116,10 @@ macro_rules! icon_from_path {
     };
 }
 
-pub const RERUN_WORDMARK: Icon = icon_from_path!("../data/icons/rerun_wordmark.svg");
+pub const PRODUCT_WORDMARK: Icon = icon_from_path!("../data/icons/simplant_lab_wordmark.svg");
+
+/// Deprecated: use [`PRODUCT_WORDMARK`].
+pub const RERUN_WORDMARK: Icon = PRODUCT_WORDMARK;
 
 pub const HELP: Icon = icon_from_path!("../data/icons/help.svg");
 

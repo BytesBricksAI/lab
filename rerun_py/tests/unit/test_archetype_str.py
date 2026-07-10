@@ -3,7 +3,8 @@ from __future__ import annotations
 from unittest.mock import patch
 
 import pytest
-import rerun as rr
+
+import simplant_lab as rr
 
 
 @pytest.mark.parametrize(

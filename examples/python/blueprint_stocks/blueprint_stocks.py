@@ -15,8 +15,8 @@ import humanize
 import pytz
 import yfinance as yf
 
-import rerun as rr
-import rerun.blueprint as rrb
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 ################################################################################
 # Helper functions to create blueprints

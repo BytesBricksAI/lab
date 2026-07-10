@@ -20,13 +20,12 @@ from .._converters import (
     to_np_float64,
 )
 from .._numpy_compatibility import asarray
-from .range1d_ext import Range1DExt
 
 __all__ = ["Range1D", "Range1DArrayLike", "Range1DBatch", "Range1DLike"]
 
 
 @define(init=False)
-class Range1D(Range1DExt):
+class Range1D:
     """**Datatype**: A 1D range, specifying a lower and upper bound."""
 
     def __init__(self: Any, range: Range1DLike) -> None:
@@ -63,4 +62,6 @@ class Range1DBatch(BaseBatch[Range1DArrayLike]):
 
     @staticmethod
     def _native_to_pa_array(data: Range1DArrayLike, data_type: pa.DataType) -> pa.Array:
-        return Range1DExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of Range1D not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in range1d_ext.py

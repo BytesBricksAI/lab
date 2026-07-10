@@ -5,13 +5,21 @@ from typing import Any, cast
 
 import numpy as np
 import pytest
-import rerun as rr
 import torch
-from rerun.components import (
+
+import simplant_lab as rr
+from simplant_lab.components import (
     LineStrip2DArrayLike,
     LineStrip2DBatch,
 )
-from rerun.datatypes import ClassIdArrayLike, Float32ArrayLike, Float32Like, Rgba32ArrayLike, Utf8ArrayLike, Vec2D
+from simplant_lab.datatypes import (
+    ClassIdArrayLike,
+    Float32ArrayLike,
+    Float32Like,
+    Rgba32ArrayLike,
+    Utf8ArrayLike,
+    Vec2D,
+)
 
 from .common_arrays import (
     class_ids_arrays,

@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .ellipses2d_ext import Ellipses2DExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["Ellipses2D"]
 
 
 @define(str=False, repr=False, init=False)
-class Ellipses2D(Ellipses2DExt, Archetype, VisualizableArchetype):
+class Ellipses2D(Archetype, VisualizableArchetype):
     """
     **Archetype**: 2D ellipses with half-extents (semi-axes) and optional center, colors etc.
 
@@ -39,7 +38,7 @@ class Ellipses2D(Ellipses2DExt, Archetype, VisualizableArchetype):
     --------
     ### Simple 2D ellipses:
     ```python
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_ellipses2d", spawn=True)
 
@@ -48,7 +47,7 @@ class Ellipses2D(Ellipses2DExt, Archetype, VisualizableArchetype):
 
     ### Batch of 2D ellipses:
     ```python
-    import rerun as rr
+    import simplant_lab as rr
 
     rr.init("rerun_example_ellipses2d_batch", spawn=True)
 
@@ -68,7 +67,67 @@ class Ellipses2D(Ellipses2DExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.Ellipses2D"
 
-    # __init__ can be found in ellipses2d_ext.py
+    def __init__(
+        self: Any,
+        half_sizes: datatypes.Vec2DArrayLike,
+        *,
+        centers: datatypes.Vec2DArrayLike | None = None,
+        colors: datatypes.Rgba32ArrayLike | None = None,
+        line_radii: datatypes.Float32ArrayLike | None = None,
+        labels: datatypes.Utf8ArrayLike | None = None,
+        show_labels: datatypes.BoolLike | None = None,
+        draw_order: datatypes.Float32Like | None = None,
+        class_ids: datatypes.ClassIdArrayLike | None = None,
+    ) -> None:
+        """
+        Create a new instance of the Ellipses2D archetype.
+
+        Parameters
+        ----------
+        half_sizes:
+            All half-extents (semi-axes) that make up the batch of ellipses.
+        centers:
+            Optional center positions of the ellipses.
+        colors:
+            Optional colors for the ellipses.
+        line_radii:
+            Optional radii for the lines that make up the ellipses.
+        labels:
+            Optional text labels for the ellipses.
+
+            If there's a single label present, it will be placed at the center of the entity.
+            Otherwise, each instance will have its own label.
+        show_labels:
+            Whether the text labels should be shown.
+
+            If not set, labels will automatically appear when there is exactly one label for this entity
+            or the number of instances on this entity is under a certain threshold.
+        draw_order:
+            An optional floating point value that specifies the 2D drawing order.
+
+            Objects with higher values are drawn on top of those with lower values.
+            Defaults to `10.0`.
+        class_ids:
+            Optional [`components.ClassId`][rerun.components.ClassId]s for the ellipses.
+
+            The [`components.ClassId`][rerun.components.ClassId] provides colors and labels if not specified explicitly.
+
+        """
+
+        # You can define your own __init__ function as a member of Ellipses2DExt in ellipses2d_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(
+                half_sizes=half_sizes,
+                centers=centers,
+                colors=colors,
+                line_radii=line_radii,
+                labels=labels,
+                show_labels=show_labels,
+                draw_order=draw_order,
+                class_ids=class_ids,
+            )
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -248,7 +307,7 @@ class Ellipses2D(Ellipses2DExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

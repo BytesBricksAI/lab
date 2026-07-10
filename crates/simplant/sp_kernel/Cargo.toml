@@ -1,0 +1,22 @@
+[package]
+name = "sp_kernel"
+authors.workspace = true
+description = "SimPlant Lab shared kernel: pure-domain value objects (tags, units, quality, ranges, measurements). No re_* deps, no I/O."
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+publish = false
+readme = "README.md"
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+thiserror.workspace = true
+serde = { workspace = true, features = ["derive"] }
+jiff = { workspace = true }
+
+[dev-dependencies]

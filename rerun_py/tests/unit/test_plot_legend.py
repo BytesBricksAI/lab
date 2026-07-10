@@ -3,14 +3,14 @@ from __future__ import annotations
 import itertools
 from typing import TYPE_CHECKING, cast
 
-import rerun as rr
-import rerun.blueprint as rrb
-from rerun.blueprint import components as blueprint_components
+import simplant_lab as rr
+import simplant_lab.blueprint as rrb
+from simplant_lab.blueprint import components as blueprint_components
 
 from .common_arrays import none_empty_or_value
 
 if TYPE_CHECKING:
-    from rerun.datatypes.bool import BoolLike
+    from simplant_lab.datatypes.bool import BoolLike
 
 
 def test_scalar_axis() -> None:

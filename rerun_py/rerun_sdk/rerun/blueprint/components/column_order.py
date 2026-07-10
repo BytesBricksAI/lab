@@ -16,13 +16,12 @@ from ..._baseclasses import (
     ComponentBatchMixin,
     ComponentMixin,
 )
-from .column_order_ext import ColumnOrderExt
 
 __all__ = ["ColumnOrder", "ColumnOrderArrayLike", "ColumnOrderBatch", "ColumnOrderLike"]
 
 
 @define(init=False)
-class ColumnOrder(ColumnOrderExt, ComponentMixin):
+class ColumnOrder(ComponentMixin):
     """
     **Component**: The order of component columns (which remain always grouped by entity path) in the dataframe view.
 
@@ -65,7 +64,9 @@ class ColumnOrderBatch(BaseBatch[ColumnOrderArrayLike], ComponentBatchMixin):
 
     @staticmethod
     def _native_to_pa_array(data: ColumnOrderArrayLike, data_type: pa.DataType) -> pa.Array:
-        return ColumnOrderExt.native_to_pa_array_override(data, data_type)
+        raise NotImplementedError(
+            "Arrow serialization of ColumnOrder not implemented: We lack codegen for arrow-serialization of general structs"
+        )  # You need to implement native_to_pa_array_override in column_order_ext.py
 
 
 # This is patched in late to avoid circular dependencies.

@@ -2,10 +2,10 @@
 //!
 //! See also the `arrows3d_column_updates` example, which achieves the same thing in a single operation.
 
-use rerun::demo_util::linspace;
+use simplant_lab::demo_util::linspace;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let rec = rerun::RecordingStreamBuilder::new(
+    let rec = simplant_lab::RecordingStreamBuilder::new(
         "rerun_example_arrows3d_row_updates",
     )
     .spawn()?;
@@ -32,7 +32,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     {
         rec.set_duration_secs("time", time);
 
-        let arrows = rerun::Arrows3D::from_vectors(vectors)
+        let arrows = simplant_lab::Arrows3D::from_vectors(vectors)
             .with_origins(origins)
             .with_colors([color]);
 

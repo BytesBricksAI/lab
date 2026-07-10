@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
+from typing import Any
 
 import pyarrow as pa
 from attrs import define, field
@@ -14,7 +15,6 @@ from .. import datatypes
 from .._baseclasses import (
     BaseBatch,
 )
-from .visible_time_range_ext import VisibleTimeRangeExt
 
 __all__ = ["VisibleTimeRange", "VisibleTimeRangeArrayLike", "VisibleTimeRangeBatch", "VisibleTimeRangeLike"]
 
@@ -27,7 +27,7 @@ def _visible_time_range__timeline__special_field_converter_override(x: datatypes
 
 
 @define(init=False)
-class VisibleTimeRange(VisibleTimeRangeExt):
+class VisibleTimeRange:
     """
     **Datatype**: Visible time range bounds for a specific timeline.
 
@@ -37,8 +37,8 @@ class VisibleTimeRange(VisibleTimeRangeExt):
     ```python
     import math
 
-    import rerun as rr
-    import rerun.blueprint as rrb
+    import simplant_lab as rr
+    import simplant_lab.blueprint as rrb
 
 
     def point(t: float, phase: float) -> list[float]:
@@ -92,7 +92,21 @@ class VisibleTimeRange(VisibleTimeRangeExt):
 
     """
 
-    # __init__ can be found in visible_time_range_ext.py
+    def __init__(self: Any, timeline: datatypes.Utf8Like, range: datatypes.TimeRangeLike) -> None:
+        """
+        Create a new instance of the VisibleTimeRange datatype.
+
+        Parameters
+        ----------
+        timeline:
+            Name of the timeline this applies to.
+        range:
+            Time range to use for this timeline.
+
+        """
+
+        # You can define your own __init__ function as a member of VisibleTimeRangeExt in visible_time_range_ext.py
+        self.__attrs_init__(timeline=timeline, range=range)
 
     timeline: datatypes.Utf8 = field(converter=_visible_time_range__timeline__special_field_converter_override)
     # Name of the timeline this applies to.

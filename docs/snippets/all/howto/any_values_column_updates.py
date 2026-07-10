@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import numpy as np
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_any_values_column_updates", spawn=True)
 

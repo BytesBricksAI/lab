@@ -32,8 +32,8 @@ class TextDocumentView(View):
     -------
     ### Use a blueprint to show a text document.:
     ```python
-    import rerun as rr
-    import rerun.blueprint as rrb
+    import simplant_lab as rr
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_text_document", spawn=True)
 
@@ -152,7 +152,7 @@ class TextDocumentView(View):
         properties: dict[str, AsComponents] = {}
         if format_options is not None:
             if not isinstance(format_options, blueprint_archetypes.TextDocumentFormat):
-                format_options = blueprint_archetypes.TextDocumentFormat(format_options)
+                format_options = blueprint_archetypes.TextDocumentFormat(monospace=format_options)
             properties["TextDocumentFormat"] = format_options
 
         super().__init__(

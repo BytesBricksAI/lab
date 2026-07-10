@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 import pytest
-import rerun as rr
-import rerun.blueprint.components as blueprint_components
-from rerun import TimeInt, datatypes
-from rerun.blueprint.archetypes import DataframeQuery
+
+import simplant_lab as rr
+import simplant_lab.blueprint.components as blueprint_components
+from simplant_lab import TimeInt, datatypes
+from simplant_lab.blueprint.archetypes import DataframeQuery
 
 
 def test_component_column_selector_explicit() -> None:

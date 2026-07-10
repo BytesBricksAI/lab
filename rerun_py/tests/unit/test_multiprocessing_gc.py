@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import gc
 
-import rerun as rr
+import simplant_lab as rr
 
 # If torch is available, use torch.multiprocessing instead of multiprocessing
 # since it causes more issues. But, it's annoying to always require it so at

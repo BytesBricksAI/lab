@@ -10,7 +10,7 @@ python main.py
 
 from __future__ import annotations
 
-import rerun as rr
+import simplant_lab as rr
 
 rec = rr.RecordingStream(application_id="test")
 

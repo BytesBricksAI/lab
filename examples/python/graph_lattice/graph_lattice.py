@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 import itertools
 
-import rerun as rr
+import simplant_lab as rr
 
 NUM_NODES = 10
 

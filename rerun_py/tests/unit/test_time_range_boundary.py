@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import pytest
-import rerun as rr
+
+import simplant_lab as rr
 
 
 def test_time_range_boundary_failure_cases() -> None:

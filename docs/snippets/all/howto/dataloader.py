@@ -8,7 +8,7 @@ import torch
 import torch.multiprocessing
 from torch import nn
 
-import rerun as rr
+import simplant_lab as rr
 
 # Rerun's tokio runtime is not fork-safe, so DataLoader workers must use
 # `spawn`. Set this before constructing any DataLoader, even with
@@ -35,7 +35,7 @@ dataset.register(uris).wait()
 # endregion: register
 
 # region: describe_sample
-from rerun.experimental.dataloader import (
+from simplant_lab.experimental.dataloader import (
     DataSource,
     Field,
     FixedRateSampling,
@@ -86,7 +86,7 @@ windowed_action = Field(
 # Decode a compressed video stream as part of each sample.
 # `keyframe_interval` must be at least the actual GOP length. For timestamp
 # timelines, `fps_estimate` should also approximate the true frame rate.
-from rerun.experimental.dataloader import VideoFrameDecoder
+from simplant_lab.experimental.dataloader import VideoFrameDecoder
 
 image_field = Field(
     "/camera/wrist:VideoStream:sample",
@@ -100,7 +100,7 @@ image_field = Field(
 # region: dataloader
 from torch.utils.data import DataLoader
 
-from rerun.experimental.dataloader import RerunMapDataset
+from simplant_lab.experimental.dataloader import RerunMapDataset
 
 
 def my_collate(

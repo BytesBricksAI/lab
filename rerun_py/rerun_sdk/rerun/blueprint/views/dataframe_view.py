@@ -38,8 +38,8 @@ class DataframeView(View):
     ```python
     import math
 
-    import rerun as rr
-    import rerun.blueprint as rrb
+    import simplant_lab as rr
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_dataframe", spawn=True)
 
@@ -144,7 +144,7 @@ class DataframeView(View):
         properties: dict[str, AsComponents] = {}
         if query is not None:
             if not isinstance(query, blueprint_archetypes.DataframeQuery):
-                query = blueprint_archetypes.DataframeQuery(query)
+                query = blueprint_archetypes.DataframeQuery(timeline=query)
             properties["DataframeQuery"] = query
 
         super().__init__(

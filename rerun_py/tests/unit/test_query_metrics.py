@@ -7,8 +7,9 @@ from types import SimpleNamespace
 from typing import TYPE_CHECKING, Any
 
 import pytest
-from rerun.experimental import MetricsCollector, QueryMetrics, query_metrics
-from rerun.experimental._query_metrics import _active_collectors
+
+from simplant_lab.experimental import MetricsCollector, QueryMetrics, query_metrics
+from simplant_lab.experimental._query_metrics import _active_collectors
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -218,7 +219,7 @@ def test_inert_fallback_on_import_error(
 
     monkeypatch.delattr(rerun_bindings, "_new_metrics_collector", raising=False)
 
-    with caplog.at_level("WARNING", logger="rerun"):
+    with caplog.at_level("WARNING", logger="simplant_lab"):
         with query_metrics() as m:
             assert m.queries == []
             assert m.last_query() is None
@@ -245,7 +246,7 @@ def test_allocation_failure_yields_inert_collector(
 
     monkeypatch.setattr(rerun_bindings, "_new_metrics_collector", boom)
 
-    with caplog.at_level("ERROR", logger="rerun"):
+    with caplog.at_level("ERROR", logger="simplant_lab"):
         with query_metrics() as m:
             assert m.queries == []
             assert m.last_query() is None

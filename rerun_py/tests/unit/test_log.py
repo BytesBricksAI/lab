@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import rerun as rr
+import simplant_lab as rr
 
 
 def test_log_point2d_basic() -> None:

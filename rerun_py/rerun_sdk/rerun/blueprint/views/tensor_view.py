@@ -34,8 +34,8 @@ class TensorView(View):
     ```python
     import numpy as np
 
-    import rerun as rr
-    import rerun.blueprint as rrb
+    import simplant_lab as rr
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_tensor", spawn=True)
 
@@ -147,17 +147,17 @@ class TensorView(View):
         properties: dict[str, AsComponents] = {}
         if slice_selection is not None:
             if not isinstance(slice_selection, blueprint_archetypes.TensorSliceSelection):
-                slice_selection = blueprint_archetypes.TensorSliceSelection(slice_selection)
+                slice_selection = blueprint_archetypes.TensorSliceSelection(width=slice_selection)
             properties["TensorSliceSelection"] = slice_selection
 
         if scalar_mapping is not None:
             if not isinstance(scalar_mapping, blueprint_archetypes.TensorScalarMapping):
-                scalar_mapping = blueprint_archetypes.TensorScalarMapping(scalar_mapping)
+                scalar_mapping = blueprint_archetypes.TensorScalarMapping(mag_filter=scalar_mapping)
             properties["TensorScalarMapping"] = scalar_mapping
 
         if view_fit is not None:
             if not isinstance(view_fit, blueprint_archetypes.TensorViewFit):
-                view_fit = blueprint_archetypes.TensorViewFit(view_fit)
+                view_fit = blueprint_archetypes.TensorViewFit(scaling=view_fit)
             properties["TensorViewFit"] = view_fit
 
         super().__init__(

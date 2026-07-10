@@ -32,8 +32,8 @@ class BarChartView(View):
     -------
     ### Use a blueprint to create a BarChartView.:
     ```python
-    import rerun as rr
-    import rerun.blueprint as rrb
+    import simplant_lab as rr
+    import simplant_lab.blueprint as rrb
 
     rr.init("rerun_example_bar_chart", spawn=True)
     rr.log("bar_chart", rr.BarChart([8, 4, 0, 9, 1, 4, 1, 6, 9, 0]))
@@ -123,12 +123,12 @@ class BarChartView(View):
         properties: dict[str, AsComponents] = {}
         if plot_legend is not None:
             if not isinstance(plot_legend, blueprint_archetypes.PlotLegend):
-                plot_legend = blueprint_archetypes.PlotLegend(plot_legend)
+                plot_legend = blueprint_archetypes.PlotLegend(corner=plot_legend)
             properties["PlotLegend"] = plot_legend
 
         if background is not None:
             if not isinstance(background, blueprint_archetypes.PlotBackground):
-                background = blueprint_archetypes.PlotBackground(background)
+                background = blueprint_archetypes.PlotBackground(color=background)
             properties["PlotBackground"] = background
 
         super().__init__(

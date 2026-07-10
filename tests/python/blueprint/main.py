@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from numpy.random import default_rng
 
-import rerun as rr
-from rerun.blueprint import (
+import simplant_lab as rr
+from simplant_lab.blueprint import (
     Blueprint,
     Grid,
     Horizontal,

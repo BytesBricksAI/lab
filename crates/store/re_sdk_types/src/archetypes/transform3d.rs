@@ -42,29 +42,30 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// use std::f32::consts::TAU;
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new("rerun_example_transform3d")
-///         .spawn()?;
+///     let rec =
+///         simplant_lab::RecordingStreamBuilder::new("rerun_example_transform3d")
+///             .spawn()?;
 ///
-///     let arrow = rerun::Arrows3D::from_vectors([(0.0, 1.0, 0.0)])
+///     let arrow = simplant_lab::Arrows3D::from_vectors([(0.0, 1.0, 0.0)])
 ///         .with_origins([(0.0, 0.0, 0.0)]);
 ///
 ///     rec.log("base", &arrow)?;
 ///
 ///     rec.log(
 ///         "base/translated",
-///         &rerun::Transform3D::from_translation([1.0, 0.0, 0.0]),
+///         &simplant_lab::Transform3D::from_translation([1.0, 0.0, 0.0]),
 ///     )?;
 ///
 ///     rec.log("base/translated", &arrow)?;
 ///
 ///     rec.log(
 ///         "base/rotated_scaled",
-///         &rerun::Transform3D::from_rotation_scale(
-///             rerun::RotationAxisAngle::new(
+///         &simplant_lab::Transform3D::from_rotation_scale(
+///             simplant_lab::RotationAxisAngle::new(
 ///                 [0.0, 0.0, 1.0],
-///                 rerun::Angle::from_radians(TAU / 8.0),
+///                 simplant_lab::Angle::from_radians(TAU / 8.0),
 ///             ),
-///             rerun::Scale3D::from(2.0),
+///             simplant_lab::Scale3D::from(2.0),
 ///         ),
 ///     )?;
 ///
@@ -86,7 +87,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Update a transform over time
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new(
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
 ///         "rerun_example_transform3d_row_updates",
 ///     )
 ///     .spawn()?;
@@ -95,10 +96,10 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     rec.log(
 ///         "box",
 ///         &[
-///             &rerun::Boxes3D::from_half_sizes([(4.0, 2.0, 1.0)])
-///                 .with_fill_mode(rerun::FillMode::Solid)
-///                 as &dyn rerun::AsComponents,
-///             &rerun::TransformAxes3D::new(10.0),
+///             &simplant_lab::Boxes3D::from_half_sizes([(4.0, 2.0, 1.0)])
+///                 .with_fill_mode(simplant_lab::FillMode::Solid)
+///                 as &dyn simplant_lab::AsComponents,
+///             &simplant_lab::TransformAxes3D::new(10.0),
 ///         ],
 ///     )?;
 ///
@@ -106,11 +107,11 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///         rec.set_time_sequence("tick", t + 1);
 ///         rec.log(
 ///             "box",
-///             &rerun::Transform3D::default()
+///             &simplant_lab::Transform3D::default()
 ///                 .with_translation([0.0, 0.0, t as f32 / 10.0])
-///                 .with_rotation(rerun::RotationAxisAngle::new(
+///                 .with_rotation(simplant_lab::RotationAxisAngle::new(
 ///                     [0.0, 1.0, 0.0],
-///                     rerun::Angle::from_radians(truncated_radians(
+///                     simplant_lab::Angle::from_radians(truncated_radians(
 ///                         (t * 4) as f32,
 ///                     )),
 ///                 )),
@@ -137,7 +138,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// ### Update a transform over time, in a single operation
 /// ```ignore
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new(
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
 ///         "rerun_example_transform3d_column_updates",
 ///     )
 ///     .spawn()?;
@@ -146,10 +147,10 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     rec.log(
 ///         "box",
 ///         &[
-///             &rerun::Boxes3D::from_half_sizes([(4.0, 2.0, 1.0)])
-///                 .with_fill_mode(rerun::FillMode::Solid)
-///                 as &dyn rerun::AsComponents,
-///             &rerun::TransformAxes3D::new(10.0),
+///             &simplant_lab::Boxes3D::from_half_sizes([(4.0, 2.0, 1.0)])
+///                 .with_fill_mode(simplant_lab::FillMode::Solid)
+///                 as &dyn simplant_lab::AsComponents,
+///             &simplant_lab::TransformAxes3D::new(10.0),
 ///         ],
 ///     )?;
 ///
@@ -158,17 +159,17 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///         (0..100)
 ///             .map(|t| truncated_radians((t * 4) as f32))
 ///             .map(|rad| {
-///                 rerun::RotationAxisAngle::new(
+///                 simplant_lab::RotationAxisAngle::new(
 ///                     [0.0, 1.0, 0.0],
-///                     rerun::Angle::from_radians(rad),
+///                     simplant_lab::Angle::from_radians(rad),
 ///                 )
 ///             });
 ///
-///     let ticks = rerun::TimeColumn::new_sequence("tick", 1..101);
+///     let ticks = simplant_lab::TimeColumn::new_sequence("tick", 1..101);
 ///     rec.send_columns(
 ///         "box",
 ///         [ticks],
-///         rerun::Transform3D::default()
+///         simplant_lab::Transform3D::default()
 ///             .with_many_translation(translations)
 ///             .with_many_rotation_axis_angle(rotations)
 ///             .columns_of_unit_batches()?,
@@ -193,10 +194,10 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 /// ### Update specific properties of a transform over time
 /// ```ignore
-/// use rerun::AsComponents;
+/// use simplant_lab::AsComponents;
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new(
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
 ///         "rerun_example_transform3d_partial_updates",
 ///     )
 ///     .spawn()?;
@@ -204,8 +205,8 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     // Set up a 3D box.
 ///     rec.log(
 ///         "box",
-///         &[&rerun::Boxes3D::from_half_sizes([(4.0, 2.0, 1.0)])
-///             .with_fill_mode(rerun::FillMode::Solid)
+///         &[&simplant_lab::Boxes3D::from_half_sizes([(4.0, 2.0, 1.0)])
+///             .with_fill_mode(simplant_lab::FillMode::Solid)
 ///             as &dyn AsComponents],
 ///     )?;
 ///
@@ -214,10 +215,10 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///         let rad = truncated_radians((deg * 4) as f32);
 ///         rec.log(
 ///             "box",
-///             &rerun::Transform3D::new().with_rotation(
-///                 rerun::RotationAxisAngle::new(
+///             &simplant_lab::Transform3D::new().with_rotation(
+///                 simplant_lab::RotationAxisAngle::new(
 ///                     [0.0, 1.0, 0.0],
-///                     rerun::Angle::from_radians(rad),
+///                     simplant_lab::Angle::from_radians(rad),
 ///                 ),
 ///             ),
 ///         )?;
@@ -227,7 +228,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     for t in 0..=50 {
 ///         rec.log(
 ///             "box",
-///             &rerun::Transform3D::new().with_translation([
+///             &simplant_lab::Transform3D::new().with_translation([
 ///                 0.0,
 ///                 0.0,
 ///                 t as f32 / 10.0,
@@ -240,17 +241,17 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///         let rad = truncated_radians(((deg + 45) * 4) as f32);
 ///         rec.log(
 ///             "box",
-///             &rerun::Transform3D::new().with_rotation(
-///                 rerun::RotationAxisAngle::new(
+///             &simplant_lab::Transform3D::new().with_rotation(
+///                 simplant_lab::RotationAxisAngle::new(
 ///                     [0.0, 1.0, 0.0],
-///                     rerun::Angle::from_radians(rad),
+///                     simplant_lab::Angle::from_radians(rad),
 ///                 ),
 ///             ),
 ///         )?;
 ///     }
 ///
 ///     // Clear all of the box's attributes.
-///     rec.log("box", &rerun::Transform3D::clear_fields())?;
+///     rec.log("box", &simplant_lab::Transform3D::clear_fields())?;
 ///
 ///     Ok(())
 /// }
@@ -636,7 +637,7 @@ impl Transform3D {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

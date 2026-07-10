@@ -17,16 +17,19 @@ from .._baseclasses import (
     BaseBatch,
 )
 from .._numpy_compatibility import asarray
-from .time_int_ext import TimeIntExt
 
 __all__ = ["TimeInt", "TimeIntArrayLike", "TimeIntBatch", "TimeIntLike"]
 
 
 @define(init=False)
-class TimeInt(TimeIntExt):
+class TimeInt:
     """**Datatype**: A 64-bit number describing either nanoseconds OR sequence numbers."""
 
-    # __init__ can be found in time_int_ext.py
+    def __init__(self: Any, value: TimeIntLike) -> None:
+        """Create a new instance of the TimeInt datatype."""
+
+        # You can define your own __init__ function as a member of TimeIntExt in time_int_ext.py
+        self.__attrs_init__(value=value)
 
     value: int = field(converter=int)
 

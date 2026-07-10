@@ -1,6 +1,6 @@
 //! Send a `.rrd` to a new recording stream.
 
-use rerun::external::re_chunk_store::{ChunkStore, ChunkStoreConfig};
+use simplant_lab::external::re_chunk_store::{ChunkStore, ChunkStoreConfig};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Get the filename from the command-line args.
@@ -16,7 +16,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Use the same app and recording IDs as the original.
     let new_recording =
-        rerun::RecordingStreamBuilder::from_store_id(&store_id).spawn()?;
+        simplant_lab::RecordingStreamBuilder::from_store_id(&store_id)
+            .spawn()?;
 
     // Forward all chunks to the new recording stream.
     for chunk in store.iter_physical_chunks() {

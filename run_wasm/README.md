@@ -1,4 +1,4 @@
-# run-wasm
+a# run-wasm
 
 This provides an [`xtask`](https://github.com/matklad/cargo-xtask) that makes it trivial to run web-based examples.
 

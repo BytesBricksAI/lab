@@ -25,8 +25,8 @@ from typing import Any, cast
 
 import numpy as np
 
-import rerun as rr  # pip install rerun-sdk
-import rerun.blueprint as rrb
+import simplant_lab as rr  # pip install rerun-sdk
+import simplant_lab.blueprint as rrb
 
 parser = argparse.ArgumentParser(description="Plot dashboard stress test")
 rr.script_add_args(parser)

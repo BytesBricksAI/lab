@@ -1,6 +1,6 @@
 """Log and then clear data recursively."""
 
-import rerun as rr
+import simplant_lab as rr
 
 rr.init("rerun_example_clear_recursive", spawn=True)
 

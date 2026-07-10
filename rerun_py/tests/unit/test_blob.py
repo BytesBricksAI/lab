@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import numpy as np
-import rerun as rr
+
+import simplant_lab as rr
 
 
 def test_blob() -> None:

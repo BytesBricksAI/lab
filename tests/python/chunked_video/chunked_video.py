@@ -17,7 +17,7 @@ import re
 import sys
 from pathlib import Path
 
-import rerun as rr
+import simplant_lab as rr
 
 
 # Try sorting by last filename digits parsed as integer.

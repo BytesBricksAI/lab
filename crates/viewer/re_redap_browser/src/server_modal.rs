@@ -185,7 +185,7 @@ impl ServerModal {
             |ui| {
                 if self.mode.should_show_experimental_warning() {
                     ui.warning_label(
-                        "Rerun Hub is experimental and not generally \
+                        "SimPlant-Lab Hub is experimental and not generally \
                 available yet. Proceed with caution!",
                     );
                 }

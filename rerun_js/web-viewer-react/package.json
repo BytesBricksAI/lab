@@ -1,7 +1,7 @@
 {
-  "name": "@rerun-io/web-viewer-react",
+  "name": "@simplant-lab/web-viewer-react",
   "version": "0.33.0-alpha.1+dev",
-  "description": "Embed the Rerun web viewer in your React app",
+  "description": "Embed the SimPlant-Lab web viewer in your React app",
   "licenses": [
     {
       "type": "MIT"

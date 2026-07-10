@@ -2,9 +2,10 @@ from __future__ import annotations
 
 import numpy as np
 import pytest
-import rerun as rr
-from rerun.datatypes import Rgba32ArrayLike, Rgba32Batch
-from rerun.error_utils import RerunWarning
+
+import simplant_lab as rr
+from simplant_lab.datatypes import Rgba32ArrayLike, Rgba32Batch
+from simplant_lab.error_utils import RerunWarning
 
 CASES: list[tuple[Rgba32ArrayLike, Rgba32ArrayLike]] = [
     (

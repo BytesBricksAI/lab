@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import numpy as np
 import pyarrow as pa
@@ -19,7 +19,6 @@ from .._baseclasses import (
 )
 from ..blueprint import VisualizableArchetype, Visualizer
 from ..error_utils import catch_and_log_exceptions
-from .asset3d_ext import Asset3DExt
 
 if TYPE_CHECKING:
     from ..blueprint.datatypes import VisualizerComponentMappingLike
@@ -28,7 +27,7 @@ __all__ = ["Asset3D"]
 
 
 @define(str=False, repr=False, init=False)
-class Asset3D(Asset3DExt, Archetype, VisualizableArchetype):
+class Asset3D(Archetype, VisualizableArchetype):
     """
     **Archetype**: A prepacked 3D asset (`.gltf`, `.glb`, `.obj`, `.stl`, etc.).
 
@@ -43,7 +42,7 @@ class Asset3D(Asset3DExt, Archetype, VisualizableArchetype):
     ```python
     import sys
 
-    import rerun as rr
+    import simplant_lab as rr
 
     if len(sys.argv) < 2:
         print(f"Usage: {sys.argv[0]} <path_to_asset.[gltf|glb|obj|stl]>")
@@ -70,7 +69,44 @@ class Asset3D(Asset3DExt, Archetype, VisualizableArchetype):
 
     NAME: ClassVar[str] = "rerun.archetypes.Asset3D"
 
-    # __init__ can be found in asset3d_ext.py
+    def __init__(
+        self: Any,
+        blob: datatypes.BlobLike,
+        *,
+        media_type: datatypes.Utf8Like | None = None,
+        albedo_factor: datatypes.Rgba32Like | None = None,
+    ) -> None:
+        """
+        Create a new instance of the Asset3D archetype.
+
+        Parameters
+        ----------
+        blob:
+            The asset's bytes.
+        media_type:
+            The Media Type of the asset.
+
+            Supported values:
+            * `model/gltf-binary`
+            * `model/gltf+json`
+            * `model/obj` (.mtl material files are not supported yet, references are silently ignored)
+            * `model/stl`
+
+            If omitted, the viewer will try to guess from the data blob.
+            If it cannot guess, it won't be able to render the asset.
+        albedo_factor:
+            A color multiplier applied to the whole asset.
+
+            For mesh who already have `albedo_factor` in materials,
+            it will be overwritten by actual `albedo_factor` of [`archetypes.Asset3D`][rerun.archetypes.Asset3D] (if specified).
+
+        """
+
+        # You can define your own __init__ function as a member of Asset3DExt in asset3d_ext.py
+        with catch_and_log_exceptions(context=self.__class__.__name__):
+            self.__attrs_init__(blob=blob, media_type=media_type, albedo_factor=albedo_factor)
+            return
+        self.__attrs_clear__()
 
     def __attrs_clear__(self) -> None:
         """Convenience method for calling `__attrs_init__` with all `None`s."""
@@ -181,7 +217,7 @@ class Asset3D(Asset3DExt, Archetype, VisualizableArchetype):
         """
         Construct a new column-oriented component bundle.
 
-        This makes it possible to use `rr.send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `rr.send_columns` to send columnar data directly into SimPlant-Lab.
 
         The returned columns will be partitioned into unit-length sub-batches by default.
         Use `ComponentColumnList.partition` to repartition the data as needed.

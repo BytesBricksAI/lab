@@ -5,6 +5,11 @@
 [files]
 extend-exclude = [
   ".typos.toml",
+  # SimPlant-internal Spanish project docs (ADR, migration plan, etc.)
+  "docs/proyect/**",
+  # SimPlant domain crates (Spanish comments, OT terminology, British "catalogue")
+  "crates/simplant/**",
+  "examples/simplant/**",
   "*.snap",
   "crates/viewer/re_ui/src/design_tokens.rs",
   "examples/assets",
@@ -29,6 +34,14 @@ typ = "typ" # We cannot write "type" in rust
 writeable = "writeable" # NumPy's attribute is `ndarray.flags.writeable`, not `writable`
 ws = "ws" # web-sockets, as in "ws://…"
 Yoh = "Yoh" # Part of @YohDeadfall
+
+# SimPlant Lab — Spanish prose, domain terms, and path segments
+historial = "historial"
+OT = "OT" # Operational Technology (OT safety)
+proyect = "proyect" # `docs/proyect/` tree (Spanish "proyecto", not a typo)
+termo = "termo" # thermodynamics-free subset label in sp_sim_engine
+Tendencias = "Tendencias"
+versiones = "versiones"
 
 # Use the more common spelling
 adaptor = "adapter"
@@ -248,4 +261,8 @@ extend-ignore-re = [
   "\\[[a-f0-9]{7}\\]\\(https://github\\.com/rerun-io/rerun/commit/", # Commit SHA links in changelog
 
   "SELECTed", # Past tense of SQL SELECT
+
+  "mis-sorted", # Hyphenated compound in sp_pid_viewer tests
+
+  "\\$USERR[0-9]+", # AutoCAD DXF system variable names in test fixtures
 ]

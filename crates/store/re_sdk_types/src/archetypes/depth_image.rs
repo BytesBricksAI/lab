@@ -32,9 +32,10 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// use ndarray::{Array, ShapeBuilder as _, s};
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec =
-///         rerun::RecordingStreamBuilder::new("rerun_example_depth_image_3d")
-///             .spawn()?;
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
+///         "rerun_example_depth_image_3d",
+///     )
+///     .spawn()?;
 ///
 ///     let width = 300;
 ///     let height = 200;
@@ -42,14 +43,14 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     image.slice_mut(s![50..150, 50..150]).fill(20000);
 ///     image.slice_mut(s![130..180, 100..280]).fill(45000);
 ///
-///     let depth_image = rerun::DepthImage::try_from(image)?
+///     let depth_image = simplant_lab::DepthImage::try_from(image)?
 ///         .with_meter(10000.0)
-///         .with_colormap(rerun::components::Colormap::Viridis);
+///         .with_colormap(simplant_lab::components::Colormap::Viridis);
 ///
 ///     // If we log a pinhole camera model, the depth gets automatically back-projected to 3D
 ///     rec.log(
 ///         "world/camera",
-///         &rerun::Pinhole::from_focal_length_and_resolution(
+///         &simplant_lab::Pinhole::from_focal_length_and_resolution(
 ///             [200.0, 200.0],
 ///             [width as f32, height as f32],
 ///         ),
@@ -454,7 +455,7 @@ impl DepthImage {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

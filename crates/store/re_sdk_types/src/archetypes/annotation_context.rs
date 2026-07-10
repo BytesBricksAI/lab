@@ -40,7 +40,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 /// use ndarray::{Array, ShapeBuilder as _, s};
 ///
 /// fn main() -> Result<(), Box<dyn std::error::Error>> {
-///     let rec = rerun::RecordingStreamBuilder::new(
+///     let rec = simplant_lab::RecordingStreamBuilder::new(
 ///         "rerun_example_annotation_context_segmentation",
 ///     )
 ///     .spawn()?;
@@ -48,9 +48,9 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///     // create an annotation context to describe the classes
 ///     rec.log_static(
 ///         "segmentation",
-///         &rerun::AnnotationContext::new([
-///             (1, "red", rerun::Rgba32::from_rgb(255, 0, 0)),
-///             (2, "green", rerun::Rgba32::from_rgb(0, 255, 0)),
+///         &simplant_lab::AnnotationContext::new([
+///             (1, "red", simplant_lab::Rgba32::from_rgb(255, 0, 0)),
+///             (2, "green", simplant_lab::Rgba32::from_rgb(0, 255, 0)),
 ///         ]),
 ///     )?;
 ///
@@ -61,7 +61,7 @@ use ::re_types_core::{DeserializationError, DeserializationResult};
 ///
 ///     rec.log(
 ///         "segmentation/image",
-///         &rerun::SegmentationImage::try_from(data)?,
+///         &simplant_lab::SegmentationImage::try_from(data)?,
 ///     )?;
 ///
 ///     Ok(())
@@ -200,7 +200,7 @@ impl AnnotationContext {
     /// Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
     /// instead, via [`SerializedComponentBatch::partitioned`].
     ///
-    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+    /// This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
     ///
     /// The specified `lengths` must sum to the total length of the component batch.
     ///

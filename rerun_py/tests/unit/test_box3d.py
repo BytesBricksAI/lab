@@ -3,8 +3,8 @@ from __future__ import annotations
 import itertools
 from typing import TYPE_CHECKING, cast
 
-import rerun as rr
-from rerun.components import HalfSize3DBatch, RotationAxisAngleBatch, RotationQuatBatch, Translation3DBatch
+import simplant_lab as rr
+from simplant_lab.components import HalfSize3DBatch, RotationAxisAngleBatch, RotationQuatBatch, Translation3DBatch
 
 from .common_arrays import (
     class_ids_arrays,
@@ -26,7 +26,7 @@ from .common_arrays import (
 )
 
 if TYPE_CHECKING:
-    from rerun.datatypes import (
+    from simplant_lab.datatypes import (
         ClassIdArrayLike,
         Float32ArrayLike,
         QuaternionArrayLike,

@@ -10,12 +10,11 @@ from .._baseclasses import (
     ComponentBatchMixin,
     ComponentMixin,
 )
-from .radius_ext import RadiusExt
 
 __all__ = ["Radius", "RadiusBatch"]
 
 
-class Radius(RadiusExt, datatypes.Float32, ComponentMixin):
+class Radius(datatypes.Float32, ComponentMixin):
     """
     **Component**: The radius of something, e.g. a point.
 

@@ -1633,7 +1633,7 @@ fn quote_builder_from_obj(reporter: &Reporter, objects: &Objects, obj: &Object) 
         Specifically, this transforms the existing [`SerializedComponentBatch`]es data into [`SerializedComponentColumn`]s
         instead, via [`SerializedComponentBatch::partitioned`].
 
-        This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into Rerun.
+        This makes it possible to use `RecordingStream::send_columns` to send columnar data directly into SimPlant-Lab.
 
         The specified `lengths` must sum to the total length of the component batch.
 

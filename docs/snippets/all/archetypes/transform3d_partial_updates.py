@@ -2,7 +2,7 @@
 
 import math
 
-import rerun as rr
+import simplant_lab as rr
 
 
 def truncated_radians(deg: float) -> float:
