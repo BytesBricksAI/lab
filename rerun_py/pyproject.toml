@@ -223,6 +223,10 @@ max-positional-args = 3
   # Allow using rerun_bindings
   "TID251",
 ]
+"rerun_sdk/rerun/__init__.py" = [
+  # Deprecation warning must run before re-exporting simplant_lab.
+  "E402",
+]
 "rerun_bindings/*" = [
   # Allow using rerun_bindings
   "TID251",
@@ -235,7 +239,7 @@ combine-as-imports = true # needed so keep rerun_sdk/__init__.py clean
 
 # Sometime Ruff is unable to guess that this is first-party package. Since it's disallowed outside of context where
 # it should be considered first-party (e.g. tests, scripts), it's OK to enforce it here.
-known-first-party = ["rerun_bindings"]
+known-first-party = ["rerun_bindings", "simplant_lab"]
 
 # We should never use these as they are internal APIs. The exception is `rerun`'s implementation, which is covered by
 # `per-file-ignores` exceptions.
@@ -260,7 +264,12 @@ include = [
 ]
 locked = true
 name = "rerun_bindings"
-python-packages = ["rerun_sdk/simplant_lab", "rerun_sdk/simplant_lab_cli", "rerun_sdk/rerun", "rerun_sdk/rerun_cli"]
+python-packages = [
+  "rerun_sdk/simplant_lab",
+  "rerun_sdk/simplant_lab_cli",
+  "rerun_sdk/rerun",
+  "rerun_sdk/rerun_cli",
+]
 
 # Use debug profile for editable installs (uv sync, pip install -e) to match
 # `pixi run py-build` and share the cargo cache.

@@ -1,8 +1,8 @@
-# Verification Report — Full Change (Phases 1–8)
+# Verification report — full change (Phases 1–8)
 
-**Change**: `pyo3-bindings-sp-domain`  
-**Scope**: All phases (1–8) — complete pyo3 bindings for SimPlant `sp_*` domain  
-**Verified at**: 2026-06-29  
+**Change**: `pyo3-bindings-sp-domain`
+**Scope**: All phases (1–8) — complete pyo3 bindings for SimPlant `sp_*` domain
+**Verified at**: 2026-06-29
 **Workspace**: `/home/m4s1t4/Work/Enprendimiento/Proyectos/SimPlant/SimPlant-v2/lab`
 
 ---
@@ -30,7 +30,7 @@
 
 ---
 
-## Build & Test Execution
+## Build & test execution
 
 ### Step 0 — pyo3 config
 
@@ -58,9 +58,9 @@ LD_LIBRARY_PATH=".pixi/envs/default/lib" cargo test -p sp_python
 **Result:** ✅ Exit 0 — **3 passed**, 0 failed
 
 ```
-test kernel::tests::tag_id_round_trip_and_rejects_empty ... ok
-test kernel::tests::measurement_round_trip ... ok
-test kernel::tests::time_window_rejects_inverted_range ... ok
+test kernel::tests::tag_id_round_trip_and_rejects_empty … ok
+test kernel::tests::measurement_round_trip … ok
+test kernel::tests::time_window_rejects_inverted_range … ok
 ```
 
 ### Step 3 — maturin develop (required for Python tests)
@@ -100,7 +100,7 @@ PYTHONPATH=rerun_py/rerun_sdk \
 
 ---
 
-## ADR-0002 — Domain Purity
+## ADR-0002 — domain purity
 
 **Requirement:** No `pyo3` or `re_*` dependencies in pure domain crates; binding lives only in `sp_python`.
 
@@ -116,7 +116,7 @@ PYTHONPATH=rerun_py/rerun_sdk \
 
 ---
 
-## UPSTREAM_DIFF Documentation
+## UPSTREAM_DIFF documentation
 
 **Task 8.2:** ✅ Verified — `docs/proyect/UPSTREAM_DIFF.md` §2.2.1 documents:
 
@@ -131,7 +131,7 @@ Upstream touch is minimal and documented with rationale (ADR-0002 compliance).
 
 ## Correctness (Specs)
 
-### kernel
+### Kernel
 
 | Requirement | Status | Notes |
 |------------|--------|-------|
@@ -143,7 +143,7 @@ Upstream touch is minimal and documented with rationale (ADR-0002 compliance).
 | `UnitOfMeasure`, `EngineeringRange`, `AlarmLimits` | ✅ Implemented | Enums + validation in constructors |
 | `Timestamp` interoperable con Python | ✅ Implemented | epoch `f64`, nanos `i64`, ISO `__str__` |
 
-### types
+### Types
 
 | Requirement | Status | Notes |
 |------------|--------|-------|
@@ -151,7 +151,7 @@ Upstream touch is minimal and documented with rationale (ADR-0002 compliance).
 | Construcción de `ProcessVariableSample` / `TagMetadata` | ✅ Implemented | Uses kernel `Quality` |
 | Helper `field(archetype, field_name)` | ✅ Implemented | `types.rs` |
 
-### asset-model
+### Asset-model
 
 | Requirement | Status | Notes |
 |------------|--------|-------|
@@ -160,7 +160,7 @@ Upstream touch is minimal and documented with rationale (ADR-0002 compliance).
 | Navegación del `AssetCatalog` | ✅ Implemented | Iterables for collections |
 | Construcción/mutadores de `Facility` | ✅ Implemented | `add_area`/`add_unit` `&mut self` |
 
-### simulation
+### Simulation
 
 | Requirement | Status | Notes |
 |------------|--------|-------|
@@ -171,7 +171,7 @@ Upstream touch is minimal and documented with rationale (ADR-0002 compliance).
 | Motor `FirstOrderEngine` | ✅ Implemented | initialize/step/current_time/value_of |
 | Unit ops steady-state | ✅ Implemented | mix/split/valve/pump/pipe + `StreamState` |
 
-### acquisition
+### Acquisition
 
 | Requirement | Status | Notes |
 |------------|--------|-------|
@@ -183,7 +183,7 @@ Upstream touch is minimal and documented with rationale (ADR-0002 compliance).
 | Adapter Modbus + direccionamiento | ✅ Implemented | parse error tested (7.5); happy path not pytest-covered |
 | Puertos desde Python (fuera de alcance) | ✅ Documented | Duck-typed concrete adapters only |
 
-### ml-dataloop
+### Ml-dataloop
 
 | Requirement | Status | Notes |
 |------------|--------|-------|
@@ -192,7 +192,7 @@ Upstream touch is minimal and documented with rationale (ADR-0002 compliance).
 | `DatasetSpec` versionado | ✅ Implemented | Not pytest-covered |
 | `RrdDataframeQuery` | ⚠️ Partial | `open()` in E2E (7.3); `query(window, tags)` not pytest-covered |
 
-### stress-testing
+### Stress-testing
 
 | Requirement | Status | Notes |
 |------------|--------|-------|
@@ -201,7 +201,7 @@ Upstream touch is minimal and documented with rationale (ADR-0002 compliance).
 | Planificar prueba de estrés | ✅ Implemented | Not pytest-covered |
 | Evaluar resultados medidos | ✅ Implemented | Not pytest-covered |
 
-### recording
+### Recording
 
 | Requirement | Status | Notes |
 |------------|--------|-------|
@@ -255,7 +255,7 @@ Upstream touch is minimal and documented with rationale (ADR-0002 compliance).
 
 ---
 
-## Proposal Success Criteria
+## Proposal success criteria
 
 | Criterion | Status |
 |-----------|--------|
@@ -270,7 +270,7 @@ Upstream touch is minimal and documented with rationale (ADR-0002 compliance).
 
 ---
 
-## Issues Found
+## Issues found
 
 **CRITICAL** (must fix before archive):
 - None.
@@ -299,7 +299,7 @@ All 34 tasks across phases 1–8 are complete. Builds (`sp_python`, `rerun_py`),
 
 ---
 
-## Structured Envelope
+## Structured envelope
 
 ```yaml
 status: pass_with_warnings

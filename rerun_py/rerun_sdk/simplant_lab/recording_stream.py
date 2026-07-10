@@ -11,7 +11,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast, overload
 from typing_extensions import Self, deprecated
 
 import rerun_bindings as bindings
-import simplant_lab as rr
 from rerun_bindings import ChunkBatcherConfig as ChunkBatcherConfig
 
 if TYPE_CHECKING:
@@ -28,6 +27,7 @@ if TYPE_CHECKING:
     from simplant_lab._send_columns import ComponentColumn
     from simplant_lab.blueprint.api import BlueprintLike
     from simplant_lab.experimental import Chunk, ChunkStore, LazyChunkStream, LazyStore
+    from simplant_lab.rrd_recording import Recording
     from simplant_lab.sinks import LogSinkLike
 
     from ._send_columns import TimeColumnLike as TimeColumnLike
@@ -730,7 +730,7 @@ class RecordingStream:
     @deprecated(
         "RecordingStream.send_recording is deprecated since 0.32. Use RecordingStream.send_chunks instead.",
     )
-    def send_recording(self, recording: rr.recording.Recording) -> None:  # ty:ignore[deprecated]
+    def send_recording(self, recording: Recording) -> None:  # ty:ignore[deprecated]
         """
         Send a `Recording` loaded from a `.rrd` to the `RecordingStream`.
 

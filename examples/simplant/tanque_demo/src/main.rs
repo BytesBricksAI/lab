@@ -30,19 +30,19 @@ fn main() -> anyhow::Result<()> {
 
     let catalog = TomlCatalogRepository::new(&catalog_path)
         .load_catalog()
-        .map_err(|e| anyhow::anyhow!(e.to_string()))
+        .map_err(|err| anyhow::anyhow!(err.to_string()))
         .with_context(|| format!("loading catalog from {}", catalog_path.display()))?;
 
     catalog
         .validate()
-        .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     let bindings: Vec<TagBinding> = catalog
         .tags()
         .iter()
         .map(|tag| {
             TagBinding::new(tag.id().clone(), tag.id().as_str())
-                .map_err(|e| anyhow::anyhow!(e.to_string()))
+                .map_err(|err| anyhow::anyhow!(err.to_string()))
         })
         .collect::<anyhow::Result<Vec<_>>>()?;
 
@@ -50,7 +50,7 @@ fn main() -> anyhow::Result<()> {
 
     let mut session =
         AcquisitionSession::create("tanque-demo", bindings, SamplingPolicy::default(), &catalog)
-            .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+            .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     let source = CsvReplaySource::new(&csv_path);
 
@@ -78,14 +78,14 @@ fn main() -> anyhow::Result<()> {
     ]))
     .with_time_panel(TimePanel::new().with_timeline("plant_time"));
 
-    let stream = RecordingStreamBuilder::new("simplant_lab_tanque_demo")
+    let stream = RecordingStreamBuilder::new("rerun_example_simplant_lab_tanque_demo")
         .with_blueprint(blueprint)
         .save(&output_path)
-        .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        .map_err(|err| anyhow::anyhow!(err.to_string()))?;
     let recorder = RerunRecorder::new(stream);
 
     let batches_recorded = run_session(&mut session, &catalog, &source, &recorder)
-        .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     recorder.flush();
 

@@ -1,4 +1,4 @@
-# Proposal: Bindings pyo3 del dominio SimPlant (sp_*) hacia Python
+# Proposal: bindings pyo3 del dominio SimPlant (sp_*) hacia Python
 
 ## Intent
 
@@ -19,7 +19,7 @@ sin violar el ADR-0002 (el dominio se mantiene puro, sin `re_*` ni `pyo3`).
 
 ## Scope
 
-### In Scope
+### In scope
 - **Nuevo crate puente `crates/simplant/sp_python`** que depende de los crates `sp_*` + `pyo3`,
   define todos los `#[pyclass]`/`#[pymethods]`/`#[pyfunction]` y exporta
   `pub fn register(py, m) -> PyResult<()>`.
@@ -39,7 +39,7 @@ sin violar el ADR-0002 (el dominio se mantiene puro, sin `re_*` ni `pyo3`).
 - **Smoke tests en Python** que repliquen los flujos de las demos (`tanque_demo`, `sim_demo`,
   export de dataset) end-to-end desde Python.
 
-### Out of Scope
+### Out of scope
 - Reescribir las demos Rust existentes a Python (se hará en un change posterior; acá solo
   se prueban los flujos con smoke tests).
 - Exponer internals de `re_sdk`/`re_importer` ya cubiertos por el binding heredado.
@@ -73,7 +73,7 @@ primero, luego `asset_model`, `simulation`, `stress_testing`, `ml_dataloop`, des
 `acquisition` y los adapters (`replay`, `modbus`, `recording`, `dataframe_query`,
 `sim_engine`).
 
-## Affected Areas
+## Affected areas
 
 | Area | Impact | Description |
 |------|--------|-------------|
@@ -95,7 +95,7 @@ primero, luego `asset_model`, `simulation`, `stress_testing`, `ml_dataloop`, des
 | Mapear ownership/`&mut` de aggregates (ej. `run_session(&mut session, ...)`) a la semántica Python | Med | Envolver en `RefCell`/métodos que consumen-y-devuelven; especificar caso por caso en cada spec |
 | ADR-0002 violado por accidente (pyo3 colándose al dominio) | Low | El binding vive solo en `sp_python`; CI/compilador verifica que `sp_*` sigan sin `re_*`/`pyo3` |
 
-## Rollback Plan
+## Rollback plan
 
 El cambio es aditivo y aislado:
 1. Quitar la línea `sp_python::register(py, m)?;` de `rerun_py/src/python_bridge.rs`.
@@ -114,7 +114,7 @@ funcionando idénticos.
   para no duplicar tipos Arrow.
 - maturin (build ya existente de `rerun_py`).
 
-## Success Criteria
+## Success criteria
 
 - [ ] `crates/simplant/sp_python` compila y `cargo build -p rerun_py` produce `rerun_bindings`
       con los submódulos de dominio registrados.

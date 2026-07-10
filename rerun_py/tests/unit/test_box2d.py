@@ -6,8 +6,9 @@ from typing import TYPE_CHECKING, cast
 import numpy as np
 import numpy.typing as npt
 import pytest
-import simplant_lab as rr
 import torch
+
+import simplant_lab as rr
 from simplant_lab.components import (
     HalfSize2DBatch,
     Position2DBatch,

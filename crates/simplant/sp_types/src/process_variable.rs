@@ -11,6 +11,7 @@ use crate::quality::Quality;
 pub struct ProcessVariableSample {
     /// Scalar engineering value (logged via builtin `Scalars` for time-series plotting).
     pub value: f64,
+
     /// Sample quality code.
     pub quality: Quality,
 }

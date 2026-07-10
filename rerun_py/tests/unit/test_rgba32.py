@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 import pytest
+
 import simplant_lab as rr
 from simplant_lab.datatypes import Rgba32ArrayLike, Rgba32Batch
 from simplant_lab.error_utils import RerunWarning

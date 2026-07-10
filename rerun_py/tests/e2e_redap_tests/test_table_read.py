@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pyarrow as pa
+
 from simplant_lab.catalog import EntryKind
 
 if TYPE_CHECKING:

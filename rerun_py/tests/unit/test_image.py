@@ -4,8 +4,9 @@ from typing import Any
 
 import numpy as np
 import pytest
-import simplant_lab as rr
 import torch
+
+import simplant_lab as rr
 from simplant_lab.archetypes.image import Image
 from simplant_lab.datatypes.tensor_data import TensorData
 from simplant_lab.error_utils import RerunWarning

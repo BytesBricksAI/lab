@@ -22,12 +22,14 @@ from typing import TYPE_CHECKING
 import pyarrow as pa
 import pytest
 from datafusion import col
+
 from simplant_lab.experimental import query_metrics
 
 if TYPE_CHECKING:
     from datafusion import DataFrame
-    from simplant_lab.catalog import DatasetEntry
     from syrupy import SnapshotAssertion
+
+    from simplant_lab.catalog import DatasetEntry
 
 
 OBJ1 = "/obj1:Points3D:positions"

@@ -1,4 +1,4 @@
-# Simulación en tiempo real — Overview y roadmap
+# Simulación en tiempo real — overview y roadmap
 
 - **Fecha:** 2026-06-22
 - **Estado:** Diseño aprobado (pendiente de specs por incremento)
@@ -38,7 +38,7 @@ Crate nuevo **`crates/simplant/sp_sim_runtime`** — dominio/aplicación puro, *
    (panel GUI / CLI)                          (adapter re_sdk → store/viewer)
 ```
 
-### 3.1 Contratos (el "pegamento" entre las 3 specs)
+### 3.1 contratos (el "pegamento" entre las 3 specs)
 
 **`SimCommand`** — enum que cada incremento amplía (ésta es la relación entre specs):
 

@@ -3,8 +3,9 @@ from __future__ import annotations
 from pathlib import Path
 
 import semver
-import simplant_lab as rr
 import tomli
+
+import simplant_lab as rr
 
 
 def test_version() -> None:

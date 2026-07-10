@@ -7,8 +7,9 @@ from typing import TYPE_CHECKING
 
 import pyarrow.compute as pc
 import pytest
-import simplant_lab as rr
 from inline_snapshot import snapshot as inline_snapshot
+
+import simplant_lab as rr
 from simplant_lab.experimental import Chunk, DeriveLens, LazyChunkStream, MutateLens, RrdReader, Selector
 
 from .conftest import TEST_APP_ID as APP_ID, TEST_RECORDING_ID as RECORDING_ID

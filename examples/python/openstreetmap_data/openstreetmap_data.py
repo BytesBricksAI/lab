@@ -8,9 +8,9 @@ from typing import Any
 from urllib.parse import urlencode
 
 import requests
-import simplant_lab.blueprint as rrb
 
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 CACHE_DIR = Path(__file__).parent / "cache"
 if not CACHE_DIR.exists():

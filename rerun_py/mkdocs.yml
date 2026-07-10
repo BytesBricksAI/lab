@@ -80,7 +80,7 @@ plugins:
   # Keep legacy `common/<page>` URLs working. We dropped the `common/` URL
   # prefix and collapsed the old function-category pages
   # (initialization_functions, logging_functions, etc.) into the flat
-  # `rerun` page. These stubs preserve the old URLs for inbound links
+  # `simplantLab` page. These stubs preserve the old URLs for inbound links
   # (docs, examples, blog posts, external sites).
   - redirects: # https://github.com/mkdocs/mkdocs-redirects
       redirect_maps:
@@ -90,7 +90,7 @@ plugins:
         common/datatypes.md: datatypes.md
         common/catalog.md: catalog.md
         common/utilities.md: utilities.md
-        common/recording.md: recording.md
+        common/recording.md: rrd_recording.md
         common/server.md: server.md
         common/notebook.md: notebook.md
         common/authentication.md: auth.md
@@ -100,13 +100,13 @@ plugins:
         common/blueprint_components.md: blueprint_components.md
         common/blueprint_datatypes.md: blueprint_datatypes.md
         common/blueprint_views.md: blueprint_views.md
-        common/initialization_functions.md: rerun.md
-        common/logging_functions.md: rerun.md
-        common/property_functions.md: rerun.md
-        common/columnar_api.md: rerun.md
-        common/script_helpers.md: rerun.md
-        common/other_classes_and_functions.md: rerun.md
-        common/custom_data.md: rerun.md
+        common/initialization_functions.md: simplantLab.md
+        common/logging_functions.md: simplantLab.md
+        common/property_functions.md: simplantLab.md
+        common/columnar_api.md: simplantLab.md
+        common/script_helpers.md: simplantLab.md
+        common/other_classes_and_functions.md: simplantLab.md
+        common/custom_data.md: simplantLab.md
 
 # https://www.mkdocs.org/user-guide/configuration/#markdown_extensions
 # https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown-extensions/

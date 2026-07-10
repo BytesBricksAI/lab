@@ -1071,6 +1071,11 @@ fn start_native_viewer(
                 app.app_options_mut().memory_limit = memory_limit;
             }
 
+            // SimPlant Lab: register the P&ID view class.
+            if let Err(err) = app.add_view_class::<sp_pid_viewer::PidView>() {
+                re_log::error!("Failed to register the P&ID view class: {err}");
+            }
+
             #[allow(clippy::allow_attributes, unused_mut)]
             let ReceiversFromUrlParams {
                 mut log_receivers,

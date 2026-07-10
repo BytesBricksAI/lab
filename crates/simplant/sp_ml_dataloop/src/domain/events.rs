@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 pub struct DatasetPublished {
     /// Dataset identifier.
     pub dataset: String,
+
     /// Published version number.
     pub version: u32,
 }

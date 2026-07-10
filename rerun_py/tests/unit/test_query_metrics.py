@@ -7,6 +7,7 @@ from types import SimpleNamespace
 from typing import TYPE_CHECKING, Any
 
 import pytest
+
 from simplant_lab.experimental import MetricsCollector, QueryMetrics, query_metrics
 from simplant_lab.experimental._query_metrics import _active_collectors
 

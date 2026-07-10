@@ -1,4 +1,4 @@
-# Inc 1 — Streaming en vivo (headless)
+# Inc 1 — streaming en vivo (headless)
 
 - **Estado:** Diseño listo para implementar
 - **Depende de:** [`00-overview.md`](00-overview.md)
@@ -30,7 +30,7 @@ Dependencias: `sp_simulation` (para `SimulatorPort`, `SimState`, `Result`). Nada
   - `run(engine, sink, stop_after_secs)` — helper headless de este incremento: hace el loop de `tick()` hasta `stop_after_secs` (o `0` = indefinido) o hasta recibir `Stop`.
   - **Pacing**: target `dt_real = dt / speed`. Acumula deuda: mide con `Instant`, duerme `dt_real - elapsed` (saturado a 0). Evita drift acumulado.
 
-### 2.2 Adapter de salida
+### 2.2 adapter de salida
 
 `RerunSimSink` sobre `re_sdk::RecordingStream`. Replica el patrón de `sim_demo`:
 - `set_duration_secs("sim_time", sim_time)`,
@@ -38,7 +38,7 @@ Dependencias: `sp_simulation` (para `SimulatorPort`, `SimState`, `Result`). Nada
 
 Ubicación: en el ejemplo `sim_live` (es código de integración). Si Inc 2 lo reusa, se promueve a un crate adapter `sp_sim_recording`.
 
-### 2.3 Ejemplo `sim_live`
+### 2.3 ejemplo `sim_live`
 
 ```
 flowsheet/scenario (igual que sim_demo)
@@ -51,7 +51,7 @@ flowsheet/scenario (igual que sim_demo)
 - **Sink en vivo**: `RecordingStreamBuilder::new(app).with_blueprint(bp).spawn()` lanza el viewer nativo y streamea. El blueprint reutiliza el de `tanque_demo` adaptado a `/sim/**` con timeline `sim_time` (tabla + tendencias).
 - **CLI**: `--speed <f64>` (default 1.0), `--duration <secs>` (default = `scenario.duration_secs()`; `0` = indefinido hasta Ctrl-C).
 
-### 2.4 Data flow
+### 2.4 data flow
 
 ```
 FirstOrderEngine.step(dt) → SimState

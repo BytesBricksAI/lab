@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 import rerun_draft as rr
+
 import simplant_lab.blueprint as rrb
 
 if TYPE_CHECKING:

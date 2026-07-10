@@ -8,9 +8,9 @@ Rust `OptimizationProfile::{LIVE,OBJECT_STORE}` constants byte-for-byte.
 from __future__ import annotations
 
 import pytest
-from simplant_lab.experimental import OptimizationProfile
 
 from rerun_bindings import _optimization_profile_values  # noqa: TID251
+from simplant_lab.experimental import OptimizationProfile
 
 # Mapping: Python field -> Rust dict key. Names diverge intentionally
 # (Rust mirrors `ChunkStoreConfig::chunk_max_*`; Python keeps the existing

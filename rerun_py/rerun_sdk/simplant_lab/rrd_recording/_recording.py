@@ -22,12 +22,12 @@ class Recording:
     """
     A single Rerun recording.
 
-    This can be loaded from an RRD file using [`load_recording()`][simplant_lab.recording.load_recording].
+    This can be loaded from an RRD file using [`load_recording()`][simplant_lab.rrd_recording.load_recording].
 
     A recording is a collection of data that was logged to Rerun. This data is organized
     as a column for each index (timeline) and each entity/component pair that was logged.
 
-    You can examine the [`.schema()`][simplant_lab.recording.Recording.schema] of the recording to see
+    You can examine the [`.schema()`][simplant_lab.rrd_recording.Recording.schema] of the recording to see
     what data is available.
     """
 

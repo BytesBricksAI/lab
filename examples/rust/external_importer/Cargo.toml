@@ -7,7 +7,9 @@ license = "MIT OR Apache-2.0"
 publish = false
 
 [dependencies]
-simplant-lab = { path = "../../../crates/top/simplant-lab", default-features = false, features = ["sdk"] }
+simplant-lab = { path = "../../../crates/top/simplant-lab", default-features = false, features = [
+  "sdk",
+] }
 
 anyhow.workspace = true
 argh.workspace = true

@@ -11,8 +11,10 @@ use crate::domain::scenario::{EngineCapability, Scenario};
 pub enum RunStatus {
     /// Created and ready to execute.
     Created,
+
     /// Finished successfully.
     Completed,
+
     /// Finished with failure.
     Failed,
 }

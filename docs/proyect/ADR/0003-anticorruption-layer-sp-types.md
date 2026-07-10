@@ -1,4 +1,4 @@
-# 0003 — Capa anti-corrupción `sp_types`
+# 0003 — capa anti-corrupción `sp_types`
 
 ## Status
 

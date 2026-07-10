@@ -18,6 +18,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 from datafusion import col, lit
+
 from simplant_lab.experimental import query_metrics
 
 if TYPE_CHECKING:

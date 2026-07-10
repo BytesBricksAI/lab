@@ -1,0 +1,16 @@
+[package]
+name = "pid_canvas_demo"
+version = "0.33.0-alpha.1+dev"
+edition = "2024"
+rust-version = "1.92"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[dependencies]
+sp_types = { path = "../../../crates/simplant/sp_types" }
+
+re_sdk = { workspace = true }
+re_sdk_types = { workspace = true }
+
+[lints]
+workspace = true

@@ -15,10 +15,10 @@ from pathlib import Path
 from typing import cast
 
 import numpy as np
-import simplant_lab.blueprint as rrb
 import trimesh
 
 import simplant_lab as rr  # pip install simplant-lab-sdk
+import simplant_lab.blueprint as rrb
 
 from .download_dataset import AVAILABLE_MESHES, ensure_mesh_downloaded
 

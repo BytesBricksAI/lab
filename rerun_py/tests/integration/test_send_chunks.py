@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Protocol
 
 import pytest
+
 import simplant_lab as rr
 from simplant_lab.experimental import Chunk, RrdReader
 

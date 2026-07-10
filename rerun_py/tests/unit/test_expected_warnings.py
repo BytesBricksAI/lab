@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 import pytest
+
 import simplant_lab as rr
 from simplant_lab.error_utils import RerunWarning
 

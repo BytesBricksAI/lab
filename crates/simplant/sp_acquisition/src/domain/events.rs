@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 pub struct AcquisitionStarted {
     /// Session identifier.
     pub session: String,
+
     /// Number of bound tags.
     pub tag_count: usize,
 }
@@ -16,6 +17,7 @@ pub struct AcquisitionStarted {
 pub struct AcquisitionStopped {
     /// Session identifier.
     pub session: String,
+
     /// Total measurement batches recorded during the session.
     pub batches_recorded: u64,
 }
@@ -25,6 +27,7 @@ pub struct AcquisitionStopped {
 pub struct SourceLost {
     /// Session identifier.
     pub session: String,
+
     /// Human-readable reason for source loss.
     pub reason: String,
 }
@@ -34,8 +37,10 @@ pub struct SourceLost {
 pub enum AcquisitionEvent {
     /// Session started.
     Started(AcquisitionStarted),
+
     /// Session stopped.
     Stopped(AcquisitionStopped),
+
     /// Data source lost.
     SourceLost(SourceLost),
 }

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import pyarrow as pa
 import pytest
+
 from simplant_lab.catalog._entry import _python_objects_to_record_batch
 
 

@@ -40,12 +40,16 @@ pub struct RunFailed {
 pub enum SimulationEvent {
     /// Flowsheet approved.
     FlowsheetApproved(FlowsheetApproved),
+
     /// Flowsheet revised.
     FlowsheetRevised(FlowsheetRevised),
+
     /// Scenario approved.
     ScenarioApproved(ScenarioApproved),
+
     /// Run completed.
     RunCompleted(RunCompleted),
+
     /// Run failed.
     RunFailed(RunFailed),
 }

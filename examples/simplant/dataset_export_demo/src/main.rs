@@ -35,18 +35,18 @@ fn parse_ts(value: &str) -> anyhow::Result<Timestamp> {
 }
 
 fn map_err<T>(result: sp_ml_dataloop::Result<T>) -> anyhow::Result<T> {
-    result.map_err(|e| anyhow::anyhow!(e.to_string()))
+    result.map_err(|err| anyhow::anyhow!(err.to_string()))
 }
 
 fn load_catalog(path: &Path) -> anyhow::Result<AssetCatalog> {
     let catalog = TomlCatalogRepository::new(path)
         .load_catalog()
-        .map_err(|e| anyhow::anyhow!(e.to_string()))
+        .map_err(|err| anyhow::anyhow!(err.to_string()))
         .with_context(|| format!("loading catalog from {}", path.display()))?;
 
     catalog
         .validate()
-        .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     Ok(catalog)
 }
@@ -61,7 +61,7 @@ fn record_rrd(
         .iter()
         .map(|tag| {
             TagBinding::new(tag.id().clone(), tag.id().as_str())
-                .map_err(|e| anyhow::anyhow!(e.to_string()))
+                .map_err(|err| anyhow::anyhow!(err.to_string()))
         })
         .collect::<anyhow::Result<Vec<_>>>()?;
 
@@ -73,7 +73,7 @@ fn record_rrd(
         SamplingPolicy::default(),
         catalog,
     )
-    .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+    .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     if let Some(parent) = rrd_path.parent() {
         std::fs::create_dir_all(parent)
@@ -82,10 +82,10 @@ fn record_rrd(
 
     let source = CsvReplaySource::new(csv_path);
     let recorder = RerunRecorder::to_file("simplant_lab_dataset_export_demo", rrd_path)
-        .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     let batches_recorded = run_session(&mut session, catalog, &source, &recorder)
-        .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     recorder.flush();
 
@@ -97,13 +97,13 @@ fn build_dataset_spec(catalog: &AssetCatalog) -> anyhow::Result<DatasetSpec> {
         parse_ts("2026-01-01T00:00:00Z")?,
         parse_ts("2026-01-01T00:30:00Z")?,
     )
-    .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+    .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     let test = TimeWindow::new(
         parse_ts("2026-01-01T01:00:00Z")?,
         parse_ts("2026-01-01T02:00:00Z")?,
     )
-    .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+    .map_err(|err| anyhow::anyhow!(err.to_string()))?;
 
     let split = map_err(DataSplit::new(train, None, test))?;
 

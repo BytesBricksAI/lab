@@ -1,4 +1,4 @@
-# Contributing to SimPlant Lab
+# Contributing to SimPlant lab
 This guide is for anyone who wants to contribute to the SimPlant Lab repository (fork of [Rerun](https://github.com/rerun-io/rerun)).
 
 

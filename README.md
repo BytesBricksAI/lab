@@ -36,7 +36,7 @@ Multi-rate, multimodal, spatial: images, point clouds, time series, tensors, tra
 ```py
 import simplant_lab as spl  # pip install simplant-lab-sdk
 
-spl.init("simplant_lab_example_app")
+spl.init("simplant_lab_example_app")  <!-- NOLINT -->
 
 spl.spawn()  # Spawn a child process with a viewer and connect
 # spl.save("recording.rrd")  # Stream all logs to disk
@@ -65,7 +65,7 @@ spl.log("path/to/points", spl.Points3D(positions, colors=colors))
 * [**Python**](https://www.rerun.io/docs/getting-started/data-in/python): `pip install simplant-lab-sdk` or on [`conda`](https://github.com/conda-forge/rerun-sdk-feedstock)
 * [**Rust**](https://www.rerun.io/docs/getting-started/data-in/rust): `cargo add simplant-lab`
 
-### Installing the SimPlant Lab viewer binary
+### Installing the SimPlant lab viewer binary
 To stream log data over the network or load our `.rrd` data files you also need the `simplant-lab` binary.
 It can be installed with `pip install simplant-lab-sdk` or with `cargo install simplant-lab-cli --locked --features nasm` (see note below).
 Note that only the Python SDK comes bundled with the viewer whereas C++ & Rust always rely on a separate install.
@@ -97,7 +97,7 @@ Some shortcomings:
 * [Multi-million point clouds can be slow](https://github.com/rerun-io/rerun/issues/1136)
 
 
-## What is SimPlant Lab for?
+## What is SimPlant lab for?
 
 SimPlant Lab is built to help you understand and improve complex processes that include rich multimodal data, like 2D, 3D, text, time series, tensors, etc.
 It is used in reinforcement learning, simulation, robotics, computer vision,
@@ -129,7 +129,7 @@ SimPlant Lab provides query APIs to make it easy to extract clean datasets from 
 
 Of course, SimPlant Lab is useful for much more than just robots. Any time you have any form of sensors, or 2D or 3D state evolving over time, SimPlant Lab is a great tool.
 
-### SimPlant Lab vs. RViz
+### SimPlant lab vs. Rviz
 
 When coming from pure visualization tools like [RViz](https://docs.ros.org/en/rolling/Tutorials/Intermediate/RViz/RViz-Main.html), you might be used to seeing the latest data only.
 SimPlant Lab is more than a pure visualization solution — it provides a platform for multimodal data with a powerful visualizer, storage model and query engine (see also: [*"What is Rerun?"*](https://rerun.io/docs/overview/what-is-rerun)).

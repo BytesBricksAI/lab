@@ -16,14 +16,14 @@ use crate::domain::unit_op::{UnitOp, UnitOpKind};
 pub fn load_flowsheet(path: impl AsRef<Path>) -> Result<FlowsheetSpec> {
     let path = path.as_ref();
     let contents = fs::read_to_string(path)
-        .map_err(|e| SimulationError::Config(format!("{}: {e}", path.display())))?;
+        .map_err(|err| SimulationError::Config(format!("{}: {err}", path.display())))?;
     flowsheet_from_str(&contents)
 }
 
 /// Parses a draft flowsheet from a TOML string, validating all invariants.
 pub fn flowsheet_from_str(contents: &str) -> Result<FlowsheetSpec> {
     let dto: FlowsheetDto =
-        toml::from_str(contents).map_err(|e| SimulationError::Config(e.to_string()))?;
+        toml::from_str(contents).map_err(|err| SimulationError::Config(err.to_string()))?;
     dto_to_flowsheet(dto)
 }
 
@@ -32,9 +32,9 @@ pub fn save_flowsheet(path: impl AsRef<Path>, flowsheet: &FlowsheetSpec) -> Resu
     let path = path.as_ref();
     let dto = flowsheet_to_dto(flowsheet);
     let contents =
-        toml::to_string_pretty(&dto).map_err(|e| SimulationError::Config(e.to_string()))?;
+        toml::to_string_pretty(&dto).map_err(|err| SimulationError::Config(err.to_string()))?;
     fs::write(path, contents)
-        .map_err(|e| SimulationError::Config(format!("{}: {e}", path.display())))
+        .map_err(|err| SimulationError::Config(format!("{}: {err}", path.display())))
 }
 
 #[derive(Debug, Serialize, Deserialize)]

@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 pub struct StressTestPlanned {
     /// Stress test identifier.
     pub test: String,
+
     /// Number of load points in the profile.
     pub point_count: usize,
 }
@@ -16,6 +17,7 @@ pub struct StressTestPlanned {
 pub struct StressTestCompleted {
     /// Stress test identifier.
     pub test: String,
+
     /// `true` when all acceptance criteria were met.
     pub passed: bool,
 }
@@ -25,6 +27,7 @@ pub struct StressTestCompleted {
 pub enum StressEvent {
     /// Test planned and ready for execution.
     Planned(StressTestPlanned),
+
     /// Test evaluated against measured outcomes.
     Completed(StressTestCompleted),
 }

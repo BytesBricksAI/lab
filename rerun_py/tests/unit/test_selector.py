@@ -5,6 +5,7 @@ import pickle
 import pyarrow as pa
 import pyarrow.compute as pc
 import pytest
+
 from simplant_lab.experimental import Selector
 
 

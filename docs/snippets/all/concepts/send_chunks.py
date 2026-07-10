@@ -2,9 +2,8 @@
 
 import sys
 
-import rerun.experimental as rrx
-
 import simplant_lab as rr
+import simplant_lab.experimental as rrx
 
 path_to_rrd = sys.argv[1]
 

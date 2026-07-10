@@ -2,9 +2,8 @@ from __future__ import annotations
 
 import tempfile
 
-import simplant_lab as rr
-
 import rerun_bindings  # noqa: TID251
+import simplant_lab as rr
 
 
 def test_disconnect_on_cleanup() -> None:

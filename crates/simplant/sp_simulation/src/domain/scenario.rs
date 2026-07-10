@@ -12,6 +12,7 @@ use crate::domain::ids::{FlowsheetId, ScenarioId};
 pub enum EngineCapability {
     /// Steady-state solution.
     SteadyState,
+
     /// Dynamic (transient) simulation.
     Dynamic,
 }

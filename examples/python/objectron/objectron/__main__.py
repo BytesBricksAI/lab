@@ -14,10 +14,10 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 import numpy as np
-import simplant_lab.blueprint as rrb
 from scipy.spatial.transform import Rotation as R
 
 import simplant_lab as rr  # pip install simplant-lab-sdk
+import simplant_lab.blueprint as rrb
 
 from .download_dataset import (
     ANNOTATIONS_FILENAME,

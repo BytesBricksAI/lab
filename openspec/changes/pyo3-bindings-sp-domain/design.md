@@ -1,6 +1,6 @@
-# Design: Bindings pyo3 del dominio SimPlant (sp_*) hacia Python
+# Design: bindings pyo3 del dominio SimPlant (sp_*) hacia Python
 
-## Technical Approach
+## Technical approach
 
 Crear un único crate puente `crates/simplant/sp_python` (`crate-type` = `rlib`) que depende
 de los 12 crates `sp_*` + `pyo3` y concentra TODA la frontera Rust↔Python (Ley de Localidad,
@@ -15,9 +15,9 @@ excepciones Python, y `py.detach(...)` para soltar el GIL en operaciones de E/S 
 
 Ningún crate `sp_*` se modifica: el ADR-0002 (dominio puro sin `re_*`/`pyo3`) queda intacto.
 
-## Architecture Decisions
+## Architecture decisions
 
-### Decisión: Crate puente único `sp_python` en lugar de submódulos en rerun_py
+### Decisión: crate puente único `sp_python` en lugar de submódulos en rerun_py
 
 **Choice**: Un crate dedicado `crates/simplant/sp_python` que reúne todos los `#[pyclass]`.
 **Alternatives considered**: (a) Definir los wrappers como submódulos dentro de
@@ -42,7 +42,7 @@ arriesgaría dos copias de tipos Arrow/`re_*`. Como `rlib`, `sp_python` se enlaz
 `rerun_bindings`; pyo3 con feature `extension-module` lo provee `rerun_py`. `sp_python`
 depende de `pyo3` **sin** `extension-module` (solo la API para definir clases).
 
-### Decisión: Newtype wrapper + `#[pymethods]`, con `Clone` cuando el dominio lo permite
+### Decisión: newtype wrapper + `#[pymethods]`, con `Clone` cuando el dominio lo permite
 
 **Choice**: `pub struct PyXxx(pub DomainType)` y mapear getters/constructores. Para value
 objects `Clone` (TagId, Measurement, Quality, UnitOp, etc.) se devuelven por valor clonando.
@@ -53,7 +53,7 @@ objects `Clone` (TagId, Measurement, Quality, UnitOp, etc.) se devuelven por val
 newtype). Para structs con campos privados e invariantes (TagId, EngineeringRange,
 FlowsheetSpec…) el newtype preserva la encapsulación del dominio.
 
-### Decisión: Mutación con interior mutability — `&mut self` y métodos que consumen `self`
+### Decisión: mutación con interior mutability — `&mut self` y métodos que consumen `self`
 
 **Choice**: Los aggregates con state machine se envuelven de forma que pyo3 pueda mutarlos:
 - Métodos `&mut self` (ej. `AcquisitionSession::start/stop`, `FlowsheetSpec::approve`,
@@ -71,7 +71,7 @@ Python.
 mutación in-place. pyo3 maneja `&mut self` de forma idiomática; el coste de clonar en `revise`
 es despreciable frente a la claridad de API. Se especifica caso por caso en cada delta spec.
 
-### Decisión: Puertos (`&dyn DataSourcePort`/`RecorderPort`/`SimulatorPort`) — fronteras concretas
+### Decisión: puertos (`&dyn DataSourcePort`/`RecorderPort`/`SimulatorPort`) — fronteras concretas
 
 **Choice**: Las funciones de orquestación que reciben trait objects (`run_session(&mut
 session, &catalog, &dyn DataSourcePort, &dyn RecorderPort)`) se exponen como `#[pyfunction]`
@@ -94,14 +94,14 @@ en `__str__`. `TimeWindow.new(start, end)` acepta los mismos tipos numéricos.
 dependencia de tz y ambigüedad; `f64` epoch + ISO string cubre logging/queries sin fricción y
 es trivial de revertir. Se documenta en la spec de kernel.
 
-### Decisión: Reuso estricto de versiones `re_*` del workspace
+### Decisión: reuso estricto de versiones `re_*` del workspace
 
 **Choice**: `sp_python` (al depender de `sp_recording`, `sp_dataframe_query`, `sp_types`) usa
 las MISMAS versiones `re_*` que `rerun_bindings`, pinneadas por el `Cargo.toml` del workspace.
 **Rationale**: Evita dos copias de tipos Arrow/`re_chunk_store`/`re_sdk` en el mismo `.so`,
 que romperían en runtime. El workspace ya centraliza estas versiones.
 
-## Data Flow
+## Data flow
 
 ```
                          ┌──────────────────────────────────────────┐
@@ -128,7 +128,7 @@ que romperían en runtime. El workspace ya centraliza estas versiones.
                          └──────────────────────────────────────────┘
 ```
 
-## File Changes
+## File changes
 
 | File | Action | Description |
 |------|--------|-------------|
@@ -150,7 +150,7 @@ que romperían en runtime. El workspace ya centraliza estas versiones.
 | `rerun_py/rerun_sdk/simplant_lab/*.pyi` | Create | Type stubs por capacidad |
 | `rerun_py/tests/test_simplant_domain.py` | Create | Smoke tests de los flujos de demos |
 
-## Interfaces / Contracts
+## Interfaces / contracts
 
 Función de registro (contrato central):
 
@@ -223,7 +223,7 @@ pub fn map_err<E: std::error::Error>(e: E) -> PyErr {
 }
 ```
 
-## Testing Strategy
+## Testing strategy
 
 | Layer | What to Test | Approach |
 |-------|-------------|----------|
@@ -232,7 +232,7 @@ pub fn map_err<E: std::error::Error>(e: E) -> PyErr {
 | Integration (Python) | Cada submódulo importable; constructores y getters | `pytest` en `rerun_py/tests/test_simplant_domain.py` |
 | E2E (Python) | Flujo `tanque_demo` (TOML→sesión→CsvReplaySource→RerunRecorder→.rrd) y `sim_demo` (draft→approve→engine→steps) replicados desde Python | `pytest` comparando nº de batches / estado final contra los valores conocidos de las demos Rust |
 
-## Migration / Rollout
+## Migration / rollout
 
 No migration required. El cambio es aditivo:
 - Implementación por capacidad en orden de dependencias (kernel/types → asset_model →
@@ -242,7 +242,7 @@ No migration required. El cambio es aditivo:
   submódulo sin tocar las demás.
 - Rollback = quitar la línea de registro + la dep + el crate (ver proposal).
 
-## Open Questions
+## Open questions
 
 - [ ] Implementar los puertos (`DataSourcePort`, `SimulatorPort`) **desde Python puro** —
       diferido a change posterior; ¿hay demanda real de motores/fuentes en Python?

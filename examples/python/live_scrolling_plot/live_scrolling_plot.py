@@ -8,9 +8,9 @@ import time
 from typing import TYPE_CHECKING
 
 import numpy as np
-import simplant_lab.blueprint as rrb
 
 import simplant_lab as rr  # pip install simplant-lab-sdk
+import simplant_lab.blueprint as rrb
 
 if TYPE_CHECKING:
     from collections.abc import Iterator

@@ -1,8 +1,8 @@
-# Verification Report — Phase 6
+# Verification report — phase 6
 
-**Change**: `pyo3-bindings-sp-domain`  
-**Scope**: Phase 6 only (tasks 6.1–6.2 — type stubs & namespace re-exports)  
-**Verified at**: 2026-06-29  
+**Change**: `pyo3-bindings-sp-domain`
+**Scope**: Phase 6 only (tasks 6.1–6.2 — type stubs & namespace re-exports)
+**Verified at**: 2026-06-29
 **Workspace**: `/home/m4s1t4/Work/Enprendimiento/Proyectos/SimPlant/SimPlant-v2/lab`
 
 ---
@@ -24,7 +24,7 @@
 
 ---
 
-## Build Verification
+## Build verification
 
 ### Step 0 — pyo3 config
 
@@ -96,9 +96,9 @@ Phase 6 does not add new behavioral specs; verification cross-checks stub covera
 | `recording` | `recording.pyi` | `recording.rs` | RerunRecorder, PLANT_TIME, EVENTS_PATH, `tag_entity_path()` | ✅ |
 | `ml_dataloop` | `ml_dataloop.pyi`, `ml_dataloop/dataframe_query.pyi` | `ml_dataloop.rs` | FeatureSpec, DataSplit, DatasetSpec; RrdDataframeQuery, QueryResult, TagSeries | ✅ |
 
-**Cross-check:** All `#[pyclass(name = "...")]` types and `#[pyfunction]` exports in `crates/simplant/sp_python/src/` have corresponding entries in the stub set. No missing public class or function detected at runtime.
+**Cross-check:** All `#[pyclass(name = "…")]` types and `#[pyfunction]` exports in `crates/simplant/sp_python/src/` have corresponding entries in the stub set. No missing public class or function detected at runtime.
 
-### Task 6.1 — Stub coverage detail
+### Task 6.1 — stub coverage detail
 
 | Requirement | Status | Notes |
 |------------|--------|-------|
@@ -120,7 +120,7 @@ Phase 6 does not add new behavioral specs; verification cross-checks stub covera
 | `simplant_lab.recording` (domain) | ✅ Covered |
 | `simplant_lab.ml_dataloop` + `dataframe_query` | ✅ Covered |
 
-### Task 6.2 — Re-exports & recording collision
+### Task 6.2 — re-exports & recording collision
 
 | Requirement | Status | Notes |
 |------------|--------|-------|
@@ -133,7 +133,7 @@ Phase 6 does not add new behavioral specs; verification cross-checks stub covera
 | Before (conflict) | After (resolved) | Evidence |
 |-------------------|------------------|----------|
 | Rerun SDK legacy `simplant_lab/recording/` Python package | Renamed to `simplant_lab/rrd_recording/` | Directory `rrd_recording/__init__.py` exports `Recording`, `RRDArchive`, `load_recording`, `load_archive` |
-| SimPlant domain `recording` (pyo3) needed same name | Domain submodule registered as `simplant_lab.recording` via pyo3 | `sp_python/src/recording.rs:65–72`, `attach_simplant_submodule(..., "recording", ...)` |
+| SimPlant domain `recording` (pyo3) needed same name | Domain submodule registered as `simplant_lab.recording` via pyo3 | `sp_python/src/recording.rs:65–72`, `attach_simplant_submodule(…, "recording", …)` |
 | Internal imports of Rerun `Recording` | Updated to `simplant_lab.rrd_recording` | `catalog/_entry.py:34`, `sinks.py:21` |
 | Package root exports both | No shadowing | `__init__.py:31` (`recording`) and `:40` (`rrd_recording`); runtime assert `recording is not rrd_recording` passes |
 | No stale `recording/` Python package dir | ✅ | Glob confirms zero files under `simplant_lab/recording/`; only `recording.pyi` stub + `recording_stream.py` (Rerun stream API, unrelated) |
@@ -161,13 +161,13 @@ Phase 6 does not add new behavioral specs; verification cross-checks stub covera
 
 ---
 
-## Issues Found
+## Issues found
 
 **CRITICAL** (must fix before archive):
 - None for Phase 6 scope.
 
 **WARNING** (should fix):
-- `types.pyi` omits the runtime re-export `Quality` (registered in `types.rs:80` via `types.add("Quality", ...)`). Stub users cannot type-check `simplant_lab.types.Quality`.
+- `types.pyi` omits the runtime re-export `Quality` (registered in `types.rs:80` via `types.add("Quality", …)`). Stub users cannot type-check `simplant_lab.types.Quality`.
 - `simulation/engine.pyi` line 3: `from .simulation import Scenario` is an invalid relative import for module `simplant_lab.simulation.engine`; should be `from ..simulation import Scenario` (or absolute). Type checkers will fail to resolve `Scenario`.
 - `simulation.pyi` `MaterialStream.__init__` documents `from` only in a comment; the kw-only `from` parameter exposed by Rust (`#[pyo3(signature = (id, composition, from=None, to=None))]`) is absent from the stub signature.
 - `acquisition.pyi` types `run_session(..., source: Any)` instead of `CsvReplaySource | ModbusTcpSource`, reducing type-checker value (matches Phase 4 note on concrete adapters).

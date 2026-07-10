@@ -13,8 +13,10 @@ use crate::domain::sampling::SamplingPolicy;
 pub enum SessionState {
     /// Created but not yet running.
     Created,
+
     /// Actively acquiring data.
     Running,
+
     /// Stopped (terminal).
     Stopped,
 }

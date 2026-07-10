@@ -2,7 +2,7 @@
 
 import sys
 
-import rerun.blueprint as rrb
+import simplant_lab.blueprint as rrb
 
 path_to_rbl = sys.argv[1]
 

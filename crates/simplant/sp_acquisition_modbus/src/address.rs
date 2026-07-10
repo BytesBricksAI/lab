@@ -7,6 +7,7 @@ use sp_acquisition::{AcquisitionError, Result};
 pub enum RegisterKind {
     /// Holding register table (function code 0x03).
     Holding,
+
     /// Input register table (function code 0x04).
     Input,
 }

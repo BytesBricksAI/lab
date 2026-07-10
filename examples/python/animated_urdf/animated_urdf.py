@@ -12,9 +12,8 @@ import argparse
 import math
 from pathlib import Path
 
-import simplant_lab.blueprint as rrb
-
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 
 TIMELINE = "example_time"
 

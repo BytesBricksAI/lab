@@ -1,4 +1,4 @@
-# UPSTREAM_DIFF — Registro de cambios sobre Rerun upstream
+# UPSTREAM_DIFF — registro de cambios sobre Rerun upstream
 
 | Campo | Valor |
 |---|---|
@@ -38,7 +38,7 @@ Comando base: `git status --short` filtrado (sin `crates/simplant/*` ni `example
 
 ## 1. Renames del rebranding (`rerun` → `simplant-lab`)
 
-### 1.1 Crates top-level Rust (32 paths)
+### 1.1 crates top-level Rust (32 paths)
 
 **`crates/top/rerun` → `crates/top/simplant-lab`** (28 archivos):
 
@@ -108,7 +108,7 @@ Comando base: `git status --short` filtrado (sin `crates/simplant/*` ni `example
 
 ## 2. Archivos upstream MODIFICADOS (agrupados por razón)
 
-### 2.1 Workspace y configuración de build (rebranding + wiring)
+### 2.1 workspace y configuración de build (rebranding + wiring)
 
 | Archivo | Cambio |
 |---|---|
@@ -121,7 +121,7 @@ Comando base: `git status --short` filtrado (sin `crates/simplant/*` ni `example
 | `.vscode/settings.json` | Ajustes del IDE |
 | `.github/workflows/reusable_build_and_upload_rerun_cli.yml` | `bin_name` → `simplant-lab` / `simplant-lab.exe` en todas las plataformas |
 
-### 2.2 Spawn y bridge Python (ejecutable del viewer)
+### 2.2 spawn y bridge Python (ejecutable del viewer)
 
 | Archivo | Cambio |
 |---|---|
@@ -129,7 +129,7 @@ Comando base: `git status --short` filtrado (sin `crates/simplant/*` ni `example
 | `rerun_py/src/python_bridge.rs` | `OTEL_SERVICE_NAME` → `simplant-lab-py`; `executable_name` → `simplant-lab` |
 | `rerun_py/pyproject.toml` | `name = "simplant-lab-sdk"`; scripts `simplant-lab` + alias `rerun`; `python-packages` incluye shims de compat |
 
-### 2.2.1 Bindings pyo3 del dominio SimPlant (`sp_python`)
+### 2.2.1 bindings pyo3 del dominio SimPlant (`sp_python`)
 
 Integración mínima en la zona upstream del fork: el crate puente `sp_python` (código SimPlant en
 `crates/simplant/sp_python/`, fuera de este registro) se registra desde el `#[pymodule]` existente.
@@ -141,6 +141,20 @@ Integración mínima en la zona upstream del fork: el crate puente `sp_python` (
 
 **Razón:** exponer los crates `sp_*` de dominio a Python sin tocar los crates de dominio (ADR-0002);
 toda la frontera pyo3 vive en `sp_python` + estas dos líneas de wiring upstream.
+
+### 2.2.2 vista P&ID (`sp_pid_viewer`)
+
+Integración mínima: la vista vive en `crates/simplant/sp_pid_viewer/` (fuera de este registro) y se
+registra vía el punto de extensión oficial `App::add_view_class`.
+
+| Archivo | Cambio |
+|---|---|
+| `crates/top/simplant-lab/Cargo.toml` | Dep opcional `sp_pid_viewer = { path = "../../simplant/sp_pid_viewer", optional = true }`; feature `native_viewer` agrega `"dep:sp_pid_viewer"` |
+| `crates/top/simplant-lab/src/commands/entrypoint.rs` | Tras construir la `App` (bloque `--memory-limit`): `app.add_view_class::<sp_pid_viewer::PidView>()` con log de error |
+| `clippy.toml` + `scripts/clippy_wasm/clippy.toml` | `doc-valid-idents` agrega `"SimPlant"` (evita falsos `clippy::doc_markdown` en docs de crates `sp_*`) |
+
+**Razón:** el archetype `simplant.archetypes.PidSymbol` vive en `sp_types` (ADR-0003) y la vista en
+`sp_pid_viewer`; el único wiring upstream son estas dos líneas del binario nativo.
 
 ### 2.3 Viewer — branding centralizado y strings de UI (36 archivos en `crates/`)
 
@@ -179,7 +193,7 @@ toda la frontera pyo3 vive en `sp_python` + estas dos líneas de wiring upstream
 | `crates/viewer/re_web_viewer_server/web_viewer/manifest.json` | Nombre de la PWA |
 | `crates/utils/re_auth/src/status_page.html` | `<title>` → SimPlant-Lab |
 
-### 2.4 Codegen — docstrings en plantillas (3 archivos)
+### 2.4 codegen — docstrings en plantillas (3 archivos)
 
 | Archivo | Cambio |
 |---|---|
@@ -189,7 +203,7 @@ toda la frontera pyo3 vive en `sp_python` + estas dos líneas de wiring upstream
 
 **Razón:** los docstrings generados para `send_columns` reflejan el nuevo nombre de producto. **No** se cambió el namespace FlatBuffers `rerun` ni los tipos wire.
 
-### 2.5 Importer DXF — extensión de dominio Oil & Gas (2 archivos modificados + nuevos en §3)
+### 2.5 importer DXF — extensión de dominio oil & gas (2 archivos modificados + nuevos en §3)
 
 | Archivo | Cambio |
 |---|---|
@@ -198,7 +212,7 @@ toda la frontera pyo3 vive en `sp_python` + estas dos líneas de wiring upstream
 
 **Razón:** primer importer de dominio (planos CAD `.dxf`) usando el punto de extensión oficial `re_importer::Importer`.
 
-### 2.6 Docs snippets (311 archivos — `docs/snippets/`)
+### 2.6 docs snippets (311 archivos — `docs/snippets/`)
 
 | Patrón | Archivos |
 |---|---|
@@ -209,14 +223,14 @@ toda la frontera pyo3 vive en `sp_python` + estas dos líneas de wiring upstream
 
 **Razón:** snippets de documentación alineados al nuevo import Python y crate Rust.
 
-### 2.7 Ejemplos (125 archivos)
+### 2.7 ejemplos (125 archivos)
 
 | Área | Conteo | Cambio típico |
 |---|---|---|
 | `examples/python/**` | 59 | `import simplant_lab as rr`; comentarios de pip |
 | `examples/rust/**` | 66 | `use simplant_lab::`; `Cargo.toml` dep `simplant-lab` |
 
-### 2.8 Tests (49 archivos)
+### 2.8 tests (49 archivos)
 
 | Área | Conteo | Cambio típico |
 |---|---|---|
@@ -239,6 +253,16 @@ toda la frontera pyo3 vive en `sp_python` + estas dos líneas de wiring upstream
 | `crates/top/re_sdk/src/blueprint/container.rs` | `impl From<…>` de ambos para `ContainerLike` |
 
 **Razón:** la API de blueprint de Rust upstream expone `TimeSeries`/`Spatial2D`/`Spatial3D`/`Map`/`Graph`/`TextDocument` pero **no** `Dataframe` (tabla) ni `TextLog` — en upstream esos views solo se construyen desde la API de Python. El demo `tanque_demo` los necesita para abrir con una tabla de variables de proceso indexada por `plant_time`. La extensión replica el patrón existente (`class_identifier` + builders `with_*`) y es **candidata a PR upstream**. No toca tipos wire ni el namespace FlatBuffers.
+
+### 2.11 API de blueprint en Rust — `CustomView` (vistas de clase arbitraria)
+
+| Archivo | Cambio |
+|---|---|
+| `crates/top/re_sdk/src/blueprint/view.rs` | Nuevo `CustomView`, con `class_identifier` provisto por el caller (en vez de hardcodeado) más `with_origin`/`with_contents`/`with_visible`/`with_defaults`/`with_override`/`with_overrides`, espejando el patrón de `TimeSeriesView`; test de construcción |
+| `crates/top/re_sdk/src/blueprint/mod.rs` | Exporta `CustomView` |
+| `crates/top/re_sdk/src/blueprint/container.rs` | `impl From<CustomView> for ContainerLike` |
+
+**Razón:** todos los views tipados de la API de blueprint (§2.10 incluida) hardcodean su `class_identifier`, así que ninguno puede dirigirse a una clase de vista registrada por la app embebedora vía `App::add_view_class` — como la vista P&ID del fork (`sp_pid_viewer::PidView`, identifier `"SimPlantPid"`). `CustomView` cierra ese hueco recibiendo el identifier como parámetro, sin tocar `api.rs` (el `class_identifier` ya fluía genérico hacia `ViewBlueprint::new(ViewClass(…))`). Usado por `examples/simplant/pid_canvas_demo` para componer un layout 50/50 (P&ID a la izquierda, tendencias a la derecha). Mismo patrón que §2.10, misma candidatura a PR upstream. No toca tipos wire ni el namespace FlatBuffers.
 
 ---
 
@@ -278,7 +302,7 @@ Según [`MIGRATION_PLAN.md`](MIGRATION_PLAN.md) §2.3, estos elementos upstream 
 
 ## 5. Notas para futuros merges upstream
 
-### 5.1 Estrategia general
+### 5.1 estrategia general
 
 1. **Rebase/merge upstream** sobre la rama de trabajo.
 2. **Resolver conflictos por capas**, en este orden:
@@ -289,7 +313,7 @@ Según [`MIGRATION_PLAN.md`](MIGRATION_PLAN.md) §2.3, estos elementos upstream 
 3. **No tocar** `crates/simplant/*` durante el merge de upstream salvo conflictos de workspace (`Cargo.toml` members).
 4. **Regenerar** tras merge si hubo cambios en `.fbs`: `pixi run codegen` (los docstrings de branding en codegen habrá que re-aplicar si upstream modificó las plantillas).
 
-### 5.2 Puntos de alto riesgo de conflicto
+### 5.2 puntos de alto riesgo de conflicto
 
 | Área | Por qué |
 |---|---|
@@ -299,7 +323,7 @@ Según [`MIGRATION_PLAN.md`](MIGRATION_PLAN.md) §2.3, estos elementos upstream 
 | `docs/snippets/all/` | Cientos de archivos; upstream los regenera con `codegen` |
 | `rerun_py/rerun_sdk/simplant_lab/` | Árbol Python generado + renombrado |
 
-### 5.3 Comandos útiles para auditar drift
+### 5.3 comandos útiles para auditar drift
 
 ```bash
 # Conteos actuales (excluyendo zona SimPlant)
@@ -315,7 +339,7 @@ rg -l 'Rerun Viewer|rerun-sdk|rerun-cli' --glob '!crates/simplant/**' --glob '!e
 git diff upstream/main --stat -- ':!crates/simplant' ':!examples/simplant'
 ```
 
-### 5.4 Checklist post-merge
+### 5.4 checklist post-merge
 
 - [ ] `pixi run simplant-lab-build` compila
 - [ ] `pixi run py-build` instala `simplant-lab-sdk`
@@ -326,4 +350,4 @@ git diff upstream/main --stat -- ':!crates/simplant' ':!examples/simplant'
 
 ---
 
-*Última actualización: 2026-06-29 — agregado §2.2.1 (`sp_python::register` en `python_bridge.rs`); resto generado desde el working tree de `feat/simplant-domain-crates`.*
+*Última actualización: 2026-07-08 — agregado §2.11 (`CustomView` en la API de blueprint de Rust); resto generado desde el working tree de `feat/simplant-domain-crates`.*

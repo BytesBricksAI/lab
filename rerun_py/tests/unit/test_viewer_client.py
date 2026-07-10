@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import datafusion
 import pyarrow as pa
+
 from simplant_lab._arrow import to_record_batch
 
 

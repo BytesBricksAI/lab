@@ -385,10 +385,18 @@ pub fn spawn(opts: &SpawnOptions) -> Result<u16, SpawnError> {
             std::thread::sleep(Duration::from_millis(100));
         }
 
-        re_log::debug_assert!(
-            bound,
-            "Spawned Rerun Viewer did not bind to port {port} in time"
-        );
+        // A slow-starting Viewer (common in debug builds with a Vulkan/wgpu
+        // backend) can miss this wait window even though it binds fine moments
+        // later. That is a transient startup condition, not a violated
+        // invariant, so we warn instead of `debug_assert!`-panicking and taking
+        // the host application down with us.
+        if !bound {
+            re_log::warn!(
+                "Spawned Rerun Viewer did not bind to port {} within the wait window; \
+                 continuing anyway (it may still be starting up).",
+                port
+            );
+        }
     }
 
     // Simply forget about the child process, we want it to outlive the parent process if needed.

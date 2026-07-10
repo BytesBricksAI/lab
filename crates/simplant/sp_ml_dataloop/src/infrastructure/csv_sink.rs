@@ -45,11 +45,11 @@ impl CsvDatasetSink {
     }
 
     fn write_csv(path: &Path, data: &QueryResult) -> Result<()> {
-        let file = File::create(path).map_err(|e| config_error(path, e))?;
+        let file = File::create(path).map_err(|err| config_error(path, err))?;
         let mut writer = Writer::from_writer(file);
         writer
             .write_record(["timestamp", "tag", "value", "quality"])
-            .map_err(|e| config_error(path, e))?;
+            .map_err(|err| config_error(path, err))?;
 
         for series in &data.series {
             for measurement in &series.measurements {
@@ -60,23 +60,23 @@ impl CsvDatasetSink {
                         measurement.value().to_string(),
                         measurement.quality().to_string(),
                     ])
-                    .map_err(|e| config_error(path, e))?;
+                    .map_err(|err| config_error(path, err))?;
             }
         }
 
-        writer.flush().map_err(|e| config_error(path, e))?;
+        writer.flush().map_err(|err| config_error(path, err))?;
         Ok(())
     }
 
     fn write_manifest(path: &Path, manifest: &DatasetManifest) -> Result<()> {
         let contents = manifest.to_toml()?;
-        fs::write(path, contents).map_err(|e| config_error(path, e))
+        fs::write(path, contents).map_err(|err| config_error(path, err))
     }
 }
 
 impl DatasetSinkPort for CsvDatasetSink {
     fn write(&self, manifest: &DatasetManifest, data: &QueryResult) -> Result<()> {
-        fs::create_dir_all(&self.dir).map_err(|e| config_error(&self.dir, e))?;
+        fs::create_dir_all(&self.dir).map_err(|err| config_error(&self.dir, err))?;
 
         let csv_path = self.csv_path(manifest);
         Self::write_csv(&csv_path, data)?;

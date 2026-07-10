@@ -18,7 +18,14 @@ workspace = true
 sp_kernel = { path = "../sp_kernel" }
 sp_acquisition = { path = "../sp_acquisition" }
 tokio-modbus = { version = "0.16", default-features = false, features = ["tcp"] }
-tokio = { workspace = true, features = ["rt", "rt-multi-thread", "net", "macros", "io-util", "time"] }
+tokio = { workspace = true, features = [
+  "rt",
+  "rt-multi-thread",
+  "net",
+  "macros",
+  "io-util",
+  "time",
+] }
 jiff = { workspace = true }
 thiserror.workspace = true
 

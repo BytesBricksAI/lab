@@ -1,4 +1,4 @@
-# Inc 3 — Interactividad (setpoints y perturbaciones en vivo)
+# Inc 3 — interactividad (setpoints y perturbaciones en vivo)
 
 - **Estado:** Diseño (se refina al llegar a su ciclo)
 - **Depende de:** [`02-panel-de-control.md`](02-panel-de-control.md)
@@ -18,7 +18,7 @@
 
 ## 2. Diseño
 
-### 2.1 Capacidad en caliente — sub-trait opt-in
+### 2.1 capacidad en caliente — sub-trait opt-in
 
 `SimulatorPort` **no** se modifica (no todos los motores son interactivos; forzarlo viola ARL — acoplamiento innecesario). En su lugar, en `sp_simulation`:
 
@@ -31,7 +31,7 @@ pub trait InteractiveSimulator: SimulatorPort {
 
 `FirstOrderEngine` (`sp_sim_engine`) lo implementa actualizando el setpoint/boundary correspondiente que ya usa internamente para integrar hacia el target.
 
-### 2.2 Cómo aplica el runner los comandos interactivos
+### 2.2 cómo aplica el runner los comandos interactivos
 
 El runner necesita poder invocar `set_input` cuando llega `SetSetpoint`/`Disturb`. Como no todo `SimulatorPort` es interactivo, dos variantes (a decidir en el ciclo):
 
@@ -40,7 +40,7 @@ El runner necesita poder invocar `set_input` cuando llega `SetSetpoint`/`Disturb
 
 `Disturb` = un `set_input` puntual sumado al estado (escalón); `SetSetpoint` = cambio persistente del target.
 
-### 2.3 Panel (egui) — añadidos
+### 2.3 panel (egui) — añadidos
 
 - Por cada variable de control declarada en el `Scenario`: un slider/`DragValue` → `SetSetpoint { var, value }` (envía on-change).
 - Botón "Perturbar" con selector de variable y magnitud → `Disturb`.

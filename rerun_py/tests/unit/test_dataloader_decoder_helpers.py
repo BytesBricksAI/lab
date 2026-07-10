@@ -5,6 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pyarrow as pa
 import pytest
+
 from simplant_lab.experimental.dataloader._decoders import (
     VideoFrameDecoder,
     _avcc_to_annex_b,

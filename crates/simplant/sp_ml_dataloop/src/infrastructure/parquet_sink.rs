@@ -87,26 +87,28 @@ impl ParquetDatasetSink {
             ],
             &Default::default(),
         )
-        .map_err(|e| config_error(path, e))?;
+        .map_err(|err| config_error(path, err))?;
 
-        let file = File::create(path).map_err(|e| config_error(path, e))?;
+        let file = File::create(path).map_err(|err| config_error(path, err))?;
         let mut writer =
-            ArrowWriter::try_new(file, schema, None).map_err(|e| config_error(path, e))?;
-        writer.write(&batch).map_err(|e| config_error(path, e))?;
-        writer.close().map_err(|e| config_error(path, e))?;
+            ArrowWriter::try_new(file, schema, None).map_err(|err| config_error(path, err))?;
+        writer
+            .write(&batch)
+            .map_err(|err| config_error(path, err))?;
+        writer.close().map_err(|err| config_error(path, err))?;
 
         Ok(())
     }
 
     fn write_manifest(path: &Path, manifest: &DatasetManifest) -> Result<()> {
         let contents = manifest.to_toml()?;
-        fs::write(path, contents).map_err(|e| config_error(path, e))
+        fs::write(path, contents).map_err(|err| config_error(path, err))
     }
 }
 
 impl DatasetSinkPort for ParquetDatasetSink {
     fn write(&self, manifest: &DatasetManifest, data: &QueryResult) -> Result<()> {
-        fs::create_dir_all(&self.dir).map_err(|e| config_error(&self.dir, e))?;
+        fs::create_dir_all(&self.dir).map_err(|err| config_error(&self.dir, err))?;
 
         let parquet_path = self.parquet_path(manifest);
         Self::write_parquet(&parquet_path, data)?;

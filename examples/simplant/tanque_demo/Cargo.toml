@@ -14,3 +14,6 @@ sp_acquisition_replay = { path = "../../../crates/simplant/sp_acquisition_replay
 sp_recording = { path = "../../../crates/simplant/sp_recording" }
 re_sdk = { workspace = true }
 anyhow = "1.0"
+
+[lints]
+workspace = true

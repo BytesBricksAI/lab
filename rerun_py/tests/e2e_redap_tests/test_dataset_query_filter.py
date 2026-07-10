@@ -3,10 +3,12 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from datafusion import Expr, col, functions as f, lit
+
 from simplant_lab.experimental import query_metrics
 
 if TYPE_CHECKING:
     import pyarrow as pa
+
     from simplant_lab.catalog import CatalogClient, DatasetEntry
 
 

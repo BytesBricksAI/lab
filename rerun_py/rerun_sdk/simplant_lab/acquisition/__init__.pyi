@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from typing import Any
 
+from ..asset_model import AssetCatalog
+from ..kernel import TagId
+from ..recording import RerunRecorder
 from . import modbus as modbus, replay as replay
-from .asset_model import AssetCatalog
-from .kernel import TagId
-from .recording import RerunRecorder
 
 class TagBinding:
     def __init__(self, tag: TagId, address: str) -> None: ...

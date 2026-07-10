@@ -1,8 +1,7 @@
 """Take screenshots of the viewer or specific views from code."""
 
-import rerun.blueprint as rrb
-
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 from simplant_lab.experimental import ViewerClient
 
 # Setup a viewer with a known blueprint.

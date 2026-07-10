@@ -1,4 +1,4 @@
-# Estado de implementación — SimPlant Lab
+# Estado de implementación — SimPlant lab
 
 | Campo | Valor |
 |---|---|
@@ -15,7 +15,7 @@
 
 Todo bajo `crates/simplant/` (zona SimPlant) y `examples/simplant/`. La **regla hexagonal está verificada por el compilador**: los crates de dominio puro declaran **cero** dependencias `re_*`; solo los adapters tocan el motor Rerun.
 
-### Fase 1 — Núcleo de dominio (completa)
+### Fase 1 — núcleo de dominio (completa)
 
 | Crate | Rol | re_* | Tests |
 |---|---|---|---|
@@ -28,7 +28,7 @@ Todo bajo `crates/simplant/` (zona SimPlant) y `examples/simplant/`. La **regla 
 
 **Demo E2E** `examples/simplant/tanque_demo`: catálogo TOML → `validate()` → replay CSV → `.rrd` válido (magic `RRF2`). Cumple el criterio de aceptación de F1 salvo la inspección visual en el viewer (GUI, no verificable headless).
 
-### Fase 2 — Adquisición industrial (Modbus)
+### Fase 2 — adquisición industrial (Modbus)
 
 | Crate | Rol | re_* | Tests |
 |---|---|---|---|
@@ -36,20 +36,20 @@ Todo bajo `crates/simplant/` (zona SimPlant) y `examples/simplant/`. La **regla 
 
 OPC UA y MQTT/Sparkplug B comparten el mismo `DataSourcePort` y quedan pendientes (necesitan servidor OPC UA / broker MQTT para verificar; el crate `opcua` requiere el spike de §8.9).
 
-### Fase 3 — Bucle de datos IA (núcleo)
+### Fase 3 — bucle de datos IA (núcleo)
 
 | Crate | Rol | re_* | Tests |
 |---|---|---|---|
 | `sp_ml_dataloop` | `DatasetSpec` versionado + `DataSplit` **anti-leakage** + `DatasetManifest` reproducible + puertos + adapter `CsvDatasetSink` + caso de uso `export_dataset` (CSV long-format + manifest TOML reproducible) | 0 | 13 |
 
-### Fase 4 — Simulación y stress (núcleo)
+### Fase 4 — simulación y stress (núcleo)
 
 | Crate | Rol | re_* | Tests |
 |---|---|---|---|
 | `sp_simulation` | `FlowsheetSpec` con **análisis de grados de libertad** (variables = ecuaciones antes de aprobar), composiciones que suman 1, grafo bien formado; `Scenario`, `SimulationRun`; `SimulatorPort` | 0 | 20 |
 | `sp_stress_testing` | `StressTest`: perfil de carga ≤ límite de diseño × factor de seguridad; criterios de aceptación; evaluación pass/fail | 0 | 14 |
 
-### Fase 6 — Motor nativo (núcleo)
+### Fase 6 — motor nativo (núcleo)
 
 | Crate | Rol | re_* | Tests |
 |---|---|---|---|

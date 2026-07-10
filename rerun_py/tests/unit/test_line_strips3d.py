@@ -5,8 +5,9 @@ from typing import TYPE_CHECKING, Any, cast
 
 import numpy as np
 import pytest
-import simplant_lab as rr
 import torch
+
+import simplant_lab as rr
 from simplant_lab.components.line_strip3d import LineStrip3DArrayLike, LineStrip3DBatch
 from simplant_lab.datatypes import Float32ArrayLike, Vec3D
 

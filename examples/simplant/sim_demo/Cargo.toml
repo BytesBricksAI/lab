@@ -12,3 +12,6 @@ sp_sim_engine = { path = "../../../crates/simplant/sp_sim_engine" }
 re_sdk = { path = "../../../crates/top/re_sdk" }
 re_sdk_types = { path = "../../../crates/store/re_sdk_types" }
 anyhow = "1.0"
+
+[lints]
+workspace = true

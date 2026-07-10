@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from ..asset_model import AssetCatalog
+from ..kernel import TagId, TimeWindow
 from . import dataframe_query as dataframe_query
-from .asset_model import AssetCatalog
-from .kernel import TagId, TimeWindow
 
 class FeatureSpec:
     def __init__(self, tag: TagId, name: str) -> None: ...

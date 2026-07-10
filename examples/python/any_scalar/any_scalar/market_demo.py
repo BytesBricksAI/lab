@@ -8,10 +8,10 @@ Shows features for "Any Scalar" visualization:
 
 from __future__ import annotations
 
-import simplant_lab.blueprint as rrb
 import yfinance as yf
 
 import simplant_lab as rr
+import simplant_lab.blueprint as rrb
 from simplant_lab.blueprint.datatypes import ComponentSourceKind, VisualizerComponentMapping
 
 

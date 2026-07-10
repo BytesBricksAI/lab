@@ -5,8 +5,9 @@ from typing import TYPE_CHECKING
 
 import polars as pl
 import pyarrow as pa
-import simplant_lab as rr
 from inline_snapshot import snapshot as inline_snapshot
+
+import simplant_lab as rr
 
 if TYPE_CHECKING:
     from pathlib import Path

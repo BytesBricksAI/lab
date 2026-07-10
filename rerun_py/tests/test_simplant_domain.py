@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+
 import simplant_lab as sl
 
 LAB_ROOT = Path(__file__).resolve().parents[2]
@@ -58,13 +59,11 @@ def test_tanque_demo_e2e_smoke(tmp_path: Path) -> None:
     catalog = repo.load_catalog()
     catalog.validate()
 
-    bindings = [
-        sl.acquisition.TagBinding(tag.id(), tag.id().as_str()) for tag in catalog.tags()
-    ]
+    bindings = [sl.acquisition.TagBinding(tag.id(), tag.id().as_str()) for tag in catalog.tags()]
     session = sl.acquisition.AcquisitionSession.create(
         "tanque-demo",
         bindings,
-        sl.acquisition.SamplingPolicy(1000, None),
+        sl.acquisition.SamplingPolicy(1000, deadband=None),
         catalog,
     )
     source = sl.acquisition.replay.CsvReplaySource(str(csv_path))
@@ -73,7 +72,12 @@ def test_tanque_demo_e2e_smoke(tmp_path: Path) -> None:
         str(output_rrd),
     )
 
-    batches = sl.acquisition.run_session(session, catalog, source, recorder)
+    batches = sl.acquisition.run_session(
+        session,
+        catalog=catalog,
+        source=source,
+        recorder=recorder,
+    )
     recorder.flush()
 
     assert batches > 0
@@ -90,24 +94,20 @@ def test_tanque_demo_e2e_smoke(tmp_path: Path) -> None:
 
 def _build_sim_demo_flowsheet(*, with_specs: bool) -> sl.simulation.FlowsheetSpec:
     h100 = sl.simulation.UnitOpId("H-100")
-    specs = (
-        [sl.simulation.Specification(h100, "outlet_temp", 0.0)]
-        if with_specs
-        else []
-    )
+    specs = [sl.simulation.Specification(h100, "outlet_temp", 0.0)] if with_specs else []
     return sl.simulation.FlowsheetSpec.draft(
         sl.simulation.FlowsheetId("FS-SIM-DEMO"),
-        [sl.simulation.ChemicalComponent("Methane")],
-        [sl.simulation.UnitOp(h100, sl.simulation.UnitOpKind.Heater, "Heater")],
-        [
+        components=[sl.simulation.ChemicalComponent("Methane")],
+        unit_ops=[sl.simulation.UnitOp(h100, sl.simulation.UnitOpKind.Heater, "Heater")],
+        streams=[
             sl.simulation.MaterialStream(
                 sl.simulation.StreamId("S1"),
                 sl.simulation.Composition([1.0]),
                 to=h100,
             )
         ],
-        specs,
-        sl.simulation.ThermoPackage.PengRobinson,
+        specs=specs,
+        thermo=sl.simulation.ThermoPackage.PengRobinson,
     )
 
 
@@ -120,12 +120,12 @@ def test_sim_demo_e2e_smoke() -> None:
     scenario = sl.simulation.Scenario.approve(
         sl.simulation.ScenarioId("SC-1"),
         flowsheet,
-        [
+        boundary_conditions=[
             sl.simulation.BoundaryCondition("outlet_temp", 180.0),
             sl.simulation.BoundaryCondition("outlet_pressure", 12.0),
         ],
-        120.0,
-        sl.simulation.EngineCapability.Dynamic,
+        duration_secs=120.0,
+        required_capability=sl.simulation.EngineCapability.Dynamic,
     )
     assert scenario.is_approved()
     assert scenario.duration_secs() == 120.0
