@@ -250,6 +250,10 @@ known-first-party = ["rerun_bindings", "simplant_lab"]
 
 
 [tool.maturin]
+# Match CI wheel builds (`--no-default-features --features pypi`) so `serve_grpc` works.
+default-features = false
+features = ["pypi"]
+
 # Python packages live under rerun_sdk/; simplant_lab_sdk.pth adds rerun_sdk to sys.path.
 # See https://github.com/rerun-io/rerun/pull/1085 for more details.
 # Viewer binaries (simplant-lab, legacy rerun) are bundled for wheel installs when present.
