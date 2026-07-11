@@ -278,9 +278,6 @@ fn normalize_sweep(start_deg: f64, end_deg: f64) -> f64 {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::path::Path;
-
-    use crate::importer_dxf::parse::load_dxf;
 
     #[test]
     fn arc_sweep_wraps() {
@@ -297,8 +294,13 @@ mod tests {
         assert!(d < 1e-5, "circle endpoints should meet, got {d}");
     }
 
+    #[cfg(not(target_arch = "wasm32"))]
     #[test]
     fn emit_sample_dxf_produces_chunks() {
+        use std::path::Path;
+
+        use crate::importer_dxf::parse::load_dxf;
+
         let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/data/dxf/sample.dxf");
         let drawing = load_dxf(&path).expect("sample.dxf should parse");
 

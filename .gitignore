@@ -108,3 +108,9 @@ justfile
 /.benchmarks
 
 openspec/*
+
+# Bundled viewer binaries copied by py-build-wheel (build artifacts, not source)
+rerun_py/rerun_sdk/simplant_lab_cli/simplant-lab
+rerun_py/rerun_sdk/simplant_lab_cli/simplant-lab.exe
+rerun_py/rerun_sdk/simplant_lab_cli/rerun
+rerun_py/rerun_sdk/simplant_lab_cli/rerun.exe

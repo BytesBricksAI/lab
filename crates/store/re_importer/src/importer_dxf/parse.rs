@@ -1,7 +1,6 @@
 //! DXF parser: reads a DXF file and produces a neutral [`Drawing`].
 
 use std::io::Cursor;
-use std::path::Path;
 
 use anyhow::{Context as _, Result};
 use dxf::Drawing as DxfDrawing;
@@ -14,7 +13,11 @@ use super::domain::{
 /// Maximum recursion depth when expanding `INSERT` references.
 pub(crate) const MAX_INSERT_DEPTH: usize = 8;
 
-pub fn load_dxf(path: impl AsRef<Path>) -> Result<Drawing> {
+/// Load and parse a DXF file from a filesystem path.
+///
+/// Only available on native targets — wasm uses [`load_dxf_bytes`] instead.
+#[cfg(not(target_arch = "wasm32"))]
+pub fn load_dxf(path: impl AsRef<std::path::Path>) -> Result<Drawing> {
     let path = path.as_ref();
     let dxf = DxfDrawing::load_file(path)
         .with_context(|| format!("failed to parse DXF file: {}", path.display()))?;
@@ -310,8 +313,10 @@ fn map_color(c: &dxf::Color) -> Option<Color> {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, not(target_arch = "wasm32")))]
 mod tests {
+    use std::path::Path;
+
     use super::*;
 
     #[test]
