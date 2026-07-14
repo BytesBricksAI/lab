@@ -266,6 +266,27 @@ registra vía el punto de extensión oficial `App::add_view_class`.
 
 ---
 
+### 2.12 SDK Python — bindings de la vista P&ID (`PidSymbol` + `PidView`)
+
+| Archivo | Cambio |
+|---|---|
+| `rerun_py/rerun_sdk/simplant_lab/pid_viewer.py` | **Nuevo** (hand-written) — `PidSymbol` (archetype `AsComponents`, espejo de `sp_types::PidSymbol` con descriptors `simplant.archetypes.PidSymbol:*`), `PidPipe` (polyline `LineStrip2D`, espejo de `sp_types::PidPipe`) y `PidView` (subclase de `blueprint.api.View`, identifier `"SimPlantPid"`) |
+| `rerun_py/rerun_sdk/simplant_lab/pid.pyi` | **Nuevo** — stub de tipos del submódulo pyo3 `simplant_lab.pid` (catálogo/mapping de símbolos), convención de `kernel.pyi` |
+| `rerun_py/rerun_sdk/simplant_lab/types.pyi` | + `ARCHETYPE_PID_SYMBOL: str`, `ARCHETYPE_PID_PIPE: str` |
+| `rerun_py/rerun_sdk/simplant_lab/__init__.py` | + `pid` en el bloque de submódulos SimPlant; re-export top-level de `PidSymbol`/`PidPipe`/`PidView` |
+| `rerun_py/tests/test_pid_viewer.py` | **Nuevo** — tests de comportamiento: batches/naming (drift-guard contra `sl.types.ARCHETYPE_*`/`field()`), mapping/catálogo de `sl.pid`, validación de `PidPipe`, E2E `.rrd` roundtrip con blueprint (símbolos + tuberías) |
+| `Cargo.lock` | Arista nueva `sp_python → sp_pid_viewer` |
+
+Segunda iteración (spec `openspec/changes/pid-pipe-connections/`): los mismos archivos se
+extendieron con `PidPipe` — conexiones de proceso como polylines, reusando el componente
+nativo `rerun.components.LineStrip2D`. La contraparte no-upstream (archetype en `sp_types`,
+`PlacedPipe` + `PidPipeVisualizer` en `sp_pid_viewer`) vive en `crates/simplant/*` (zona
+excluida).
+
+**Razón:** la demo de producto se desarrolla en Python y necesitaba loguear `PidSymbol` y declarar la vista `"SimPlantPid"` en blueprints desde el SDK. Los strings de naming NO se importan de bindings en import-time: constantes locales privadas + tests de contrato que assertan igualdad contra los valores bindeados desde Rust (drift rompe CI, evita ciclos de import). `blueprint/views/` y `blueprint/__init__.py` son generados, por eso `PidView` vive en `pid_viewer.py` y se re-exporta top-level. La contraparte no-upstream (feature `view` en `sp_pid_viewer`, módulo `pid` en `sp_python`, demo Python) vive en `crates/simplant/*` y `examples/simplant/*` (zona excluida). Spec: `openspec/changes/pyo3-bindings-pid-viewer/`.
+
+---
+
 ## 3. Archivos NUEVOS en zona upstream (untracked)
 
 | Path | Archivos | Razón |
@@ -277,6 +298,9 @@ registra vía el punto de extensión oficial `App::add_view_class`.
 | `crates/store/re_importer/src/importer_dxf/domain.rs` | 1 | Tipos de dominio DXF |
 | `crates/store/re_importer/src/importer_dxf/parse.rs` | 1 | Parser DXF |
 | `crates/store/re_importer/src/importer_dxf/emit.rs` | 1 | Emisión a archetypes Rerun |
+| `rerun_py/rerun_sdk/simplant_lab/pid_viewer.py` | 1 | `PidSymbol` + `PidView` hand-written (ver §2.12) |
+| `rerun_py/rerun_sdk/simplant_lab/pid.pyi` | 1 | Stub del submódulo pyo3 `simplant_lab.pid` (ver §2.12) |
+| `rerun_py/tests/test_pid_viewer.py` | 1 | Tests de comportamiento P&ID bindings (ver §2.12) |
 | `crates/store/re_importer/tests/data/dxf/sample.dxf` | 1 | Fixture de test |
 | `rerun_py/rerun_sdk/rerun/__init__.py` | 1 | Shim de compat: `from simplant_lab import *` + `DeprecationWarning` |
 | `rerun_py/rerun_sdk/rerun_cli/__init__.py` | 1 | Shim CLI de compat |
@@ -350,4 +374,4 @@ git diff upstream/main --stat -- ':!crates/simplant' ':!examples/simplant'
 
 ---
 
-*Última actualización: 2026-07-08 — agregado §2.11 (`CustomView` en la API de blueprint de Rust); resto generado desde el working tree de `feat/simplant-domain-crates`.*
+*Última actualización: 2026-07-12 — §2.12 ampliado con `PidPipe` (spec `pid-pipe-connections`); antes §2.12 (`PidSymbol`/`PidView`) y §2.11 (`CustomView`); resto generado desde el working tree de `feat/simplant-domain-crates`.*

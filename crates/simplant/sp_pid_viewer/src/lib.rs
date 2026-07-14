@@ -12,15 +12,22 @@
 //!
 //! `symbols` and `mapping` are egui-free and unit-testable in isolation;
 //! `visualizer` renders the canvas widget; `view` wires it into the SimPlant
-//! Lab viewer as a native view (`PidView`, identifier `"SimPlantPid"`),
-//! queried from logged `sp_types::PidSymbol` entities.
+//! Lab viewer as a native view (`PidView`, identifier [`VIEW_CLASS_IDENTIFIER`]),
+//! queried from logged `sp_types::PidSymbol` and `sp_types::PidPipe` entities.
+
+/// View class identifier of the native P&ID view.
+pub const VIEW_CLASS_IDENTIFIER: &str = "SimPlantPid";
 
 pub mod mapping;
 pub mod symbols;
+#[cfg(feature = "view")]
 pub mod view;
+#[cfg(feature = "view")]
 pub mod visualizer;
 
 pub use mapping::{symbol_for, symbol_id_for};
-pub use symbols::Symbol;
+pub use symbols::{Connector, Symbol, SymbolKind, SymbolMeta};
+#[cfg(feature = "view")]
 pub use view::PidView;
-pub use visualizer::{PidCanvas, PidCanvasResponse, PlacedSymbol};
+#[cfg(feature = "view")]
+pub use visualizer::{PidCanvas, PidCanvasResponse, PipeKind, PlacedPipe, PlacedSymbol};

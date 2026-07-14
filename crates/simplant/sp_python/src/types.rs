@@ -1,7 +1,7 @@
 use pyo3::prelude::*;
 use sp_types::{
-    ARCHETYPE_PROCESS_VARIABLE, ARCHETYPE_TAG_METADATA, COMPONENT_QUALITY, ProcessVariableSample,
-    TagMetadata, field as sp_field,
+    ARCHETYPE_PID_PIPE, ARCHETYPE_PID_SYMBOL, ARCHETYPE_PROCESS_VARIABLE, ARCHETYPE_TAG_METADATA,
+    COMPONENT_QUALITY, ProcessVariableSample, TagMetadata, field as sp_field,
 };
 
 use crate::kernel::{Quality, UnitOfMeasure, kernel_quality_from_py, kernel_unit_from_py};
@@ -78,6 +78,8 @@ pub fn register(py: Python<'_>, parent: &Bound<'_, PyModule>) -> PyResult<()> {
     types.add_class::<PyProcessVariableSample>()?;
     types.add_class::<PyTagMetadata>()?;
     types.add("Quality", py.get_type::<Quality>())?;
+    types.add("ARCHETYPE_PID_PIPE", ARCHETYPE_PID_PIPE)?;
+    types.add("ARCHETYPE_PID_SYMBOL", ARCHETYPE_PID_SYMBOL)?;
     types.add("ARCHETYPE_PROCESS_VARIABLE", ARCHETYPE_PROCESS_VARIABLE)?;
     types.add("ARCHETYPE_TAG_METADATA", ARCHETYPE_TAG_METADATA)?;
     types.add("COMPONENT_QUALITY", COMPONENT_QUALITY)?;

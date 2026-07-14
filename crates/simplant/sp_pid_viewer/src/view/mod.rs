@@ -1,10 +1,13 @@
 //! `PidView`: the P&ID view class for the SimPlant Lab viewer.
 //!
-//! Renders every `PidSymbol` entity in the view on a [`crate::visualizer::PidCanvas`]
-//! and wires hover/click into the viewer's global selection.
+//! Renders every `PidSymbol` and `PidPipe` entity in the view on a
+//! [`crate::visualizer::PidCanvas`] and wires symbol hover/click into the
+//! viewer's global selection.
 
+mod pipe_visualizer_system;
 mod visualizer_system;
 
+pub use pipe_visualizer_system::{PidPipeDatum, PidPipeVisualizer, PidPipeVisualizerOutput};
 pub use visualizer_system::{PidSymbolDatum, PidSymbolVisualizer, PidSymbolVisualizerOutput};
 
 use re_log_types::EntityPath;
@@ -19,7 +22,7 @@ use re_viewer_context::{
     ViewerContext, VisualizableReason,
 };
 
-use crate::visualizer::{PidCanvas, PlacedSymbol};
+use crate::visualizer::{PidCanvas, PlacedPipe, PlacedSymbol};
 
 /// The P&ID view: engineering symbols on an interactive canvas, with live
 /// values from the store.
@@ -28,7 +31,7 @@ pub struct PidView;
 
 impl ViewClass for PidView {
     fn identifier() -> ViewClassIdentifier {
-        "SimPlantPid".into()
+        crate::VIEW_CLASS_IDENTIFIER.into()
     }
 
     fn display_name(&self) -> &'static str {
@@ -51,7 +54,8 @@ impl ViewClass for PidView {
         &self,
         system_registry: &mut ViewSystemRegistrator<'_>,
     ) -> Result<(), ViewClassRegistryError> {
-        system_registry.register_visualizer::<PidSymbolVisualizer>()
+        system_registry.register_visualizer::<PidSymbolVisualizer>()?;
+        system_registry.register_visualizer::<PidPipeVisualizer>()
     }
 
     fn new_state(&self) -> Box<dyn ViewState> {
@@ -67,11 +71,15 @@ impl ViewClass for PidView {
         ctx: &ViewerContext<'_>,
         include_entity: &dyn Fn(&EntityPath) -> bool,
     ) -> ViewSpawnHeuristics {
-        if ctx
+        let has_symbols = ctx
             .visualizable_entities_per_visualizer
             .get(&PidSymbolVisualizer::identifier())
-            .is_some_and(|entities| entities.keys().any(include_entity))
-        {
+            .is_some_and(|entities| entities.keys().any(include_entity));
+        let has_pipes = ctx
+            .visualizable_entities_per_visualizer
+            .get(&PidPipeVisualizer::identifier())
+            .is_some_and(|entities| entities.keys().any(include_entity));
+        if has_symbols || has_pipes {
             ViewSpawnHeuristics::root()
         } else {
             ViewSpawnHeuristics::empty()
@@ -80,18 +88,19 @@ impl ViewClass for PidView {
 
     fn recommended_visualizers_for_entity(
         &self,
-        _entity_path: &EntityPath,
+        entity_path: &EntityPath,
         visualizers: &[(ViewSystemIdentifier, &VisualizableReason)],
-        _indicated_entities_per_visualizer: &PerVisualizerType<&IndicatedEntities>,
+        indicated_entities_per_visualizer: &PerVisualizerType<&IndicatedEntities>,
     ) -> RecommendedVisualizers {
-        if visualizers
-            .iter()
-            .any(|(viz, _)| *viz == PidSymbolVisualizer::identifier())
-        {
-            RecommendedVisualizers::default(PidSymbolVisualizer::identifier())
-        } else {
-            RecommendedVisualizers::empty()
-        }
+        // Both visualizers report every entity in the view as visualizable, so
+        // indication — which archetype the entity actually logged — is what
+        // separates symbols from pipes (same pattern as the time series view).
+        RecommendedVisualizers::default_many(visualizers.iter().filter_map(|(viz, _)| {
+            indicated_entities_per_visualizer
+                .get(viz)?
+                .contains(entity_path)
+                .then_some(*viz)
+        }))
     }
 
     fn ui(
@@ -103,16 +112,25 @@ impl ViewClass for PidView {
         query: &ViewQuery<'_>,
         system_output: SystemExecutionOutput,
     ) -> Result<(), ViewSystemExecutionError> {
-        let empty = PidSymbolVisualizerOutput::new();
-        let data = system_output
+        let empty_symbols = PidSymbolVisualizerOutput::new();
+        let symbol_data = system_output
             .visualizer_data::<PidSymbolVisualizerOutput>(PidSymbolVisualizer::identifier())
-            .unwrap_or(&empty);
+            .unwrap_or(&empty_symbols);
 
-        let placed: Vec<PlacedSymbol> = data.iter().map(|datum| datum.placed.clone()).collect();
-        let canvas = PidCanvas::new(&placed).show(ui);
+        let empty_pipes = PidPipeVisualizerOutput::new();
+        let pipe_data = system_output
+            .visualizer_data::<PidPipeVisualizerOutput>(PidPipeVisualizer::identifier())
+            .unwrap_or(&empty_pipes);
+
+        let placed: Vec<PlacedSymbol> = symbol_data
+            .iter()
+            .map(|datum| datum.placed.clone())
+            .collect();
+        let pipes: Vec<PlacedPipe> = pipe_data.iter().map(|datum| datum.placed.clone()).collect();
+        let canvas = PidCanvas::new(&placed).with_pipes(&pipes).show(ui);
 
         // Wire every symbol into the viewer's global hover/selection.
-        for (datum, response) in data.iter().zip(&canvas.symbol_responses) {
+        for (datum, response) in symbol_data.iter().zip(&canvas.symbol_responses) {
             ctx.handle_select_hover_drag_interactions(
                 response,
                 Item::DataResult(DataResultInteractionAddress {

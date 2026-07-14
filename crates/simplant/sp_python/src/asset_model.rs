@@ -84,6 +84,18 @@ fn py_equipment_kind_from_domain(kind: EquipmentKind) -> PyEquipmentKind {
     }
 }
 
+pub(crate) fn equipment_kind_to_domain(kind: PyEquipmentKind) -> EquipmentKind {
+    match kind {
+        PyEquipmentKind::Vessel => EquipmentKind::Vessel,
+        PyEquipmentKind::Tank => EquipmentKind::Tank,
+        PyEquipmentKind::Pump => EquipmentKind::Pump,
+        PyEquipmentKind::HeatExchanger => EquipmentKind::HeatExchanger,
+        PyEquipmentKind::Valve => EquipmentKind::Valve,
+        PyEquipmentKind::Pipe => EquipmentKind::Pipe,
+        PyEquipmentKind::Other => EquipmentKind::Other,
+    }
+}
+
 #[pyclass(name = "ProcessUnit", module = "simplant_lab.asset_model")]
 #[derive(Clone)]
 pub struct PyProcessUnit(pub ProcessUnit);

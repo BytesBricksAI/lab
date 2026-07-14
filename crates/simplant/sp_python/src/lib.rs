@@ -3,6 +3,7 @@ mod asset_model;
 mod error;
 mod kernel;
 mod ml_dataloop;
+mod pid;
 mod recording;
 mod simulation;
 mod stress_testing;
@@ -33,6 +34,7 @@ pub fn register(py: Python<'_>, parent: &Bound<'_, PyModule>) -> PyResult<()> {
     acquisition::register(py, parent)?;
     simulation::register(py, parent)?;
     ml_dataloop::register(py, parent)?;
+    pid::register(py, parent)?;
     stress_testing::register(py, parent)?;
     recording::register(py, parent)?;
     types::register(py, parent)?;

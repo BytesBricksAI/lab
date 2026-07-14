@@ -27,6 +27,7 @@ sp_asset_model = { path = "../sp_asset_model" }
 sp_dataframe_query = { path = "../sp_dataframe_query" }
 sp_kernel = { path = "../sp_kernel" }
 sp_ml_dataloop = { path = "../sp_ml_dataloop" }
+sp_pid_viewer = { path = "../sp_pid_viewer", default-features = false }
 sp_recording = { path = "../sp_recording" }
 sp_sim_engine = { path = "../sp_sim_engine" }
 sp_simulation = { path = "../sp_simulation" }

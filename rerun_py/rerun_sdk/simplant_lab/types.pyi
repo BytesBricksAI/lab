@@ -4,6 +4,8 @@ from .kernel import Quality, UnitOfMeasure
 
 ARCHETYPE_PROCESS_VARIABLE: str
 ARCHETYPE_TAG_METADATA: str
+ARCHETYPE_PID_PIPE: str
+ARCHETYPE_PID_SYMBOL: str
 COMPONENT_QUALITY: str
 
 class ProcessVariableSample:

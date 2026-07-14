@@ -11918,6 +11918,7 @@ dependencies = [
  "sp_dataframe_query",
  "sp_kernel",
  "sp_ml_dataloop",
+ "sp_pid_viewer",
  "sp_recording",
  "sp_sim_engine",
  "sp_simulation",

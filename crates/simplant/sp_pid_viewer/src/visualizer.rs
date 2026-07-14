@@ -11,6 +11,45 @@ use crate::symbols;
 /// symbols stay visible in both light and dark themes.
 const EQUINOR_FILL: &str = "#231f20";
 
+/// Line style of a placed pipe (ISA-5.1): process lines are solid,
+/// instrument signal lines are dashed.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub enum PipeKind {
+    /// Solid process line.
+    #[default]
+    Process,
+
+    /// Dashed instrument signal line.
+    Signal,
+}
+
+/// A pipe polyline placed on the diagram, in diagram coordinates (y down).
+#[derive(Debug, Clone)]
+pub struct PlacedPipe {
+    /// Polyline vertices in diagram coordinates.
+    pub points: Vec<egui::Pos2>,
+
+    /// Line style (process = solid, signal = dashed).
+    pub kind: PipeKind,
+}
+
+impl PlacedPipe {
+    /// A process-line polyline through the given diagram points.
+    pub fn new(points: Vec<egui::Pos2>) -> Self {
+        Self {
+            points,
+            kind: PipeKind::Process,
+        }
+    }
+
+    /// Sets the line style.
+    #[inline]
+    pub fn with_kind(mut self, kind: PipeKind) -> Self {
+        self.kind = kind;
+        self
+    }
+}
+
 /// A symbol instance placed on the diagram, in diagram coordinates (y down).
 #[derive(Debug, Clone)]
 pub struct PlacedSymbol {
@@ -92,6 +131,7 @@ impl PidCanvasResponse {
 /// double-click the background to re-fit the diagram).
 pub struct PidCanvas<'a> {
     placed: &'a [PlacedSymbol],
+    pipes: &'a [PlacedPipe],
     id_salt: egui::Id,
 }
 
@@ -100,8 +140,16 @@ impl<'a> PidCanvas<'a> {
     pub fn new(placed: &'a [PlacedSymbol]) -> Self {
         Self {
             placed,
+            pipes: &[],
             id_salt: egui::Id::new("sp_pid_canvas"),
         }
+    }
+
+    /// Adds process-line polylines drawn beneath the symbols.
+    #[inline]
+    pub fn with_pipes(mut self, pipes: &'a [PlacedPipe]) -> Self {
+        self.pipes = pipes;
+        self
     }
 
     /// Distinguishes multiple canvases living in the same `Ui`.
@@ -114,7 +162,7 @@ impl<'a> PidCanvas<'a> {
     /// Shows the canvas and reports interactions.
     pub fn show(&self, ui: &mut egui::Ui) -> PidCanvasResponse {
         let scene_id = ui.make_persistent_id(self.id_salt);
-        let fit_rect = content_bounds(self.placed)
+        let fit_rect = content_bounds(self.placed, self.pipes)
             .unwrap_or_else(|| egui::Rect::from_min_size(egui::Pos2::ZERO, egui::vec2(1.0, 1.0)))
             .expand(24.0);
         let mut scene_rect: egui::Rect = ui
@@ -129,6 +177,27 @@ impl<'a> PidCanvas<'a> {
 
         let response = egui::Scene::new()
             .show(ui, &mut scene_rect, |ui| {
+                for pipe in self.pipes {
+                    if pipe.points.len() < 2 {
+                        continue;
+                    }
+                    match pipe.kind {
+                        PipeKind::Process => {
+                            ui.painter().add(egui::Shape::line(
+                                pipe.points.clone(),
+                                egui::Stroke::new(1.5, symbol_color),
+                            ));
+                        }
+                        PipeKind::Signal => {
+                            ui.painter().extend(egui::Shape::dashed_line(
+                                &pipe.points,
+                                egui::Stroke::new(1.0, symbol_color),
+                                5.0,
+                                4.0,
+                            ));
+                        }
+                    }
+                }
                 for (index, placed) in self.placed.iter().enumerate() {
                     let interaction = draw_symbol(ui, placed, symbol_color);
                     if interaction.hovered() {
@@ -164,33 +233,64 @@ fn draw_symbol(
     placed: &PlacedSymbol,
     symbol_color: egui::Color32,
 ) -> egui::Response {
-    let rect = egui::Rect::from_center_size(placed.center, placed.size);
-    let response = ui.allocate_rect(rect, egui::Sense::click());
+    let bounds = egui::Rect::from_center_size(placed.center, placed.size);
+    let response = ui.allocate_rect(bounds, egui::Sense::click());
 
-    if let Some(symbol) = symbols::find(&placed.symbol_id) {
+    let symbol = symbols::find(&placed.symbol_id);
+
+    // The glyph is painted in the aspect-preserving rect that
+    // `symbols::connector_point` maps into, so pipes anchored to connectors
+    // meet the artwork exactly (and non-native boxes no longer distort it).
+    let glyph = symbol
+        .and_then(|symbol| symbol.meta())
+        .map_or(bounds, |meta| {
+            let (min, size) = symbols::glyph_rect(
+                [placed.center.x, placed.center.y],
+                [placed.size.x / 2.0, placed.size.y / 2.0],
+                meta.view_box,
+            );
+            egui::Rect::from_min_size(egui::pos2(min[0], min[1]), egui::vec2(size[0], size[1]))
+        });
+
+    if let Some(symbol) = symbol {
         let uri = symbol_uri(symbol.id, symbol_color);
         ensure_svg_registered(ui.ctx(), &uri, symbol.svg, symbol_color);
-        egui::Image::from_uri(uri).paint_at(ui, rect);
+        egui::Image::from_uri(uri).paint_at(ui, glyph);
     } else {
         // Unknown or unmapped symbol: honest placeholder instead of a
         // wrong icon on a P&ID.
         ui.painter().rect_stroke(
-            rect,
+            bounds,
             egui::CornerRadius::same(2),
             egui::Stroke::new(1.0, symbol_color),
             egui::StrokeKind::Inside,
         );
         ui.painter().text(
-            rect.center(),
+            bounds.center(),
             egui::Align2::CENTER_CENTER,
             "?",
-            egui::FontId::proportional(rect.height() * 0.4),
+            egui::FontId::proportional(bounds.height() * 0.4),
             symbol_color,
         );
     }
 
-    let font = egui::FontId::proportional((placed.size.y * 0.16).clamp(6.0, 14.0));
-    let label_pos = rect.center_bottom() + egui::vec2(0.0, 2.0);
+    if symbol.is_some_and(|symbol| symbol.kind == symbols::SymbolKind::Instrument) {
+        draw_instrument_tag(ui, placed, glyph);
+    } else {
+        draw_equipment_tag(ui, placed, glyph);
+    }
+
+    let tooltip = match &placed.live_value {
+        Some(value) => format!("{}\n{}", placed.label, value),
+        None => placed.label.clone(),
+    };
+    response.on_hover_text(tooltip)
+}
+
+/// Equipment tag (and live value) under the glyph.
+fn draw_equipment_tag(ui: &egui::Ui, placed: &PlacedSymbol, glyph: egui::Rect) {
+    let font = egui::FontId::proportional((glyph.height() * 0.16).clamp(6.0, 14.0));
+    let label_pos = glyph.center_bottom() + egui::vec2(0.0, 2.0);
     ui.painter().text(
         label_pos,
         egui::Align2::CENTER_TOP,
@@ -207,12 +307,52 @@ fn draw_symbol(
             ui.visuals().strong_text_color(),
         );
     }
+}
 
-    let tooltip = match &placed.live_value {
-        Some(value) => format!("{}\n{}", placed.label, value),
-        None => placed.label.clone(),
-    };
-    response.on_hover_text(tooltip)
+/// ISA-5.1 instrument tag: identification letters and loop number go
+/// *inside* the bubble (split at the first `-`). The live value sits beside
+/// the bubble — leader lines usually arrive from below, so text under the
+/// bubble would collide with them.
+fn draw_instrument_tag(ui: &egui::Ui, placed: &PlacedSymbol, glyph: egui::Rect) {
+    let font = egui::FontId::proportional((glyph.height() * 0.26).clamp(5.0, 14.0));
+    let color = ui.visuals().text_color();
+    match placed.label.split_once('-') {
+        Some((letters, number)) => {
+            let offset = egui::vec2(0.0, font.size * 0.55);
+            ui.painter().text(
+                glyph.center() - offset,
+                egui::Align2::CENTER_CENTER,
+                letters,
+                font.clone(),
+                color,
+            );
+            ui.painter().text(
+                glyph.center() + offset,
+                egui::Align2::CENTER_CENTER,
+                number,
+                font.clone(),
+                color,
+            );
+        }
+        None => {
+            ui.painter().text(
+                glyph.center(),
+                egui::Align2::CENTER_CENTER,
+                &placed.label,
+                font.clone(),
+                color,
+            );
+        }
+    }
+    if let Some(value) = &placed.live_value {
+        ui.painter().text(
+            glyph.right_center() + egui::vec2(4.0, 0.0),
+            egui::Align2::LEFT_CENTER,
+            value,
+            font,
+            ui.visuals().strong_text_color(),
+        );
+    }
 }
 
 /// Registers the themed SVG bytes under `uri` once per egui context.
@@ -246,11 +386,26 @@ fn color_hex(color: egui::Color32) -> String {
     format!("{:02x}{:02x}{:02x}", color.r(), color.g(), color.b())
 }
 
-/// Bounding box of all placed symbols, in diagram coordinates.
-fn content_bounds(placed: &[PlacedSymbol]) -> Option<egui::Rect> {
-    placed
+/// Bounding box of all placed symbols and pipe points, in diagram coordinates.
+fn content_bounds(placed: &[PlacedSymbol], pipes: &[PlacedPipe]) -> Option<egui::Rect> {
+    let symbol_bounds = placed
         .iter()
-        .map(|symbol| egui::Rect::from_center_size(symbol.center, symbol.size))
+        .map(|symbol| egui::Rect::from_center_size(symbol.center, symbol.size));
+    let pipe_bounds = pipes.iter().filter_map(|pipe| {
+        if pipe.points.is_empty() {
+            None
+        } else {
+            let mut iter = pipe.points.iter();
+            let first = *iter.next()?;
+            let mut rect = egui::Rect::from_min_max(first, first);
+            for point in iter {
+                rect.extend_with(*point);
+            }
+            Some(rect)
+        }
+    });
+    symbol_bounds
+        .chain(pipe_bounds)
         .reduce(|acc, rect| acc.union(rect))
 }
 
@@ -290,9 +445,26 @@ mod tests {
                 egui::vec2(20.0, 40.0),
             ),
         ];
-        let bounds = content_bounds(&placed).expect("non-empty input");
+        let bounds = content_bounds(&placed, &[]).expect("non-empty input");
         assert_eq!(bounds.min, egui::pos2(-5.0, -5.0));
         assert_eq!(bounds.max, egui::pos2(110.0, 70.0));
-        assert!(content_bounds(&[]).is_none());
+        assert!(content_bounds(&[], &[]).is_none());
+    }
+
+    #[test]
+    fn content_bounds_covers_pipes_beyond_symbols() {
+        let placed = [PlacedSymbol::new(
+            "PP007A",
+            "P-101",
+            egui::pos2(0.0, 0.0),
+            egui::vec2(10.0, 10.0),
+        )];
+        let pipes = [PlacedPipe::new(vec![
+            egui::pos2(200.0, 0.0),
+            egui::pos2(300.0, 50.0),
+        ])];
+        let bounds = content_bounds(&placed, &pipes).expect("non-empty input");
+        assert_eq!(bounds.min, egui::pos2(-5.0, -5.0));
+        assert_eq!(bounds.max, egui::pos2(300.0, 50.0));
     }
 }

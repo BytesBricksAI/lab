@@ -32,6 +32,7 @@ from . import (
     experimental as experimental,
     kernel as kernel,
     ml_dataloop as ml_dataloop,
+    pid as pid,
     recording as recording,
     rrd_recording as rrd_recording,
     server as server,
@@ -199,6 +200,7 @@ from .error_utils import (
     set_strict_mode as set_strict_mode,
     strict_mode as strict_mode,
 )
+from .pid_viewer import PidPipe as PidPipe, PidSymbol as PidSymbol, PidView as PidView
 from .recording_stream import (
     BinaryStream as BinaryStream,
     ChunkBatcherConfig as ChunkBatcherConfig,

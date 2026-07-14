@@ -9,6 +9,9 @@ pub const ARCHETYPE_TAG_METADATA: &str = "simplant.archetypes.TagMetadata";
 /// Archetype name for equipment symbols placed on a P&ID diagram.
 pub const ARCHETYPE_PID_SYMBOL: &str = "simplant.archetypes.PidSymbol";
 
+/// Archetype name for process lines (pipes) on a P&ID diagram.
+pub const ARCHETYPE_PID_PIPE: &str = "simplant.archetypes.PidPipe";
+
 /// Component type name for OPC UA-style quality codes.
 pub const COMPONENT_QUALITY: &str = "simplant.components.Quality";
 

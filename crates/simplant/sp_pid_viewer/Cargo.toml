@@ -12,17 +12,30 @@ repository.workspace = true
 rust-version.workspace = true
 version.workspace = true
 
+[features]
+default = ["view"]
+# The native viewer view class (PidView) and the egui canvas.
+view = [
+  "dep:re_chunk_store",
+  "dep:re_log_types",
+  "dep:re_sdk_types",
+  "dep:re_ui",
+  "dep:re_viewer_context",
+  "dep:egui",
+  "dep:sp_types",
+]
+
 [dependencies]
 sp_asset_model = { path = "../sp_asset_model" }
-sp_types = { path = "../sp_types" }
+sp_types = { path = "../sp_types", optional = true }
 
-re_chunk_store.workspace = true
-re_log_types.workspace = true
-re_sdk_types.workspace = true
-re_ui.workspace = true
-re_viewer_context.workspace = true
+re_chunk_store = { workspace = true, optional = true }
+re_log_types = { workspace = true, optional = true }
+re_sdk_types = { workspace = true, optional = true }
+re_ui = { workspace = true, optional = true }
+re_viewer_context = { workspace = true, optional = true }
 
-egui.workspace = true
+egui = { workspace = true, optional = true }
 
 [lints]
 workspace = true
